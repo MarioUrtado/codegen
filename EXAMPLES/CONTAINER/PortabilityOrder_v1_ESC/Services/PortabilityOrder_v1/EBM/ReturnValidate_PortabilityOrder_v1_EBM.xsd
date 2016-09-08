@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 
+	xmlns:header="http://www.entel.cl/ESO/MessageHeader/v1" 
+	xmlns:tns="http://www.entel.cl/EBM/PortabilityOrder/ReturnValidate/v1"
+	xmlns:ebons_msisdn="http://www.entel.cl/EBO/MSISDN/v1"
+	xmlns:ebons_money="http://www.entel.cl/EBO/Money/v1"
+	xmlns:ebons_customerbill="http://www.entel.cl/EBO/CustomerBill/v1"
+	xmlns:ebons_portabilityorder="http://www.entel.cl/EBO/PortabilityOrder/v1"
+	
+	targetNamespace="http://www.entel.cl/EBM/PortabilityOrder/ReturnValidate/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	 <import namespace="http://www.entel.cl/ESO/MessageHeader/v1" schemaLocation="../../../Commons/ESO/MessageHeader_v1_ESO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/MSISDN/v1" schemaLocation="../../../SID/ResourceDomain/MSISDN_v1_EBO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/Money/v1" schemaLocation="../../../SID/CommonBusinessEntitiesDomain/Money_v1_EBO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/CustomerBill/v1" schemaLocation="../../../SID/CustomerDomain/CustomerBill_v1_EBO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/PortabilityOrder/v1" schemaLocation="../../../SID/EngagedPartyDomain/PortabilityOrder_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	 <!---=- start:EBM Content -=- -->
+	
+					
+		<element name="ReturnValidate_PortabilityOrder_REQ" type="tns:ReturnValidate_PortabilityOrder_REQ_Type"/>
+		<complexType name="ReturnValidate_PortabilityOrder_REQ_Type">
+		<sequence>
+			<element ref="header:RequestHeader"/>
+			<element name="Body">		
+				<complexType>	
+					<sequence>							
+						
+                	<element name="PortabilityOrder" maxOccurs="1" minOccurs="1">
+                		<complexType>
+                		<sequence>
+                		<element ref="ebons_portabilityorder:messageDate" maxOccurs="1" minOccurs="0"/>
+                			<element ref="ebons_portabilityorder:orderNumber" maxOccurs="1" minOccurs="0"/>
+                			<element ref="ebons_portabilityorder:portabilityDueDateLastBilling" maxOccurs="1" minOccurs="0"/>
+                			<element ref="ebons_portabilityorder:transactionNumber" maxOccurs="1" minOccurs="0"/>
+                			<element ref="ebons_portabilityorder:portabilityConsultId" maxOccurs="1" minOccurs="0"/>
+                			<element ref="ebons_portabilityorder:portabilityObjectType" maxOccurs="1" minOccurs="1"/>
+                			<element ref="ebons_portabilityorder:portabilityOperDateActive" maxOccurs="1" minOccurs="0"/>
+                			<element ref="ebons_portabilityorder:portabilityRequestStatus" maxOccurs="1" minOccurs="0"/>
+                			<element ref="ebons_portabilityorder:rejectionDescription" maxOccurs="1" minOccurs="0"/>
+                			<element ref="ebons_portabilityorder:requestId" maxOccurs="1" minOccurs="0"/>
+                			
+                        	<element name="CustomerBill" maxOccurs="1" minOccurs="0">
+                        		<complexType>
+                        		<sequence>
+                        		
+                                	<element name="billAmount" maxOccurs="1" minOccurs="0">
+                                		<complexType>
+                                		<sequence>
+                                		<element ref="ebons_money:units" maxOccurs="1" minOccurs="0"/>
+                                			
+                                		</sequence>	
+                                		</complexType>	
+                                	</element>
+                                		
+                                	
+                        			
+                                	<element name="unit" maxOccurs="1" minOccurs="0">
+                                		<complexType>
+                                		<sequence>
+                                		<element ref="ebons_money:units" maxOccurs="1" minOccurs="0"/>
+                                			
+                                		</sequence>	
+                                		</complexType>	
+                                	</element>
+                                		
+                                	
+                        			
+                        		</sequence>	
+                        		</complexType>	
+                        	</element>
+                        		
+                        	
+                			
+                        	<element name="MSISDN" maxOccurs="1" minOccurs="0">
+                        		<complexType>
+                        		<sequence>
+                        		<element ref="ebons_msisdn:SN" maxOccurs="1" minOccurs="1"/>
+                        			
+                        		</sequence>	
+                        		</complexType>	
+                        	</element>
+                        		
+                        	
+                			
+                		</sequence>	
+                		</complexType>	
+                	</element>
+                		
+                	
+						</sequence>
+											
+				</complexType>								
+			</element>
+		</sequence>
+		</complexType>
+	
+					
+		<element name="ReturnValidate_PortabilityOrder_RSP" type="tns:ReturnValidate_PortabilityOrder_RSP_Type"/>
+		<complexType name="ReturnValidate_PortabilityOrder_RSP_Type">
+		<sequence>
+			<element ref="header:ResponseHeader"/>	
+			<element name="Body">		
+				<complexType>	
+					<sequence>							
+						</sequence>
+											
+				</complexType>								
+			</element>
+		</sequence>
+		</complexType>
+	
+	
+	
+	
+	<element name="ReturnValidate_PortabilityOrder_FRSP" type="tns:ReturnValidate_PortabilityOrder_FRSP_Type"/>
+	<complexType name="ReturnValidate_PortabilityOrder_FRSP_Type">
+		<sequence>
+			<element ref="header:ResponseHeader"/>
+			<element name="Body">
+				<complexType>
+					<sequence/>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	 <!---=- end:EBM Content -=- -->
+	 
+</schema>	

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/Individual/v1"
+	xmlns:ebons_country="http://www.entel.cl/EBO/Country/v1"
+	xmlns:ebons_placeofbirth="http://www.entel.cl/EBO/PlaceOfBirth/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/Individual/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/Country/v1" schemaLocation="../CommonBusinessEntitiesDomain/Country_v1_EBO.xsd"/>
+	<xs:import namespace="http://www.entel.cl/EBO/PlaceOfBirth/v1" schemaLocation="../CommonBusinessEntitiesDomain/PlaceOfBirth_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="age" type="xs:integer"/>									
+	<xs:element name="aliveDuring" type="xs:dateTime">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>birth date and death date</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="birthDate" type="xs:dateTime"/>									
+	<xs:element name="degree" type="xs:string"/>									
+	<xs:element name="educationalLevel" type="xs:string"/>									
+	<xs:element name="gender" type="xs:string"/>									
+	<xs:element name="icom" type="xs:string"/>									
+	<xs:element name="jobTitle" type="xs:string"/>									
+	<xs:element name="maritalStatusDate" type="xs:dateTime"/>									
+	<xs:element name="martialStatus" type="xs:string"/>									
+	<xs:element name="nationality" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>Pointer to a country object</xs:documentation>
+					<xs:documentation>BSSF: changed to reference</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="typeCode" type="xs:string"/>									
+	<xs:element name="voteIndicator" type="xs:string"/>									
+	<xs:element name="countryOfBirth" type="ebons_country:Country_Type">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>Pointer to a country object</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="placeOfBirth" type="ebons_placeofbirth:PlaceOfBirth_Type">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>Pointer to a Location object</xs:documentation>
+					<xs:documentation>City, town name etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="Individual" type="tns:Individual_Type"/>
+	<xs:complexType name="Individual_Type">
+		
+			<xs:annotation>
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">Represents a single human being ( a man, woman or child).</xs:documentation>
+							
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">The individual could be a customer, an employee or any other person that the organization needs to store information about. An Individual is a type of Party</xs:documentation>
+						
+			</xs:annotation>
+		<xs:sequence> 
+		<xs:element ref="tns:age" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:aliveDuring" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:birthDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:degree" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:educationalLevel" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:gender" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:icom" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:jobTitle" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:maritalStatusDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:martialStatus" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:nationality" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:typeCode" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:voteIndicator" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:countryOfBirth" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:placeOfBirth" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

@@ -1,6 +1,12 @@
+import os
 import builder
 import parseWSDL
 import ConfigParser
+
+def chdir_force(_dir):
+	if not(os.path.isdir(_dir)):
+		os.makedirs(_dir)
+	os.chdir(_dir)
 
 def generateConfig(_path):
 	_config = ConfigParser.ConfigParser()
@@ -11,17 +17,32 @@ config=generateConfig('pool.cfg')
 workspace = config.get('WORKSPACE', 'path')
 config.remove_section('WORKSPACE')
 
-for section in config.sections():
-	
+wsdls=[]
+pool=config.get('CONTRACT_CONTAINER', 'path')
+for file in os.listdir(pool):
+	full_path = os.path.join( pool , file)
+	if os.path.isfile(full_path):
+		if ( '_ESC.WSDL' in file.upper() ):
+			wsdls.append(file)
+
+for section in wsdls:
 	configDump = ConfigParser.RawConfigParser()
 	configDump.add_section('WORKSPACE')
 	configDump.set('WORKSPACE', 'path', workspace)
 	configDump.add_section('WSDL')
-	configDump.set('WSDL', 'path', config.get(section, 'wsdl'))
+	pathWSDL = os.path.join(pool,section)
+	configDump.set('WSDL', 'path', pathWSDL)
 	configDump.add_section('EBMs')
-	configDump.set('EBMs', 'path', config.get(section, 'ebmFolder'))
-	with open('wsdl.cfg', 'wb') as configfile:
+	pathEBM = os.path.join(pool, 'EBM')
+	configDump.set('EBMs', 'path', pathEBM)
+
+	chdir_force('tmp')
+
+	filename = section.upper()+'.cfg'
+
+	with open(filename, 'wb') as configfile:
 		configDump.write(configfile)
 
-	parseWSDL.main()
-	builder.main()
+	parseWSDL.main(filename)
+	os.chdir('../')
+	##builder.main()

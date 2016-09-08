@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/ThirdPartyPayeeAgency/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/ThirdPartyPayeeAgency/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="branch" type="xs:string"/>									
+	<xs:element name="branchAddress" type="xs:string"/>									
+	<xs:element name="branchName" type="xs:string"/>									
+	<xs:element name="commerce" type="xs:string"/>									
+	<xs:element name="commerceLocalId" type="xs:integer"/>									
+	<xs:element name="commerceOriginal" type="xs:string"/>									
+	<xs:element name="distributor" type="xs:string"/>									
+	<xs:element name="integrator" type="xs:string"/>									
+	<xs:element name="integratorSubType" type="xs:string"/>									
+	<xs:element name="name" type="xs:string"/>									
+	<xs:element name="nameDistributor" type="xs:string"/>									
+	<xs:element name="origin" type="xs:string"/>									
+	<xs:element name="payeeAgencyDetail" type="xs:string"/>									
+	<xs:element name="payeeAgencyStatus" type="xs:string"/>									
+	<xs:element name="payeeAgencyValidFor" type="xs:dateTime"/>									
+	<xs:element name="platform" type="xs:string"/>									
+	<xs:element name="responsable" type="xs:string"/>									
+	<xs:element name="terminal" type="xs:string"/>									
+	<xs:element name="type" type="xs:string"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="ThirdPartyPayeeAgency" type="tns:ThirdPartyPayeeAgency_Type"/>
+	<xs:complexType name="ThirdPartyPayeeAgency_Type">
+		<xs:sequence> 
+		<xs:element ref="tns:branch" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:branchAddress" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:branchName" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:commerce" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:commerceLocalId" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:commerceOriginal" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:distributor" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:integrator" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:integratorSubType" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:name" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:nameDistributor" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:origin" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:payeeAgencyDetail" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:payeeAgencyStatus" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:payeeAgencyValidFor" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:platform" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:responsable" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:terminal" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:type" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

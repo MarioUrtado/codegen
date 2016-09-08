@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/CustomerAddress/v1"
+	xmlns:ebons_postaldeliveryaddress="http://www.entel.cl/EBO/PostalDeliveryAddress/v1"
+	xmlns:ebons_geographicarea="http://www.entel.cl/EBO/GeographicArea/v1"
+	xmlns:ebons_streetname="http://www.entel.cl/EBO/StreetName/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/CustomerAddress/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/PostalDeliveryAddress/v1" schemaLocation="../CommonBusinessEntitiesDomain/PostalDeliveryAddress_v1_EBO.xsd"/>
+	<xs:import namespace="http://www.entel.cl/EBO/GeographicArea/v1" schemaLocation="../CommonBusinessEntitiesDomain/GeographicArea_v1_EBO.xsd"/>
+	<xs:import namespace="http://www.entel.cl/EBO/StreetName/v1" schemaLocation="../CommonBusinessEntitiesDomain/StreetName_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="geographicArea" type="ebons_geographicarea:GeographicArea_Type"/>									
+	<xs:element name="postalDeliveryAddress" type="ebons_postaldeliveryaddress:PostalDeliveryAddress_Type"/>									
+	<xs:element name="streetName" type="ebons_streetname:StreetName_Type"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="CustomerAddress" type="tns:CustomerAddress_Type"/>
+	<xs:complexType name="CustomerAddress_Type">
+		<xs:sequence> 
+		<xs:element ref="tns:geographicArea" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:postalDeliveryAddress" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:streetName" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

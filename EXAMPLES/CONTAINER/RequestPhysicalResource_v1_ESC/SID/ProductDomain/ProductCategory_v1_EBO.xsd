@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/ProductCategory/v1"
+	xmlns:ebons_timeperiod="http://www.entel.cl/EBO/TimePeriod/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/ProductCategory/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/TimePeriod/v1" schemaLocation="../CommonBusinessEntitiesDomain/TimePeriod_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="deptCode" type="xs:string"/>									
+	<xs:element name="deptName" type="xs:string"/>									
+	<xs:element name="description" type="xs:string"/>									
+	<xs:element name="href" type="xs:string"/>									
+	<xs:element name="id" type="xs:string"/>									
+	<xs:element name="lifecycleStatus" type="xs:string"/>									
+	<xs:element name="name" type="xs:string"/>									
+	<xs:element name="parentId" type="xs:string"/>									
+	<xs:element name="productIds" type="xs:string"/>									
+	<xs:element name="subCategory" type="xs:string"/>									
+	<xs:element name="validFor" type="ebons_timeperiod:TimePeriod_Type"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="ProductCategory" type="tns:ProductCategory_Type"/>
+	<xs:complexType name="ProductCategory_Type">
+		
+			<xs:annotation>
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">A method used to group a set of ProductSpecifications that are classified together because of common characteristics.</xs:documentation>
+							
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">This entity is used in the context of the PSCM as "features".</xs:documentation>
+						
+			</xs:annotation>
+		<xs:sequence> 
+		<xs:element ref="tns:deptCode" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:deptName" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:description" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:href" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:id" maxOccurs="1" minOccurs="1"/>
+		<xs:element ref="tns:lifecycleStatus" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:name" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:parentId" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:productIds" maxOccurs="unbounded" minOccurs="0"/>
+		<xs:element ref="tns:subCategory" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:validFor" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

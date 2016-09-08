@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/Party/v1"
+	xmlns:ebons_timeperiod="http://www.entel.cl/EBO/TimePeriod/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/Party/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/TimePeriod/v1" schemaLocation="../CommonBusinessEntitiesDomain/TimePeriod_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="objectID" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>Unambiguously distinguishes different object instances.  It is the naming attribute of the object.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="partyId" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>Unique identifier for the Party</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="skill" type="xs:string"/>									
+	<xs:element name="version" type="xs:string"/>									
+	<xs:element name="validFor" type="ebons_timeperiod:TimePeriod_Type"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="Party" type="tns:Party_Type"/>
+	<xs:complexType name="Party_Type">
+		
+			<xs:annotation>
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">Represents an  individual, organization or organization unit. Party is an abstract concept that should be used in places where the business says something can be an organization , organization unit or an individual</xs:documentation>
+						
+			</xs:annotation>
+		<xs:sequence> 
+		<xs:element ref="tns:objectID" maxOccurs="1" minOccurs="1"/>
+		<xs:element ref="tns:partyId" maxOccurs="1" minOccurs="1"/>
+		<xs:element ref="tns:skill" maxOccurs="1" minOccurs="1"/>
+		<xs:element ref="tns:version" maxOccurs="1" minOccurs="1"/>
+		<xs:element ref="tns:validFor" maxOccurs="1" minOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

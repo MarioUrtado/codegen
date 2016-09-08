@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 
+	xmlns:header="http://www.entel.cl/ESO/MessageHeader/v1" 
+	xmlns:tns="http://www.entel.cl/EBM/PartyAccount/Publish/v1"
+	xmlns:ebons_money="http://www.entel.cl/EBO/Money/v1"
+	xmlns:ebons_partypayment="http://www.entel.cl/EBO/PartyPayment/v1"
+	xmlns:ebons_thirdpartypayeeagency="http://www.entel.cl/EBO/ThirdPartyPayeeAgency/v1"
+	xmlns:ebons_partyaccount="http://www.entel.cl/EBO/PartyAccount/v1"
+	xmlns:ebons_organization="http://www.entel.cl/EBO/Organization/v1"
+	
+	targetNamespace="http://www.entel.cl/EBM/PartyAccount/Publish/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	 <import namespace="http://www.entel.cl/ESO/MessageHeader/v1" schemaLocation="../../../Commons/ESO/MessageHeader_v1_ESO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/Money/v1" schemaLocation="../../../SID/CommonBusinessEntitiesDomain/Money_v1_EBO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/PartyPayment/v1" schemaLocation="../../../SID/EngagedPartyDomain/PartyPayment_v1_EBO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/ThirdPartyPayeeAgency/v1" schemaLocation="../../../SID/CustomerDomain/ThirdPartyPayeeAgency_v1_EBO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/PartyAccount/v1" schemaLocation="../../../SID/EngagedPartyDomain/PartyAccount_v1_EBO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/Organization/v1" schemaLocation="../../../SID/EngagedPartyDomain/Organization_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	 <!---=- start:EBM Content -=- -->
+	
+					
+		<element name="Publish_PartyAccount_CRSP" type="tns:Publish_PartyAccount_CRSP_Type"/>
+		<complexType name="Publish_PartyAccount_CRSP_Type">
+		<sequence>
+			<element ref="header:ResponseHeader"/>	
+			<element name="Body">		
+				<complexType>	
+					<sequence>							
+						
+                	<element name="PartyPayment" maxOccurs="1" minOccurs="0">
+                		<complexType>
+                		<sequence>
+                		<element ref="ebons_partypayment:paymentDate"/>
+                			
+                        	<element name="amount" maxOccurs="1" minOccurs="0">
+                        		<complexType>
+                        		<sequence>
+                        		<element ref="ebons_money:amount" maxOccurs="1" minOccurs="0"/>
+                        			
+                        		</sequence>	
+                        		</complexType>	
+                        	</element>
+                        		
+                        	
+                			
+                		</sequence>	
+                		</complexType>	
+                	</element>
+                		
+                	
+						</sequence>
+											
+				</complexType>								
+			</element>
+		</sequence>
+		</complexType>
+	
+					
+		<element name="Publish_PartyAccount_REQ" type="tns:Publish_PartyAccount_REQ_Type"/>
+		<complexType name="Publish_PartyAccount_REQ_Type">
+		<sequence>
+			<element ref="header:RequestHeader"/>
+			<element name="Body">		
+				<complexType>	
+					<sequence>							
+						
+                	<element name="PartyPayment" maxOccurs="1" minOccurs="1">
+                		<complexType>
+                		<sequence>
+                		
+                        	<element name="PartyAccount" maxOccurs="1" minOccurs="1">
+                        		<complexType>
+                        		<sequence>
+                        		<element ref="ebons_partyaccount:creditLimit" maxOccurs="1" minOccurs="1"/>
+                        			
+                                	<element name="Organization" maxOccurs="1" minOccurs="1">
+                                		<complexType>
+                                		<sequence>
+                                		<element ref="ebons_organization:internalCode" maxOccurs="1" minOccurs="1"/>
+                                			<element ref="ebons_organization:partyId" maxOccurs="1" minOccurs="1"/>
+                                			<element ref="ebons_organization:type" maxOccurs="1" minOccurs="1"/>
+                                			
+                                		</sequence>	
+                                		</complexType>	
+                                	</element>
+                                		
+                                	
+                        			
+                        		</sequence>	
+                        		</complexType>	
+                        	</element>
+                        		
+                        	
+                			
+                        	<element name="ThirdPartyPayeeAgency" maxOccurs="1" minOccurs="1">
+                        		<complexType>
+                        		<sequence>
+                        		<element ref="ebons_thirdpartypayeeagency:distributor" maxOccurs="1" minOccurs="1"/>
+                        			<element ref="ebons_thirdpartypayeeagency:origin" maxOccurs="1" minOccurs="1"/>
+                        			<element ref="ebons_thirdpartypayeeagency:responsable" maxOccurs="1" minOccurs="1"/>
+                        			
+                        		</sequence>	
+                        		</complexType>	
+                        	</element>
+                        		
+                        	
+                			
+                        	<element name="amount" maxOccurs="1" minOccurs="1">
+                        		<complexType>
+                        		<sequence>
+                        		<element ref="ebons_money:amount" maxOccurs="1" minOccurs="1"/>
+                        			
+                        		</sequence>	
+                        		</complexType>	
+                        	</element>
+                        		
+                        	
+                			
+                		</sequence>	
+                		</complexType>	
+                	</element>
+                		
+                	
+						</sequence>
+											
+				</complexType>								
+			</element>
+		</sequence>
+		</complexType>
+	
+	
+	<element name="Publish_PartyAccount_RSP" type="tns:Publish_PartyAccount_RSP_Type"/>
+		<complexType name="Publish_PartyAccount_RSP_Type">
+			<sequence>
+				<element ref="header:ResponseHeader"/>
+				<element name="Body">
+					<complexType>
+						<sequence/>
+					</complexType>
+				</element>
+			</sequence>
+		</complexType>
+	
+	<element name="Publish_PartyAccount_FRSP" type="tns:Publish_PartyAccount_FRSP_Type"/>
+	<complexType name="Publish_PartyAccount_FRSP_Type">
+		<sequence>
+			<element ref="header:ResponseHeader"/>
+			<element name="Body">
+				<complexType>
+					<sequence/>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	 <!---=- end:EBM Content -=- -->
+	 
+</schema>	

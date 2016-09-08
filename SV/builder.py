@@ -16,8 +16,12 @@ def chdir_force(_dir):
 		os.makedirs(_dir)
 	os.chdir(_dir)
 
-def main():
-	config=generateConfig('init.cfg')
+def build(_initConfig):
+	print '-----------------------------------------'
+	print 'Lectura de configuracion de servicio'
+	print _initConfig
+	print '-----------------------------------------'
+	config=generateConfig(_initConfig)
 
 	config_template_location = ConfigParser.ConfigParser()
 	config_template_location.readfp(open('TEMPLATE_CONFIG'))
@@ -29,9 +33,12 @@ def main():
 	serviceCode=config.get( 'SERVICE', 'code')
 	serviceVersion=config.get( 'SERVICE', 'version')
 
+	print 'Servicio: ' + serviceName
+
 	project='ES_'+serviceName+'_v'+serviceVersion
 	countries=['INT', 'CHL', 'PER']
 
+	print 'Capacidades: ' + config.get( 'CAPABILITIES', 'name')
 	capabilities=config.get( 'CAPABILITIES', 'name').split(',')
 
 	chdir_force(project)
@@ -47,7 +54,6 @@ def main():
 	_from=root_path+config_template_location.get('PROJECT','pom')
 	_to='pom.xml'
 	util.pom(_from,_to, serviceName)
-
 
 	chdir_force('MPL')
 
@@ -117,7 +123,6 @@ def main():
 	##Root project folder
 	os.chdir('../')
 
-
 	##GENERATE_ESARQUITECTURE
 	with open('get_ESArchitecture.xqy', 'w') as new_file:
 		with open('../TEMPLATES/ES/get_ESArchitecture_TEMPLATE.xqy', 'r') as template_file:
@@ -125,21 +130,24 @@ def main():
 				if 'PLACE_CAPABILIES' in line:
 					for ctry in countries:
 						new_line=config_2.get('COUNTRY_TAG', 'open').replace('%COUNTRY_NAME%',ctry )
-						new_file.write(new_line)
+						new_file.write(('\t\t'+new_line + '\n'))
 						for cap in capabilities:
+							capability_code = config.get(cap, 'code')
 							new_line=config_2.get('CAPABILITY_TAG', 'open')
-							new_line=new_line.replace('%CAPABILITY_NAME%',cap ).replace('%CAPABILITY_CODE%', '###CAPABILITY_CODE#').replace('%COUNTRY_NAME%', ctry).replace('%SERVICE_NAME%', serviceName)
-							new_file.write(new_line)
-							new_file.write(config_2.get('CAPABILITY_TAG', 'close'))
+							new_line=new_line.replace('%CAPABILITY_NAME%',cap ).replace('%CAPABILITY_CODE%', capability_code).replace('%COUNTRY_NAME%', ctry).replace('%SERVICE_NAME%', serviceName)
+							new_file.write(('\t\t\t'+new_line))
+							new_file.write( (config_2.get('CAPABILITY_TAG', 'close')+'\n'))
 						new_line=config_2.get('COUNTRY_TAG', 'close')
-						new_file.write(new_line)
+						new_file.write(('\t\t' + new_line + '\n'))
 				else:
 					new_line=line.replace('%SERVICE_NAME%', serviceName).replace('%SERVICE_CODE%', serviceCode)
 					new_file.write(new_line)
 	os.chdir('../')
 
+	wsdlConfig = os.path.join(os.path.join(root_path, 'tmp'),(serviceName.upper()+'_V'+serviceVersion+'_ESC.WSDL.cfg'))
+
 	#get config of paths
-	paramConfig=generateConfig('WSDL.CFG')
+	paramConfig=generateConfig(wsdlConfig)
 
 	#import wsdl to project
 	wsdlPath=paramConfig.get('WSDL', 'path').replace('\\', '/')
@@ -147,17 +155,20 @@ def main():
 	shutil.copy(wsdlPath, ESCpath)
 
 	#import ebs to project
-
 	try:
 		ebmPath=paramConfig.get('EBMs', 'path').replace('\\', '/')
 	except ConfigParser.NoSectionError, e:
 		ebmPath=wsdlPath+'/EBM'
 		raise e
 
-	for file_name in os.listdir(ebmPath):
-	    full_file_name = os.path.join(ebmPath, file_name)
-	    if (os.path.isfile(full_file_name)):
-	        shutil.copy(full_file_name, ESCpath)
+	for cap in capabilities:
+		ebmfile= cap + '_'+serviceName+'_v'+config.get(cap, 'version')+'_EBM.xsd'
+		ebmfilepath = os.path.join(ebmPath, ebmfile)
+		shutil.copy(ebmfilepath, ESCpath)
+#	for file_name in os.listdir(ebmPath):
+#	    full_file_name = os.path.join(ebmPath, file_name)
+#	    if (os.path.isfile(full_file_name)):
+#	        shutil.copy(full_file_name, ESCpath)
 
 	#refactor path wsdl
 #	goToESC=project+'/ESC/Primary'
@@ -187,3 +198,21 @@ def main():
 	workspaacePathProject=workspaacePath+'/'+project
 	shutil.copytree(fullPathProject, workspaacePathProject)
 
+	print 'Borrado de proyectos temporasles'
+	shutil.rmtree(fullPathProject)
+
+	print '-----------------------------------------'
+	print 'Fin de construccion de proyecto'
+	print '-----------------------------------------'
+def main():
+	inits=[]
+	full_path_temp = os.path.join(root_path, 'tmp')
+	for file in os.listdir(full_path_temp):
+		if '_init.cfg' in file:
+			inits.append(file)
+
+	for initConfig in inits:
+		fullpathInit = os.path.join(full_path_temp, initConfig)
+		build(fullpathInit)
+
+main()

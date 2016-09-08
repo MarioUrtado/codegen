@@ -1,0 +1,102 @@
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.entel.cl/ESO/EndpointConfiguration/v1" targetNamespace="http://www.entel.cl/ESO/EndpointConfiguration/v1" xmlns:eddns_dictionary="http://www.entel.cl/EDD/Dictionary/v1" elementFormDefault="qualified" >
+  
+  <import namespace="http://www.entel.cl/EDD/Dictionary/v1" schemaLocation="../EDD/Dictionary_v1_EDD.xsd"/>
+  
+   <element name="Target" type="tns:TargetOperation_Type"/>
+    <complexType name="TargetOperation_Type">
+        <attribute name="operation" use="required" type="eddns_dictionary:genericStringValue_SType"/>
+        <attribute name="provider" use="required" type="eddns_dictionary:genericStringValue_SType"/>
+        <attribute name="version"/>
+    </complexType>
+  
+   <element name="Endpoint" type="tns:EndpointConfiguration_Type"/>
+   <complexType name="EndpointConfiguration_Type">
+        <sequence>
+            <choice>
+                <element name="OSB" minOccurs="0" maxOccurs="1" type="tns:ConfigOSBEndpoint_Type"/>
+                <element name="JMS" minOccurs="0" maxOccurs="1" type="tns:ConfigJMSEndpoint_Type"/>
+                <element name="HTTP" minOccurs="0" maxOccurs="1" type="tns:ConfigHTTPEndpoint_Type"/>
+		<element name="HTTPSOAP12" minOccurs="0" maxOccurs="1" type="tns:ConfigHTTPSOAP12PEndpoint_Type"/>
+                <element name="JNDI" minOccurs="0" maxOccurs="1" type="tns:ConfigPortableJNDIEndpoint_Type"/>
+                <element name="MQ" minOccurs="0" maxOccurs="1" type="tns:ConfigMQEndpoint_Type"/>
+            </choice>
+            <element ref="tns:Target"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="ConfigOSBEndpoint_Type">
+        <complexContent>
+            <extension base="tns:ConfigEndpoint_Type">
+                <attribute name="uri" use="required"/>
+                <attribute name="operation"/>
+                <attribute name="isProxy" type="boolean" use="required"/>
+                <attribute name="isPipeline" type="boolean" use="required"/>
+            </extension>
+        </complexContent>
+    </complexType>
+    
+    <complexType name="ConfigJMSEndpoint_Type">
+        <complexContent>
+            <extension base="tns:ConfigEndpoint_Type">
+                <attribute name="queueJNDI" use="required"/>
+                <attribute name="connFactoryJNDI" use="required"/>
+                <attribute name="host" use="required"/>
+                <attribute name="port" use="required"/>
+                <attribute name="protocol"/>
+            </extension>
+        </complexContent>
+    </complexType>
+    
+    <complexType name="ConfigHTTPEndpoint_Type">
+        <complexContent>
+            <extension base="tns:ConfigEndpoint_Type">
+                <attribute name="URI"/>
+                <attribute name="host"/>
+                <attribute name="port"/>
+                <attribute name="SSL" type="boolean"/>
+                <attribute name="method"/>
+                <attribute name="contentType"/>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="ConfigHTTPSOAP12PEndpoint_Type">
+        <complexContent>
+            <extension base="tns:ConfigHTTPEndpoint_Type">
+                <attribute name="soapAction" use="required"/>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+    <complexType name="ConfigPortableJNDIEndpoint_Type">
+        <complexContent>
+            <extension base="tns:ConfigEndpoint_Type">
+                <attribute name="initialContextFactory"/>
+                <attribute name="jndiLookup"/>
+                <attribute name="providerURL"/>
+            </extension>
+        </complexContent>
+    </complexType>
+    
+    <complexType name="ConfigMQEndpoint_Type">
+        <complexContent>
+            <extension base="tns:ConfigEndpoint_Type">
+                <attribute name="pollInterval"/>
+                <attribute name="isResponseRequired" type="boolean"/>
+                <attribute name="responseURI"/>
+                <attribute name="responseMessageType"/>
+                <attribute name="requestURI" use="required"/>
+                <attribute name="connResourceRef"/>
+            </extension>
+        </complexContent>
+    </complexType>
+    
+    <complexType name="ConfigEndpoint_Type" abstract="true">
+        <sequence>
+          <element minOccurs="0" name="Credentials" type="eddns_dictionary:Credentials_Type"/>
+        </sequence>
+        <attribute name="timeout" type="eddns_dictionary:timeout_SType"/>
+        <attribute name="readtimeout" type="eddns_dictionary:timeout_SType"/>
+    </complexType>    
+  
+</schema>

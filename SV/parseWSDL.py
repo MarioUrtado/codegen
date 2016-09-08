@@ -8,9 +8,15 @@ def generateConfig(_path):
 	_config.readfp(open(_path))
 	return _config
 
-def main():
 
-	paramConfig=generateConfig('wsdl.cfg')
+def chdir_force(_dir):
+	if not(os.path.isdir(_dir)):
+		os.makedirs(_dir)
+	os.chdir(_dir)
+
+def main(filename):
+
+	paramConfig=generateConfig(filename)
 	wsdlPath=paramConfig.get('WSDL', 'path').replace('\\', '/')
 
 	config = ConfigParser.RawConfigParser()
@@ -40,5 +46,17 @@ def main():
 
 	config.set('CAPABILITIES', 'name', operationsNames)
 
-	with open('init.cfg', 'wb') as configfile:
-	    config.write(configfile)
+	for oper in operations:
+		config.add_section(oper)
+		config.set(oper, 'code', '##CAPABILITY_CODE##')
+		config.set(oper, 'version', '1')
+		config.set(oper, 'syncORasync', 'sync')
+
+
+	file_name = serviceName + '_init.cfg'
+	with open(file_name, 'wb') as configfile:
+		config.write(configfile)
+
+
+
+

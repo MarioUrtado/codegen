@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 
+	xmlns:header="http://www.entel.cl/ESO/MessageHeader/v1" 
+	xmlns:tns="http://www.entel.cl/EBM/PortabilityOrder/Route/v1"
+	xmlns:ebons_msisdn="http://www.entel.cl/EBO/MSISDN/v1"
+	xmlns:ebons_portabilityorder="http://www.entel.cl/EBO/PortabilityOrder/v1"
+	
+	targetNamespace="http://www.entel.cl/EBM/PortabilityOrder/Route/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	 <import namespace="http://www.entel.cl/ESO/MessageHeader/v1" schemaLocation="../../../Commons/ESO/MessageHeader_v1_ESO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/MSISDN/v1" schemaLocation="../../../SID/ResourceDomain/MSISDN_v1_EBO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/PortabilityOrder/v1" schemaLocation="../../../SID/EngagedPartyDomain/PortabilityOrder_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	 <!---=- start:EBM Content -=- -->
+	
+					
+		<element name="Route_PortabilityOrder_REQ" type="tns:Route_PortabilityOrder_REQ_Type"/>
+		<complexType name="Route_PortabilityOrder_REQ_Type">
+		<sequence>
+			<element ref="header:RequestHeader"/>
+			<element name="Body">		
+				<complexType>	
+					<sequence>							
+						
+                	<element name="PortabilityOrder" maxOccurs="1" minOccurs="1">
+                		<complexType>
+                		<sequence>
+                		<element ref="ebons_portabilityorder:operatorDestination" maxOccurs="1" minOccurs="1"/>
+                			
+                        	<element name="MSISDN" maxOccurs="1" minOccurs="1">
+                        		<complexType>
+                        		<sequence>
+                        		<element ref="ebons_msisdn:SN" maxOccurs="1" minOccurs="1"/>
+                        			
+                        		</sequence>	
+                        		</complexType>	
+                        	</element>
+                        		
+                        	
+                			
+                		</sequence>	
+                		</complexType>	
+                	</element>
+                		
+                	
+						</sequence>
+											
+				</complexType>								
+			</element>
+		</sequence>
+		</complexType>
+	
+	
+	<element name="Route_PortabilityOrder_RSP" type="tns:Route_PortabilityOrder_RSP_Type"/>
+		<complexType name="Route_PortabilityOrder_RSP_Type">
+			<sequence>
+				<element ref="header:ResponseHeader"/>
+				<element name="Body">
+					<complexType>
+						<sequence/>
+					</complexType>
+				</element>
+			</sequence>
+		</complexType>
+	
+	<element name="Route_PortabilityOrder_FRSP" type="tns:Route_PortabilityOrder_FRSP_Type"/>
+	<complexType name="Route_PortabilityOrder_FRSP_Type">
+		<sequence>
+			<element ref="header:ResponseHeader"/>
+			<element name="Body">
+				<complexType>
+					<sequence/>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	 <!---=- end:EBM Content -=- -->
+	 
+</schema>	
