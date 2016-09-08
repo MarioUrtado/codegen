@@ -2,19 +2,19 @@ xquery version "1.0" encoding "utf-8";
 
 (:: OracleAnnotationVersion "1.0" ::)
 
-declare namespace ns1="http://www.entel.cl/CSM/RA/INT-AS400-CLI/ClientDelete/v1";
-(:: import schema at "../CSC/INT-AS400-CLI_ClientDelete_v1_CSM.xsd" ::)
+declare namespace ns1="http://www.entel.cl/CSM/RA/%SYSTEM_API%/%OPERATION%/v1";
+(:: import schema at "../CSC/%SYSTEM_API%_%OPERATION%_v1_CSM.xsd" ::)
 
 declare namespace ns3 = "http://www.entel.cl/EBO/Consumer/v1";
 declare namespace ns4 = "http://www.entel.cl/ESO/MessageHeader/v1";
 
-declare variable $RaREQ as element() (:: schema-element(ns1:INT-AS400-CLI_ClientDelete_REQ) ::) external;
+declare variable $RaREQ as element() (:: schema-element(ns1:%SYSTEM_API%_%OPERATION%_REQ) ::) external;
 declare variable $GetMappingRSP as element() external;
 
-declare function local:get_INT-AS400-CLI_ClientDelete_REQMappings($RaREQ as element() (:: schema-element(ns1:INT-AS400-CLI_ClientDelete_REQ) ::), 
+declare function local:get_%SYSTEM_API%_%OPERATION%_REQMappings($RaREQ as element() (:: schema-element(ns1:%SYSTEM_API%_%OPERATION%_REQ) ::), 
                                                                  $GetMappingRSP as element()) 
-                                                                 as element() (:: schema-element(ns1:INT-AS400-CLI_ClientDelete_REQ) ::) {
-    <ns1:INT-AS400-CLI_ClientDelete_REQ>
+                                                                 as element() (:: schema-element(ns1:%SYSTEM_API%_%OPERATION%_REQ) ::) {
+    <ns1:%SYSTEM_API%_%OPERATION%_REQ>
     (: 
       The Request Header is not required at this point, as it is assumed to be saved on a local variable within the 
       RA Pipeline. This reduces the size of the $body variable, and avoids further XPATH queries to be performed.
@@ -23,10 +23,8 @@ declare function local:get_INT-AS400-CLI_ClientDelete_REQMappings($RaREQ as elem
     :)
         <ns4:RequestHeader></ns4:RequestHeader>
         <ns1:Body>
-          {$RaREQ/*[2]/*:ConsumerID}
-          <ns3:ConsumerType>{data($GetMappingRSP/*[1]/*[1][@entity="Client" and @field="Type"]/@dCode)}</ns3:ConsumerType>
         </ns1:Body>
-    </ns1:INT-AS400-CLI_ClientDelete_REQ>
+    </ns1:%SYSTEM_API%_%OPERATION%_REQ>
 };
 
-local:get_INT-AS400-CLI_ClientDelete_REQMappings($RaREQ, $GetMappingRSP)
+local:get_%SYSTEM_API%_%OPERATION%_REQMappings($RaREQ, $GetMappingRSP)
