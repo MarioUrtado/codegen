@@ -1,0 +1,15 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/ESB_RETRY_NOTIFICATION_Polling" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/ESB_RETRY_NOTIFICATION_Polling" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="EsbRetryNotificationCollection" type="EsbRetryNotificationCollection"/>
+   <xs:complexType name="EsbRetryNotificationCollection">
+      <xs:sequence>
+         <xs:element name="EsbRetryNotification" type="EsbRetryNotification" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="EsbRetryNotification">
+      <xs:sequence>
+         <xs:element name="id" type="xs:decimal"/>
+         <xs:element name="transactionCheckId" type="xs:decimal" minOccurs="0"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

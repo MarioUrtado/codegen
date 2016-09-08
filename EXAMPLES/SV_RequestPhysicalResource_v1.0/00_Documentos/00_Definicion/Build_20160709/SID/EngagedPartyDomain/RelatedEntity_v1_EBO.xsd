@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/RelatedEntity/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/RelatedEntity/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="entitySpecification" type="xs:string"/>									
+	<xs:element name="reference" type="xs:string"/>									
+	<xs:element name="role" type="xs:string"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="RelatedEntity" type="tns:RelatedEntity_Type"/>
+	<xs:complexType name="RelatedEntity_Type">
+		<xs:sequence> 
+		<xs:element ref="tns:entitySpecification" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:reference" maxOccurs="1" minOccurs="1"/>
+		<xs:element ref="tns:role" maxOccurs="1" minOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

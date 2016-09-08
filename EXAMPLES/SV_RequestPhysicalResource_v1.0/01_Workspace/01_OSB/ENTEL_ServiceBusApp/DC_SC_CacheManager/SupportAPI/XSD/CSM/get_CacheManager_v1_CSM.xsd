@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.entel.cl/SC/CacheManager/get/v1"
+        xmlns:eddns_dictionary="http://www.entel.cl/EDD/Dictionary/v1"
+        targetNamespace="http://www.entel.cl/SC/CacheManager/get/v1" elementFormDefault="qualified" version="1.0">
+  <import namespace="http://www.entel.cl/EDD/Dictionary/v1"
+          schemaLocation="../../../../SR_Commons/XSD/EDD/Dictionary_v1_EDD.xsd"/>
+  <element name="GetREQ" type="tns:GetREQ_Type"/>
+  <element name="GetRSP" type="tns:GetRSP_Type"/>
+  <complexType name="GetREQ_Type">
+    <sequence>
+      <element name="Key" type="eddns_dictionary:CacheKey_Type"/>
+    </sequence>
+  </complexType>
+  <complexType name="GetRSP_Type">
+    <sequence>
+      <element name="Item" type="eddns_dictionary:GenericDataMapItem_Type" minOccurs="0"/>
+    </sequence>
+  </complexType>
+</schema>

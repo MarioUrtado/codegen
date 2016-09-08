@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+                  xmlns:ns="http://schemas.xmlsoap.org/soap/encoding/"
+                  xmlns:tns="http://www.entel.cl/ESC/PartyAccount/v1"
+                  xmlns:ebmns_Publish="http://www.entel.cl/EBM/PartyAccount/Publish/v1"
+                  targetNamespace="http://www.entel.cl/ESC/PartyAccount/v1">
+   <wsdl:types>
+      <xs:schema>
+         <xs:import namespace="http://www.entel.cl/EBM/PartyAccount/Publish/v1"
+                    schemaLocation="EBM/Publish_PartyAccount_v1_EBM.xsd"/>
+      </xs:schema>
+   </wsdl:types>
+   <wsdl:message name="Publish_Message_Callback">
+      <wsdl:part name="Callback" element="ebmns_Publish:Publish_PartyAccount_CRSP"/>
+   </wsdl:message>
+   <wsdl:message name="Publish_Message_In">
+      <wsdl:part name="In" element="ebmns_Publish:Publish_PartyAccount_REQ"/>
+   </wsdl:message>
+   <wsdl:message name="Publish_Message_Out">
+      <wsdl:part name="Out" element="ebmns_Publish:Publish_PartyAccount_RSP"/>
+   </wsdl:message>
+   <wsdl:message name="Publish_Message_Fault">
+      <wsdl:part name="Fault" element="ebmns_Publish:Publish_PartyAccount_FRSP"/>
+   </wsdl:message>
+   <wsdl:portType name="PartyAccount_PortType">
+      <wsdl:operation name="Publish">
+         <wsdl:input message="tns:Publish_Message_In"/>
+         <wsdl:output message="tns:Publish_Message_Out"/>
+         <wsdl:fault name="DefaultFault" message="tns:Publish_Message_Fault"/>
+      </wsdl:operation>
+      <wsdl:operation name="Publish_Callback">
+         <wsdl:output message="tns:Publish_Message_Callback"/>
+      </wsdl:operation>
+   </wsdl:portType>
+   <wsdl:binding name="PartyAccount_SOAP12Binding" type="tns:PartyAccount_PortType">
+      <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+      <wsdl:operation name="Publish">
+         <soap12:operation soapActionRequired="true"
+                           soapAction="http://www.entel.cl/EBM/PartyAccount/Publish/v1"/>
+         <wsdl:input>
+            <soap12:body use="literal" parts="In"/>
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal" parts="Out"/>
+         </wsdl:output>
+         <wsdl:fault name="DefaultFault">
+            <soap12:fault use="literal" name="DefaultFault"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="Publish_Callback">
+         <soap12:operation soapActionRequired="true"
+                           soapAction="http://www.entel.cl/EBM/PartyAccount/Publish/v1"/>
+         <wsdl:output>
+            <soap12:body use="literal" parts="Callback"/>
+         </wsdl:output>
+      </wsdl:operation>
+   </wsdl:binding>
+   <wsdl:service name="PartyAccount_Service">
+      <wsdl:port name="PartyAccount_Port" binding="tns:PartyAccount_SOAP12Binding">
+         <soap12:address location="http://www.entel.cl/ESC/PartyAccount/v1"/>
+      </wsdl:port>
+   </wsdl:service>
+</wsdl:definitions>

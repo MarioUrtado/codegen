@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/Activity/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/Activity/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="ID" type="xs:string"/>									
+	<xs:element name="comment" type="xs:string"/>									
+	<xs:element name="description" type="xs:string"/>									
+	<xs:element name="owner" type="xs:string"/>									
+	<xs:element name="status" type="xs:string"/>									
+	<xs:element name="type" type="xs:string"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="Activity" type="tns:Activity_Type"/>
+	<xs:complexType name="Activity_Type">
+		<xs:sequence> 
+		<xs:element ref="tns:ID" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:comment" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:description" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:owner" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:status" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:type" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

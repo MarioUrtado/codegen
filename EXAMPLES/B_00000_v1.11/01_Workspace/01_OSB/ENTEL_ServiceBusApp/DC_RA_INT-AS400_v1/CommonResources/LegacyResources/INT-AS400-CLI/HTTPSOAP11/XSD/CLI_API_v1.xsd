@@ -1,0 +1,21 @@
+<schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+        targetNamespace="http://www.entel.as400.com/">
+  <element name="ClientDelete_REQUEST">
+    <complexType>
+      <sequence>
+        <element minOccurs="1" maxOccurs="1" name="CLI_ID" type="string"/>
+        <element minOccurs="1" maxOccurs="1" name="CLI_TYPE" type="string"/>
+      </sequence>
+    </complexType>
+  </element>
+  <element name="ClientDelete_RESPONSE">
+    <complexType>
+      <sequence>
+        <element name="CLI_DESC" type="string" maxOccurs="1" minOccurs="1"/>
+        <element name="CLI_STAT" type="string" maxOccurs="1" minOccurs="1"/>
+        <element name="STATUS_CODE" type="int" maxOccurs="1" minOccurs="1"/>
+        <element name="STATUS_DESC" type="string" maxOccurs="1" minOccurs="1"/>
+      </sequence>
+    </complexType>
+  </element>
+</schema>

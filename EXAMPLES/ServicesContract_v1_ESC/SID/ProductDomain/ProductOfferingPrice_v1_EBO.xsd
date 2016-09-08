@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/ProductOfferingPrice/v1"
+	xmlns:ebo_characteristics="http://www.entel.cl/EBO/Characteristics/v1"
+	xmlns:ebo_timeperiod="http://www.entel.cl/EBO/TimePeriod/v1"
+	xmlns:ebo_money="http://www.entel.cl/EBO/Money/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/ProductOfferingPrice/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/Characteristics/v1" schemaLocation="../CommonBusinessEntitiesDomain/Characteristics_v1_EBO.xsd"/>
+	<xs:import namespace="http://www.entel.cl/EBO/TimePeriod/v1" schemaLocation="../CommonBusinessEntitiesDomain/TimePeriod_v1_EBO.xsd"/>
+	<xs:import namespace="http://www.entel.cl/EBO/Money/v1" schemaLocation="../CommonBusinessEntitiesDomain/Money_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="chargeTypeCode" type="xs:string"/>									
+	<xs:element name="currency" type="xs:string"/>									
+	<xs:element name="description" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>A narrative that explains in detail the semantics of this component.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="displayOnly" type="xs:boolean"/>									
+	<xs:element name="externalIds" type="xs:string"/>									
+	<xs:element name="frequency" type="xs:string"/>									
+	<xs:element name="href" type="xs:string"/>									
+	<xs:element name="id" type="xs:string"/>									
+	<xs:element name="name" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>A short descriptive name such as &amp;ldquo;affinity discount&amp;rdquo;.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="paymentContext" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>indicates whether the POP is used for postpaid, prepaid</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="percentage" type="xs:float"/>									
+	<xs:element name="plaid" type="xs:string"/>									
+	<xs:element name="popId" type="xs:string"/>									
+	<xs:element name="priceType" type="xs:string"/>									
+	<xs:element name="recurringChargePeriod" type="xs:string"/>									
+	<xs:element name="state" type="xs:string"/>									
+	<xs:element name="taxCode" type="xs:string"/>									
+	<xs:element name="unitOfMeasure" type="xs:string"/>									
+	<xs:element name="amount" type="ebo_money:Money_Type"/>									
+	<xs:element name="characteristics" type="ebo_characteristics:Characteristics_Type"/>									
+	<xs:element name="validFor" type="ebo_timeperiod:TimePeriod_Type">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>The period for which the price is valid.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="ProductOfferingPrice" type="tns:ProductOfferingPrice_Type"/>
+	<xs:complexType name="ProductOfferingPrice_Type">
+		
+			<xs:annotation>
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">An amount, usually of money, that is asked for or allowed when a ProductOffering is bought, rented, or leased.  The price is valid for a defined period of time and may not represent the actual price paid by a customer.</xs:documentation>
+						
+			</xs:annotation>
+		<xs:sequence> 
+		<xs:element ref="tns:chargeTypeCode" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:currency" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:description" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:displayOnly" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:externalIds" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:frequency" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:href" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:id" maxOccurs="1" minOccurs="1"/>
+		<xs:element ref="tns:name" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:paymentContext" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:percentage" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:plaid" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:popId" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:priceType" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:recurringChargePeriod" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:state" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:taxCode" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:unitOfMeasure" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:amount" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:characteristics" maxOccurs="unbounded" minOccurs="0"/>
+		<xs:element ref="tns:validFor" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

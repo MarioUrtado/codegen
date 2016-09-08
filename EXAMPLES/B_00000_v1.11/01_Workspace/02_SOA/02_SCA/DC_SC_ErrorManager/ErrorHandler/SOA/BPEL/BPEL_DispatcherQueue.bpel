@@ -1,0 +1,111 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed Feb 10 16:47:58 ART 2016
+  Author:  zacarias.piscopo
+  Type: BPEL 2.0 Process
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="BPEL_DispatcherQueue"
+               targetNamespace="http://xmlns.oracle.com/DC_SC_ErrorManager/ErrorHandler/BPEL_DispatcherQueue"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/DC_SC_ErrorManager/ErrorHandler/BPEL_DispatcherQueue"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://www.entel.cl/ESO/NotificationTreatment/v1"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/jms/DC_SC_ErrorManager/ErrorHandler/Resp_NotificationTreatment"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:ns3="http://www.entel.cl/ESO/ErrorTreatmentStatus/v1"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/DC_SC_ErrorManager/ErrorHandler/Call_SP_ERROR_DISPATCHER_DONE"
+         xmlns:ns5="http://xmlns.oracle.com/pcbpel/adapter/db/DC_SC_ErrorManager/ErrorHandler/Call_SP_ERROR_DISPATCHER_PROGRESS"
+         xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/db/sp/Call_SP_ERROR_DISPATCHER_PROGRESS"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns7="http://xmlns.oracle.com/pcbpel/adapter/db/sp/Call_SP_ERROR_DISPATCHER_DONE"
+         xmlns:ns8="http://xmlns.oracle.com/pcbpel/adapter/db/DC_SC_ErrorManager/ErrorHandler/Call_to_SP_ERROR_DISPATCHER_DONE"
+         xmlns:ns9="http://xmlns.oracle.com/pcbpel/adapter/db/DC_SC_ErrorManager/ErrorHandler/Call_to_SP_ERROR_DISPATCHER_PROGRESS"
+         xmlns:ns10="http://xmlns.oracle.com/pcbpel/adapter/db/sp/Call_to_SP_ERROR_DISPATCHER_DONE"
+         xmlns:ns11="http://xmlns.oracle.com/pcbpel/adapter/db/sp/Call_to_SP_ERROR_DISPATCHER_PROGRESS"
+         xmlns:ns12="http://xmlns.oracle.com/pcbpel/adapter/db/DC_SC_ErrorManager/ErrorHandler/Call_to_SP_ERROR_DISPATCHER_SET_STATE"
+         xmlns:ns13="http://xmlns.oracle.com/pcbpel/adapter/db/sp/Call_to_SP_ERROR_DISPATCHER_SET_STATE">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <import namespace="http://xmlns.oracle.com/pcbpel/adapter/jms/DC_SC_ErrorManager/ErrorHandler/Resp_NotificationTreatment"
+          location="../WSDLs/Resp_NotificationTreatment.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"
+          ui:processWSDL="true"/>
+  <partnerLinks>
+    <partnerLink name="Resp_NotificationTreatment" partnerLinkType="ns2:Consume_Message_plt"
+                 myRole="Consume_Message_role"/>
+    <partnerLink name="Call_to_SP_ERROR_DISPATCHER_SET_STATE"
+                 partnerLinkType="ns12:Call_to_SP_ERROR_DISPATCHER_SET_STATE_plt"
+                 partnerRole="Call_to_SP_ERROR_DISPATCHER_SET_STATE_role"/>
+  </partnerLinks>
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="ns2:Consume_Message_msg"/>
+    <variable name="Req_ErrorDispatcher_Set_State" messageType="ns12:args_in_msg"/>
+    <variable name="Resp_ErrorDispatcher_Set_State_OUT" messageType="ns12:args_out_msg"/>
+  </variables>
+  <faultHandlers>
+    <catchAll>
+      <throw name="ThrowRollBack" faultName="bpelx:rollback"/>
+    </catchAll>
+  </faultHandlers>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in BPEL_DispatcherQueue.wsdl) -->
+    <receive name="receiveInput_Notification_Treatment" partnerLink="Resp_NotificationTreatment"
+             portType="ns2:Consume_Message_ptt"
+             operation="Consume_Message" variable="inputVariable" createInstance="yes"/>
+    <assign name="Assign_to_SP_ERROR_DISPATCHER_SET_STATE">
+      <copy>
+        <from>$inputVariable.body/ns3:Error_Treatment_Id</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Req_ErrorDispatcher_Set_State.InputParameters/ns13:P_ID_DISPATCHER</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.body/ns3:Status</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Req_ErrorDispatcher_Set_State.InputParameters/ns13:P_STATUS</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.body/ns3:Description</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Req_ErrorDispatcher_Set_State.InputParameters/ns13:P_DESCRIPTION</to>
+      </copy>
+    </assign>
+    <invoke name="Invoke_to_SP_ERROR_DISPATCHER_SET_STATE"
+            partnerLink="Call_to_SP_ERROR_DISPATCHER_SET_STATE"
+            portType="ns12:Call_to_SP_ERROR_DISPATCHER_SET_STATE_ptt"
+            operation="Call_to_SP_ERROR_DISPATCHER_SET_STATE" inputVariable="Req_ErrorDispatcher_Set_State"
+            outputVariable="Resp_ErrorDispatcher_Set_State_OUT" bpelx:invokeAsDetail="no"/>
+  </sequence>
+</process>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 (http://www.altova.com) by  () -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:eddns_dictionary="http://www.entel.cl/EDD/Dictionary/v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.entel.cl/EBO/MarketSegment/v1" targetNamespace="http://www.entel.cl/EBO/MarketSegment/v1" elementFormDefault="qualified" version="1.0">
+	<import namespace="http://www.entel.cl/EDD/Dictionary/v1" schemaLocation="../EDD/Dictionary_v1_EDD.xsd"/>
+	<!---=- start:EBO root elements defs -=- -->
+	<element name="ID" type="xs:string">
+		<annotation>
+			<documentation>A unique identifier for the MarketSegment.</documentation>
+		</annotation>
+	</element>
+	<element name="description" type="xs:string">
+		<annotation>
+			<documentation>A narrative that explains what the MarketSegment is.</documentation>
+		</annotation>
+	</element>
+	<element name="marketSegmentCategory" type="xs:string">
+		<annotation>
+			<documentation>A classification of MarketSegments because they share common characteristics. For example a vertical or horizontal MarketSegment. Vertical MarketSegments put a PartyRole in a single segment, while a PartyRole can exist in multiple horizontal MarketSegments</documentation>
+		</annotation>
+	</element>
+	<element name="marketSegmentSubCategory" type="xs:string">
+		<annotation>
+			<documentation>A further classification of MarketSegments because they share common characteristics. For example, a vertical category MarketSegment may be further categorized as consumer, business, or carrier.</documentation>
+		</annotation>
+	</element>
+	<element name="name" type="xs:string">
+		<annotation>
+			<documentation>A word, term, or phrase by which a MarketSegment is known and distinguished from other MarketSegments.</documentation>
+		</annotation>
+	</element>
+	<element name="validFor" type="eddns_dictionary:TimePeriod">
+		<annotation>
+			<documentation>The period during which the MarketSegment is applicable.</documentation>
+		</annotation>
+	</element>
+	<!---=- end:EBO root elements defs -=- -->
+	<!---=- start:EBO complexType defs -=- -->
+	<element name="MarketSegment" type="tns:MarketSegment_Type"/>
+	<complexType name="MarketSegment_Type">
+		<sequence>
+			<annotation>
+				<documentation>A grouping of Parties, GeographicAreas, SalesChannels, and so forth. MarketSegments are the target of MarketingCampaigns, ProductOfferings, ProductPromotions, ProductPlacements, and ProductPrograms from both internal and external (Competitors, and other Providers) perspective.</documentation>
+			</annotation>
+			<element ref="tns:ID" minOccurs="1" maxOccurs="1"/>
+			<element ref="tns:description" minOccurs="0" maxOccurs="1"/>
+			<element ref="tns:marketSegmentCategory" minOccurs="0" maxOccurs="1"/>
+			<element ref="tns:marketSegmentSubCategory" minOccurs="0" maxOccurs="1"/>
+			<element ref="tns:name" minOccurs="0" maxOccurs="1"/>
+			<element ref="tns:validFor" minOccurs="0" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+	<!---=- end:EBO complexType defs -=- -->
+</schema>

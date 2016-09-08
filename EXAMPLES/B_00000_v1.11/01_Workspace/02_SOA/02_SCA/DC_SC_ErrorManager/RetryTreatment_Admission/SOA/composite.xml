@@ -1,0 +1,143 @@
+<composite name="RetryTreatment_Admission"
+           revision="1.0"
+           label="2016-03-10_11-37-44_054"
+           mode="active"
+           state="on"
+           xmlns="http://xmlns.oracle.com/sca/1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+           xmlns:orawsp="http://schemas.oracle.com/ws/2006/01/policy"
+           xmlns:ui="http://xmlns.oracle.com/soa/designer/"
+           xmlns:sca-ext="http://xmlns.oracle.com/sca/1.0-ext">
+  <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/DC_SC_ErrorManager/RetryTreatment_Admission/ESB_RETRYMANAGER_Pooling"
+          location="WSDLs/ESB_RETRYMANAGER_Pooling.wsdl" importType="wsdl"/>
+  <import namespace="http://xmlns.oracle.com/pcbpel/adapter/jms/DC_SC_ErrorManager/RetryTreatment_Admission/JMS_Send_RetryManagerAdmissionQueue"
+          location="WSDLs/JMS_Send_RetryManagerAdmissionQueue.wsdl" importType="wsdl"/>
+  <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/DC_SC_ErrorManager/RetryTreatment_Admission/RETRY_UPDATE_STATUS"
+          location="WSDLs/RETRY_UPDATE_STATUS.wsdl" importType="wsdl"/>
+  <import namespace="http://xmlns.oracle.com/pcbpel/adapter/jms/DC_SC_ErrorManager/RetryTreatment_Admission/JMS_Receive_RetryManagerAdmissionQueue"
+          location="WSDLs/JMS_Receive_RetryManagerAdmissionQueue.wsdl" importType="wsdl"/>
+  <import namespace="http://xmlns.oracle.com/pcbpel/adapter/jms/DC_SC_ErrorManager/RetryTreatment_Admission/JMS_Send_RetryManagerQueue"
+          location="WSDLs/JMS_Send_RetryManagerQueue.wsdl" importType="wsdl"/>
+  <import namespace="http://xmlns.oracle.com/pcbpel/adapter/jms/DC_SC_ErrorManager/RetryTreatment_Admission/ESB_ReciveToRetryManagerAdmissionErrorQueue"
+          location="WSDLs/ESB_ReciveToRetryManagerAdmissionErrorQueue.wsdl" importType="wsdl"/>
+  <import namespace="http://xmlns.oracle.com/pcbpel/adapter/jms/DC_SC_ErrorManager/RetryTreatment_Admission/JMS_Send_MessageDispatcherQueue"
+          location="WSDLs/JMS_Send_MessageDispatcherQueue.wsdl" importType="wsdl"/>
+  <service name="ESB_RETRYMANAGER_Pooling" ui:wsdlLocation="WSDLs/ESB_RETRYMANAGER_Pooling.wsdl">
+    <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/db/DC_SC_ErrorManager/RetryTreatment_Admission/ESB_RETRYMANAGER_Pooling#wsdl.interface(ESB_RETRYMANAGER_Pooling_ptt)"/>
+    <binding.jca config="Adapters/ESB_RETRYMANAGER_Pooling_db.jca">
+      <property name="useRejectedMessageRecovery" type="xs:string" many="false" override="may">true</property>
+    </binding.jca>
+    <property name="jca.retry.count" type="xs:int" many="false" override="may">2147483647</property>
+    <property name="jca.retry.interval" type="xs:int" many="false" override="may">1</property>
+    <property name="jca.retry.backoff" type="xs:int" many="false" override="may">2</property>
+    <property name="jca.retry.maxInterval" type="xs:int" many="false" override="may">120</property>
+  </service>
+  <service name="JMS_Receive_RetryManagerAdmissionQueue" ui:wsdlLocation="WSDLs/JMS_Receive_RetryManagerAdmissionQueue.wsdl">
+    <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/jms/DC_SC_ErrorManager/RetryTreatment_Admission/JMS_Receive_RetryManagerAdmissionQueue#wsdl.interface(Consume_Message_ptt)"/>
+    <binding.jca config="Adapters/JMS_Receive_RetryManagerAdmissionQueue.jca">
+      <property name="useRejectedMessageRecovery" type="xs:string" many="false" override="may">true</property>
+    </binding.jca>
+  </service>
+  <service name="ESB_ReciveToRetryManagerAdmissionErrorQueue"
+           ui:wsdlLocation="WSDLs/ESB_ReciveToRetryManagerAdmissionErrorQueue.wsdl">
+    <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/jms/DC_SC_ErrorManager/RetryTreatment_Admission/ESB_ReciveToRetryManagerAdmissionErrorQueue#wsdl.interface(Consume_Message_ptt)"/>
+    <binding.jca config="Adapters/ESB_ReciveToRetryManagerAdmissionErrorQueue_jms.jca">
+      <property name="useRejectedMessageRecovery" type="xs:string" many="false" override="may">true</property>
+    </binding.jca>
+  </service>
+  <property name="productVersion" type="xs:string" many="false">12.2.1.0.0.151013</property>
+  <property name="compositeID" type="xs:string" many="false">c73c8d01-06e8-4c26-a210-a065e844d4f4</property>
+  <component name="Admission_BPELProcess" version="2.0">
+    <implementation.bpel src="BPEL/Admission_BPELProcess.bpel"/>
+    <componentType>
+      <service name="ESB_RETRYMANAGER_Pooling" ui:wsdlLocation="WSDLs/ESB_RETRYMANAGER_Pooling.wsdl">
+        <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/db/DC_SC_ErrorManager/RetryTreatment_Admission/ESB_RETRYMANAGER_Pooling#wsdl.interface(ESB_RETRYMANAGER_Pooling_ptt)"/>
+      </service>
+      <reference name="JMS_Send_RetryManagerAdmissionQueue" ui:wsdlLocation="WSDLs/JMS_Send_RetryManagerAdmissionQueue.wsdl">
+        <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/jms/DC_SC_ErrorManager/RetryTreatment_Admission/JMS_Send_RetryManagerAdmissionQueue#wsdl.interface(Produce_Message_ptt)"/>
+      </reference>
+    </componentType>
+    <property name="bpel.config.transaction" type="xs:string" many="false">required</property>
+    <property name="bpel.config.oneWayDeliveryPolicy" type="xs:string" many="false">sync</property>
+  </component>
+  <component name="UpdatesAdmission_BPELProcess" version="2.0">
+    <implementation.bpel src="BPEL/UpdatesAdmission_BPELProcess.bpel"/>
+    <componentType>
+      <service name="JMS_Receive_RetryManagerAdmissionQueue"
+               ui:wsdlLocation="WSDLs/JMS_Receive_RetryManagerAdmissionQueue.wsdl">
+        <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/jms/DC_SC_ErrorManager/RetryTreatment_Admission/JMS_Receive_RetryManagerAdmissionQueue#wsdl.interface(Consume_Message_ptt)"/>
+      </service>
+      <reference name="RETRY_UPDATE_STATUS" ui:wsdlLocation="WSDLs/RETRY_UPDATE_STATUS.wsdl">
+        <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/db/DC_SC_ErrorManager/RetryTreatment_Admission/RETRY_UPDATE_STATUS#wsdl.interface(RETRY_UPDATE_STATUS_ptt)"/>
+      </reference>
+      <reference name="JMS_Send_RetryManagerQueue" ui:wsdlLocation="WSDLs/JMS_Send_RetryManagerQueue.wsdl">
+        <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/jms/DC_SC_ErrorManager/RetryTreatment_Admission/JMS_Send_RetryManagerQueue#wsdl.interface(Produce_Message_ptt)"/>
+      </reference>
+    </componentType>
+    <property name="bpel.config.transaction" type="xs:string" many="false">required</property>
+    <property name="bpel.config.oneWayDeliveryPolicy" type="xs:string" many="false">sync</property>
+  </component>
+  <component name="CleanErrorQueue_BPELProccess" version="2.0">
+    <implementation.bpel src="BPEL/CleanErrorQueue_BPELProccess.bpel"/>
+    <componentType>
+      <service name="ESB_ReciveToRetryManagerAdmissionErrorQueue"
+               ui:wsdlLocation="WSDLs/ESB_ReciveToRetryManagerAdmissionErrorQueue.wsdl">
+        <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/jms/DC_SC_ErrorManager/RetryTreatment_Admission/ESB_ReciveToRetryManagerAdmissionErrorQueue#wsdl.interface(Consume_Message_ptt)"/>
+      </service>
+      <reference name="JMS_Send_MessageDispatcherQueue" ui:wsdlLocation="WSDLs/JMS_Send_MessageDispatcherQueue.wsdl">
+        <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/jms/DC_SC_ErrorManager/RetryTreatment_Admission/JMS_Send_MessageDispatcherQueue#wsdl.interface(Produce_Message_ptt)"/>
+      </reference>
+    </componentType>
+    <property name="bpel.config.transaction" type="xs:string" many="false">required</property>
+    <property name="bpel.config.oneWayDeliveryPolicy" type="xs:string" many="false">sync</property>
+  </component>
+  <reference name="JMS_Send_RetryManagerAdmissionQueue" ui:wsdlLocation="WSDLs/JMS_Send_RetryManagerAdmissionQueue.wsdl">
+    <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/jms/DC_SC_ErrorManager/RetryTreatment_Admission/JMS_Send_RetryManagerAdmissionQueue#wsdl.interface(Produce_Message_ptt)"/>
+    <binding.jca config="Adapters/JMS_Send_RetryManagerAdmissionQueue.jca"/>
+  </reference>
+  <reference name="RETRY_UPDATE_STATUS" ui:wsdlLocation="WSDLs/RETRY_UPDATE_STATUS.wsdl">
+    <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/db/DC_SC_ErrorManager/RetryTreatment_Admission/RETRY_UPDATE_STATUS#wsdl.interface(RETRY_UPDATE_STATUS_ptt)"/>
+    <binding.jca config="Adapters/RETRY_UPDATE_STATUS_db.jca"/>
+    <property name="jca.retry.count" type="xs:int" many="false" override="may">4</property>
+    <property name="jca.retry.interval" type="xs:int" many="false" override="may">1</property>
+    <property name="jca.retry.backoff" type="xs:int" many="false" override="may">2</property>
+    <property name="jca.retry.maxInterval" type="xs:int" many="false" override="may">120</property>
+  </reference>
+  <reference name="JMS_Send_RetryManagerQueue" ui:wsdlLocation="WSDLs/JMS_Send_RetryManagerQueue.wsdl">
+    <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/jms/DC_SC_ErrorManager/RetryTreatment_Admission/JMS_Send_RetryManagerQueue#wsdl.interface(Produce_Message_ptt)"/>
+    <binding.jca config="Adapters/JMS_Send_RetryManagerQueue.jca"/>
+  </reference>
+  <reference name="JMS_Send_MessageDispatcherQueue" ui:wsdlLocation="WSDLs/JMS_Send_MessageDispatcherQueue.wsdl">
+    <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/jms/DC_SC_ErrorManager/RetryTreatment_Admission/JMS_Send_MessageDispatcherQueue#wsdl.interface(Produce_Message_ptt)"/>
+    <binding.jca config="Adapters/JMS_Send_MessageDispatcherQueue.jca"/>
+  </reference>
+  <wire>
+    <source.uri>ESB_RETRYMANAGER_Pooling</source.uri>
+    <target.uri>Admission_BPELProcess/ESB_RETRYMANAGER_Pooling</target.uri>
+  </wire>
+  <wire>
+    <source.uri>Admission_BPELProcess/JMS_Send_RetryManagerAdmissionQueue</source.uri>
+    <target.uri>JMS_Send_RetryManagerAdmissionQueue</target.uri>
+  </wire>
+  <wire>
+    <source.uri>UpdatesAdmission_BPELProcess/RETRY_UPDATE_STATUS</source.uri>
+    <target.uri>RETRY_UPDATE_STATUS</target.uri>
+  </wire>
+  <wire>
+    <source.uri>UpdatesAdmission_BPELProcess/JMS_Send_RetryManagerQueue</source.uri>
+    <target.uri>JMS_Send_RetryManagerQueue</target.uri>
+  </wire>
+  <wire>
+    <source.uri>ESB_ReciveToRetryManagerAdmissionErrorQueue</source.uri>
+    <target.uri>CleanErrorQueue_BPELProccess/ESB_ReciveToRetryManagerAdmissionErrorQueue</target.uri>
+  </wire>
+  <wire>
+    <source.uri>CleanErrorQueue_BPELProccess/JMS_Send_MessageDispatcherQueue</source.uri>
+    <target.uri>JMS_Send_MessageDispatcherQueue</target.uri>
+  </wire>
+  <wire>
+    <source.uri>JMS_Receive_RetryManagerAdmissionQueue</source.uri>
+    <target.uri>UpdatesAdmission_BPELProcess/JMS_Receive_RetryManagerAdmissionQueue</target.uri>
+  </wire>
+</composite>

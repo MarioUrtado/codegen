@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/BusinessInteraction/v1"
+	xmlns:ebons_date="http://www.entel.cl/EBO/Date/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/BusinessInteraction/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/Date/v1" schemaLocation="../CommonBusinessEntitiesDomain/Date_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="ID" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>Unique identifier for Interaction.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="interactionCategory" type="xs:string"/>									
+	<xs:element name="interactionDescription" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>Narrative that explains the interaction and details about an interaction, such as why an interaction is taking place.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="interactionExecutionDesc" type="xs:string"/>									
+	<xs:element name="interactionExternalID" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>The external Id for a business interaction</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="interactionMode" type="xs:string"/>									
+	<xs:element name="interactionName" type="xs:string"/>									
+	<xs:element name="interactionStatus" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>The current condition of an interaction, such as open, in research, closed, and so forth.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="interactionDate" type="ebons_date:Date_Type">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>Date interaction initiated</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="interactionDateClosed" type="ebons_date:Date_Type">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>The date on which an interaction is closed or completed.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="BusinessInteraction" type="tns:BusinessInteraction_Type"/>
+	<xs:complexType name="BusinessInteraction_Type">
+		
+			<xs:annotation>
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">A BusinessInteraction is an arrangement, contract, or communication between one or more Business Participants.  A BusinessInteraction may consist of one or more BusinessInteractionItems.  A BusinessInteractionItem may refer to a Product, Service, Resource, or one of their specifications. A BusinessInteraction is further defined by one or more Locations.  One BusinessInteraction may reference another BusinessInteraction and one BusinessInteractionItem may reference another BusinessInteractionItem on the same or different BusinessInteraction.  There are types of BusinessInteractions are:  Requests, Responses, Notifications, and Agreements.</xs:documentation>
+						
+			</xs:annotation>
+		<xs:sequence> 
+		<xs:element ref="tns:ID" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:interactionCategory" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:interactionDescription" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:interactionExecutionDesc" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:interactionExternalID" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:interactionMode" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:interactionName" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:interactionStatus" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:interactionDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:interactionDateClosed" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

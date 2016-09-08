@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
+    <con:coreEntry>
+        <con:binding type="Native REST" xsi:type="con:NativeRestBindingType">
+            <con:wadl ref="ES_Consumer_v1/ESC/Secondary/Consumer_v1_ESC"/>
+        </con:binding>
+        <con:xqConfiguration>
+            <con:snippetVersion>1.0</con:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:router errorHandler="error-N3f57c7ff.7490f26f.0.152f9f3c67e.N7dbd">
+        <con:pipeline type="request" name="request-N53ee2cea.Ncb6dc59.0.152ef608e66.N7fda">
+            <con:stage id="_StageId-N53ee2cea.Ncb6dc59.0.152ef608e66.N7fd8" name="Get Transformation REST to SOAP Request">
+                <con:context/>
+                <con:actions>
+                    <con1:nxsdTranslation>
+                        <con2:id>_ActionId-N53ee2cea.Ncb6dc59.0.152ef608e66.N7fc7</con2:id>
+                        <con1:type>Native-To-XML</con1:type>
+                        <con1:sourceExpr>
+                            <con2:xqueryText>$body/text()</con2:xqueryText>
+                        </con1:sourceExpr>
+                        <con1:nxsd ref="ES_Consumer_v1/ESC/Secondary/get_Consumer_JSON_v1_EBM"/>
+                        <con1:schemaElement xmlns:v1="http://www.entel.cl/EBM/Consumer/get/JSON/v1">v1:Get_Consumer_REQ</con1:schemaElement>
+                        <con1:replace-body-content/>
+                    </con1:nxsdTranslation>
+                    <con1:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-N53ee2cea.Ncb6dc59.0.152ef608e66.N7fc4</con2:id>
+                        <con1:expr>
+                            <con2:xqueryTransform>
+                                <con2:resource ref="ES_Consumer_v1/MPL/SIF/XQuery/JSON_Transformation/get/get_Get_Consumer_JSON_REQ"/>
+                                <con2:param name="getConsumerReq">
+                                    <con2:path>$body/*[1]</con2:path>
+                                </con2:param>
+                            </con2:xqueryTransform>
+                        </con1:expr>
+                    </con1:replace>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-N53ee2cea.Ncb6dc59.0.152ef608e66.N7fd9">
+            <con:stage id="_StageId-N53ee2cea.Ncb6dc59.0.152ef608e66.N7fd7" name="Get Transformation SOAP to REST Response">
+                <con:context/>
+                <con:actions>
+                    <con1:ifThenElse>
+                        <con2:id>_ActionId-N3f57c7ff.N43e948d9.0.1532a80db34.N7e7f</con2:id>
+                        <con1:case id="_BranchId-N3f57c7ff.N43e948d9.0.1532a80db34.N7e7e">
+                            <con1:condition>
+                                <con2:xqueryText>exists($body/*:Get_Consumer_RSP)</con2:xqueryText>
+                            </con1:condition>
+                            <con1:actions>
+                                <con1:replace varName="body" contents-only="true">
+                                    <con2:id>_ActionId-N53ee2cea.Ncb6dc59.0.152ef608e66.N7fb9</con2:id>
+                                    <con1:expr>
+                                        <con2:xqueryTransform>
+                                            <con2:resource ref="ES_Consumer_v1/MPL/SIF/XQuery/JSON_Transformation/get/get_Get_Consumer_JSON_RSP"/>
+                                            <con2:param name="Get_Consumer_RSP">
+                                                <con2:path>$body/*[1]</con2:path>
+                                            </con2:param>
+                                        </con2:xqueryTransform>
+                                    </con1:expr>
+                                </con1:replace>
+                                <con1:nxsdTranslation>
+                                    <con2:id>_ActionId-N53ee2cea.Ncb6dc59.0.152ef608e66.N7fbc</con2:id>
+                                    <con1:type>XML-To-Native</con1:type>
+                                    <con1:sourceExpr>
+                                        <con2:xqueryText>$body/*[1]</con2:xqueryText>
+                                    </con1:sourceExpr>
+                                    <con1:nxsd ref="ES_Consumer_v1/ESC/Secondary/get_Consumer_JSON_v1_EBM"/>
+                                    <con1:schemaElement xmlns:v1="http://www.entel.cl/EBM/Consumer/get/JSON/v1">v1:Get_Consumer_RSP</con1:schemaElement>
+                                    <con1:replace-body-content/>
+                                </con1:nxsdTranslation>
+                            </con1:actions>
+                        </con1:case>
+                        <con1:default>
+                            <con1:Error>
+                                <con2:id>_ActionId-N3f57c7ff.N43e948d9.0.1532a80db34.N7e17</con2:id>
+                                <con1:errCode>FUNC001</con1:errCode>
+                                <con1:message>Error finalizado de manera correcta</con1:message>
+                            </con1:Error>
+                        </con1:default>
+                    </con1:ifThenElse>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="request" name="request-N53ee2cea.Ncb6dc59.0.152ef608e66.N7fd6">
+            <con:stage id="_StageId-N53ee2cea.Ncb6dc59.0.152ef608e66.N7fd4" name="Delete Transformation REST to SOAP Request">
+                <con:context/>
+                <con:actions>
+                    <con1:nxsdTranslation>
+                        <con2:id>_ActionId-N3f57c7ff.6d56dd2f.0.1530b0fbba3.N7fce</con2:id>
+                        <con1:type>Native-To-XML</con1:type>
+                        <con1:sourceExpr>
+                            <con2:xqueryText>$body/text()</con2:xqueryText>
+                        </con1:sourceExpr>
+                        <con1:nxsd ref="ES_Consumer_v1/ESC/Secondary/del_Consumer_JSON_v1_EBM"/>
+                        <con1:schemaElement xmlns:v1="http://www.entel.cl/EBM/Consumer/del/JSON/v1">v1:Del_Consumer_REQ</con1:schemaElement>
+                        <con1:replace-body-content/>
+                    </con1:nxsdTranslation>
+                    <con1:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-N3f57c7ff.N7e97c46f.0.1530b3692c2.N7ffb</con2:id>
+                        <con1:expr>
+                            <con2:xqueryTransform>
+                                <con2:resource ref="ES_Consumer_v1/MPL/SIF/XQuery/JSON_Transformation/del/get_Del_Consumer_JSON_REQ"/>
+                                <con2:param name="delConsumerReq">
+                                    <con2:path>$body/*[1]</con2:path>
+                                </con2:param>
+                            </con2:xqueryTransform>
+                        </con1:expr>
+                    </con1:replace>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-N53ee2cea.Ncb6dc59.0.152ef608e66.N7fd5">
+            <con:stage id="_StageId-N53ee2ce7.N52172ab6.0.152f5e3dcdf.N7eff" name="Delete Transformation SOAP to REST Response">
+                <con:context/>
+                <con:actions>
+                    <con1:ifThenElse>
+                        <con2:id>_ActionId-N3f57c7ff.N43e948d9.0.1532a80db34.N7ebd</con2:id>
+                        <con1:case id="_BranchId-N3f57c7ff.N43e948d9.0.1532a80db34.N7ebc">
+                            <con1:condition>
+                                <con2:xqueryText>exists($body/*:Del_Consumer_RSP)</con2:xqueryText>
+                            </con1:condition>
+                            <con1:actions>
+                                <con1:replace contents-only="true" varName="body">
+                                    <con2:id>_ActionId-N3f57c7ff.N7e97c46f.0.1530b3692c2.N7ff8</con2:id>
+                                    <con1:expr>
+                                        <con2:xqueryTransform>
+                                            <con2:resource ref="ES_Consumer_v1/MPL/SIF/XQuery/JSON_Transformation/del/get_Del_Consumer_JSON_RSP"/>
+                                            <con2:param name="delConsumerRsp">
+                                                <con2:path>$body/*[1]</con2:path>
+                                            </con2:param>
+                                        </con2:xqueryTransform>
+                                    </con1:expr>
+                                </con1:replace>
+                                <con1:nxsdTranslation>
+                                    <con2:id>_ActionId-N3f57c7ff.6d56dd2f.0.1530b0fbba3.N7f9b</con2:id>
+                                    <con1:type>XML-To-Native</con1:type>
+                                    <con1:sourceExpr>
+                                        <con2:xqueryText>$body/*[1]</con2:xqueryText>
+                                    </con1:sourceExpr>
+                                    <con1:nxsd ref="ES_Consumer_v1/ESC/Secondary/del_Consumer_JSON_v1_EBM"/>
+                                    <con1:schemaElement xmlns:v1="http://www.entel.cl/EBM/Consumer/del/JSON/v1">v1:Del_Consumer_RSP</con1:schemaElement>
+                                    <con1:replace-body-content/>
+                                </con1:nxsdTranslation>
+                            </con1:actions>
+                        </con1:case>
+                        <con1:default>
+                            <con1:Error>
+                                <con2:id>_ActionId-N3f57c7ff.N43e948d9.0.1532a80db34.N7e86</con2:id>
+                                <con1:errCode>FUNC001</con1:errCode>
+                                <con1:message>Error finalizado de manera correcta</con1:message>
+                            </con1:Error>
+                        </con1:default>
+                    </con1:ifThenElse>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-N53ee2ce7.N52172ab6.0.152f5e3dcdf.N7ef9">
+            <con:stage id="_StageId-N3f57c7ff.7490f26f.0.152f9f3c67e.N7ee9" name="Get Transformation SOAP to REST ErrorResponse">
+                <con:context/>
+                <con:actions>
+                    <con1:ifThenElse>
+                        <con2:id>_ActionId-N3f57c7ff.7490f26f.0.152f9f3c67e.N7ee8</con2:id>
+                        <con1:case id="_BranchId-N3f57c7ff.7490f26f.0.152f9f3c67e.N7ee7">
+                            <con1:condition>
+                                <con2:xqueryText>exists($body/*:Fault/detail[1]/*:Get_Consumer_FRSP[1])</con2:xqueryText>
+                            </con1:condition>
+                            <con1:actions>
+                                <con1:replace varName="body" contents-only="true">
+                                    <con2:id>_ActionId-N53ee2ce7.N3c776a38.0.152f4919826.N7f65</con2:id>
+                                    <con1:expr>
+                                        <con2:xqueryTransform>
+                                            <con2:resource ref="ES_Consumer_v1/MPL/SIF/XQuery/JSON_Transformation/get/get_Get_Consumer_JSON_FRSP"/>
+                                            <con2:param name="faultstring">
+                                                <con2:path>$body/*:Fault/faultstring[1]/text()</con2:path>
+                                            </con2:param>
+                                            <con2:param name="faultcode">
+                                                <con2:path>$body/*:Fault/faultcode[1]/text()</con2:path>
+                                            </con2:param>
+                                            <con2:param name="Get_Consumer_FRSP">
+                                                <con2:path>$body/*:Fault/detail[1]/*:Get_Consumer_FRSP[1]</con2:path>
+                                            </con2:param>
+                                        </con2:xqueryTransform>
+                                    </con1:expr>
+                                </con1:replace>
+                                <con1:nxsdTranslation>
+                                    <con2:id>_ActionId-N53ee2ce7.N52172ab6.0.152f5e3dcdf.N7f08</con2:id>
+                                    <con1:type>XML-To-Native</con1:type>
+                                    <con1:sourceExpr>
+                                        <con2:xqueryText>$body/*[1]</con2:xqueryText>
+                                    </con1:sourceExpr>
+                                    <con1:nxsd ref="ES_Consumer_v1/ESC/Secondary/get_Consumer_JSON_v1_EBM"/>
+                                    <con1:schemaElement xmlns:v1="http://www.entel.cl/EBM/Consumer/get/JSON/v1">v1:Fault</con1:schemaElement>
+                                    <con1:replace-body-content/>
+                                </con1:nxsdTranslation>
+                                <con1:transport-headers copy-all="true">
+                                    <con2:id>_ActionId-N3f57c7ff.39ca1f60.0.1532cdfcef5.N7dfa</con2:id>
+                                    <con1:header-set>inbound-response</con1:header-set>
+                                    <con1:header value="expression" name="Content-Type">
+                                        <con2:xqueryText>'application/json'</con2:xqueryText>
+                                    </con1:header>
+                                </con1:transport-headers>
+                                <con2:reply isError="true">
+                                    <con2:id>_ActionId-N53ee2ce7.N52172ab6.0.152f5e3dcdf.N7ef5</con2:id>
+                                </con2:reply>
+                            </con1:actions>
+                        </con1:case>
+                        <con1:default>
+                            <con1:Error>
+                                <con2:id>_ActionId-N3f57c7ff.N6dc40d42.0.152fb1a40a0.N7f8b</con2:id>
+                                <con1:errCode>98</con1:errCode>
+                                <con1:message>Unexpected Error Exception</con1:message>
+                            </con1:Error>
+                        </con1:default>
+                    </con1:ifThenElse>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-N3f57c7ff.7490f26f.0.152f9f3c67e.N7dbd">
+            <con:stage id="_StageId-N3f57c7ff.7490f26f.0.152f9f3c67e.N7dbc" name="UnexpectedError Handler">
+                <con:context/>
+                <con:actions>
+                    <con1:transport-headers copy-all="true">
+                        <con2:id>_ActionId-N3f57c7ff.39ca1f60.0.1532cdfcef5.N7ead</con2:id>
+                        <con1:header-set>inbound-response</con1:header-set>
+                        <con1:header value="expression" name="Content-Type">
+                            <con2:xqueryText>'application/json'</con2:xqueryText>
+                        </con1:header>
+                    </con1:transport-headers>
+                    <con1:ifThenElse>
+                        <con2:id>_ActionId-N3f57c7ff.39ca1f60.0.1532cdfcef5.N7f81</con2:id>
+                        <con1:case id="_BranchId-N3f57c7ff.39ca1f60.0.1532cdfcef5.N7f80">
+                            <con1:condition>
+                                <con2:xqueryText>exists($body/*:Fault)</con2:xqueryText>
+                            </con1:condition>
+                            <con1:actions>
+                                <con1:replace varName="body" contents-only="true">
+                                    <con2:id>_ActionId-N3f57c7ff.39ca1f60.0.1532cdfcef5.N7f7a</con2:id>
+                                    <con1:expr>
+                                        <con2:xqueryTransform>
+                                            <con2:resource ref="SR_Commons/XQuery/ServiceComponent/SIF/get_UnexpectedErrorRSP_JSON_v1"/>
+                                            <con2:param name="faultstring">
+                                                <con2:path>$body/*:Fault/faultstring[1]/text()</con2:path>
+                                            </con2:param>
+                                            <con2:param name="faultcode">
+                                                <con2:path>$body/*:Fault/faultcode[1]/text()</con2:path>
+                                            </con2:param>
+                                            <con2:param name="unexpectedErrorException">
+                                                <con2:path>$body/*:Fault/detail[1]</con2:path>
+                                            </con2:param>
+                                        </con2:xqueryTransform>
+                                    </con1:expr>
+                                </con1:replace>
+                                <con1:nxsdTranslation>
+                                    <con2:id>_ActionId-N3f57c7ff.39ca1f60.0.1532cdfcef5.N7f77</con2:id>
+                                    <con1:type>XML-To-Native</con1:type>
+                                    <con1:sourceExpr>
+                                        <con2:xqueryText>$body/*[1]</con2:xqueryText>
+                                    </con1:sourceExpr>
+                                    <con1:nxsd ref="SR_Commons/XSD/ESO/Exception_JSON_v1_ESO"/>
+                                    <con1:schemaElement xmlns:v1="http://www.entel.cl/ESO/Exception/JSON/v1">v1:Fault</con1:schemaElement>
+                                    <con1:replace-body-content/>
+                                </con1:nxsdTranslation>
+                                <con2:reply isError="true">
+                                    <con2:id>_ActionId-N3f57c7ff.39ca1f60.0.1532cdfcef5.N7f74</con2:id>
+                                </con2:reply>
+                            </con1:actions>
+                        </con1:case>
+                        <con1:case id="_BranchId-N3f57c7ff.39ca1f60.0.1532cdfcef5.N7eab">
+                            <con1:condition>
+                                <con2:xqueryText>exists($body/*:InvalidHeader)</con2:xqueryText>
+                            </con1:condition>
+                            <con1:actions>
+                                <con1:replace varName="body" contents-only="true">
+                                    <con2:id>_ActionId-N5601948d.N68b05e7c.0.15592953824.N7ffe</con2:id>
+                                    <con1:expr>
+                                        <con2:xqueryTransform>
+                                            <con2:resource ref="SR_Commons/XQuery/ServiceComponent/SIF/get_InvalidHeader_JSON_v1"/>
+                                            <con2:param name="invalidHeader">
+                                                <con2:path>$body/*:InvalidHeader</con2:path>
+                                            </con2:param>
+                                        </con2:xqueryTransform>
+                                    </con1:expr>
+                                </con1:replace>
+                                <con1:nxsdTranslation>
+                                    <con2:id>_ActionId-N3f57c7ff.39ca1f60.0.1532cdfcef5.N7e42</con2:id>
+                                    <con1:type>XML-To-Native</con1:type>
+                                    <con1:sourceExpr>
+                                        <con2:xqueryText>$body/*[1]</con2:xqueryText>
+                                    </con1:sourceExpr>
+                                    <con1:nxsd ref="SR_Commons/XSD/ESO/InvalidMessage_JSON_v1_ESO"/>
+                                    <con1:schemaElement xmlns:v1="http://www.entel.cl/ESO/InvalidMessage/JSON/v1">v1:InvalidHeader_RSP</con1:schemaElement>
+                                    <con1:replace-body-content/>
+                                </con1:nxsdTranslation>
+                            </con1:actions>
+                        </con1:case>
+                        <con1:case id="_BranchId-N3f57c7ff.39ca1f60.0.1532cdfcef5.N7e06">
+                            <con1:condition>
+                                <con2:xqueryText>exists($body/*:InvalidMessage[1])</con2:xqueryText>
+                            </con1:condition>
+                            <con1:actions>
+                                <con1:replace varName="body" contents-only="true">
+                                    <con2:id>_ActionId-N3f57c7ff.39ca1f60.0.1532cdfcef5.N7dfd</con2:id>
+                                    <con1:expr>
+                                        <con2:xqueryTransform>
+                                            <con2:resource ref="SR_Commons/XQuery/ServiceComponent/SIF/get_InvalidMessage_JSON_v1"/>
+                                            <con2:param name="invalidMessage">
+                                                <con2:path>$body/*:InvalidMessage[1]</con2:path>
+                                            </con2:param>
+                                        </con2:xqueryTransform>
+                                    </con1:expr>
+                                </con1:replace>
+                                <con1:nxsdTranslation>
+                                    <con2:id>_ActionId-N3f57c7ff.39ca1f60.0.1532cdfcef5.N7e01</con2:id>
+                                    <con1:type>XML-To-Native</con1:type>
+                                    <con1:sourceExpr>
+                                        <con2:xqueryText>$body/*[1]</con2:xqueryText>
+                                    </con1:sourceExpr>
+                                    <con1:nxsd ref="SR_Commons/XSD/ESO/InvalidMessage_JSON_v1_ESO"/>
+                                    <con1:schemaElement xmlns:v1="http://www.entel.cl/ESO/InvalidMessage/JSON/v1">v1:InvalidMessage_RSP</con1:schemaElement>
+                                    <con1:replace-body-content/>
+                                </con1:nxsdTranslation>
+                            </con1:actions>
+                        </con1:case>
+                        <con1:default/>
+                    </con1:ifThenElse>
+                    <con2:reply isError="false">
+                        <con2:id>_ActionId-N3f57c7ff.39ca1f60.0.1532cdfcef5.N7f88</con2:id>
+                    </con2:reply>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-N3f57c7ff.6d56dd2f.0.1530b0fbba3.N7f34">
+            <con:stage id="_StageId-N3f57c7ff.6d56dd2f.0.1530b0fbba3.N7f33" name="Del Transformation SOAP to REST ErrorResponse">
+                <con:context/>
+                <con:actions>
+                    <con1:ifThenElse>
+                        <con2:id>_ActionId-N3f57c7ff.6d56dd2f.0.1530b0fbba3.N7f29</con2:id>
+                        <con1:case id="_BranchId-N3f57c7ff.6d56dd2f.0.1530b0fbba3.N7f28">
+                            <con1:condition>
+                                <con2:xqueryText>exists($body/*:Fault/detail[1]/*:Del_Consumer_FRSP[1])</con2:xqueryText>
+                            </con1:condition>
+                            <con1:actions>
+                                <con1:replace varName="body" contents-only="true">
+                                    <con2:id>_ActionId-N3f57c7ff.N7e97c46f.0.1530b3692c2.N7ff5</con2:id>
+                                    <con1:expr>
+                                        <con2:xqueryTransform>
+                                            <con2:resource ref="ES_Consumer_v1/MPL/SIF/XQuery/JSON_Transformation/del/get_Del_Consumer_JSON_FRSP"/>
+                                            <con2:param name="faultstring">
+                                                <con2:path>$body/*:Fault/faultstring[1]/text()</con2:path>
+                                            </con2:param>
+                                            <con2:param name="faultcode">
+                                                <con2:path>$body/*:Fault/faultcode[1]/text()</con2:path>
+                                            </con2:param>
+                                            <con2:param name="delConsumerFrsp">
+                                                <con2:path>$body/*:Fault/detail[1]/*:Del_Consumer_FRSP[1]</con2:path>
+                                            </con2:param>
+                                        </con2:xqueryTransform>
+                                    </con1:expr>
+                                </con1:replace>
+                                <con1:nxsdTranslation>
+                                    <con2:id>_ActionId-N3f57c7ff.6d56dd2f.0.1530b0fbba3.N7f25</con2:id>
+                                    <con1:type>XML-To-Native</con1:type>
+                                    <con1:sourceExpr>
+                                        <con2:xqueryText>$body/*[1]</con2:xqueryText>
+                                    </con1:sourceExpr>
+                                    <con1:nxsd ref="ES_Consumer_v1/ESC/Secondary/del_Consumer_JSON_v1_EBM"/>
+                                    <con1:schemaElement xmlns:v1="http://www.entel.cl/EBM/Consumer/del/JSON/v1">v1:Fault</con1:schemaElement>
+                                    <con1:replace-body-content/>
+                                </con1:nxsdTranslation>
+                                <con1:transport-headers copy-all="true">
+                                    <con2:id>_ActionId-N3f57c7ff.39ca1f60.0.1532cdfcef5.N7df6</con2:id>
+                                    <con1:header-set>inbound-response</con1:header-set>
+                                    <con1:header value="expression" name="Content-Type">
+                                        <con2:xqueryText>'application/json'</con2:xqueryText>
+                                    </con1:header>
+                                </con1:transport-headers>
+                                <con2:reply isError="true">
+                                    <con2:id>_ActionId-N3f57c7ff.5cc3c8a5.0.1530b2d6b43.N7ff7</con2:id>
+                                </con2:reply>
+                            </con1:actions>
+                        </con1:case>
+                        <con1:default>
+                            <con1:Error>
+                                <con2:id>_ActionId-N3f57c7ff.6d56dd2f.0.1530b0fbba3.N7f22</con2:id>
+                                <con1:errCode>98</con1:errCode>
+                                <con1:message>Unexpected Error Exception</con1:message>
+                            </con1:Error>
+                        </con1:default>
+                    </con1:ifThenElse>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="request" name="request-N3f57c7ff.39ca1f60.0.1532cdfcef5.N7e0e"></con:pipeline>
+        <con:pipeline type="response" name="response-N3f57c7ff.39ca1f60.0.1532cdfcef5.N7e0d">
+            <con:stage id="_StageId-N3f57c7ff.39ca1f60.0.1532cdfcef5.N7e0b" name="Set Content-Type Response">
+                <con:context/>
+                <con:actions>
+                    <con1:transport-headers copy-all="true">
+                        <con2:id>_ActionId-N3f57c7ff.39ca1f60.0.1532cdfcef5.N7e08</con2:id>
+                        <con1:header-set>inbound-response</con1:header-set>
+                        <con1:header value="expression" name="Content-Type">
+                            <con2:xqueryText>'application/json'</con2:xqueryText>
+                        </con1:header>
+                    </con1:transport-headers>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:flow>
+            <con:pipeline-node name="contentType to JSON">
+                <con:request>request-N3f57c7ff.39ca1f60.0.1532cdfcef5.N7e0e</con:request>
+                <con:response>response-N3f57c7ff.39ca1f60.0.1532cdfcef5.N7e0d</con:response>
+            </con:pipeline-node>
+            <con:branch-node type="operation" id="_FlowId-N53ee2cea.Ncb6dc59.0.152ef608e66.N7fdb" name="Consumer Operations">
+                <con:context/>
+                <con:branch-table>
+                    <con:branch name="get">
+                        <con:operator>equals</con:operator>
+                        <con:value/>
+                        <con:flow>
+                            <con:pipeline-node name="Get Transformation REST-SOAP">
+                                <con:request>request-N53ee2cea.Ncb6dc59.0.152ef608e66.N7fda</con:request>
+                                <con:response>response-N53ee2cea.Ncb6dc59.0.152ef608e66.N7fd9</con:response>
+                            </con:pipeline-node>
+                            <con:route-node name="Route To Get  ES_Consumer_v1" error-handler="error-N53ee2ce7.N52172ab6.0.152f5e3dcdf.N7ef9">
+                                <con:context/>
+                                <con:actions>
+                                    <con3:route>
+                                        <con2:id>_ActionId-N53ee2ce7.N52172ab6.0.152f5e3dcdf.N7efa</con2:id>
+                                        <con3:service ref="ES_Consumer_v1/MPL/PIF/Consumer_PIF" xsi:type="con:PipelineRef"/>
+                                        <con3:operation>get</con3:operation>
+                                        <con3:outboundTransform/>
+                                        <con3:responseTransform/>
+                                    </con3:route>
+                                </con:actions>
+                            </con:route-node>
+                        </con:flow>
+                    </con:branch>
+                    <con:branch name="del">
+                        <con:operator>equals</con:operator>
+                        <con:value/>
+                        <con:flow>
+                            <con:pipeline-node name="Delete Transformation REST-SOAP">
+                                <con:request>request-N53ee2cea.Ncb6dc59.0.152ef608e66.N7fd6</con:request>
+                                <con:response>response-N53ee2cea.Ncb6dc59.0.152ef608e66.N7fd5</con:response>
+                            </con:pipeline-node>
+                            <con:route-node name="Route To Del  ES_Consumer_v1" error-handler="error-N3f57c7ff.6d56dd2f.0.1530b0fbba3.N7f34">
+                                <con:context/>
+                                <con:actions>
+                                    <con3:route>
+                                        <con2:id>_ActionId-N3f57c7ff.6d56dd2f.0.1530b0fbba3.N7f35</con2:id>
+                                        <con3:service ref="ES_Consumer_v1/MPL/PIF/Consumer_PIF" xsi:type="con:PipelineRef"/>
+                                        <con3:operation>del</con3:operation>
+                                        <con3:outboundTransform/>
+                                        <con3:responseTransform/>
+                                    </con3:route>
+                                </con:actions>
+                            </con:route-node>
+                        </con:flow>
+                    </con:branch>
+                    <con:default-branch>
+                        <con:flow/>
+                    </con:default-branch>
+                </con:branch-table>
+            </con:branch-node>
+        </con:flow>
+    </con:router>
+</con:pipelineEntry>

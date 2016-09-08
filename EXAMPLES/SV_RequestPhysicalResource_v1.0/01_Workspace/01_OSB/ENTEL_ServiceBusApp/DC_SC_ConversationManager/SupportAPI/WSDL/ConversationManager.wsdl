@@ -1,0 +1,220 @@
+<wsdl:definitions name="ConversationManager" targetNamespace="http://www.entel.cl/SC/ConversationManager/v1" 
+                                      xmlns:tns="http://www.entel.cl/SC/ConversationManager/v1" 
+                                      xmlns:getStatus="http://www.entel.cl/SC/ConversationManager/getStatus/v1" 
+                                      xmlns:updStatus="http://www.entel.cl/SC/ConversationManager/updStatus/v1" 
+                                      xmlns:getNewConversation="http://www.entel.cl/SC/ConversationManager/getNewConversation/v1" 
+                                      xmlns:publishResult="http://www.entel.cl/SC/ConversationManager/publishResult/v1"
+                                      xmlns:getInfo="http://www.entel.cl/SC/ConversationManager/getInfo/v1"
+                                      xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+                                      xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+                                      xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+                                      xmlns:rcPubRes="http://www.entel.cl/SC/ConversationManager/RefreshCache_PublishResult/v1"
+                                      xmlns:rcIsTxOw="http://www.entel.cl/SC/ConversationManager/RefreshCache_getInfo/v1"
+                                      xmlns:subscribe="http://www.entel.cl/SC/ConversationManager/subscribe/v1"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/">
+  <wsdl:types>
+    <xs:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://www.entel.cl/SC/ConversationManager/getStatus/v1" schemaLocation="../XSD/CSM/getStatus_ConversationManager_v1_CSM.xsd"/>
+      <xs:import namespace="http://www.entel.cl/SC/ConversationManager/updStatus/v1" schemaLocation="../XSD/CSM/updStatus_ConversationManager_v1_CSM.xsd"/>
+      <xs:import namespace="http://www.entel.cl/SC/ConversationManager/getNewConversation/v1" schemaLocation="../XSD/CSM/getNewConversation_ConversationManager_v1_CSM.xsd"/>
+      <xs:import namespace="http://www.entel.cl/SC/ConversationManager/publishResult/v1" schemaLocation="../XSD/CSM/publishResult_ConversationManager_v1_CSM.xsd"/>
+      <xs:import namespace="http://www.entel.cl/SC/ConversationManager/RefreshCache_PublishResult/v1" schemaLocation="../XSD/CSM/refreshCache_publishResult_ConversationManager_v1_CSM.xsd"/>
+      <xs:import namespace="http://www.entel.cl/SC/ConversationManager/getInfo/v1" schemaLocation="../XSD/CSM/getInfo_ConversationManager_v1_CSM.xsd"/>
+      <xs:import namespace="http://www.entel.cl/SC/ConversationManager/RefreshCache_getInfo/v1" schemaLocation="../XSD/CSM/refreshCache_getInfo_ConversationManager_v1_CSM.xsd"/>
+      <xs:import namespace="http://www.entel.cl/SC/ConversationManager/subscribe/v1"
+                 schemaLocation="../XSD/CSM/subscribe_ConversationManager_v1_CSM.xsd"/>
+    </xs:schema>
+  </wsdl:types>
+  
+  <wsdl:message name="getConversationStatus_Message_In">
+    <wsdl:part name="In" element="getStatus:GetStatusREQ"/>   
+  </wsdl:message>
+  
+   <wsdl:message name="getConversationStatus_Message_Out">  
+    <wsdl:part name="Out" element="getStatus:GetStatusRSP"/>
+  </wsdl:message>
+  
+  <wsdl:message name="updConversationStatus_Message_In">
+    <wsdl:part name="In" element="updStatus:UpdStatusREQ"/>    
+  </wsdl:message>
+  
+   <wsdl:message name="updConversationStatus_Message_Out">  
+    <wsdl:part name="Out" element="updStatus:UpdStatusRSP"/>
+  </wsdl:message>
+  
+  <wsdl:message name="getNewConversationStatus_Message_In">
+    <wsdl:part name="In" element="getNewConversation:GetNewConversationREQ"/>    
+  </wsdl:message>  
+  
+  <wsdl:message name="getNewConversationStatus_Message_Out">
+    <wsdl:part name="Out" element="getNewConversation:GetNewConversationRSP"/>
+  </wsdl:message>
+  
+  <wsdl:message name="publishResult_Message_In">
+    <wsdl:part name="In" element="publishResult:PublishResultREQ"/>
+  </wsdl:message>
+  
+   <wsdl:message name="publishResult_Message_Out">
+    <wsdl:part name="Out" element="publishResult:PublishResultRSP"/>
+  </wsdl:message>
+  
+  <wsdl:message name="refreshCache_PublishResult_Message_In">
+    <wsdl:part name="In" element="rcPubRes:RefreshCache_PublishResultREQ"/>
+  </wsdl:message>
+  
+  <wsdl:message name="refreshCache_PublishResult_Message_Out">
+    <wsdl:part name="Out" element="rcPubRes:RefreshCache_PublishResultRSP"/>
+  </wsdl:message>
+  
+  <wsdl:message name="getInfo_Message_In">
+    <wsdl:part name="In" element="getInfo:GetInfoREQ"/>
+  </wsdl:message>
+  
+   <wsdl:message name="getInfo_Message_Out">
+    <wsdl:part name="Out" element="getInfo:GetInfoRSP"/>
+  </wsdl:message>
+  
+  <wsdl:message name="refreshCache_getInfo_Message_In">
+    <wsdl:part name="In" element="rcIsTxOw:RefreshCache_getInfoREQ"/>
+  </wsdl:message>
+  
+  <wsdl:message name="refreshCache_getInfo_Message_Out">
+    <wsdl:part name="Out" element="rcIsTxOw:RefreshCache_getInfoRSP"/>
+  </wsdl:message>
+  
+  <wsdl:message name="subscribe_Message_In">
+    <wsdl:part name="In" element="subscribe:SubscribeREQ"/>
+  </wsdl:message>
+  
+   <wsdl:message name="subscribe_Message_Out">
+    <wsdl:part name="Out" element="subscribe:SubscribeRSP"/>
+  </wsdl:message>
+  
+  <wsdl:portType name="ConversationManager_PortType">
+    <wsdl:operation name="getConversationStatus">
+      <wsdl:input message="tns:getConversationStatus_Message_In"/>
+      <wsdl:output message="tns:getConversationStatus_Message_Out"/>
+    </wsdl:operation>
+    <wsdl:operation name="updConversationStatus">
+      <wsdl:input message="tns:updConversationStatus_Message_In"/>
+      <wsdl:output message="tns:updConversationStatus_Message_Out"/>
+    </wsdl:operation>
+    <wsdl:operation name="getNewConversation">
+      <wsdl:input message="tns:getNewConversationStatus_Message_In"/>
+      <wsdl:output message="tns:getNewConversationStatus_Message_Out"/>
+    </wsdl:operation>
+    <wsdl:operation name="publishResult">
+      <wsdl:input message="tns:publishResult_Message_In"/>
+      <wsdl:output message="tns:publishResult_Message_Out"/>
+    </wsdl:operation>
+    <wsdl:operation name="getInfo">
+      <wsdl:input message="tns:getInfo_Message_In"/>
+      <wsdl:output message="tns:getInfo_Message_Out"/>
+    </wsdl:operation>
+        <wsdl:operation name="subscribe">
+      <wsdl:input message="tns:subscribe_Message_In"/>
+      <wsdl:output message="tns:subscribe_Message_Out"/>
+    </wsdl:operation>
+  </wsdl:portType>
+
+  <wsdl:portType name="ConversationManager_CFG_PortType">
+    <wsdl:operation name="refreshCache_PublishResult">
+      <wsdl:input message="tns:refreshCache_PublishResult_Message_In"/>
+      <wsdl:output message="tns:refreshCache_PublishResult_Message_Out"/>
+    </wsdl:operation>
+    <wsdl:operation name="refreshCache_getInfo">
+      <wsdl:input message="tns:refreshCache_getInfo_Message_In"/>
+      <wsdl:output message="tns:refreshCache_getInfo_Message_Out"/>
+    </wsdl:operation>
+  </wsdl:portType>
+
+  <wsdl:binding name="ConversationManager_SOAP12Binding" type="tns:ConversationManager_PortType">
+    <wsoap12:binding style="document" transport="http://www.bea.com/wli/sb/transports/sb"/>
+    <wsdl:operation name="getConversationStatus">
+      <wsoap12:operation style="document" soapAction=""/>
+      <wsdl:input>
+        <wsoap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsoap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updConversationStatus">
+      <wsoap12:operation style="document" soapAction=""/>
+      <wsdl:input>
+        <wsoap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsoap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getNewConversation">
+      <wsoap12:operation style="document" soapAction=""/>
+      <wsdl:input>
+        <wsoap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsoap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="publishResult">
+      <wsoap12:operation style="document" soapAction=""/>
+      <wsdl:input>
+        <wsoap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsoap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getInfo">
+      <wsoap12:operation style="document" soapAction=""/>
+      <wsdl:input>
+        <wsoap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsoap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="subscribe">
+      <wsoap12:operation style="document" soapAction=""/>
+      <wsdl:input>
+        <wsoap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsoap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  
+  <wsdl:binding name="ConversationManager_CFG_SOAP12Binding" type="tns:ConversationManager_CFG_PortType">
+    <wsoap12:binding style="document" transport="http://www.bea.com/wli/sb/transports/sb"/>
+    <wsdl:operation name="refreshCache_PublishResult">
+      <wsoap12:operation style="document"/>
+      <wsdl:input>
+        <wsoap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsoap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="refreshCache_getInfo">
+      <wsoap12:operation style="document"/>
+      <wsdl:input>
+        <wsoap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsoap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  
+  <wsdl:service name="ConversationManager_Service">
+    <wsdl:port name="ConversationManager_Port" binding="tns:ConversationManager_SOAP12Binding">
+      <wsoap12:address location="sb://ConversationManager"/>
+    </wsdl:port>
+    <wsdl:port name="ConversationManager_CFG_Port" binding="tns:ConversationManager_CFG_SOAP12Binding">
+      <wsoap12:address location="sb://ConversationManager_CFG"/>
+    </wsdl:port>
+  </wsdl:service>
+  
+</wsdl:definitions>

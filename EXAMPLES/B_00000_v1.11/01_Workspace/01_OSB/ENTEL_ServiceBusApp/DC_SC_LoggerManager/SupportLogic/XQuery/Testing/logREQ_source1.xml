@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<v1:LogREQ xmlns:v1="http://www.entel.cl/SC/LoggerManager/log/v1"
+ xmlns:trace="http://www.entel.cl/ESO/TraceProfile/v1"
+ xmlns:Q1="http://www.entel.cl/ESO/Error/v1"
+ xmlns:lp="http://www.entel.cl/ESO/LoggerProfile/v1"
+ xmlns:hd="http://www.entel.cl/ESO/MessageHeader/v1"
+ xmlns:pref="http://www.entel.cl/ESO/Result/v1"
+ xmlns:eddns_dictionary="http://www.entel.cl/EDD/Dictionary/v1"
+ xmlns:tns="http://www.entel.cl/ESO/ContextMetadataProfile/v1"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <v1:Trace>
+        <trace:Header>
+            <hd:Consumer code="0" name="name0">
+                <hd:Credentials user="user0" password="password0"/>
+            </hd:Consumer>
+            <hd:Trace reqTimestamp="2006-05-04T18:13:51.0Z" rspTimestamp="2006-05-04T18:13:51.0Z" messageID="124578" correlationID="124566"
+                 conversationID="ADF1">
+                <hd:Service code="C453" name="Client" operation="get"/>
+            </hd:Trace>
+            <hd:Country code="100" name="CL"/>
+            <hd:Channel name="WEB" mode="SYNC"/>
+            <hd:QoS ttl="0" priority="0" retryCount="0" maxRetryCount="0"/>
+        </trace:Header>
+        <trace:Logger Component="Component0" Operation="Operation0"/>
+    </v1:Trace>
+    <v1:Message>
+        <Cliente>
+            <getCliente>1000</getCliente>
+        </Cliente>
+    </v1:Message>
+    <v1:LogType>SREQ</v1:LogType>
+    <v1:Severity>INFO</v1:Severity>
+    <v1:Description>Description0</v1:Description>
+</v1:LogREQ>

@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/typesystem/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config">
+    <con:coreEntry>
+        <con:binding type="SOAP" isSoap12="true" xsi:type="con:SoapBindingType">
+            <con:wsdl ref="DC_SC_CorrelationManager/SupportAPI/WSDL/CorrelationManager"/>
+            <con:binding>
+                <con:name>CorrelationManager_SOAP12Binding</con:name>
+                <con:namespace>http://www.entel.cl/SC/CorrelationManager/v1</con:namespace>
+            </con:binding>
+        </con:binding>
+        <con:xqConfiguration>
+            <con:snippetVersion>1.0</con:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:router errorHandler="error-N3f57c316.477e60ba.0.152f074a95a.N7e46">
+        <con:pipeline type="error" name="error-N3f57c316.477e60ba.0.152f074a95a.N7e46">
+            <con:stage id="_StageId-N3f57c7ff.N2352d525.0.1531e880f20.N7e0c" name="CorrelationManager Error Handler" xmlns:con1="http://www.bea.com/wli/sb/typesystem/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
+                <con:context/>
+                <con:actions>
+                    <con3:ifThenElse>
+                        <con2:id>_ActionId-N3f57c7ff.N2352d525.0.1531e880f20.N7c8d</con2:id>
+                        <con3:case id="_BranchId-N3f57c7ff.N2352d525.0.1531e880f20.N7c8c">
+                            <con3:condition>
+                                <con2:xqueryText>exists($RequestHeader)</con2:xqueryText>
+                            </con3:condition>
+                            <con3:actions>
+                                <con1:ifThenElse xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con6="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con7="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con5="http://www.bea.com/wli/sb/stages/alert/config" xmlns:con3="http://www.bea.com/wli/sb/typesystem/config">
+                                    <con2:id>_ActionId-N3f57c7ff.N2352d525.0.1531e880f20.N7ccf</con2:id>
+                                    <con1:case id="_BranchId-N3f57c7ff.N2352d525.0.1531e880f20.N7cce">
+                                        <con1:condition>
+                                            <con2:xqueryText>exists($SourceError/*[1])</con2:xqueryText>
+                                        </con1:condition>
+                                        <con1:actions>
+                                            <con1:replace varName="body" contents-only="true">
+                                                <con2:id>_ActionId-N3f57c7ff.N2352d525.0.1531e880f20.N7cc8</con2:id>
+                                                <con1:expr>
+                                                    <con2:xqueryTransform>
+                                                        <con2:resource ref="SR_Commons/XQuery/SupportComponent/ErrorManager/get_handleREQ_v2_wSourceError"/>
+                                                        <con2:param name="errorPlaceHolderTime">
+                                                            <con2:path>current-dateTime()</con2:path>
+                                                        </con2:param>
+                                                        <con2:param name="errorIndexModule">
+                                                            <con2:path>'CorrelationManager'</con2:path>
+                                                        </con2:param>
+                                                        <con2:param name="messageHeader">
+                                                            <con2:path>$RequestHeader</con2:path>
+                                                        </con2:param>
+                                                        <con2:param name="componentOperation">
+                                                            <con2:path>$operation</con2:path>
+                                                        </con2:param>
+                                                        <con2:param name="sourceError">
+                                                            <con2:path>$SourceError</con2:path>
+                                                        </con2:param>
+                                                        <con2:param name="errorPlaceHolderPlace">
+                                                            <con2:path>data($fault/ctx:location)</con2:path>
+                                                        </con2:param>
+                                                        <con2:param name="componentName">
+                                                            <con2:path>'CorrelationManager'</con2:path>
+                                                        </con2:param>
+                                                        <con2:param name="errorIndexSubModule">
+                                                            <con2:path>$operation</con2:path>
+                                                        </con2:param>
+                                                    </con2:xqueryTransform>
+                                                </con1:expr>
+                                            </con1:replace>
+                                        </con1:actions>
+                                    </con1:case>
+                                    <con1:default>
+                                        <con1:replace varName="body" contents-only="true">
+                                            <con2:id>_ActionId-N3f57c7ff.N2352d525.0.1531e880f20.N7e0a</con2:id>
+                                            <con1:expr>
+                                                <con2:xqueryTransform>
+                                                    <con2:resource ref="SR_Commons/XQuery/SupportComponent/ErrorManager/get_handleREQ_v2"/>
+                                                    <con2:param name="messageHeader">
+                                                        <con2:path>$RequetHeader</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="sourceErrorCode">
+                                                        <con2:path>''</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="errorPlaceHolderPlace">
+                                                        <con2:path>data($fault/ctx:location)</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="sourceErrorDesc">
+                                                        <con2:path>''</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="sourceFault">
+                                                        <con2:path>$fault</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="errorIndexSubModule">
+                                                        <con2:path>$operation</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="errorPlaceHolderTime">
+                                                        <con2:path>current-dateTime()</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="errorIndexModule">
+                                                        <con2:path>'CorrelationManager'</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="errorSourceDetails">
+                                                        <con2:path>'CorrelationManager'</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="componentOperation">
+                                                        <con2:path>$operation</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="errorSourceID">
+                                                        <con2:path>'FRW'</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="componentName">
+                                                        <con2:path>'CorrelationManager'</con2:path>
+                                                    </con2:param>
+                                                </con2:xqueryTransform>
+                                            </con1:expr>
+                                        </con1:replace>
+                                    </con1:default>
+                                </con1:ifThenElse>
+                                <con3:wsCallout>
+                                    <con2:id>_ActionId-N3f57c7ff.N602433db.0.1531fc8f5d3.N7f6b</con2:id>
+                                    <con3:service ref="DC_SC_ErrorManager/SupportAPI/Proxy/ErrorManager" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                    <con3:operation>handle</con3:operation>
+                                    <con3:request>
+                                        <con3:body wrapped="true">body</con3:body>
+                                    </con3:request>
+                                    <con3:response>
+                                        <con3:body wrapped="true">body</con3:body>
+                                    </con3:response>
+                                    <con3:requestTransform/>
+                                    <con3:responseTransform/>
+                                </con3:wsCallout>
+                                <con3:ifThenElse>
+                                    <con2:id>_ActionId-N3f57c7ff.N2352d525.0.1531e880f20.N7dc7</con2:id>
+                                    <con3:case id="_BranchId-N3f57c7ff.N2352d525.0.1531e880f20.N7dc6">
+                                        <con3:condition>
+                                            <con2:xqueryText>$operation='getCorrelation'</con2:xqueryText>
+                                        </con3:condition>
+                                        <con3:actions>
+                                            <con3:replace contents-only="true" varName="body">
+                                                <con2:id>_ActionId-N3f57c7ff.N602433db.0.1531fc8f5d3.N7f2e</con2:id>
+                                                <con3:expr>
+                                                    <con2:xqueryTransform>
+                                                        <con2:resource ref="DC_SC_CorrelationManager/SupportLogic/XQuery/get_GetCorrelationRSP_Adapter"/>
+                                                        <con2:param name="OutputParameters">
+                                                            <con2:path>()</con2:path>
+                                                        </con2:param>
+                                                        <con2:param name="Result">
+                                                            <con2:path>$body/*[1]/*[1]</con2:path>
+                                                        </con2:param>
+                                                    </con2:xqueryTransform>
+                                                </con3:expr>
+                                            </con3:replace>
+                                        </con3:actions>
+                                    </con3:case>
+                                    <con3:default>
+                                        <con3:replace contents-only="true" varName="body">
+                                            <con2:id>_ActionId-N3f57c7ff.N602433db.0.1531fc8f5d3.N7f2b</con2:id>
+                                            <con3:expr>
+                                                <con2:xqueryTransform>
+                                                    <con2:resource ref="DC_SC_CorrelationManager/SupportLogic/XQuery/get_RegisterGroupRSP_Adapter"/>
+                                                    <con2:param name="Result">
+                                                        <con2:path>$body/*[1]/*[1]</con2:path>
+                                                    </con2:param>
+                                                </con2:xqueryTransform>
+                                            </con3:expr>
+                                        </con3:replace>
+                                    </con3:default>
+                                </con3:ifThenElse>
+                            </con3:actions>
+                        </con3:case>
+                        <con3:default>
+                            <con3:ifThenElse>
+                                <con2:id>_ActionId-N3f57c7ff.N2352d525.0.1531e880f20.N7c7c</con2:id>
+                                <con3:case id="_BranchId-N3f57c7ff.N2352d525.0.1531e880f20.N7c7b">
+                                    <con3:condition>
+                                        <con2:xqueryText>exists($SourceError/*[1])</con2:xqueryText>
+                                    </con3:condition>
+                                    <con3:actions>
+                                        <con3:replace varName="body" contents-only="true">
+                                            <con2:id>_ActionId-N3f57c7ff.N2352d525.0.1531e880f20.N7c76</con2:id>
+                                            <con3:expr>
+                                                <con2:xqueryTransform>
+                                                    <con2:resource ref="SR_Commons/XQuery/get_Result_Simple"/>
+                                                    <con2:param name="resultStatus">
+                                                        <con2:path>'ERROR'</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="sourceErrorDescription">
+                                                        <con2:path>data($SourceError/@*:description)</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="canonicalErrorType">
+                                                        <con2:path>'FWTE'</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="errorSourceCode">
+                                                        <con2:path>data($SourceError/*[1]/@*:source)</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="canonicalErrorCode">
+                                                        <con2:path>'30000'</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="errorSourceDetails">
+                                                        <con2:path>data($SourceError/*[1]/@*:details)</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="sourceErrorCode">
+                                                        <con2:path>data($SourceError/@*:code)</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="canonicalErrorDescription">
+                                                        <con2:path>'Error en el procesamiento de la solicitud'</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="resultDescription">
+                                                        <con2:path>'Ejecucion finalizada con Errores.'</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="sourceFault">
+                                                        <con2:path>$SourceError/*[2]/*</con2:path>
+                                                    </con2:param>
+                                                </con2:xqueryTransform>
+                                            </con3:expr>
+                                        </con3:replace>
+                                    </con3:actions>
+                                </con3:case>
+                                <con3:default>
+                                    <con3:replace varName="body" contents-only="true">
+                                        <con2:id>_ActionId-N3f57c7ff.N2352d525.0.1531e880f20.N7c83</con2:id>
+                                        <con3:expr>
+                                            <con2:xqueryTransform>
+                                                <con2:resource ref="SR_Commons/XQuery/get_Result_Simple"/>
+                                                <con2:param name="resultStatus">
+                                                    <con2:path>'ERROR'</con2:path>
+                                                </con2:param>
+                                                <con2:param name="sourceErrorDescription">
+                                                    <con2:path>data($fault/ctx:reason)</con2:path>
+                                                </con2:param>
+                                                <con2:param name="canonicalErrorType">
+                                                    <con2:path>'FWTE'</con2:path>
+                                                </con2:param>
+                                                <con2:param name="errorSourceCode">
+                                                    <con2:path>data($fault/ctx:code)</con2:path>
+                                                </con2:param>
+                                                <con2:param name="canonicalErrorCode">
+                                                    <con2:path>'30000'</con2:path>
+                                                </con2:param>
+                                                <con2:param name="errorSourceDetails">
+                                                    <con2:path>'CorrelationManager'</con2:path>
+                                                </con2:param>
+                                                <con2:param name="sourceErrorCode">
+                                                    <con2:path>'FRW'</con2:path>
+                                                </con2:param>
+                                                <con2:param name="canonicalErrorDescription">
+                                                    <con2:path>'Error en el procesamiento de la solicitud'</con2:path>
+                                                </con2:param>
+                                                <con2:param name="resultDescription">
+                                                    <con2:path>'Ejecucion finalizada con Errores.'</con2:path>
+                                                </con2:param>
+                                                <con2:param name="sourceFault">
+                                                    <con2:path>$fault</con2:path>
+                                                </con2:param>
+                                            </con2:xqueryTransform>
+                                        </con3:expr>
+                                    </con3:replace>
+                                </con3:default>
+                            </con3:ifThenElse>
+                            <con3:ifThenElse>
+                                <con2:id>_ActionId-N3f57c31f.620b954d.0.15320447911.N7edc</con2:id>
+                                <con3:case id="_BranchId-N3f57c31f.620b954d.0.15320447911.N7edb">
+                                    <con3:condition>
+                                        <con2:xqueryText>$operation='getCorrelation'</con2:xqueryText>
+                                    </con3:condition>
+                                    <con3:actions>
+                                        <con3:replace contents-only="true" varName="body">
+                                            <con2:id>_ActionId-N3f57c31f.620b954d.0.15320447911.N7eda</con2:id>
+                                            <con3:expr>
+                                                <con2:xqueryTransform>
+                                                    <con2:resource ref="DC_SC_CorrelationManager/SupportLogic/XQuery/get_GetCorrelationRSP_Adapter"/>
+                                                    <con2:param name="OutputParameters">
+                                                        <con2:path>()</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="Result">
+                                                        <con2:path>$body/*[1]</con2:path>
+                                                    </con2:param>
+                                                </con2:xqueryTransform>
+                                            </con3:expr>
+                                        </con3:replace>
+                                    </con3:actions>
+                                </con3:case>
+                                <con3:default>
+                                    <con3:replace contents-only="true" varName="body">
+                                        <con2:id>_ActionId-N3f57c31f.620b954d.0.15320447911.N7ed9</con2:id>
+                                        <con3:expr>
+                                            <con2:xqueryTransform>
+                                                <con2:resource ref="DC_SC_CorrelationManager/SupportLogic/XQuery/get_RegisterGroupRSP_Adapter"/>
+                                                <con2:param name="Result">
+                                                    <con2:path>$body/*[1]</con2:path>
+                                                </con2:param>
+                                            </con2:xqueryTransform>
+                                        </con3:expr>
+                                    </con3:replace>
+                                </con3:default>
+                            </con3:ifThenElse>
+                        </con3:default>
+                    </con3:ifThenElse>
+                    <con2:reply isError="true">
+                        <con2:id>_ActionId-N3f57c7ff.N2352d525.0.1531e880f20.N7e08</con2:id>
+                    </con2:reply>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="request" name="request-N3f57c7ff.1e23e82.0.152f99bb042.N7f32">
+            <con:stage id="_StageId-N3f57c7ff.N2352d525.0.1531e880f20.N7c5d" name="Aux Var">
+                <con:context>
+                    <con1:userNsDecl prefix="v11" namespace="http://www.entel.cl/ESO/MessageHeader/v1"/>
+                    <con1:userNsDecl prefix="v1" namespace="http://www.entel.cl/SC/CorrelationMember/registerGroup/v1"/>
+                </con:context>
+                <con:actions>
+                    <con4:assign varName="RequestHeader">
+                        <con1:id>_ActionId-N3f57c7ff.N2352d525.0.1531e880f20.N7c5c</con1:id>
+                        <con4:expr>
+                            <con1:xqueryText>$body/*[1]/v11:RequestHeader</con1:xqueryText>
+                        </con4:expr>
+                    </con4:assign>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-N3f57c30e.N7ac715b1.0.1532d3e61e4.N8000" name="Schema Validation">
+                <con:context>
+                    <con1:userNsDecl prefix="v11" namespace="http://www.entel.cl/ESO/MessageHeader/v1"/>
+                    <con1:userNsDecl prefix="v1" namespace="http://www.entel.cl/SC/CorrelationMember/registerGroup/v1"/>
+                </con:context>
+                <con:actions>
+                    <con4:validate>
+                        <con1:id>_ActionId-N3f57c30e.N7ac715b1.0.1532d3e61e4.N7ffd</con1:id>
+                        <con4:schema ref="DC_SC_CorrelationManager/SupportAPI/XSD/CSM/registerGroup_CorrelationManager_v1_CSM"/>
+                        <con4:schemaElement xmlns:v1="http://www.entel.cl/SC/CorrelationMember/registerGroup/v1">v1:RegisterGroupREQ</con4:schemaElement>
+                        <con4:varName>body</con4:varName>
+                        <con4:location>
+                            <con1:xpathText>./*[1]</con1:xpathText>
+                        </con4:location>
+                    </con4:validate>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-N3f57c30e.N552866d4.0.153526ab996.N7e50" name="RegisterGroup_AP">
+                <con:context/>
+                <con:actions>
+                    <con4:wsCallout>
+                        <con1:id>_ActionId-N3f57c30e.N552866d4.0.153526ab996.N7e4f</con1:id>
+                        <con4:service ref="DC_SC_CorrelationManager/SupportLogic/Pipeline/RegisterGroup_AP" xsi:type="con:PipelineRef"/>
+                        <con4:request>
+                            <con4:payload wrapped="true">body</con4:payload>
+                        </con4:request>
+                        <con4:response>
+                            <con4:payload wrapped="true">body</con4:payload>
+                        </con4:response>
+                        <con4:requestTransform/>
+                        <con4:responseTransform/>
+                    </con4:wsCallout>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-N3f57c7ff.1e23e82.0.152f99bb042.N7f31">
+            <con:stage id="_StageId-N3f57c7ff.1e23e82.0.152f99bb042.N7f2f" name="Marshall Response">
+                <con:context>
+                    <con1:userNsDecl prefix="v1" namespace="http://www.entel.cl/SC/CorrelationMember/register/v1"/>
+                </con:context>
+                <con:actions>
+                    <con3:assign varName="Result" xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con2:id>_ActionId-N3f57c7ff.N6f402935.0.1532d09755e.N7cdb</con2:id>
+                        <con3:expr>
+                            <con2:xqueryTransform>
+                                <con2:resource ref="SR_Commons/XQuery/get_Result_OK_Simple"/>
+                            </con2:xqueryTransform>
+                        </con3:expr>
+                    </con3:assign>
+                    <con4:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-N3f57c316.477e60ba.0.152f074a95a.N7e06</con1:id>
+                        <con4:expr>
+                            <con1:xqueryTransform>
+                                <con1:resource ref="DC_SC_CorrelationManager/SupportLogic/XQuery/get_RegisterGroupRSP_Adapter"/>
+                                <con1:param name="Result">
+                                    <con1:path>$Result</con1:path>
+                                </con1:param>
+                            </con1:xqueryTransform>
+                        </con4:expr>
+                    </con4:replace>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="request" name="request-N3f57c7ff.1e23e82.0.152f99bb042.N7f1e">
+            <con:stage id="_StageId-N3f57c7ff.N2352d525.0.1531e880f20.N7bf6" name="Aux Var">
+                <con:context>
+                    <con1:userNsDecl prefix="v11" namespace="http://www.entel.cl/ESO/MessageHeader/v1"/>
+                    <con1:userNsDecl prefix="v1" namespace="http://www.entel.cl/SC/CorrelationMember/registerGroup/v1"/>
+                </con:context>
+                <con:actions>
+                    <con4:assign varName="RequestHeader">
+                        <con1:id>_ActionId-N3f57c7ff.N2352d525.0.1531e880f20.N7bf5</con1:id>
+                        <con4:expr>
+                            <con1:xqueryText>$body/*[1]/v11:RequestHeader</con1:xqueryText>
+                        </con4:expr>
+                    </con4:assign>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-N3f57c7ff.1e23e82.0.152f99bb042.N7f1c" name="Marshall Request">
+                <con:context>
+                    <con1:userNsDecl prefix="v11" namespace="http://www.entel.cl/SC/CorrelationManager/getMembers/v1"/>
+                    <con1:userNsDecl prefix="v1" namespace="http://www.entel.cl/SC/CorrelationMember/register/v1"/>
+                </con:context>
+                <con:actions>
+                    <con4:replace contents-only="true" varName="body">
+                        <con1:id>_ActionId-N3f57c316.477e60ba.0.152f074a95a.N7dff</con1:id>
+                        <con4:expr>
+                            <con1:xqueryTransform>
+                                <con1:resource ref="DC_SC_CorrelationManager/SupportLogic/XQuery/get_GetCorrelationREQ_Adapter"/>
+                                <con1:param name="GetCorrelationREQ">
+                                    <con1:path>$body/*[1]</con1:path>
+                                </con1:param>
+                            </con1:xqueryTransform>
+                        </con4:expr>
+                    </con4:replace>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-N3f57c7ff.1e23e82.0.152f99bb042.N7f1d">
+            <con:stage id="_StageId-N3f57c7ff.1e23e82.0.152f99bb042.N7f1b" name="Marshall Response">
+                <con:context>
+                    <con1:userNsDecl prefix="v1" namespace="http://www.entel.cl/SC/CorrelationManager/getMembers/v1"/>
+                </con:context>
+                <con:actions>
+                    <con4:replace contents-only="true" varName="body">
+                        <con1:id>_ActionId-N3f57c316.477e60ba.0.152f074a95a.N7dfc</con1:id>
+                        <con4:expr>
+                            <con1:xqueryTransform>
+                                <con1:resource ref="DC_SC_CorrelationManager/SupportLogic/XQuery/get_GetCorrelationRSP_Adapter"/>
+                                <con1:param name="OutputParameters">
+                                    <con1:path>$body/*[1]</con1:path>
+                                </con1:param>
+                                <con1:param name="Result">
+                                    <con1:path>$Result</con1:path>
+                                </con1:param>
+                            </con1:xqueryTransform>
+                        </con4:expr>
+                    </con4:replace>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:flow>
+            <con:branch-node type="operation" id="_FlowId-N3f57c7ff.1e23e82.0.152f99bb042.N7f29" name="CorrelationManager Operations">
+                <con:context/>
+                <con:branch-table>
+                    <con:branch name="registerGroup">
+                        <con:operator>equals</con:operator>
+                        <con:value/>
+                        <con:flow>
+                            <con:pipeline-node name="registerGroup ~ REQ|RSP Marshalling">
+                                <con:request>request-N3f57c7ff.1e23e82.0.152f99bb042.N7f32</con:request>
+                                <con:response>response-N3f57c7ff.1e23e82.0.152f99bb042.N7f31</con:response>
+                            </con:pipeline-node>
+                        </con:flow>
+                    </con:branch>
+                    <con:branch name="getCorrelation">
+                        <con:operator>equals</con:operator>
+                        <con:value/>
+                        <con:flow>
+                            <con:pipeline-node name="getCorrelation ~ REQ|RSP Marshalling">
+                                <con:request>request-N3f57c7ff.1e23e82.0.152f99bb042.N7f1e</con:request>
+                                <con:response>response-N3f57c7ff.1e23e82.0.152f99bb042.N7f1d</con:response>
+                            </con:pipeline-node>
+                            <con:route-node name="Route_GetCorrelation_BS">
+                                <con:context/>
+                                <con:actions>
+                                    <con3:route>
+                                        <con1:id>_ActionId-N3f57c7ff.1e23e82.0.152f99bb042.N7ea2</con1:id>
+                                        <con3:service ref="DC_SC_CorrelationManager/SupportLogic/Business/GetCorrelationMemberDBAdapter" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                        <con3:operation>getCorrelationMemberAdapter</con3:operation>
+                                        <con3:outboundTransform/>
+                                        <con3:responseTransform>
+                                            <con3:ifThenElse xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
+                                                <con2:id>_ActionId-N3f57c7ff.N2352d525.0.1531e880f20.N7d8b</con2:id>
+                                                <con3:case id="_BranchId-N3f57c7ff.N2352d525.0.1531e880f20.N7d8a">
+                                                    <con3:condition>
+                                                        <con2:xqueryText>$body/*[1]/*:P_SOURCE_ERROR_CODE != 0</con2:xqueryText>
+                                                    </con3:condition>
+                                                    <con3:actions>
+                                                        <con3:assign varName="SourceError">
+                                                            <con2:id>_ActionId-N3f57c7ff.N2352d525.0.1531e880f20.N7cd6</con2:id>
+                                                            <con3:expr>
+                                                                <con2:xqueryTransform>
+                                                                    <con2:resource ref="SR_Commons/XQuery/get_SourceError_v1"/>
+                                                                    <con2:param name="ErrorSourceDetails">
+                                                                        <con2:path>'CorrelationManager'</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="SourceFault">
+                                                                        <con2:path>()</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="SourceErrorDescription">
+                                                                        <con2:path>data($body/*[1]/*[2])</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="ErrorSourceCode">
+                                                                        <con2:path>'FRW'</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="SourceErrorCode">
+                                                                        <con2:path>data($body/*[1]/*[3])</con2:path>
+                                                                    </con2:param>
+                                                                </con2:xqueryTransform>
+                                                            </con3:expr>
+                                                        </con3:assign>
+                                                        <con3:Error>
+                                                            <con2:id>_ActionId-N3f57c7ff.N2352d525.0.1531e880f20.N7cd9</con2:id>
+                                                            <con3:errCode>99</con3:errCode>
+                                                            <con3:message>Error funcional desde el modelo</con3:message>
+                                                        </con3:Error>
+                                                    </con3:actions>
+                                                </con3:case>
+                                                <con3:default>
+                                                    <con3:assign varName="Result">
+                                                        <con2:id>_ActionId-N3f57c7ff.N2352d525.0.1531e880f20.N7d42</con2:id>
+                                                        <con3:expr>
+                                                            <con2:xqueryTransform>
+                                                                <con2:resource ref="SR_Commons/XQuery/get_Result_OK_Simple"/>
+                                                            </con2:xqueryTransform>
+                                                        </con3:expr>
+                                                    </con3:assign>
+                                                </con3:default>
+                                            </con3:ifThenElse>
+                                        </con3:responseTransform>
+                                    </con3:route>
+                                </con:actions>
+                            </con:route-node>
+                        </con:flow>
+                    </con:branch>
+                    <con:default-branch>
+                        <con:flow/>
+                    </con:default-branch>
+                </con:branch-table>
+            </con:branch-node>
+        </con:flow>
+    </con:router>
+</con:pipelineEntry>

@@ -1,0 +1,137 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/ENTEL01/ESB_LOGGERMANAGER_PKG/ERROR/" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/ENTEL01/ESB_LOGGERMANAGER_PKG/ERROR/" elementFormDefault="qualified">
+   <element name="InputParameters">
+      <complexType>
+         <sequence>
+            <element name="ERRORREQ" type="db:ERROR_T" db:index="1" db:type="Struct" minOccurs="0" nillable="true"/>
+            <element name="REGISTERTIME" type="dateTime" db:index="2" db:type="TIMESTAMP" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <complexType name="SOURCEERROR_T">
+      <sequence>
+         <element name="CODE_" type="db:string50" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="DESCRIPTION_" type="db:string255" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="ERRORSOURCEDETAILS_" type="db:ERRORSOURCEDETAILS_T" db:type="Struct" minOccurs="0" nillable="true"/>
+         <element name="SOURCEFAULT_" type="string" db:type="CLOB" minOccurs="0" nillable="true"/>
+      </sequence>
+   </complexType>
+   <complexType name="SERVICE_T">
+      <sequence>
+         <element name="CODE_" type="db:string30" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="NAME_" type="db:string50" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="OPERATION_" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+      </sequence>
+   </complexType>
+   <complexType name="ERRORSOURCEDETAILS_T">
+      <sequence>
+         <element name="SOURCE_" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="DETAILS" type="db:string255" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+      </sequence>
+   </complexType>
+   <complexType name="HEADERTRACER_T">
+      <sequence>
+         <element name="COMPONENT_" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="OPERATION_" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="HEADER_" type="db:HEADER_T" db:type="Struct" minOccurs="0" nillable="true"/>
+      </sequence>
+   </complexType>
+   <complexType name="CHANNEL_T">
+      <sequence>
+         <element name="NAME_" type="db:string50" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="MODE_" type="db:string50" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+      </sequence>
+   </complexType>
+   <complexType name="ERROR_T">
+      <sequence>
+         <element name="HEADERTRACER_" type="db:HEADERTRACER_T" db:type="Struct" minOccurs="0" nillable="true"/>
+         <element name="RESULT_" type="db:RESULT_T" db:type="Struct" minOccurs="0" nillable="true"/>
+         <element name="ERRORINDEX_" type="db:ERRORINDEX_T" db:type="Struct" minOccurs="0" nillable="true"/>
+         <element name="ERRORPLACEHOLDER_" type="db:PLACEHOLDER_T" db:type="Struct" minOccurs="0" nillable="true"/>
+      </sequence>
+   </complexType>
+   <complexType name="CONSUMER_T">
+      <sequence>
+         <element name="SYSCODE_" type="db:string30" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="ENTERPRISECODE_" type="db:string30" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="COUNTRYCODE_" type="db:string30" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+      </sequence>
+   </complexType>
+   <complexType name="RESULT_T">
+      <sequence>
+         <element name="STATUS_" type="db:string50" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="DESCRIPTION_" type="db:string255" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="CANONICALERROR_" type="db:CANONICALERROR_T" db:type="Struct" minOccurs="0" nillable="true"/>
+         <element name="SOURCEERROR_" type="db:SOURCEERROR_T" db:type="Struct" minOccurs="0" nillable="true"/>
+         <element name="CORRELATIVEERRORS_" type="db:SOURCEERRORS_T" db:type="Struct" minOccurs="0" nillable="true"/>
+      </sequence>
+   </complexType>
+   <complexType name="TRACE_T">
+      <sequence>
+         <element name="CLIENTREQTIMESTAMP_" type="db:string50" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="REQTIMESTAMP_" type="db:string50" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="RSPTIMESTAMP_" type="db:string50" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="PROCESSID_" type="db:string50" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="EVENTID_" type="db:string50" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="SOURCEID_" type="db:string50" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="CORRELATIONEVENTID_" type="db:string50" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="CONVERSATIONID_" type="db:string50" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="CORRELATIONID_" type="db:string50" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="SERVICE_" type="db:SERVICE_T" db:type="Struct" minOccurs="0" nillable="true"/>
+      </sequence>
+   </complexType>
+   <complexType name="SOURCEERRORS_T">
+      <sequence>
+         <element name="SOURCEERROR1_" type="db:SOURCEERROR_T" db:type="Struct" minOccurs="0" nillable="true"/>
+         <element name="SOURCEERROR2_" type="db:SOURCEERROR_T" db:type="Struct" minOccurs="0" nillable="true"/>
+         <element name="SOURCEERROR3_" type="db:SOURCEERROR_T" db:type="Struct" minOccurs="0" nillable="true"/>
+         <element name="SOURCEERROR4_" type="db:SOURCEERROR_T" db:type="Struct" minOccurs="0" nillable="true"/>
+         <element name="SOURCEERROR5_" type="db:SOURCEERROR_T" db:type="Struct" minOccurs="0" nillable="true"/>
+      </sequence>
+   </complexType>
+   <complexType name="HEADER_T">
+      <sequence>
+         <element name="CONSUMER_" type="db:CONSUMER_T" db:type="Struct" minOccurs="0" nillable="true"/>
+         <element name="TRACE_" type="db:TRACE_T" db:type="Struct" minOccurs="0" nillable="true"/>
+         <element name="CHANNEL_" type="db:CHANNEL_T" db:type="Struct" minOccurs="0" nillable="true"/>
+      </sequence>
+   </complexType>
+   <complexType name="CANONICALERROR_T">
+      <sequence>
+         <element name="CODE_" type="db:string50" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="DESCRIPTION_" type="db:string255" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="TYPE_" type="db:string30" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+      </sequence>
+   </complexType>
+   <complexType name="PLACEHOLDER_T">
+      <sequence>
+         <element name="TIME_" type="db:string50" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="PLACE_" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+      </sequence>
+   </complexType>
+   <complexType name="ERRORINDEX_T">
+      <sequence>
+         <element name="MODULE_" type="db:string50" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="SUBMODULE_" type="db:string50" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+      </sequence>
+   </complexType>
+   <simpleType name="string100">
+      <restriction base="string">
+         <maxLength value="100"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string30">
+      <restriction base="string">
+         <maxLength value="30"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string50">
+      <restriction base="string">
+         <maxLength value="50"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string255">
+      <restriction base="string">
+         <maxLength value="255"/>
+      </restriction>
+   </simpleType>
+</schema>

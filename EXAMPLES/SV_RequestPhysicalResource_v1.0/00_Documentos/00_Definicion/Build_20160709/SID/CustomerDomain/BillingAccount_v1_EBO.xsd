@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/BillingAccount/v1"
+	xmlns:ebons_emailcontact="http://www.entel.cl/EBO/EmailContact/v1"
+	xmlns:ebons_timeperiod="http://www.entel.cl/EBO/TimePeriod/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/BillingAccount/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/EmailContact/v1" schemaLocation="../EngagedPartyDomain/EmailContact_v1_EBO.xsd"/>
+	<xs:import namespace="http://www.entel.cl/EBO/TimePeriod/v1" schemaLocation="../CommonBusinessEntitiesDomain/TimePeriod_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="billDocumentType" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>Tipo de factura papel o electronica</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="costCenter" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>Centro de Costo.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="externalCurrency" type="xs:string"/>									
+	<xs:element name="externalID" type="xs:string"/>									
+	<xs:element name="status" type="xs:string"/>									
+	<xs:element name="statusChangeDate" type="xs:dateTime"/>									
+	<xs:element name="billEmail" type="ebons_emailcontact:EmailContact_Type">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>Correo que debe enviar la factura</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="validFor" type="ebons_timeperiod:TimePeriod_Type">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>The time period the billing account is valid</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="BillingAccount" type="tns:BillingAccount_Type"/>
+	<xs:complexType name="BillingAccount_Type">
+		
+			<xs:annotation>
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">A billing accounts accumulates all charges from products and contracts that will be shown on the same invoice or prepaid statement. </xs:documentation>
+							
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">BSCS and CBiO concept of "Billing Accounts" is represented by this entity.</xs:documentation>
+							
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">Also, the legacy CS concept of "main account" is represented by a BA.</xs:documentation>
+						
+			</xs:annotation>
+		<xs:sequence> 
+		<xs:element ref="tns:billDocumentType" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:costCenter" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:externalCurrency" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:externalID" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:status" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:statusChangeDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:billEmail" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:validFor" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

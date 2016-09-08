@@ -1,0 +1,29 @@
+<wsdl:definitions
+     name="ESB_ERROR_CONVERSATION_Poling"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/DC_SC_ErrorManager/AdmissionHospital/ESB_ERROR_CONVERSATION_Poling"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/DC_SC_ErrorManager/AdmissionHospital/ESB_ERROR_CONVERSATION_Poling"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+     xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/ESB_ERROR_CONVERSATION_Poling"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+  <plt:partnerLinkType name="ESB_ERROR_CONVERSATION_Poling_plt" >
+    <plt:role name="ESB_ERROR_CONVERSATION_Poling_role" >
+      <plt:portType name="tns:ESB_ERROR_CONVERSATION_Poling_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/ESB_ERROR_CONVERSATION_Poling" schemaLocation="../Schemas/ESB_ERROR_CONVERSATION_Poling_table.xsd" />
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="EsbErrorConversationCollection_msg">
+        <wsdl:part name="EsbErrorConversationCollection" element="top:EsbErrorConversationCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="ESB_ERROR_CONVERSATION_Poling_ptt">
+        <wsdl:operation name="receive">
+            <wsdl:input message="tns:EsbErrorConversationCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 
+	xmlns:header="http://www.entel.cl/ESO/MessageHeader/v1" 
+	xmlns:tns="http://www.entel.cl/EBM/RequestPhysicalResource/Create/v1"
+	xmlns:ebons_physicalresource="http://www.entel.cl/EBO/PhysicalResource/v1"
+	xmlns:ebons_physicalresourcespec="http://www.entel.cl/EBO/PhysicalResourceSpec/v1"
+	xmlns:ebons_issuingcompany="http://www.entel.cl/EBO/IssuingCompany/v1"
+	xmlns:ebons_freightinvoice="http://www.entel.cl/EBO/FreightInvoice/v1"
+	xmlns:ebons_freightinvoiceitem="http://www.entel.cl/EBO/FreightInvoiceItem/v1"
+	xmlns:ebons_partyrole="http://www.entel.cl/EBO/PartyRole/v1"
+	
+	targetNamespace="http://www.entel.cl/EBM/RequestPhysicalResource/Create/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	 <import namespace="http://www.entel.cl/ESO/MessageHeader/v1" schemaLocation="../../../Commons/ESO/MessageHeader_v1_ESO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/PhysicalResource/v1" schemaLocation="../../../SID/ResourceDomain/PhysicalResource_v1_EBO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/PhysicalResourceSpec/v1" schemaLocation="../../../SID/ResourceDomain/PhysicalResourceSpec_v1_EBO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/IssuingCompany/v1" schemaLocation="../../../SID/EngagedPartyDomain/IssuingCompany_v1_EBO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/FreightInvoice/v1" schemaLocation="../../../SID/CustomerDomain/FreightInvoice_v1_EBO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/FreightInvoiceItem/v1" schemaLocation="../../../SID/CustomerDomain/FreightInvoiceItem_v1_EBO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/PartyRole/v1" schemaLocation="../../../SID/EngagedPartyDomain/PartyRole_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	 <!---=- start:EBM Content -=- -->
+	
+					
+		<element name="Create_RequestPhysicalResource_CRSP" type="tns:Create_RequestPhysicalResource_CRSP_Type"/>
+		<complexType name="Create_RequestPhysicalResource_CRSP_Type">
+		<sequence>
+			<element ref="header:ResponseHeader"/>	
+			<element name="Body">		
+				<complexType>	
+					<sequence>							
+						</sequence>
+											
+				</complexType>								
+			</element>
+		</sequence>
+		</complexType>
+	
+					
+		<element name="Create_RequestPhysicalResource_REQ" type="tns:Create_RequestPhysicalResource_REQ_Type"/>
+		<complexType name="Create_RequestPhysicalResource_REQ_Type">
+		<sequence>
+			<element ref="header:RequestHeader"/>
+			<element name="Body">		
+				<complexType>	
+					<sequence>							
+						
+                	<element name="FreightInvoice" maxOccurs="1" minOccurs="1">
+                		<complexType>
+                		<sequence>
+                		
+                        	<element name="FreightInvoiceItem" maxOccurs="unbounded" minOccurs="1">
+                        		<complexType>
+                        		<sequence>
+                        		<element ref="ebons_freightinvoiceitem:needDate" maxOccurs="1" minOccurs="1"/>
+                        			<element ref="ebons_freightinvoiceitem:quantity" maxOccurs="1" minOccurs="1"/>
+                        			
+                                	<element name="PhysicalResource" maxOccurs="1" minOccurs="1">
+                                		<complexType>
+                                		<sequence>
+                                		
+                                        	<element name="PhysicalResourceSpec" maxOccurs="1" minOccurs="1">
+                                        		<complexType>
+                                        		<sequence>
+                                        		<element ref="ebons_physicalresourcespec:skuNumber" maxOccurs="1" minOccurs="1"/>
+                                        			
+                                        		</sequence>	
+                                        		</complexType>	
+                                        	</element>
+                                        		
+                                        	
+                                			
+                                		</sequence>	
+                                		</complexType>	
+                                	</element>
+                                		
+                                	
+                        			
+                        		</sequence>	
+                        		</complexType>	
+                        	</element>
+                        		
+                        	
+                			
+                        	<element name="IssuingCompany" maxOccurs="1" minOccurs="1">
+                        		<complexType>
+                        		<sequence>
+                        		
+                                	<element name="partyRole" maxOccurs="1" minOccurs="1">
+                                		<complexType>
+                                		<sequence>
+                                		<element ref="ebons_partyrole:ID" maxOccurs="1" minOccurs="1"/>
+                                			
+                                		</sequence>	
+                                		</complexType>	
+                                	</element>
+                                		
+                                	
+                        			
+                        		</sequence>	
+                        		</complexType>	
+                        	</element>
+                        		
+                        	
+                			
+                		</sequence>	
+                		</complexType>	
+                	</element>
+                		
+                	
+						</sequence>
+											
+				</complexType>								
+			</element>
+		</sequence>
+		</complexType>
+	
+	
+	<element name="Create_RequestPhysicalResource_RSP" type="tns:Create_RequestPhysicalResource_RSP_Type"/>
+		<complexType name="Create_RequestPhysicalResource_RSP_Type">
+			<sequence>
+				<element ref="header:ResponseHeader"/>
+				<element name="Body">
+					<complexType>
+						<sequence/>
+					</complexType>
+				</element>
+			</sequence>
+		</complexType>
+	
+	<element name="Create_RequestPhysicalResource_FRSP" type="tns:Create_RequestPhysicalResource_FRSP_Type"/>
+	<complexType name="Create_RequestPhysicalResource_FRSP_Type">
+		<sequence>
+			<element ref="header:ResponseHeader"/>
+			<element name="Body">
+				<complexType>
+					<sequence/>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	 <!---=- end:EBM Content -=- -->
+	 
+</schema>	

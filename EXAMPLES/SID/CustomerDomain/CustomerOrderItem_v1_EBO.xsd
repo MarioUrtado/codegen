@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/CustomerOrderItem/v1"
+	xmlns:ebons_money="http://www.entel.cl/EBO/Money/v1"
+	xmlns:ebons_quantity="http://www.entel.cl/EBO/Quantity/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/CustomerOrderItem/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/Money/v1" schemaLocation="../CommonBusinessEntitiesDomain/Money_v1_EBO.xsd"/>
+	<xs:import namespace="http://www.entel.cl/EBO/Quantity/v1" schemaLocation="../CommonBusinessEntitiesDomain/Quantity_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="ID" type="xs:string"/>									
+	<xs:element name="action" type="xs:string"/>									
+	<xs:element name="assignedPriority" type="xs:integer"/>									
+	<xs:element name="biSpecification" type="xs:string"/>									
+	<xs:element name="biType" type="xs:string"/>									
+	<xs:element name="createBy" type="xs:string"/>									
+	<xs:element name="createDate" type="xs:dateTime"/>									
+	<xs:element name="description" type="xs:string"/>									
+	<xs:element name="dueDate" type="xs:dateTime"/>									
+	<xs:element name="itemType" type="xs:string"/>									
+	<xs:element name="lastModifiedDate" type="xs:dateTime"/>									
+	<xs:element name="modiefiedBy" type="xs:string"/>									
+	<xs:element name="note" type="xs:string"/>									
+	<xs:element name="productCode" type="xs:string"/>									
+	<xs:element name="rechargeCode" type="xs:string"/>									
+	<xs:element name="requestStartDate" type="xs:dateTime"/>									
+	<xs:element name="requestedCompletionDate" type="xs:dateTime"/>									
+	<xs:element name="solution" type="xs:string"/>									
+	<xs:element name="specialInstruction" type="xs:string"/>									
+	<xs:element name="subState" type="xs:string"/>									
+	<xs:element name="technicalObservation" type="xs:string"/>									
+	<xs:element name="cost" type="ebons_money:Money_Type"/>									
+	<xs:element name="quantity" type="ebons_quantity:Quantity_Type"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="CustomerOrderItem" type="tns:CustomerOrderItem_Type"/>
+	<xs:complexType name="CustomerOrderItem_Type">
+		
+			<xs:annotation>
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">The purpose for the Customer Order expressed in terms of a Product Offering or a Product (for a change order) inherited from BusinessInteractionItem.</xs:documentation>
+						
+			</xs:annotation>
+		<xs:sequence> 
+		<xs:element ref="tns:ID" maxOccurs="1" minOccurs="1"/>
+		<xs:element ref="tns:action" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:assignedPriority" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:biSpecification" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:biType" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:createBy" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:createDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:description" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:dueDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:itemType" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:lastModifiedDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:modiefiedBy" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:note" maxOccurs="unbounded" minOccurs="0"/>
+		<xs:element ref="tns:productCode" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:rechargeCode" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:requestStartDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:requestedCompletionDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:solution" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:specialInstruction" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:subState" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:technicalObservation" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:cost" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:quantity" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

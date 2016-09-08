@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/PhysicalResource/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/PhysicalResource/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+	<xs:element name="imei" type="xs:string"/>
+	<xs:element name="manufactureDate" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>This is a string attribute that defines the date of manufacture of this item in the fixed format "dd/mm/yyyy". This is an optional attribute.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="otherIdentifier" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>This is a string that is used to contain other important identifying data, such as a bar code, of the hardware item. This is an optional attribute.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="physicalResourceId" type="xs:string"/>									
+	<xs:element name="powerState" type="xs:integer">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>This is an enumerated integer that defines the current power status of the hardware item. Values include:</xs:documentation>
+					<xs:documentation>  0:  Unknown</xs:documentation>
+					<xs:documentation>  1:  Not Applicable</xs:documentation>
+					<xs:documentation>  2:  No Power Applied</xs:documentation>
+					<xs:documentation>  3: Full Power Applied</xs:documentation>
+					<xs:documentation>  4:  Power Save - Normal</xs:documentation>
+					<xs:documentation>  5:  Power Save - Degraded</xs:documentation>
+					<xs:documentation>  6:  Power Save - Standby</xs:documentation>
+					<xs:documentation>  7:  Power Save - Critical</xs:documentation>
+					<xs:documentation>  8:  Power Save - Low Power Mode</xs:documentation>
+					<xs:documentation>  9:  Power Save - Unknown</xs:documentation>
+					<xs:documentation> 10: Power Cycle</xs:documentation>
+					<xs:documentation> 11: Power Warning</xs:documentation>
+					<xs:documentation> 12: Power Off</xs:documentation>
+					<xs:documentation>Value 1 means that the hardware item doesn't require the direct application of power (e.g., a but or bolt). If the value for this item is 3, then the PowerCapability class will describe the particular power requirements of this item through the HasPower association.</xs:documentation>
+					<xs:documentation>This is an optional attribute.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="serialNumber" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>This is a string that represents a manufacturer-allocated number used to identify different instances of the same hardware item. The ModelNumber and PartNumber attributes are used to identify different types of hardware items. This is a REQUIRED attribute.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="versionNumber" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>This is a string that identifies the version of this object. This is an optional attribute.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="PhysicalResource" type="tns:PhysicalResource_Type"/>
+	<xs:complexType name="PhysicalResource_Type">
+		
+			<xs:annotation>
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">This is an abstract base class for describing different types of hardware that constitute a Product. It has two main purposes: (1) to collect common attributes and relationships for all hardware, and (2) to provide a convenient, single point where relationships with other managed objects can be defined.</xs:documentation>
+						
+			</xs:annotation>
+		<xs:sequence>
+		<xs:element ref="tns:imei" maxOccurs="1" minOccurs="0"/>	
+		<xs:element ref="tns:manufactureDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:otherIdentifier" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:physicalResourceId" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:powerState" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:serialNumber" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:versionNumber" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

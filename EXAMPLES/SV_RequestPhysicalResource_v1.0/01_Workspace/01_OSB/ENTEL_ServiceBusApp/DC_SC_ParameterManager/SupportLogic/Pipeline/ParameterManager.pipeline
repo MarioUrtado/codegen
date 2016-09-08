@@ -1,0 +1,1153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
+    <con:coreEntry>
+        <con:binding type="SOAP" isSoap12="true" xsi:type="con:SoapBindingType">
+            <con:wsdl ref="DC_SC_ParameterManager/SupportAPI/WSDL/ParameterManager"/>
+            <con:binding>
+                <con:name>ParameterManager_SOAP12Binding</con:name>
+                <con:namespace>http://www.entel.cl/SC/ParameterManager/v1</con:namespace>
+            </con:binding>
+        </con:binding>
+        <con:xqConfiguration>
+            <con:snippetVersion>1.0</con:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:router errorHandler="error-N3f57fff2.N623c2b98.0.15139add8d6.N8000">
+        <con:pipeline type="error" name="error-N3f57fff2.N623c2b98.0.15139add8d6.N8000">
+            <con:stage id="_StageId-N3f57fff2.N623c2b98.0.15139add8d6.N7fff" name="Error Handling">
+                <con:context>
+                    <con2:userNsDecl prefix="v1" namespace="http://www.entel.cl/SC/ParameterManager/get/v1"/>
+                </con:context>
+                <con:actions>
+                    <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-N53ee33e5.N34938de0.0.15319009c97.N7ffb</con2:id>
+                        <con3:expr>
+                            <con2:xqueryText>element { concat(upper-case(substring($operation,1,1)),substring($operation,2), 'RSP') } {''}</con2:xqueryText>
+                        </con3:expr>
+                    </con3:replace>
+                    <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-N3f57fff2.1b883fbb.0.15139b756b4.N7ffe</con2:id>
+                        <con3:location>
+                            <con2:xpathText>./*[1]</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                            <con2:xqueryTransform>
+                                <con2:resource ref="SR_Commons/XQuery/get_Result_Simple"/>
+                                <con2:param name="resultStatus">
+                                    <con2:path>'ERROR'</con2:path>
+                                </con2:param>
+                                <con2:param name="sourceErrorDescription">
+                                    <con2:path>if (data($fault/ctx:errorCode) = 99)
+then data($fault/ctx:reason)
+else 'Error en la ejecucion de la operación'</con2:path>
+                                </con2:param>
+                                <con2:param name="canonicalErrorType">
+                                    <con2:path>if (data($fault/ctx:errorCode) = 99)
+then 'FCFM'
+else 'FWTE'</con2:path>
+                                </con2:param>
+                                <con2:param name="errorSourceCode">
+                                    <con2:path>'FRW'</con2:path>
+                                </con2:param>
+                                <con2:param name="canonicalErrorCode">
+                                    <con2:path>if (data($fault/ctx:errorCode) = 99)
+then '20000'
+else '30000'</con2:path>
+                                </con2:param>
+                                <con2:param name="errorSourceDetails">
+                                    <con2:path>'MDW Framework ~ ParameterManager'</con2:path>
+                                </con2:param>
+                                <con2:param name="sourceErrorCode">
+                                    <con2:path>if (data($fault/ctx:errorCode) = 99)
+then fn:data ($fault/ctx:errorCode)
+else '97'</con2:path>
+                                </con2:param>
+                                <con2:param name="canonicalErrorDescription">
+                                    <con2:path>if (data($fault/ctx:errorCode) = 99)
+then 'Error en el procesamiento de la solicitud.'
+else 'Error en el procesamiento de la solicitud.'</con2:path>
+                                </con2:param>
+                                <con2:param name="resultDescription">
+                                    <con2:path>'Transacción que finaliza con error'</con2:path>
+                                </con2:param>
+                                <con2:param name="sourceFault">
+                                    <con2:path>$fault</con2:path>
+                                </con2:param>
+                            </con2:xqueryTransform>
+                        </con3:expr>
+                    </con3:replace>
+                    <con2:reply isError="true">
+                        <con2:id>_ActionId-N3f57fff2.1b883fbb.0.15139b756b4.N7ffb</con2:id>
+                    </con2:reply>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="request" name="request-N3f57c7ff.N74bb4033.0.1520e9a5eae.N7fc4">
+            <con:stage id="_StageId-N3f57c7ff.N74bb4033.0.1520e9a5eae.N7f99" name="Get -  Cache Manager">
+                <con:context>
+                    <con2:userNsDecl prefix="v11" namespace="http://www.entel.cl/ESO/MessageHeader/v1"/>
+                    <con2:userNsDecl prefix="v1" namespace="http://www.entel.cl/SC/ParameterManager/get/v1"/>
+                </con:context>
+                <con:actions>
+                    <con3:wsCallout>
+                        <con2:id>_ActionId-N3f57c7ff.N74bb4033.0.1520e9a5eae.N7ffe</con2:id>
+                        <con3:service ref="DC_SC_CacheManager/SupportAPI/Proxy/CacheManager" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>get</con3:operation>
+                        <con3:request>
+                            <con3:body wrapped="false">getCacheRequest</con3:body>
+                        </con3:request>
+                        <con3:response>
+                            <con3:body wrapped="false">getCacheResponse</con3:body>
+                        </con3:response>
+                        <con3:requestTransform>
+                            <con3:assign varName="getCacheRequest">
+                                <con2:id>_ActionId-N3f57c7ff.N74bb4033.0.1520e9a5eae.N7ff8</con2:id>
+                                <con3:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="SR_Commons/XQuery/SupportComponent/CacheManager/get_getREQ"/>
+                                        <con2:param name="instance">
+                                            <con2:path>string-join($body/*[1]/*[2]/*,"")</con2:path>
+                                        </con2:param>
+                                        <con2:param name="source">
+                                            <con2:path>'ParameterManager'</con2:path>
+                                        </con2:param>
+                                        <con2:param name="category">
+                                            <con2:path>'get'</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con3:expr>
+                            </con3:assign>
+                        </con3:requestTransform>
+                        <con3:responseTransform>
+                            <con3:ifThenElse>
+                                <con2:id>_ActionId-N3f57c7ff.N74bb4033.0.1520e9a5eae.N7f9e</con2:id>
+                                <con3:case id="_BranchId-N3f57c7ff.N74bb4033.0.1520e9a5eae.N7f9d">
+                                    <con3:condition>
+                                        <con2:xqueryText>exists($getCacheResponse/*[1])</con2:xqueryText>
+                                    </con3:condition>
+                                    <con3:actions>
+                                        <con3:replace varName="body" contents-only="true">
+                                            <con2:id>_ActionId-N3f57c7ff.N74bb4033.0.1520e9a5eae.N7f9a</con2:id>
+                                            <con3:expr>
+                                                <con2:xqueryText>$getCacheResponse/*[1]/*:Value/*</con2:xqueryText>
+                                            </con3:expr>
+                                        </con3:replace>
+                                        <con2:reply>
+                                            <con2:id>_ActionId-N3f57c7ff.N74bb4033.0.1520e9a5eae.N7f91</con2:id>
+                                        </con2:reply>
+                                    </con3:actions>
+                                </con3:case>
+                                <con3:default/>
+                            </con3:ifThenElse>
+                        </con3:responseTransform>
+                    </con3:wsCallout>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-N3f57c7ff.N74bb4033.0.1520e9a5eae.N7fc2" name="Marshall Get Request">
+                <con:context>
+                    <con2:userNsDecl prefix="v1" namespace="http://www.entel.cl/SC/ParameterManager/get/v1"/>
+                </con:context>
+                <con:actions>
+                    <con3:assign varName="RequestHeader">
+                        <con2:id>_ActionId-N3f57c30a.N775252a1.0.1513f344c01.N7f10</con2:id>
+                        <con3:expr>
+                            <con2:xqueryText>$body/*[1]/*[1]</con2:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                    <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-N3f57c7ff.N3362a6ad.0.150a4524ef5.N7fc5</con2:id>
+                        <con3:expr>
+                            <con2:xqueryTransform>
+                                <con2:resource ref="DC_SC_ParameterManager/SupportLogic/XQuery/getREQ_Adapter"/>
+                                <con2:param name="getREQ">
+                                    <con2:path>$body/*[1]</con2:path>
+                                </con2:param>
+                            </con2:xqueryTransform>
+                        </con3:expr>
+                    </con3:replace>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-N3f57c7ff.N74bb4033.0.1520e9a5eae.N7fc3">
+            <con:stage id="_StageId-N3f57c7ff.N41adec6f.0.15211b98085.N7e96" name="Marshall Get Response">
+                <con:context/>
+                <con:actions>
+                    <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-N3f57c7ff.N3362a6ad.0.150a4524ef5.N7fc2</con2:id>
+                        <con3:expr>
+                            <con2:xqueryTransform>
+                                <con2:resource ref="DC_SC_ParameterManager/SupportLogic/XQuery/getRSP_Adapter"/>
+                                <con2:param name="Result">
+                                    <con2:path>$result</con2:path>
+                                </con2:param>
+                                <con2:param name="OutputParameters">
+                                    <con2:path>$body/*[1]</con2:path>
+                                </con2:param>
+                            </con2:xqueryTransform>
+                        </con3:expr>
+                    </con3:replace>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-N3f57c7ff.N74bb4033.0.1520e9a5eae.N7fc1" name="Put - Cache Manager">
+                <con:context>
+                    <con2:userNsDecl prefix="v1" namespace="http://www.entel.cl/SC/ParameterManager/get/v1"/>
+                </con:context>
+                <con:actions>
+                    <con3:wsCallout>
+                        <con2:id>_ActionId-N3f57c7ff.N74bb4033.0.1520e9a5eae.N7f8e</con2:id>
+                        <con3:service ref="DC_SC_CacheManager/SupportAPI/Proxy/CacheManager" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>put</con3:operation>
+                        <con3:request>
+                            <con3:body wrapped="false">putCacheRequest</con3:body>
+                        </con3:request>
+                        <con3:response>
+                            <con3:body wrapped="false">putCacheResponse</con3:body>
+                        </con3:response>
+                        <con3:requestTransform>
+                            <con3:assign varName="putCacheRequest">
+                                <con2:id>_ActionId-N3f57c7ff.N74bb4033.0.1520e9a5eae.N7f8b</con2:id>
+                                <con3:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="SR_Commons/XQuery/SupportComponent/CacheManager/get_putREQ"/>
+                                        <con2:param name="instance">
+                                            <con2:path>data($getCacheRequest/*[1]/@instance)</con2:path>
+                                        </con2:param>
+                                        <con2:param name="putRequest">
+                                            <con2:path>$body/*</con2:path>
+                                        </con2:param>
+                                        <con2:param name="source">
+                                            <con2:path>data($getCacheRequest/*[1]/@source)</con2:path>
+                                        </con2:param>
+                                        <con2:param name="category">
+                                            <con2:path>data($getCacheRequest/*[1]/@category)</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con3:expr>
+                            </con3:assign>
+                        </con3:requestTransform>
+                        <con3:responseTransform/>
+                    </con3:wsCallout>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="request" name="request-N3f57c7ff.N41adec6f.0.15211b98085.N8000">
+            <con:stage id="_StageId-N3f57c7ff.N41adec6f.0.15211b98085.N7f4b" name="Get -  Cache Manager">
+                <con:context>
+                    <con2:userNsDecl prefix="v11" namespace="http://www.entel.cl/ESO/MessageHeader/v1"/>
+                    <con2:userNsDecl prefix="v1" namespace="http://www.entel.cl/SC/ParameterManager/getMapping/v1"/>
+                </con:context>
+                <con:actions>
+                    <con3:wsCallout>
+                        <con2:id>_ActionId-N3f57c7ff.N41adec6f.0.15211b98085.N7f4a</con2:id>
+                        <con3:service ref="DC_SC_CacheManager/SupportAPI/Proxy/CacheManager" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>get</con3:operation>
+                        <con3:request>
+                            <con3:body wrapped="false">getCacheRequest</con3:body>
+                        </con3:request>
+                        <con3:response>
+                            <con3:body wrapped="false">getCacheResponse</con3:body>
+                        </con3:response>
+                        <con3:requestTransform>
+                            <con3:assign varName="getCacheRequest">
+                                <con2:id>_ActionId-N3f57c7ff.N41adec6f.0.15211b98085.N7f49</con2:id>
+                                <con3:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="SR_Commons/XQuery/SupportComponent/CacheManager/get_getREQ"/>
+                                        <con2:param name="instance">
+                                            <con2:path>string-join(
+  for $map in $body/*[1]/*[2]/*
+  return
+    concat($map/@sCode, $map/@context, $map/@entity, $map/@field, $map/@dSys, $map/@sSys),
+    "")</con2:path>
+                                        </con2:param>
+                                        <con2:param name="source">
+                                            <con2:path>'ParameterManager'</con2:path>
+                                        </con2:param>
+                                        <con2:param name="category">
+                                            <con2:path>'getMapping'</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con3:expr>
+                            </con3:assign>
+                        </con3:requestTransform>
+                        <con3:responseTransform>
+                            <con3:ifThenElse>
+                                <con2:id>_ActionId-N3f57c7ff.N41adec6f.0.15211b98085.N7f48</con2:id>
+                                <con3:case id="_BranchId-N3f57c7ff.N41adec6f.0.15211b98085.N7f47">
+                                    <con3:condition>
+                                        <con2:xqueryText>exists($getCacheResponse/*[1])</con2:xqueryText>
+                                    </con3:condition>
+                                    <con3:actions>
+                                        <con3:replace varName="body" contents-only="true">
+                                            <con2:id>_ActionId-N3f57c7ff.N41adec6f.0.15211b98085.N7f46</con2:id>
+                                            <con3:expr>
+                                                <con2:xqueryText>$getCacheResponse/*[1]/*:Value/*</con2:xqueryText>
+                                            </con3:expr>
+                                        </con3:replace>
+                                        <con2:reply>
+                                            <con2:id>_ActionId-N3f57c7ff.N41adec6f.0.15211b98085.N7f45</con2:id>
+                                        </con2:reply>
+                                    </con3:actions>
+                                </con3:case>
+                                <con3:default/>
+                            </con3:ifThenElse>
+                        </con3:responseTransform>
+                    </con3:wsCallout>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-N3f57c7ff.N41adec6f.0.15211b98085.N7ffe" name="Marshall Get Mapping Request">
+                <con:context>
+                    <con2:userNsDecl prefix="v1" namespace="http://www.entel.cl/SC/ParameterManager/getMapping/v1"/>
+                </con:context>
+                <con:actions>
+                    <con3:assign varName="RequestHeader">
+                        <con2:id>_ActionId-N3f57c7ff.17d4280d.0.15143e209ad.N7d36</con2:id>
+                        <con3:expr>
+                            <con2:xqueryText>$body/*[1]/*[1]</con2:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                    <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-N53ee33e3.20a28f6b.0.150b4069109.N7ffb</con2:id>
+                        <con3:expr>
+                            <con2:xqueryTransform>
+                                <con2:resource ref="DC_SC_ParameterManager/SupportLogic/XQuery/getMappingREQ_Adapter"/>
+                                <con2:param name="getMappingREQ">
+                                    <con2:path>$body/*[1]</con2:path>
+                                </con2:param>
+                            </con2:xqueryTransform>
+                        </con3:expr>
+                    </con3:replace>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-N3f57c7ff.N41adec6f.0.15211b98085.N7fff">
+            <con:stage id="_StageId-N3f57c7ff.N41adec6f.0.15211b98085.N7dfd" name="Marshall Get Mapping Response">
+                <con:context/>
+                <con:actions>
+                    <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-N53ee33e3.20a28f6b.0.150b4069109.N7ff8</con2:id>
+                        <con3:expr>
+                            <con2:xqueryTransform>
+                                <con2:resource ref="DC_SC_ParameterManager/SupportLogic/XQuery/getMappingRSP_Adapter"/>
+                                <con2:param name="Result">
+                                    <con2:path>$result</con2:path>
+                                </con2:param>
+                                <con2:param name="OutputParameters">
+                                    <con2:path>$body/*[1]</con2:path>
+                                </con2:param>
+                            </con2:xqueryTransform>
+                        </con3:expr>
+                    </con3:replace>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-N3f57c7ff.N41adec6f.0.15211b98085.N7ffd" name="Put - Cache Manager">
+                <con:context/>
+                <con:actions>
+                    <con3:wsCallout>
+                        <con2:id>_ActionId-N3f57c7ff.N41adec6f.0.15211b98085.N7ed7</con2:id>
+                        <con3:service ref="DC_SC_CacheManager/SupportAPI/Proxy/CacheManager" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>put</con3:operation>
+                        <con3:request>
+                            <con3:body wrapped="false">putCacheRequest</con3:body>
+                        </con3:request>
+                        <con3:response>
+                            <con3:body wrapped="false">putCacheResponse</con3:body>
+                        </con3:response>
+                        <con3:requestTransform>
+                            <con3:assign varName="putCacheRequest">
+                                <con2:id>_ActionId-N3f57c7ff.N41adec6f.0.15211b98085.N7ed6</con2:id>
+                                <con3:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="SR_Commons/XQuery/SupportComponent/CacheManager/get_putREQ"/>
+                                        <con2:param name="instance">
+                                            <con2:path>data($getCacheRequest/*[1]/@instance)</con2:path>
+                                        </con2:param>
+                                        <con2:param name="putRequest">
+                                            <con2:path>$body/*</con2:path>
+                                        </con2:param>
+                                        <con2:param name="source">
+                                            <con2:path>data($getCacheRequest/*[1]/@source)</con2:path>
+                                        </con2:param>
+                                        <con2:param name="category">
+                                            <con2:path>data($getCacheRequest/*[1]/@category)</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con3:expr>
+                            </con3:assign>
+                        </con3:requestTransform>
+                        <con3:responseTransform/>
+                    </con3:wsCallout>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="request" name="request-N3f57c7ff.N41adec6f.0.15211b98085.N7e9a">
+            <con:stage id="_StageId-N3f57c7ff.N41adec6f.0.15211b98085.N7d48" name="Get -  Cache Manager">
+                <con:context>
+                    <con2:userNsDecl prefix="v11" namespace="http://www.entel.cl/ESO/MessageHeader/v1"/>
+                    <con2:userNsDecl prefix="v1" namespace="http://www.entel.cl/SC/ParameterManager/getEndpoint/v1"/>
+                </con:context>
+                <con:actions>
+                    <con3:wsCallout>
+                        <con2:id>_ActionId-N3f57c7ff.N41adec6f.0.15211b98085.N7d47</con2:id>
+                        <con3:service ref="DC_SC_CacheManager/SupportAPI/Proxy/CacheManager" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>get</con3:operation>
+                        <con3:request>
+                            <con3:body wrapped="false">getCacheRequest</con3:body>
+                        </con3:request>
+                        <con3:response>
+                            <con3:body wrapped="false">getCacheResponse</con3:body>
+                        </con3:response>
+                        <con3:requestTransform>
+                            <con3:assign varName="getCacheRequest">
+                                <con2:id>_ActionId-N3f57c7ff.N41adec6f.0.15211b98085.N7d46</con2:id>
+                                <con3:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="SR_Commons/XQuery/SupportComponent/CacheManager/get_getREQ"/>
+                                        <con2:param name="instance">
+                                            <con2:path>concat($body/*[1]/*[2]/@operation,
+       $body/*[1]/*[2]/@provider,
+       $body/*[1]/*[2]/@api,
+       $body/*[1]/*[2]/@version)</con2:path>
+                                        </con2:param>
+                                        <con2:param name="source">
+                                            <con2:path>'ParameterManager'</con2:path>
+                                        </con2:param>
+                                        <con2:param name="category">
+                                            <con2:path>'getEndpoint'</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con3:expr>
+                            </con3:assign>
+                        </con3:requestTransform>
+                        <con3:responseTransform>
+                            <con3:ifThenElse>
+                                <con2:id>_ActionId-N3f57c7ff.N41adec6f.0.15211b98085.N7be2</con2:id>
+                                <con3:case id="_BranchId-N3f57c7ff.N41adec6f.0.15211b98085.N7be1">
+                                    <con3:condition>
+                                        <con2:xqueryText>exists($getCacheResponse/*[1])</con2:xqueryText>
+                                    </con3:condition>
+                                    <con3:actions>
+                                        <con3:replace varName="body" contents-only="true">
+                                            <con2:id>_ActionId-N3f57c7ff.N41adec6f.0.15211b98085.N7be0</con2:id>
+                                            <con3:expr>
+                                                <con2:xqueryText>$getCacheResponse/*[1]/*:Value/*</con2:xqueryText>
+                                            </con3:expr>
+                                        </con3:replace>
+                                        <con2:reply>
+                                            <con2:id>_ActionId-N3f57c7ff.N41adec6f.0.15211b98085.N7bdf</con2:id>
+                                        </con2:reply>
+                                    </con3:actions>
+                                </con3:case>
+                                <con3:default/>
+                            </con3:ifThenElse>
+                        </con3:responseTransform>
+                    </con3:wsCallout>
+                    <con3:ifThenElse>
+                        <con2:id>_ActionId-N3f57c7ff.N41adec6f.0.15211b98085.N7d45</con2:id>
+                        <con3:case id="_BranchId-N3f57c7ff.N41adec6f.0.15211b98085.N7d44">
+                            <con3:condition>
+                                <con2:xqueryText>exists($getCacheResponse/*[1]/*[1])</con2:xqueryText>
+                            </con3:condition>
+                            <con3:actions>
+                                <con3:replace varName="body" contents-only="true">
+                                    <con2:id>_ActionId-N3f57c7ff.N41adec6f.0.15211b98085.N7d43</con2:id>
+                                    <con3:expr>
+                                        <con2:xqueryText>$getCacheResponse/*[1]/*:Value/*</con2:xqueryText>
+                                    </con3:expr>
+                                </con3:replace>
+                                <con2:reply>
+                                    <con2:id>_ActionId-N3f57c7ff.N41adec6f.0.15211b98085.N7d42</con2:id>
+                                </con2:reply>
+                            </con3:actions>
+                        </con3:case>
+                        <con3:default/>
+                    </con3:ifThenElse>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-N3f57c7ff.N41adec6f.0.15211b98085.N7e98" name="Marshall Get Endpoint Request">
+                <con:context/>
+                <con:actions>
+                    <con3:assign varName="RequestHeader">
+                        <con2:id>_ActionId-N3f57c7ff.17d4280d.0.15143e209ad.N79dc</con2:id>
+                        <con3:expr>
+                            <con2:xqueryText>$body/*[1]/*[1]</con2:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                    <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-N3f57c323.N33f7f8a5.0.150de0720b8.N7ffe</con2:id>
+                        <con3:expr>
+                            <con2:xqueryTransform>
+                                <con2:resource ref="DC_SC_ParameterManager/SupportLogic/XQuery/getEndpointREQ_Adapter"/>
+                                <con2:param name="GetEndpointREQ">
+                                    <con2:path>$body/*[1]</con2:path>
+                                </con2:param>
+                            </con2:xqueryTransform>
+                        </con3:expr>
+                    </con3:replace>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-N3f57c7ff.N41adec6f.0.15211b98085.N7e99">
+            <con:stage id="_StageId-N3f57c7ff.N41adec6f.0.15211b98085.N7e97" name="Marshall Get Endpoint Response">
+                <con:context/>
+                <con:actions>
+                    <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-N3f57c323.N33f7f8a5.0.150de0720b8.N7ffa</con2:id>
+                        <con3:expr>
+                            <con2:xqueryTransform>
+                                <con2:resource ref="DC_SC_ParameterManager/SupportLogic/XQuery/getEndpointRSP_Adapter"/>
+                                <con2:param name="Result">
+                                    <con2:path>$result</con2:path>
+                                </con2:param>
+                                <con2:param name="OutputParameters">
+                                    <con2:path>$body/*[1]</con2:path>
+                                </con2:param>
+                            </con2:xqueryTransform>
+                        </con3:expr>
+                    </con3:replace>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-N3f57c7ff.N41adec6f.0.15211b98085.N7cd2" name="Put - Cache Manager">
+                <con:context/>
+                <con:actions>
+                    <con3:wsCallout>
+                        <con2:id>_ActionId-N3f57c7ff.N41adec6f.0.15211b98085.N7cd1</con2:id>
+                        <con3:service ref="DC_SC_CacheManager/SupportAPI/Proxy/CacheManager" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>put</con3:operation>
+                        <con3:request>
+                            <con3:body wrapped="false">putCacheRequest</con3:body>
+                        </con3:request>
+                        <con3:response>
+                            <con3:body wrapped="false">putCacheResponse</con3:body>
+                        </con3:response>
+                        <con3:requestTransform>
+                            <con3:assign varName="putCacheRequest">
+                                <con2:id>_ActionId-N3f57c7ff.N41adec6f.0.15211b98085.N7cd0</con2:id>
+                                <con3:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="SR_Commons/XQuery/SupportComponent/CacheManager/get_putREQ"/>
+                                        <con2:param name="instance">
+                                            <con2:path>data($getCacheRequest/*[1]/@instance)</con2:path>
+                                        </con2:param>
+                                        <con2:param name="putRequest">
+                                            <con2:path>$body/*</con2:path>
+                                        </con2:param>
+                                        <con2:param name="source">
+                                            <con2:path>data($getCacheRequest/*[1]/@source)</con2:path>
+                                        </con2:param>
+                                        <con2:param name="category">
+                                            <con2:path>data($getCacheRequest/*[1]/@category)</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con3:expr>
+                            </con3:assign>
+                        </con3:requestTransform>
+                        <con3:responseTransform/>
+                    </con3:wsCallout>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="request" name="request-N3f57c7ff.N41adec6f.0.15211b98085.N7c69">
+            <con:stage id="_StageId-N3f57c7ff.N41adec6f.0.15211b98085.N7be5" name="Get -  Cache Manager">
+                <con:context>
+                    <con2:userNsDecl prefix="v11" namespace="http://www.entel.cl/ESO/MessageHeader/v1"/>
+                    <con2:userNsDecl prefix="v1" namespace="http://www.entel.cl/SC/ParameterManager/getConfig/v1"/>
+                </con:context>
+                <con:actions>
+                    <con3:wsCallout>
+                        <con2:id>_ActionId-N3f57c7ff.N41adec6f.0.15211b98085.N7be4</con2:id>
+                        <con3:service ref="DC_SC_CacheManager/SupportAPI/Proxy/CacheManager" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>get</con3:operation>
+                        <con3:request>
+                            <con3:body wrapped="false">getCacheRequest</con3:body>
+                        </con3:request>
+                        <con3:response>
+                            <con3:body wrapped="false">getCacheResponse</con3:body>
+                        </con3:response>
+                        <con3:requestTransform>
+                            <con3:assign varName="getCacheRequest">
+                                <con2:id>_ActionId-N3f57c7ff.N41adec6f.0.15211b98085.N7be3</con2:id>
+                                <con3:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="SR_Commons/XQuery/SupportComponent/CacheManager/get_getREQ"/>
+                                        <con2:param name="instance">
+                                            <con2:path>data($body/*[1]/*[2])</con2:path>
+                                        </con2:param>
+                                        <con2:param name="source">
+                                            <con2:path>'ParameterManager'</con2:path>
+                                        </con2:param>
+                                        <con2:param name="category">
+                                            <con2:path>'getConfig'</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con3:expr>
+                            </con3:assign>
+                        </con3:requestTransform>
+                        <con3:responseTransform>
+                            <con3:ifThenElse>
+                                <con2:id>_ActionId-N53ee33e0.N6eccfa16.0.1523b2bf106.N7f91</con2:id>
+                                <con3:case id="_BranchId-N53ee33e0.N6eccfa16.0.1523b2bf106.N7f90">
+                                    <con3:condition>
+                                        <con2:xqueryText>exists($getCacheResponse/*[1])</con2:xqueryText>
+                                    </con3:condition>
+                                    <con3:actions>
+                                        <con3:replace varName="body" contents-only="true">
+                                            <con2:id>_ActionId-N53ee33e0.N6eccfa16.0.1523b2bf106.N7f8f</con2:id>
+                                            <con3:expr>
+                                                <con2:xqueryText>$getCacheResponse/*[1]/*:Value/*</con2:xqueryText>
+                                            </con3:expr>
+                                        </con3:replace>
+                                        <con2:reply>
+                                            <con2:id>_ActionId-N53ee33e0.N6eccfa16.0.1523b2bf106.N7f8e</con2:id>
+                                        </con2:reply>
+                                    </con3:actions>
+                                </con3:case>
+                                <con3:default/>
+                            </con3:ifThenElse>
+                        </con3:responseTransform>
+                    </con3:wsCallout>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-N3f57c7ff.N41adec6f.0.15211b98085.N7c67" name="Marshall Get Config Request">
+                <con:context/>
+                <con:actions>
+                    <con3:assign varName="RequestHeader">
+                        <con2:id>_ActionId-N3f57c7ff.17d4280d.0.15143e209ad.N79a6</con2:id>
+                        <con3:expr>
+                            <con2:xqueryText>$body/*[1]/*[1]</con2:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                    <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-N53ee33e1.17ae0e1a.0.150c8a4f3fd.N7ffb</con2:id>
+                        <con3:expr>
+                            <con2:xqueryTransform>
+                                <con2:resource ref="DC_SC_ParameterManager/SupportLogic/XQuery/getConfigREQ_Adapter"/>
+                                <con2:param name="getConfigREQ">
+                                    <con2:path>$body/*[1]</con2:path>
+                                </con2:param>
+                            </con2:xqueryTransform>
+                        </con3:expr>
+                    </con3:replace>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-N3f57c7ff.N41adec6f.0.15211b98085.N7c68">
+            <con:stage id="_StageId-N3f57c7ff.N41adec6f.0.15211b98085.N7c66" name="Marshall Get Config Response">
+                <con:context/>
+                <con:actions>
+                    <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-N53ee33e1.17ae0e1a.0.150c8a4f3fd.N7ff8</con2:id>
+                        <con3:expr>
+                            <con2:xqueryTransform>
+                                <con2:resource ref="DC_SC_ParameterManager/SupportLogic/XQuery/getConfigRSP_Adapter"/>
+                                <con2:param name="outputParametersDB">
+                                    <con2:path>$body/*[1]</con2:path>
+                                </con2:param>
+                                <con2:param name="Result">
+                                    <con2:path>$result</con2:path>
+                                </con2:param>
+                            </con2:xqueryTransform>
+                        </con3:expr>
+                    </con3:replace>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-N3f57c7ff.N41adec6f.0.15211b98085.N7b6f" name="Put - Cache Manager">
+                <con:context/>
+                <con:actions>
+                    <con3:wsCallout>
+                        <con2:id>_ActionId-N3f57c7ff.N41adec6f.0.15211b98085.N7b6e</con2:id>
+                        <con3:service ref="DC_SC_CacheManager/SupportAPI/Proxy/CacheManager" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>put</con3:operation>
+                        <con3:request>
+                            <con3:body wrapped="false">putCacheRequest</con3:body>
+                        </con3:request>
+                        <con3:response>
+                            <con3:body wrapped="false">putCacheResponse</con3:body>
+                        </con3:response>
+                        <con3:requestTransform>
+                            <con3:assign varName="putCacheRequest">
+                                <con2:id>_ActionId-N3f57c7ff.N41adec6f.0.15211b98085.N7b6d</con2:id>
+                                <con3:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="SR_Commons/XQuery/SupportComponent/CacheManager/get_putREQ"/>
+                                        <con2:param name="instance">
+                                            <con2:path>data($getCacheRequest/*[1]/@instance)</con2:path>
+                                        </con2:param>
+                                        <con2:param name="putRequest">
+                                            <con2:path>$body/*</con2:path>
+                                        </con2:param>
+                                        <con2:param name="source">
+                                            <con2:path>data($getCacheRequest/*[1]/@source)</con2:path>
+                                        </con2:param>
+                                        <con2:param name="category">
+                                            <con2:path>data($getCacheRequest/*[1]/@category)</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con3:expr>
+                            </con3:assign>
+                        </con3:requestTransform>
+                        <con3:responseTransform/>
+                    </con3:wsCallout>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-N53ee33e6.N6f11ec6c.0.152842583f6.N7e96">
+            <con:stage id="_StageId-N3f57c320.N7d75eb57.0.152b37959a1.N7ea9" name="Error Handling">
+                <con:context/>
+                <con:actions>
+                    <con3:replace varName="fault" contents-only="true" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con2:id>_ActionId-N3f57c320.N7d75eb57.0.152b37959a1.N7ea8</con2:id>
+                        <con3:location>
+                            <con2:xpathText>./ctx:errorCode</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                            <con2:xqueryText>99</con2:xqueryText>
+                        </con3:expr>
+                    </con3:replace>
+                    <con3:replace varName="fault" contents-only="true" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con2:id>_ActionId-N3f57c320.N7d75eb57.0.152b37959a1.N7ea7</con2:id>
+                        <con3:location>
+                            <con2:xpathText>./ctx:reason</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                            <con2:xqueryText>"Error al intentar conectar al Back-End"</con2:xqueryText>
+                        </con3:expr>
+                    </con3:replace>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-N53ee33e6.N6f11ec6c.0.152842583f6.N7e2e">
+            <con:stage id="_StageId-N3f57c320.N7d75eb57.0.152b37959a1.N7ee1" name="Error Handling">
+                <con:context/>
+                <con:actions>
+                    <con3:replace varName="fault" contents-only="true" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con2:id>_ActionId-N3f57c320.N7d75eb57.0.152b37959a1.N7ee0</con2:id>
+                        <con3:location>
+                            <con2:xpathText>./ctx:errorCode</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                            <con2:xqueryText>99</con2:xqueryText>
+                        </con3:expr>
+                    </con3:replace>
+                    <con3:replace varName="fault" contents-only="true" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con2:id>_ActionId-N3f57c320.N7d75eb57.0.152b37959a1.N7edf</con2:id>
+                        <con3:location>
+                            <con2:xpathText>./ctx:reason</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                            <con2:xqueryText>"Error al intentar conectar al Back-End"</con2:xqueryText>
+                        </con3:expr>
+                    </con3:replace>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-N53ee33e6.N6f11ec6c.0.152842583f6.N7d95">
+            <con:stage id="_StageId-N3f57c320.N7d75eb57.0.152b37959a1.N7e6f" name="Error Handling">
+                <con:context/>
+                <con:actions>
+                    <con3:replace varName="fault" contents-only="true" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con2:id>_ActionId-N3f57c320.N7d75eb57.0.152b37959a1.N7e6e</con2:id>
+                        <con3:location>
+                            <con2:xpathText>./ctx:errorCode</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                            <con2:xqueryText>99</con2:xqueryText>
+                        </con3:expr>
+                    </con3:replace>
+                    <con3:replace varName="fault" contents-only="true" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con2:id>_ActionId-N3f57c320.N7d75eb57.0.152b37959a1.N7e6d</con2:id>
+                        <con3:location>
+                            <con2:xpathText>./ctx:reason</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                            <con2:xqueryText>"Error al intentar conectar al Back-End"</con2:xqueryText>
+                        </con3:expr>
+                    </con3:replace>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-N53ee33e6.N6f11ec6c.0.152842583f6.N7cfc">
+            <con:stage id="_StageId-N53ee33e6.N6f11ec6c.0.152842583f6.N7cc7" name="Error Handling">
+                <con:context/>
+                <con:actions>
+                    <con3:replace varName="fault" contents-only="true" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con2:id>_ActionId-N3f57c320.N7d75eb57.0.152b37959a1.N7f4d</con2:id>
+                        <con3:location>
+                            <con2:xpathText>./ctx:errorCode</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                            <con2:xqueryText>99</con2:xqueryText>
+                        </con3:expr>
+                    </con3:replace>
+                    <con3:replace varName="fault" contents-only="true" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con2:id>_ActionId-N3f57c320.N7d75eb57.0.152b37959a1.N7f4a</con2:id>
+                        <con3:location>
+                            <con2:xpathText>./ctx:reason</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                            <con2:xqueryText>"Error al intentar conectar al Back-End"</con2:xqueryText>
+                        </con3:expr>
+                    </con3:replace>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:flow>
+            <con:branch-node type="operation" id="_FlowId-N3f57c7ff.N3362a6ad.0.150a4524ef5.N8000" name="Parameter Operations">
+                <con:context/>
+                <con:branch-table>
+                    <con:branch name="get">
+                        <con:operator>equals</con:operator>
+                        <con:value/>
+                        <con:flow>
+                            <con:pipeline-node name="Get Operation">
+                                <con:request>request-N3f57c7ff.N74bb4033.0.1520e9a5eae.N7fc4</con:request>
+                                <con:response>response-N3f57c7ff.N74bb4033.0.1520e9a5eae.N7fc3</con:response>
+                            </con:pipeline-node>
+                            <con:route-node name="RouteGet" error-handler="error-N53ee33e6.N6f11ec6c.0.152842583f6.N7e96">
+                                <con:context>
+                                    <con2:userNsDecl prefix="v1" namespace="http://www.entel.cl/SC/ParameterManager/get/v1"/>
+                                </con:context>
+                                <con:actions>
+                                    <con1:route>
+                                        <con2:id>_ActionId-N3f57c7ff.N3362a6ad.0.150a4524ef5.N7fc8</con2:id>
+                                        <con1:service ref="DC_SC_ParameterManager/SupportLogic/JCA/getParameterManagerAdapter/getParameterManagerAdapter" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                        <con1:operation>getParameterManagerAdapter</con1:operation>
+                                        <con1:outboundTransform/>
+                                        <con1:responseTransform>
+                                            <con3:ifThenElse>
+                                                <con2:id>_ActionId-N3f57c7ff.17d4280d.0.15143e209ad.N7998</con2:id>
+                                                <con3:case id="_BranchId-N3f57c7ff.17d4280d.0.15143e209ad.N7997">
+                                                    <con3:condition>
+                                                        <con2:xqueryText>$body/*[1]/*[2]/*:CODE_ != 0</con2:xqueryText>
+                                                    </con3:condition>
+                                                    <con3:actions>
+                                                        <con3:assign varName="result">
+                                                            <con2:id>_ActionId-N53ee33e6.N6f11ec6c.0.152842583f6.N7ffb</con2:id>
+                                                            <con3:expr>
+                                                                <con2:xqueryTransform>
+                                                                    <con2:resource ref="SR_Commons/XQuery/get_Result_Simple"/>
+                                                                    <con2:param name="resultStatus">
+                                                                        <con2:path>'WARNING'</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="sourceErrorDescription">
+                                                                        <con2:path>fn:data ($body/*[1]/*[2]/*:DESCRIPTION_)</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="canonicalErrorType">
+                                                                        <con2:path>'FWCF'</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="errorSourceCode">
+                                                                        <con2:path>'FRW'</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="canonicalErrorCode">
+                                                                        <con2:path>if ($body/*[1]/*[2]/*:CODE_ = 1)
+then '50003'
+else if ($body/*[1]/*[2]/*:CODE_ = 2)
+then '50004'
+else if ($body/*[1]/*[2]/*:CODE_ = 3)
+then '50002'
+else ()</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="errorSourceDetails">
+                                                                        <con2:path>fn:concat('MDW Framework ~ ParameterManager ~ ', $operation)</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="sourceErrorCode">
+                                                                        <con2:path>fn:data ($body/*[1]/*[2]/*:CODE_)</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="canonicalErrorDescription">
+                                                                        <con2:path>if ($body/*[1]/*[2]/*:CODE_ = 1)
+then 'Configuracion con falta de parametros.'
+else if ($body/*[1]/*[2]/*:CODE_ = 2)
+then 'Configuracion Inconsistente. Claves sin valor.'
+else if ($body/*[1]/*[2]/*:CODE_ = 3)
+then 'No existe configuracion.'
+else ()</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="resultDescription">
+                                                                        <con2:path>'Transacción que finaliza con advertencias'</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="sourceFault">
+                                                                        <con2:path>()</con2:path>
+                                                                    </con2:param>
+                                                                </con2:xqueryTransform>
+                                                            </con3:expr>
+                                                        </con3:assign>
+                                                    </con3:actions>
+                                                </con3:case>
+                                                <con3:default/>
+                                            </con3:ifThenElse>
+                                        </con1:responseTransform>
+                                    </con1:route>
+                                </con:actions>
+                            </con:route-node>
+                        </con:flow>
+                    </con:branch>
+                    <con:branch name="getMapping">
+                        <con:operator>equals</con:operator>
+                        <con:value/>
+                        <con:flow>
+                            <con:pipeline-node name="getMapping Operation">
+                                <con:request>request-N3f57c7ff.N41adec6f.0.15211b98085.N8000</con:request>
+                                <con:response>response-N3f57c7ff.N41adec6f.0.15211b98085.N7fff</con:response>
+                            </con:pipeline-node>
+                            <con:route-node name="RouteGetMappings" error-handler="error-N53ee33e6.N6f11ec6c.0.152842583f6.N7e2e">
+                                <con:context>
+                                    <con2:userNsDecl prefix="v1" namespace="http://www.entel.cl/SC/ParameterManager/getMapping/v1"/>
+                                </con:context>
+                                <con:actions>
+                                    <con1:route>
+                                        <con2:id>_ActionId-N53ee33e3.20a28f6b.0.150b4069109.N7ffe</con2:id>
+                                        <con1:service ref="DC_SC_ParameterManager/SupportLogic/JCA/getMappingParameterManagerAdapter/getMappingParameterManagerAdapter" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                        <con1:operation>getMappingParameterManagerAdapter</con1:operation>
+                                        <con1:outboundTransform/>
+                                        <con1:responseTransform>
+                                            <con3:ifThenElse>
+                                                <con2:id>_ActionId-N3f57c7ff.17d4280d.0.15143e209ad.N78b5</con2:id>
+                                                <con3:case id="_BranchId-N3f57c7ff.17d4280d.0.15143e209ad.N78b4">
+                                                    <con3:condition>
+                                                        <con2:xqueryText>$body/*[1]/*[2]/*:CODE_ != 0</con2:xqueryText>
+                                                    </con3:condition>
+                                                    <con3:actions>
+                                                        <con3:assign varName="result">
+                                                            <con2:id>_ActionId-N53ee33e6.N6f11ec6c.0.152842583f6.N7f96</con2:id>
+                                                            <con3:expr>
+                                                                <con2:xqueryTransform>
+                                                                    <con2:resource ref="SR_Commons/XQuery/get_Result_Simple"/>
+                                                                    <con2:param name="resultStatus">
+                                                                        <con2:path>'WARNING'</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="sourceErrorDescription">
+                                                                        <con2:path>fn:data ($body/*[1]/*[2]/*:DESCRIPTION_)</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="canonicalErrorType">
+                                                                        <con2:path>'FWCF'</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="errorSourceCode">
+                                                                        <con2:path>'FRW'</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="canonicalErrorCode">
+                                                                        <con2:path>if ($body/*[1]/*[2]/*:CODE_ = 4)
+then '50003'
+else if ($body/*[1]/*[2]/*:CODE_ = 5)
+then '50004'
+else if ($body/*[1]/*[2]/*:CODE_ = 6)
+then '50006'
+else ()</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="errorSourceDetails">
+                                                                        <con2:path>fn:concat('MDW Framework ~ ParameterManager ~ ', $operation)</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="sourceErrorCode">
+                                                                        <con2:path>fn:data ($body/*[1]/*[2]/*:CODE_)</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="canonicalErrorDescription">
+                                                                        <con2:path>if ($body/*[1]/*[2]/*:CODE_ = 4)
+then 'Configuracion con falta de parametros.'
+else if ($body/*[1]/*[2]/*:CODE_ = 5)
+then 'Configuracion Inconsistente. Claves sin valor.'
+else if ($body/*[1]/*[2]/*:CODE_ = 6)
+then 'Traducción de Error no encontrada.'
+else ()</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="resultDescription">
+                                                                        <con2:path>'Transacción que finaliza con advertencias'</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="sourceFault">
+                                                                        <con2:path>()</con2:path>
+                                                                    </con2:param>
+                                                                </con2:xqueryTransform>
+                                                            </con3:expr>
+                                                        </con3:assign>
+                                                    </con3:actions>
+                                                </con3:case>
+                                                <con3:default/>
+                                            </con3:ifThenElse>
+                                        </con1:responseTransform>
+                                    </con1:route>
+                                </con:actions>
+                            </con:route-node>
+                        </con:flow>
+                    </con:branch>
+                    <con:branch name="getEndpoint">
+                        <con:operator>equals</con:operator>
+                        <con:value/>
+                        <con:flow>
+                            <con:pipeline-node name="getEndpoint Operation">
+                                <con:request>request-N3f57c7ff.N41adec6f.0.15211b98085.N7e9a</con:request>
+                                <con:response>response-N3f57c7ff.N41adec6f.0.15211b98085.N7e99</con:response>
+                            </con:pipeline-node>
+                            <con:route-node name="RouteGetEndpoint" error-handler="error-N53ee33e6.N6f11ec6c.0.152842583f6.N7d95">
+                                <con:context>
+                                    <con2:userNsDecl prefix="v1" namespace="http://www.entel.cl/SC/ParameterManager/getEndpoint/v1"/>
+                                </con:context>
+                                <con:actions>
+                                    <con1:route>
+                                        <con2:id>_ActionId-N3f57c7ff.53d38f29.0.150d27bfadc.N7f91</con2:id>
+                                        <con1:service ref="DC_SC_ParameterManager/SupportLogic/JCA/getEndpointParameterManagerAdapter/getEndpointParameterManagerAdapter" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                        <con1:operation>getEndpointParameterManagerAdapter</con1:operation>
+                                        <con1:outboundTransform/>
+                                        <con1:responseTransform>
+                                            <con3:ifThenElse>
+                                                <con2:id>_ActionId-N3f57c7ff.17d4280d.0.15143e209ad.N78aa</con2:id>
+                                                <con3:case id="_BranchId-N3f57c7ff.17d4280d.0.15143e209ad.N78a9">
+                                                    <con3:condition>
+                                                        <con2:xqueryText>$body/*[1]/*[2]/*:CODE_ != 0</con2:xqueryText>
+                                                    </con3:condition>
+                                                    <con3:actions>
+                                                        <con3:assign varName="result">
+                                                            <con2:id>_ActionId-N53ee33e6.N6f11ec6c.0.152842583f6.N7f62</con2:id>
+                                                            <con3:expr>
+                                                                <con2:xqueryTransform>
+                                                                    <con2:resource ref="SR_Commons/XQuery/get_Result_Simple"/>
+                                                                    <con2:param name="resultStatus">
+                                                                        <con2:path>'WARNING'</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="sourceErrorDescription">
+                                                                        <con2:path>fn:data ($body/*[1]/*[2]/*:DESCRIPTION_)</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="canonicalErrorType">
+                                                                        <con2:path>'FWCF'</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="errorSourceCode">
+                                                                        <con2:path>'FRW'</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="canonicalErrorCode">
+                                                                        <con2:path>if ($body/*[1]/*[2]/*:CODE_ = 9)
+then '50003'
+else if ($body/*[1]/*[2]/*:CODE_ = 10)
+then '50006'
+else ()</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="errorSourceDetails">
+                                                                        <con2:path>fn:concat('MDW Framework ~ ParameterManager ~ ', $operation)</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="sourceErrorCode">
+                                                                        <con2:path>fn:data ($body/*[1]/*[2]/*:CODE_)</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="canonicalErrorDescription">
+                                                                        <con2:path>if ($body/*[1]/*[2]/*:CODE_ = 9)
+then 'Configuracion con falta de parametros.'
+else if ($body/*[1]/*[2]/*:CODE_ = 10)
+then 'Traducción de Error no encontrada.'
+else ()</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="resultDescription">
+                                                                        <con2:path>'Transacción que finaliza con advertencias'</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="sourceFault">
+                                                                        <con2:path>()</con2:path>
+                                                                    </con2:param>
+                                                                </con2:xqueryTransform>
+                                                            </con3:expr>
+                                                        </con3:assign>
+                                                    </con3:actions>
+                                                </con3:case>
+                                                <con3:default/>
+                                            </con3:ifThenElse>
+                                        </con1:responseTransform>
+                                    </con1:route>
+                                </con:actions>
+                            </con:route-node>
+                        </con:flow>
+                    </con:branch>
+                    <con:branch name="getConfig">
+                        <con:operator>equals</con:operator>
+                        <con:value/>
+                        <con:flow>
+                            <con:pipeline-node name="Get Config Operation">
+                                <con:request>request-N3f57c7ff.N41adec6f.0.15211b98085.N7c69</con:request>
+                                <con:response>response-N3f57c7ff.N41adec6f.0.15211b98085.N7c68</con:response>
+                            </con:pipeline-node>
+                            <con:route-node name="RouteGetConfig" error-handler="error-N53ee33e6.N6f11ec6c.0.152842583f6.N7cfc">
+                                <con:context>
+                                    <con2:userNsDecl prefix="v1" namespace="http://www.entel.cl/SC/ParameterManager/getConfig/v1"/>
+                                    <con2:userNsDecl prefix="v11" namespace="http://www.entel.cl/SC/ParameterManager/getEndpoint/v1"/>
+                                </con:context>
+                                <con:actions>
+                                    <con1:route>
+                                        <con2:id>_ActionId-N53ee33e1.17ae0e1a.0.150c8a4f3fd.N7ffe</con2:id>
+                                        <con1:service ref="DC_SC_ParameterManager/SupportLogic/JCA/getConfigParameterManagerAdapter/getConfigParameterManagerAdapter" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                        <con1:operation>getConfigParameterManagerAdapter</con1:operation>
+                                        <con1:outboundTransform/>
+                                        <con1:responseTransform>
+                                            <con3:ifThenElse>
+                                                <con2:id>_ActionId-N3f57c7ff.17d4280d.0.15143e209ad.N789f</con2:id>
+                                                <con3:case id="_BranchId-N3f57c7ff.17d4280d.0.15143e209ad.N789e">
+                                                    <con3:condition>
+                                                        <con2:xqueryText>$body/*[1]/*[2]/*:CODE_ != 0</con2:xqueryText>
+                                                    </con3:condition>
+                                                    <con3:actions>
+                                                        <con3:assign varName="result">
+                                                            <con2:id>_ActionId-N53ee33e6.N6f11ec6c.0.152842583f6.N7f2e</con2:id>
+                                                            <con3:expr>
+                                                                <con2:xqueryTransform>
+                                                                    <con2:resource ref="SR_Commons/XQuery/get_Result_Simple"/>
+                                                                    <con2:param name="resultStatus">
+                                                                        <con2:path>'WARNING'</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="sourceErrorDescription">
+                                                                        <con2:path>fn:data ($body/*[1]/*[2]/*:DESCRIPTION_)</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="canonicalErrorType">
+                                                                        <con2:path>'FWCF'</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="errorSourceCode">
+                                                                        <con2:path>'FRW'</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="canonicalErrorCode">
+                                                                        <con2:path>if ($body/*[1]/*[2]/*:CODE_ = 7)
+then '50003'
+else if ($body/*[1]/*[2]/*:CODE_ = 8)
+then '50006'
+else ()</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="errorSourceDetails">
+                                                                        <con2:path>fn:concat('MDW Framework ~ ParameterManager ~ ', $operation)</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="sourceErrorCode">
+                                                                        <con2:path>fn:data ($body/*[1]/*[2]/*:CODE_)</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="canonicalErrorDescription">
+                                                                        <con2:path>if ($body/*[1]/*[2]/*:CODE_ = 7)
+then 'Configuracion con falta de parametros.'
+else if ($body/*[1]/*[2]/*:CODE_ = 8)
+then 'Traducción de Error no encontrada.'
+else ()</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="resultDescription">
+                                                                        <con2:path>'Transacción que finaliza con advertencias'</con2:path>
+                                                                    </con2:param>
+                                                                    <con2:param name="sourceFault">
+                                                                        <con2:path>()</con2:path>
+                                                                    </con2:param>
+                                                                </con2:xqueryTransform>
+                                                            </con3:expr>
+                                                        </con3:assign>
+                                                    </con3:actions>
+                                                </con3:case>
+                                                <con3:default/>
+                                            </con3:ifThenElse>
+                                        </con1:responseTransform>
+                                    </con1:route>
+                                </con:actions>
+                            </con:route-node>
+                        </con:flow>
+                    </con:branch>
+                    <con:default-branch>
+                        <con:flow/>
+                    </con:default-branch>
+                </con:branch-table>
+            </con:branch-node>
+        </con:flow>
+        <con:partner-links>
+            <con:partner-link>
+                <con:service ref="DC_SC_ParameterManager/getConfigParameterManagerAdapter" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            </con:partner-link>
+            <con:partner-link>
+                <con:service ref="DC_SC_ParameterManager/getParameterManagerAdapter" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            </con:partner-link>
+            <con:partner-link>
+                <con:service ref="DC_SC_ParameterManager/getMappingParameterManagerAdapter" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            </con:partner-link>
+        </con:partner-links>
+    </con:router>
+</con:pipelineEntry>

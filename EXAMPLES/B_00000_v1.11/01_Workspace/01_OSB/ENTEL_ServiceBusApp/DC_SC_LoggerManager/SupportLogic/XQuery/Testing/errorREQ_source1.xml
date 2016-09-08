@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:ErrorREQ xmlns:trace="http://www.entel.cl/ESO/TraceProfile/v1"
+ xmlns:cmp="http://www.entel.cl/ESO/ContextMetadataProfile/v1"
+ xmlns:lp="http://www.entel.cl/ESO/LoggerProfile/v1"
+ xmlns:hd="http://www.entel.cl/ESO/MessageHeader/v1"
+ xmlns:rs="http://www.entel.cl/ESO/Result/v1"
+ xmlns:esons_error="http://www.entel.cl/ESO/Error/v1"
+ xmlns:eddns_dictionary="http://www.entel.cl/EDD/Dictionary/v1"
+ xmlns:tns="http://www.entel.cl/SC/LoggerManager/error/v1"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.entel.cl/SC/LoggerManager/error/v1 file:/C:/develop/Entel/DOCUMENTACION/09-Requirements/SOA%20Framework%201.0/4%20-%20Codigo/OSB/Trunk/Applications/ENTEL_ServiceBusApp_0/DC_SC_LoggerManager/SupportAPI/XSD/ESM/error_LoggerManager_v1_ESM.xsd">
+    <tns:Trace>
+        <trace:Header>
+            <hd:Consumer code="0" name="name0">
+                <hd:Credentials user="user0" password="password0"/>
+            </hd:Consumer>
+            <hd:Trace reqTimestamp="2006-05-04T18:13:51.0Z" rspTimestamp="2006-05-04T18:13:51.0Z" messageID="messageID0" correlationID="correlationID0"
+                 conversationID="conversationID0">
+                <hd:Service code="code0" name="name1" operation="operation0"/>
+            </hd:Trace>
+            <hd:Country code="0" name="name2"/>
+            <hd:Channel name="NI" mode="NI"/>
+            <hd:QoS ttl="0" priority="0" retryCount="0" maxRetryCount="0"/>
+        </trace:Header>
+        <trace:Logger Component="Component0" Operation="Operation0"/>
+        <trace:ContextMetadata Family="Family0" Class="Class0" Member="Member0" Module="Module0"/>
+    </tns:Trace>
+    <tns:FaultDetails>
+        <fault>...</fault>
+    </tns:FaultDetails>
+    <tns:ErrorResult>
+        <rs:Status>OK</rs:Status>
+        <rs:Description>Description0</rs:Description>
+        <esons_error:Error>
+            <esons_error:Code>Code0</esons_error:Code>
+            <esons_error:Description>Description0</esons_error:Description>
+            <esons_error:Type>VAL</esons_error:Type>
+        </esons_error:Error>
+    </tns:ErrorResult>
+    <tns:ErrorSourceDetails>
+        <fault>...</fault>
+    </tns:ErrorSourceDetails>
+    <tns:ErrorMetadata>
+        <esons_error:Code>Code1</esons_error:Code>
+        <esons_error:Description>Description1</esons_error:Description>
+    </tns:ErrorMetadata>
+</tns:ErrorREQ>

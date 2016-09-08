@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/Service/v1"
+	xmlns:ebons_services="http://www.entel.cl/EBO/Services/v1"
+	xmlns:ebons_characteristics="http://www.entel.cl/EBO/Characteristics/v1"
+	xmlns:ebons_timeperiod="http://www.entel.cl/EBO/TimePeriod/v1"
+	xmlns:ebons_status="http://www.entel.cl/EBO/Status/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/Service/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/Services/v1" schemaLocation="Services_v1_EBO.xsd"/>
+	<xs:import namespace="http://www.entel.cl/EBO/Characteristics/v1" schemaLocation="Characteristics_v1_EBO.xsd"/>
+	<xs:import namespace="http://www.entel.cl/EBO/TimePeriod/v1" schemaLocation="TimePeriod_v1_EBO.xsd"/>
+	<xs:import namespace="http://www.entel.cl/EBO/Status/v1" schemaLocation="Status_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="enabled" type="xs:boolean">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>This is a Boolean attribute that, if TRUE, signifies that this Service has been enabled for use.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="externalCode" type="xs:string"/>									
+	<xs:element name="externalID" type="xs:string"/>									
+	<xs:element name="hasStarted" type="xs:boolean">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>This is a Boolean attribute that, if TRUE, signifies that this Service has already been started. If the value of this attribute is FALSE, then this signifies that this Service has NOT been Started.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="id" type="xs:string"/>									
+	<xs:element name="isMandatory" type="xs:boolean">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>This is a Boolean attribute that, if TRUE, signifies that this Service is mandatory (i.e., this Service must be running when the managed environment is in a non-failed state). If the value of this attribute is FALSE, then this means that this Service is not required to run.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="isStateful" type="xs:boolean">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>This is a Boolean attribute that, if TRUE, means that this Service can be changed without affecting any other services.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="lastActivedDate" type="xs:dateTime">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>Ultima fecha de activacion</xs:documentation>
+				</xs:annotation>
+			</xs:element>		
+	<xs:element name="name" type="xs:string"/>									
+	<xs:element name="parentId" type="xs:string"/>									
+	<xs:element name="serviceCandidate" type="xs:string"/>									
+	<xs:element name="serviceCode" type="xs:string"/>									
+	<xs:element name="serviceSpecification" type="xs:string"/>									
+	<xs:element name="serviceType" type="xs:string"/>									
+	<xs:element name="startMode" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>This attribute is an enumerated integer that indicates how the Service is started. Values include:</xs:documentation>
+					<xs:documentation>  0:  Unknown</xs:documentation>
+					<xs:documentation>  1:  Automatically by the managed </xs:documentation>
+					<xs:documentation>       environment</xs:documentation>
+					<xs:documentation>  2:  Automatically by the owning device</xs:documentation>
+					<xs:documentation>  3:  Manually by the Provider of the Service</xs:documentation>
+					<xs:documentation>  4:  Manually by a Customer</xs:documentation>
+					<xs:documentation>  5:  Any of the above</xs:documentation>
+				</xs:annotation>
+			</xs:element>		
+	<xs:element name="subscriberDate" type="xs:dateTime"/>								
+	<xs:element name="versionNumber" type="xs:string"/>									
+	<xs:element name="serviceCharacteristics" type="ebons_characteristics:Characteristics_Type"/>									
+	<xs:element name="services" type="ebons_services:Services_Type"/>									
+	<xs:element name="statuses" type="ebons_status:Status_Type"/>									
+	<xs:element name="validFor" type="ebons_timeperiod:TimePeriod_Type"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="Service" type="tns:Service_Type"/>
+	<xs:complexType name="Service_Type">
+		
+			<xs:annotation>
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">This is an abstract base class for defining the Service hierarchy. All Services are characterized as either being possibly visible and usable by a Customer or not. This gives rise to the two subclasses of Service: CustomerFacingService and ResourceFacingService.</xs:documentation>
+							
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">Services are defined as being tightly bound to Products. A Product defines the context of the Service, Service and its related entities (e.g., ServiceSpecification, ServiceRole, and so forth) are related to entities in the Resource, Product, and other domains through a set of relationships.</xs:documentation>
+							
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">A Service represents the object that will be instantiated. Each Service instance can be different; therefore, Service is limited to owning just the changeable attributes, methods, relationships, and constraints that can be instantiated. The invariant attributes, methods, relationships, and constraints that can be instantiated are defined by a ServiceSpecification.</xs:documentation>
+							
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">The purpose of this entity is twofold. First, it is used to define attributes, methods, and relationships that are common to all Services. Second, it provides a convenient point to define how Services interact with other parts business entities.</xs:documentation>
+							
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">Service is a first-class entity, inheriting directly from ManagedEntity. It is therefore a sibling with Resource, Product, and other first-class entities. Note that the CIM models Service as a subclass of LogicalElement, which is a subclass of ManagedSystemElement, which is a subclass of ManagedElement (which is equivalent to ManagedEntity).</xs:documentation>
+						
+			</xs:annotation>
+		<xs:sequence> 
+		<xs:element ref="tns:enabled" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:externalCode" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:externalID" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:hasStarted" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:id" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:isMandatory" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:isStateful" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:lastActivedDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:name" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:parentId" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:serviceCandidate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:serviceCode" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:serviceSpecification" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:serviceType" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:startMode" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:subscriberDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:versionNumber" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:serviceCharacteristics" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:services" maxOccurs="unbounded" minOccurs="0"/>
+		<xs:element ref="tns:statuses" maxOccurs="unbounded" minOccurs="0"/>
+		<xs:element ref="tns:validFor" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/Status/v1"
+	xmlns:ebons_timeperiod="http://www.entel.cl/EBO/TimePeriod/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/Status/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/TimePeriod/v1" schemaLocation="TimePeriod_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="reason" type="xs:string"/>									
+	<xs:element name="status" type="xs:string"/>									
+	<xs:element name="validFor" type="ebons_timeperiod:TimePeriod_Type"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="Status" type="tns:Status_Type"/>
+	<xs:complexType name="Status_Type">
+		<xs:sequence> 
+		<xs:element ref="tns:reason" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:status" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:validFor" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

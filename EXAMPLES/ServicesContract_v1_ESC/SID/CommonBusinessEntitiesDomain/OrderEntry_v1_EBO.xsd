@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/OrderEntry/v1"
+	xmlns:ebons_money="http://www.entel.cl/EBO/Money/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/OrderEntry/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/Money/v1" schemaLocation="../CommonBusinessEntitiesDomain/Money_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="ID" type="xs:string"/>									
+	<xs:element name="createdBy" type="xs:string"/>									
+	<xs:element name="createdDate" type="xs:dateTime"/>									
+	<xs:element name="externalID" type="xs:string"/>									
+	<xs:element name="orderDetail" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>detalle de la orden</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="solution" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>solucion</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="state" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>estado de la orden</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="subState" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>subestado de la orden</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="technicalObservation" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>observaciones tecnicas</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="cost" type="ebons_money:Money_Type">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>costo</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="OrderEntry" type="tns:OrderEntry_Type"/>
+	<xs:complexType name="OrderEntry_Type">
+		<xs:sequence> 
+		<xs:element ref="tns:ID" maxOccurs="1" minOccurs="1"/>
+		<xs:element ref="tns:createdBy" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:createdDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:externalID" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:orderDetail" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:solution" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:state" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:subState" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:technicalObservation" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:cost" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

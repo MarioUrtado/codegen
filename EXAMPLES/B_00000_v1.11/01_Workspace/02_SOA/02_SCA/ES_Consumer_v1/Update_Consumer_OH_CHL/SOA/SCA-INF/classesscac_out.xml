@@ -1,0 +1,1383 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Faults>
+   <Fault>
+      <severity>error</severity>
+      <loc>/ns:composite/ns:import[@location='oramds:/apps/Commons/DC_SC_ErrorManager/SupportAPI/WSDL/ErrorManager.wsdl']</loc>
+      <line>19</line>
+      <col>26</col>
+      <file>C:\Repos\ENTEL\branches\B_00000_v1.2\01_Workspace\02_SOA\ES_Consumer_v1\Update_Consumer_OH_CHL\SOA\composite.xml</file>
+      <name>C:\Repos\ENTEL\branches\B_00000_v1.2\01_Workspace\02_SOA\ES_Consumer_v1\Update_Consumer_OH_CHL\SOA\composite.xml</name>
+      <fix/>
+      <msg>Load of wsdl "oramds:/apps/Commons/DC_SC_ErrorManager/SupportAPI/WSDL/ErrorManager.wsdl" failed</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/ns:composite/ns:import[@location='WSDLs/ErrorManagerWrapper2.wsdl']</loc>
+      <line>21</line>
+      <col>44</col>
+      <file>C:\Repos\ENTEL\branches\B_00000_v1.2\01_Workspace\02_SOA\ES_Consumer_v1\Update_Consumer_OH_CHL\SOA\composite.xml</file>
+      <name>C:\Repos\ENTEL\branches\B_00000_v1.2\01_Workspace\02_SOA\ES_Consumer_v1\Update_Consumer_OH_CHL\SOA\composite.xml</name>
+      <fix/>
+      <msg>Load of wsdl "WSDLs/ErrorManagerWrapper2.wsdl" failed</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/ns:composite/ns:import[@location='WSDLs/ConversationManagerWrapper1.wsdl']</loc>
+      <line>23</line>
+      <col>44</col>
+      <file>C:\Repos\ENTEL\branches\B_00000_v1.2\01_Workspace\02_SOA\ES_Consumer_v1\Update_Consumer_OH_CHL\SOA\composite.xml</file>
+      <name>C:\Repos\ENTEL\branches\B_00000_v1.2\01_Workspace\02_SOA\ES_Consumer_v1\Update_Consumer_OH_CHL\SOA\composite.xml</name>
+      <fix/>
+      <msg>Load of wsdl "WSDLs/ConversationManagerWrapper1.wsdl" failed</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/ns:composite/ns:import[@location='oramds:/apps/Commons/DC_SC_ConversationManager/SupportAPI/WSDL/ConversationManager.wsdl']</loc>
+      <line>25</line>
+      <col>44</col>
+      <file>C:\Repos\ENTEL\branches\B_00000_v1.2\01_Workspace\02_SOA\ES_Consumer_v1\Update_Consumer_OH_CHL\SOA\composite.xml</file>
+      <name>C:\Repos\ENTEL\branches\B_00000_v1.2\01_Workspace\02_SOA\ES_Consumer_v1\Update_Consumer_OH_CHL\SOA\composite.xml</name>
+      <fix/>
+      <msg>Load of wsdl "oramds:/apps/Commons/DC_SC_ConversationManager/SupportAPI/WSDL/ConversationManager.wsdl" failed</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc/>
+      <line/>
+      <col/>
+      <file>file:/C:/Repos/ENTEL/branches/B_00000_v1.2/01_Workspace/02_SOA/ES_Consumer_v1/Update_Consumer_OH_CHL/SOA/WSDLs/Update_Consumer_OH_BPELProcess.wsdl</file>
+      <name>/C:/Repos/ENTEL/branches/B_00000_v1.2/01_Workspace/02_SOA/ES_Consumer_v1/Update_Consumer_OH_CHL/SOA/WSDLs/Update_Consumer_OH_BPELProcess.wsdl</name>
+      <fix/>
+      <msg>Error in getting XML input stream: oramds:/apps/Commons/DC_RA_CHL-SALESFORCE_v1/ResourceAdapters/CHL-SALESFORCE-CRM_UPD-CLI-DATA_RA_v1/XSD/CHL-SALESFORCE-CRM_UPD-CLI-DATA_v1_CSM.xsd: oracle.mds.exception.MDSException: MDS-00054: The file to be loaded oramds:/apps/Commons/DC_RA_CHL-SALESFORCE_v1/ResourceAdapters/CHL-SALESFORCE-CRM_UPD-CLI-DATA_RA_v1/XSD/CHL-SALESFORCE-CRM_UPD-CLI-DATA_v1_CSM.xsd does not exist.</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc/>
+      <line/>
+      <col/>
+      <file>file:/C:/Repos/ENTEL/branches/B_00000_v1.2/01_Workspace/02_SOA/ES_Consumer_v1/Update_Consumer_OH_CHL/SOA/WSDLs/Update_Consumer_OH_BPELProcess.wsdl</file>
+      <name>/C:/Repos/ENTEL/branches/B_00000_v1.2/01_Workspace/02_SOA/ES_Consumer_v1/Update_Consumer_OH_CHL/SOA/WSDLs/Update_Consumer_OH_BPELProcess.wsdl</name>
+      <fix/>
+      <msg>Message part "payload" is undefined [element = {http://www.entel.cl/EBM/Consumer/upd/v1}Upd_Consumer_REQ</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc/>
+      <line/>
+      <col/>
+      <file>file:/C:/Repos/ENTEL/branches/B_00000_v1.2/01_Workspace/02_SOA/ES_Consumer_v1/Update_Consumer_OH_CHL/SOA/WSDLs/Update_Consumer_OH_BPELProcess.wsdl</file>
+      <name>/C:/Repos/ENTEL/branches/B_00000_v1.2/01_Workspace/02_SOA/ES_Consumer_v1/Update_Consumer_OH_CHL/SOA/WSDLs/Update_Consumer_OH_BPELProcess.wsdl</name>
+      <fix/>
+      <msg>Message part "payload" is undefined [element = {http://www.entel.cl/EBM/Consumer/upd/v1}Upd_Consumer_RSP</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc/>
+      <line/>
+      <col/>
+      <file>file:/C:/Repos/ENTEL/branches/B_00000_v1.2/01_Workspace/02_SOA/ES_Consumer_v1/Update_Consumer_OH_CHL/SOA/WSDLs/Update_Consumer_OH_BPELProcess.wsdl</file>
+      <name>/C:/Repos/ENTEL/branches/B_00000_v1.2/01_Workspace/02_SOA/ES_Consumer_v1/Update_Consumer_OH_CHL/SOA/WSDLs/Update_Consumer_OH_BPELProcess.wsdl</name>
+      <fix/>
+      <msg>Message part "FAULT_part" is undefined [element = {http://www.entel.cl/EBM/Consumer/upd/v1}Upd_Consumer_FRSP</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc/>
+      <line/>
+      <col/>
+      <file>file:/C:/Repos/ENTEL/branches/B_00000_v1.2/01_Workspace/02_SOA/ES_Consumer_v1/Update_Consumer_OH_CHL/SOA/WSDLs/jmsReference_Upd_RA_SALESFORCE.wsdl</file>
+      <name>/C:/Repos/ENTEL/branches/B_00000_v1.2/01_Workspace/02_SOA/ES_Consumer_v1/Update_Consumer_OH_CHL/SOA/WSDLs/jmsReference_Upd_RA_SALESFORCE.wsdl</name>
+      <fix/>
+      <msg>Message part "CHL-SALESFORCE-CRM_UPD-CLI-DATA_REQ" is undefined [element = {http://www.entel.cl/CSM/RA/CHL/SALESFORCE/CRM/UPD-CLI-DATA/v1}CHL-SALESFORCE-CRM_UPD-CLI-DATA_REQ</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc/>
+      <line/>
+      <col/>
+      <file>file:/C:/Repos/ENTEL/branches/B_00000_v1.2/01_Workspace/02_SOA/ES_Consumer_v1/Update_Consumer_OH_CHL/SOA/WSDLs/jmsReference_Upd_RA_SALESFORCE.wsdl</file>
+      <name>/C:/Repos/ENTEL/branches/B_00000_v1.2/01_Workspace/02_SOA/ES_Consumer_v1/Update_Consumer_OH_CHL/SOA/WSDLs/jmsReference_Upd_RA_SALESFORCE.wsdl</name>
+      <fix/>
+      <msg>Message part "CHL-SALESFORCE-CRM_UPD-CLI-DATA_RSP" is undefined [element = {http://www.entel.cl/CSM/RA/CHL/SALESFORCE/CRM/UPD-CLI-DATA/v1}CHL-SALESFORCE-CRM_UPD-CLI-DATA_RSP</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc/>
+      <line/>
+      <col/>
+      <file>file:/C:/Repos/ENTEL/branches/B_00000_v1.2/01_Workspace/02_SOA/ES_Consumer_v1/Update_Consumer_OH_CHL/SOA/WSDLs/jmsReference_Upd_RA_SALESFORCE.wsdl</file>
+      <name>/C:/Repos/ENTEL/branches/B_00000_v1.2/01_Workspace/02_SOA/ES_Consumer_v1/Update_Consumer_OH_CHL/SOA/WSDLs/jmsReference_Upd_RA_SALESFORCE.wsdl</name>
+      <fix/>
+      <msg>Message part "CHL-SALESFORCE-CRM_UPD-CLI-DATA_REQ" is undefined [element = {http://www.entel.cl/CSM/RA/CHL/SALESFORCE/CRM/UPD-CLI-DATA/v1}CHL-SALESFORCE-CRM_UPD-CLI-DATA_REQ</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc/>
+      <line/>
+      <col/>
+      <file>file:/C:/Repos/ENTEL/branches/B_00000_v1.2/01_Workspace/02_SOA/ES_Consumer_v1/Update_Consumer_OH_CHL/SOA/WSDLs/jmsReference_Upd_RA_SALESFORCE.wsdl</file>
+      <name>/C:/Repos/ENTEL/branches/B_00000_v1.2/01_Workspace/02_SOA/ES_Consumer_v1/Update_Consumer_OH_CHL/SOA/WSDLs/jmsReference_Upd_RA_SALESFORCE.wsdl</name>
+      <fix/>
+      <msg>Message part "CHL-SALESFORCE-CRM_UPD-CLI-DATA_RSP" is undefined [element = {http://www.entel.cl/CSM/RA/CHL/SALESFORCE/CRM/UPD-CLI-DATA/v1}CHL-SALESFORCE-CRM_UPD-CLI-DATA_RSP</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc/>
+      <line/>
+      <col/>
+      <file>file:/C:/Repos/ENTEL/branches/B_00000_v1.2/01_Workspace/02_SOA/ES_Consumer_v1/Update_Consumer_OH_CHL/SOA/WSDLs/jmsReference_Upd_RA_SALESFORCE.wsdl</file>
+      <name>/C:/Repos/ENTEL/branches/B_00000_v1.2/01_Workspace/02_SOA/ES_Consumer_v1/Update_Consumer_OH_CHL/SOA/WSDLs/jmsReference_Upd_RA_SALESFORCE.wsdl</name>
+      <fix/>
+      <msg>Message part "CHL-SALESFORCE-CRM_UPD-CLI-DATA_REQ" is undefined [element = {http://www.entel.cl/CSM/RA/CHL/SALESFORCE/CRM/UPD-CLI-DATA/v1}CHL-SALESFORCE-CRM_UPD-CLI-DATA_REQ</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc/>
+      <line/>
+      <col/>
+      <file>file:/C:/Repos/ENTEL/branches/B_00000_v1.2/01_Workspace/02_SOA/ES_Consumer_v1/Update_Consumer_OH_CHL/SOA/WSDLs/jmsReference_Upd_RA_SALESFORCE.wsdl</file>
+      <name>/C:/Repos/ENTEL/branches/B_00000_v1.2/01_Workspace/02_SOA/ES_Consumer_v1/Update_Consumer_OH_CHL/SOA/WSDLs/jmsReference_Upd_RA_SALESFORCE.wsdl</name>
+      <fix/>
+      <msg>Message part "CHL-SALESFORCE-CRM_UPD-CLI-DATA_RSP" is undefined [element = {http://www.entel.cl/CSM/RA/CHL/SALESFORCE/CRM/UPD-CLI-DATA/v1}CHL-SALESFORCE-CRM_UPD-CLI-DATA_RSP</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/ns:composite/ns:reference[@name='DReference_SBConversationManager']</loc>
+      <line>89</line>
+      <col>135</col>
+      <file>C:\Repos\ENTEL\branches\B_00000_v1.2\01_Workspace\02_SOA\ES_Consumer_v1\Update_Consumer_OH_CHL\SOA\composite.xml</file>
+      <name>C:\Repos\ENTEL\branches\B_00000_v1.2\01_Workspace\02_SOA\ES_Consumer_v1\Update_Consumer_OH_CHL\SOA\composite.xml</name>
+      <fix/>
+      <msg>Cannot find Port Type "{http://www.entel.cl/SC/ConversationManager/v1}ConversationManager_PortType" for "DReference_SBConversationManager" in WSDL Manager</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/ns:composite/ns:reference[@name='DReference_ErrorManager']</loc>
+      <line>79</line>
+      <col>152</col>
+      <file>C:\Repos\ENTEL\branches\B_00000_v1.2\01_Workspace\02_SOA\ES_Consumer_v1\Update_Consumer_OH_CHL\SOA\composite.xml</file>
+      <name>C:\Repos\ENTEL\branches\B_00000_v1.2\01_Workspace\02_SOA\ES_Consumer_v1\Update_Consumer_OH_CHL\SOA\composite.xml</name>
+      <fix/>
+      <msg>Cannot find Port Type "{http://www.entel.cl/SC/ErrorManager/v1}ErrorManager_PortType" for "DReference_ErrorManager" in WSDL Manager</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/ns:composite/ns:component[@name='Update_Consumer_OH_BPELProcess/DService']</loc>
+      <line/>
+      <col/>
+      <file>C:\Repos\ENTEL\branches\B_00000_v1.2\01_Workspace\02_SOA\ES_Consumer_v1\Update_Consumer_OH_CHL\SOA\composite.xml</file>
+      <name>C:\Repos\ENTEL\branches\B_00000_v1.2\01_Workspace\02_SOA\ES_Consumer_v1\Update_Consumer_OH_CHL\SOA\composite.xml</name>
+      <fix/>
+      <msg>The service "DService" exposed by component "Update_Consumer_OH_BPELProcess" is not wired to/used by any other component.</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/ns:composite/ns:component[@name='Update_Consumer_OH_BPELProcess']</loc>
+      <line>42</line>
+      <col>81</col>
+      <file>C:\Repos\ENTEL\branches\B_00000_v1.2\01_Workspace\02_SOA\ES_Consumer_v1\Update_Consumer_OH_CHL\SOA\composite.xml</file>
+      <name>C:\Repos\ENTEL\branches\B_00000_v1.2\01_Workspace\02_SOA\ES_Consumer_v1\Update_Consumer_OH_CHL\SOA\composite.xml</name>
+      <fix/>
+      <msg>Cannot find Port Type "{http://www.entel.cl/SC/ErrorManager/v1}ErrorManager_PortType" for "DReference_ErrorManager" in WSDL Manager</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/ns:composite/ns:component[@name='Update_Consumer_OH_BPELProcess']</loc>
+      <line>42</line>
+      <col>81</col>
+      <file>C:\Repos\ENTEL\branches\B_00000_v1.2\01_Workspace\02_SOA\ES_Consumer_v1\Update_Consumer_OH_CHL\SOA\composite.xml</file>
+      <name>C:\Repos\ENTEL\branches\B_00000_v1.2\01_Workspace\02_SOA\ES_Consumer_v1\Update_Consumer_OH_CHL\SOA\composite.xml</name>
+      <fix/>
+      <msg>Cannot find Port Type "{http://www.entel.cl/SC/ConversationManager/v1}ConversationManager_PortType" for "DReference_SBConversationManager" in WSDL Manager</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']</loc>
+      <line>43</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Please check import location or element QNames.</fix>
+      <msg>Error in getting XML input stream: oramds:/apps/Commons/DC_SC_ErrorManager/SupportAPI/WSDL/ErrorManager.wsdl: oracle.mds.exception.MDSException: MDS-00054: The file to be loaded oramds:/apps/Commons/DC_SC_ErrorManager/SupportAPI/WSDL/ErrorManager.wsdl does not exist.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='import'][1]</loc>
+      <line>52</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Check location "oramds:/apps/Commons/SR_Commons/XSD/ESO/Result_v2_ESO.xsd" and import type "http://www.w3.org/2001/XMLSchema"</fix>
+      <msg>Cannot import type "http://www.w3.org/2001/XMLSchema" from location "oramds:/apps/Commons/SR_Commons/XSD/ESO/Result_v2_ESO.xsd"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='import'][2]</loc>
+      <line>54</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Check location "oramds:/apps/Commons/ES_Consumer_v1/ESC/Primary/upd_Consumer_v1_EBM.xsd" and import type "http://www.w3.org/2001/XMLSchema"</fix>
+      <msg>Cannot import type "http://www.w3.org/2001/XMLSchema" from location "oramds:/apps/Commons/ES_Consumer_v1/ESC/Primary/upd_Consumer_v1_EBM.xsd"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='import'][3]</loc>
+      <line>56</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Check location "oramds:/apps/Commons/SR_Commons/XSD/ESO/MessageHeader_v1_ESO.xsd" and import type "http://www.w3.org/2001/XMLSchema"</fix>
+      <msg>Cannot import type "http://www.w3.org/2001/XMLSchema" from location "oramds:/apps/Commons/SR_Commons/XSD/ESO/MessageHeader_v1_ESO.xsd"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='import'][4]</loc>
+      <line>58</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Check location "../WSDLs/RuntimeFault.wsdl" and import type "http://schemas.xmlsoap.org/wsdl/"</fix>
+      <msg>Cannot import type "http://schemas.xmlsoap.org/wsdl/" from location "../WSDLs/RuntimeFault.wsdl"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='import'][5]</loc>
+      <line>60</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Check location "../WSDLs/Update_Consumer_OH_BPELProcess.wsdl" and import type "http://schemas.xmlsoap.org/wsdl/"</fix>
+      <msg>Cannot import type "http://schemas.xmlsoap.org/wsdl/" from location "../WSDLs/Update_Consumer_OH_BPELProcess.wsdl"</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='partnerLinks']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='partnerLink'][@name='update_consumer_oh_bpelprocess_client']</loc>
+      <line>74</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Make sure that value "client:Update_Consumer_OH_BPELProcess" is resolvable (check imports, value of "partnerLinkType").</fix>
+      <msg>"partnerLinkType" is set to "client:Update_Consumer_OH_BPELProcess" on this &lt;bpel:partnerLink>  but it cannot be resolved (check value of "partnerLinkType", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='partnerLinks']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='partnerLink'][@name='jmsReference_Upd_RA_SALESFORCE']</loc>
+      <line>76</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Make sure that value "ns2:jmsReference_Upd_RA_SALESFORCE_plt" is resolvable (check imports, value of "partnerLinkType").</fix>
+      <msg>"partnerLinkType" is set to "ns2:jmsReference_Upd_RA_SALESFORCE_plt" on this &lt;bpel:partnerLink>  but it cannot be resolved (check value of "partnerLinkType", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='partnerLinks']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='partnerLink'][@name='DReference_ErrorManager']</loc>
+      <line>78</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Make sure that value "ns10:DReference_ErrorManager" is resolvable (check imports, value of "partnerLinkType").</fix>
+      <msg>"partnerLinkType" is set to "ns10:DReference_ErrorManager" on this &lt;bpel:partnerLink>  but it cannot be resolved (check value of "partnerLinkType", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='partnerLinks']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='partnerLink'][@name='DReference_SBConversationManager']</loc>
+      <line>80</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Make sure that value "ns11:DReference_SBConversationManager" is resolvable (check imports, value of "partnerLinkType").</fix>
+      <msg>"partnerLinkType" is set to "ns11:DReference_SBConversationManager" on this &lt;bpel:partnerLink>  but it cannot be resolved (check value of "partnerLinkType", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='partnerLinks']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='partnerLink'][@name='DService']</loc>
+      <line>82</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Make sure that value "client:Update_Consumer_OH_BPELProcess" is resolvable (check imports, value of "partnerLinkType").</fix>
+      <msg>"partnerLinkType" is set to "client:Update_Consumer_OH_BPELProcess" on this &lt;bpel:partnerLink>  but it cannot be resolved (check value of "partnerLinkType", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variables']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variable'][@name='inputVariable']</loc>
+      <line>93</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Make sure that value "client:Update_Consumer_OH_BPELProcessRequestMessage" is resolvable (check imports, value of "messageType").</fix>
+      <msg>"messageType" is set to "client:Update_Consumer_OH_BPELProcessRequestMessage" on this &lt;bpel:variable>  but it cannot be resolved (check value of "messageType", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variables']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variable'][@name='outputVariable']</loc>
+      <line>96</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Make sure that value "client:Update_Consumer_OH_BPELProcessResponseMessage" is resolvable (check imports, value of "messageType").</fix>
+      <msg>"messageType" is set to "client:Update_Consumer_OH_BPELProcessResponseMessage" on this &lt;bpel:variable>  but it cannot be resolved (check value of "messageType", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variables']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variable'][@name='Invoke_Upd_RA_SALESFORCE_REQ']</loc>
+      <line>97</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Make sure that value "ns2:Request_msg_out" is resolvable (check imports, value of "messageType").</fix>
+      <msg>"messageType" is set to "ns2:Request_msg_out" on this &lt;bpel:variable>  but it cannot be resolved (check value of "messageType", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variables']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variable'][@name='Receive_Upd_RA_SALESFORCE_RSP']</loc>
+      <line>98</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Make sure that value "ns2:Reply_msg_in" is resolvable (check imports, value of "messageType").</fix>
+      <msg>"messageType" is set to "ns2:Reply_msg_in" on this &lt;bpel:variable>  but it cannot be resolved (check value of "messageType", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variables']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variable'][@name='JMSCorrelationId']</loc>
+      <line>99</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Make sure that value "xsd:string" is resolvable (check imports, value of "type").</fix>
+      <msg>"type" is set to "xsd:string" on this &lt;bpel:variable>  but it cannot be resolved (check value of "type", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variables']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variable'][@name='runtimeFault']</loc>
+      <line>100</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Make sure that value "bpelx:RuntimeFaultMessage" is resolvable (check imports, value of "messageType").</fix>
+      <msg>"messageType" is set to "bpelx:RuntimeFaultMessage" on this &lt;bpel:variable>  but it cannot be resolved (check value of "messageType", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variables']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variable'][@name='Invoke_ErrorManager_handle_REQ']</loc>
+      <line>101</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Make sure that value "ns10:handle_Message_In" is resolvable (check imports, value of "messageType").</fix>
+      <msg>"messageType" is set to "ns10:handle_Message_In" on this &lt;bpel:variable>  but it cannot be resolved (check value of "messageType", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variables']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variable'][@name='Invoke_ErrorManager_handle_RSP']</loc>
+      <line>102</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Make sure that value "ns10:handle_Message_Out" is resolvable (check imports, value of "messageType").</fix>
+      <msg>"messageType" is set to "ns10:handle_Message_Out" on this &lt;bpel:variable>  but it cannot be resolved (check value of "messageType", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variables']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variable'][@name='Response_Upd_Consumer_FRSP']</loc>
+      <line>104</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Make sure that value "client:Update_Consumer_OH_BPELProcessFaultMessage" is resolvable (check imports, value of "messageType").</fix>
+      <msg>"messageType" is set to "client:Update_Consumer_OH_BPELProcessFaultMessage" on this &lt;bpel:variable>  but it cannot be resolved (check value of "messageType", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variables']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variable'][@name='Invoke_PublishResult_REQ']</loc>
+      <line>105</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Make sure that value "ns11:publishResult_Message_In" is resolvable (check imports, value of "messageType").</fix>
+      <msg>"messageType" is set to "ns11:publishResult_Message_In" on this &lt;bpel:variable>  but it cannot be resolved (check value of "messageType", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variables']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variable'][@name='Invoke_PublishResult_RSP']</loc>
+      <line>106</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Make sure that value "ns11:publishResult_Message_Out" is resolvable (check imports, value of "messageType").</fix>
+      <msg>"messageType" is set to "ns11:publishResult_Message_Out" on this &lt;bpel:variable>  but it cannot be resolved (check value of "messageType", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variables']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variable'][@name='Result_Error']</loc>
+      <line>107</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Make sure that value "ns7:Result" is resolvable (check imports, value of "element").</fix>
+      <msg>"element" is set to "ns7:Result" on this &lt;bpel:variable>  but it cannot be resolved (check value of "element", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variables']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variable'][@name='existsError']</loc>
+      <line>108</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Make sure that value "xsd:boolean" is resolvable (check imports, value of "type").</fix>
+      <msg>"type" is set to "xsd:boolean" on this &lt;bpel:variable>  but it cannot be resolved (check value of "type", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variables']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variable'][@name='Invoke_updConversationStatus_REQ']</loc>
+      <line>112</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Make sure that value "ns11:updConversationStatus_Message_In" is resolvable (check imports, value of "messageType").</fix>
+      <msg>"messageType" is set to "ns11:updConversationStatus_Message_In" on this &lt;bpel:variable>  but it cannot be resolved (check value of "messageType", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variables']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variable'][@name='Invoke_updConversationStatus_RSP']</loc>
+      <line>114</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Make sure that value "ns11:updConversationStatus_Message_Out" is resolvable (check imports, value of "messageType").</fix>
+      <msg>"messageType" is set to "ns11:updConversationStatus_Message_Out" on this &lt;bpel:variable>  but it cannot be resolved (check value of "messageType", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variables']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variable'][@name='Upd_Consumer_CRSP']</loc>
+      <line>115</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Make sure that value "ns6:Upd_Consumer_CRSP" is resolvable (check imports, value of "element").</fix>
+      <msg>"element" is set to "ns6:Upd_Consumer_CRSP" on this &lt;bpel:variable>  but it cannot be resolved (check value of "element", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='correlationSets']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='correlationSet'][@name='Correlation_Set_HeaderConversation']</loc>
+      <line>118</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Make sure that value "ns3:conversationId" is resolvable (check imports, value of "properties").</fix>
+      <msg>"properties" is set to "ns3:conversationId" on this &lt;bpel:correlationSet>  but it cannot be resolved (check value of "properties", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Receive_Reply_Sync']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='faultHandlers']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='catchAll']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sync_Reply_Failure_Sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='Assign_ErrorManager_REQ']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][2]</loc>
+      <line>143</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Receive_Reply_Sync']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='faultHandlers']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='catchAll']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sync_Reply_Failure_Sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='Assign_ErrorManager_REQ']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][3]</loc>
+      <line>147</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Receive_Reply_Sync']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='faultHandlers']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='catchAll']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sync_Reply_Failure_Sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='Assign_ErrorManager_REQ']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][4]</loc>
+      <line>151</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Receive_Reply_Sync']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='faultHandlers']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='catchAll']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sync_Reply_Failure_Sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='Assign_ErrorManager_REQ']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][5]</loc>
+      <line>155</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Receive_Reply_Sync']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='faultHandlers']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='catchAll']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sync_Reply_Failure_Sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='Assign_ErrorManager_REQ']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][6]</loc>
+      <line>159</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Receive_Reply_Sync']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='faultHandlers']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='catchAll']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sync_Reply_Failure_Sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='Assign_ErrorManager_REQ']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][7]</loc>
+      <line>163</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Receive_Reply_Sync']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='faultHandlers']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='catchAll']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sync_Reply_Failure_Sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='Assign_ErrorManager_REQ']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][8]</loc>
+      <line>167</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Receive_Reply_Sync']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='faultHandlers']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='catchAll']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sync_Reply_Failure_Sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='invoke'][@name='Invoke_ReceiveReplySync_ErrorManager']</loc>
+      <line>191</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Check the bpel:partnerLink specified on this activity via attribute "partnerLink" and make sure it is itself specified correctly.</fix>
+      <msg>The activity &lt;bpel:invoke> refers to a bpel:partnerLink (via the attribute "partnerLink") - this bpel:partnerLink needs to be defined correctly.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Receive_Reply_Sync']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='faultHandlers']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='catchAll']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sync_Reply_Failure_Sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='invoke'][@name='Invoke_ReceiveReplySync_ErrorManager']</loc>
+      <line>191</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Check the bpel:variable specified on this activity via attribute "outputVariable" and make sure it is itself specified correctly.</fix>
+      <msg>The activity &lt;bpel:invoke> refers to a bpel:variable (via the attribute "outputVariable") - this bpel:variable needs to be defined correctly.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Receive_Reply_Sync']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='faultHandlers']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='catchAll']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sync_Reply_Failure_Sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='invoke'][@name='Invoke_ReceiveReplySync_ErrorManager']</loc>
+      <line>191</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Check the bpel:variable specified on this activity via attribute "inputVariable" and make sure it is itself specified correctly.</fix>
+      <msg>The activity &lt;bpel:invoke> refers to a bpel:variable (via the attribute "inputVariable") - this bpel:variable needs to be defined correctly.</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Receive_Reply_Sync']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='faultHandlers']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='catchAll']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sync_Reply_Failure_Sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='invoke'][@name='Invoke_ReceiveReplySync_ErrorManager']</loc>
+      <line>191</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Make sure that value "ns10:ErrorManager_PortType" is resolvable (check imports, value of "portType").</fix>
+      <msg>"portType" is set to "ns10:ErrorManager_PortType" on this &lt;bpel:invoke> activity but it cannot be resolved (check value of "portType", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Receive_Reply_Sync']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='faultHandlers']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='catchAll']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sync_Reply_Failure_Sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='Assign_Fail_Output']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][1]</loc>
+      <line>193</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Receive_Reply_Sync']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='faultHandlers']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='catchAll']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sync_Reply_Failure_Sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='Assign_Fail_Output']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][2]</loc>
+      <line>197</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Receive_Reply_Sync']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='faultHandlers']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='catchAll']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sync_Reply_Failure_Sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='Assign_Fail_Output']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][3]</loc>
+      <line>201</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Receive_Reply_Sync']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='faultHandlers']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='catchAll']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sync_Reply_Failure_Sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='Assign_Fail_Output']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][4]</loc>
+      <line>205</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Receive_Reply_Sync']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='faultHandlers']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='catchAll']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sync_Reply_Failure_Sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='reply'][@name='Reply_Failure']</loc>
+      <line>212</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Check the bpel:partnerLink specified on this activity via attribute "partnerLink" and make sure it is itself specified correctly.</fix>
+      <msg>The activity &lt;bpel:reply> refers to a bpel:partnerLink (via the attribute "partnerLink") - this bpel:partnerLink needs to be defined correctly.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Receive_Reply_Sync']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='faultHandlers']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='catchAll']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sync_Reply_Failure_Sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='reply'][@name='Reply_Failure']</loc>
+      <line>212</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Check the bpel:variable specified on this activity via attribute "variable" and make sure it is itself specified correctly.</fix>
+      <msg>The activity &lt;bpel:reply> refers to a bpel:variable (via the attribute "variable") - this bpel:variable needs to be defined correctly.</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Receive_Reply_Sync']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='faultHandlers']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='catchAll']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sync_Reply_Failure_Sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='reply'][@name='Reply_Failure']</loc>
+      <line>212</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Make sure that value "client:Update_Consumer_OH_BPELProcess" is resolvable (check imports, value of "portType").</fix>
+      <msg>"portType" is set to "client:Update_Consumer_OH_BPELProcess" on this &lt;bpel:reply> activity but it cannot be resolved (check value of "portType", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Receive_Reply_Sync']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Receive_Reply_Sync_Sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='receive'][@name='receiveInput']</loc>
+      <line>219</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Check the bpel:partnerLink specified on this activity via attribute "partnerLink" and make sure it is itself specified correctly.</fix>
+      <msg>The activity &lt;bpel:receive> refers to a bpel:partnerLink (via the attribute "partnerLink") - this bpel:partnerLink needs to be defined correctly.</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Receive_Reply_Sync']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Receive_Reply_Sync_Sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='receive'][@name='receiveInput']</loc>
+      <line>219</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Make sure that value "client:Update_Consumer_OH_BPELProcess" is resolvable (check imports, value of "portType").</fix>
+      <msg>"portType" is set to "client:Update_Consumer_OH_BPELProcess" on this &lt;bpel:receive> activity but it cannot be resolved (check value of "portType", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Receive_Reply_Sync']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Receive_Reply_Sync_Sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='receive'][@name='receiveInput']</loc>
+      <line>219</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Check the bpel:variable specified on this activity via attribute "variable" and make sure it is itself specified correctly.</fix>
+      <msg>The activity &lt;bpel:receive> refers to a bpel:variable (via the attribute "variable") - this bpel:variable needs to be defined correctly.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Receive_Reply_Sync']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Receive_Reply_Sync_Sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='get_Update_Consumer_OH_ReplyOk']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='to']</loc>
+      <line>231</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Check the bpel:variable specified on this node via attribute "variable" and make sure it is itself specified correctly.</fix>
+      <msg>The node &lt;bpel:to> refers to a bpel:variable (via the attribute "variable") - this bpel:variable needs to be defined correctly.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Receive_Reply_Sync']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Receive_Reply_Sync_Sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='reply'][@name='replyOutput']</loc>
+      <line>236</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Check the bpel:partnerLink specified on this activity via attribute "partnerLink" and make sure it is itself specified correctly.</fix>
+      <msg>The activity &lt;bpel:reply> refers to a bpel:partnerLink (via the attribute "partnerLink") - this bpel:partnerLink needs to be defined correctly.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Receive_Reply_Sync']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Receive_Reply_Sync_Sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='reply'][@name='replyOutput']</loc>
+      <line>236</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Check the bpel:variable specified on this activity via attribute "variable" and make sure it is itself specified correctly.</fix>
+      <msg>The activity &lt;bpel:reply> refers to a bpel:variable (via the attribute "variable") - this bpel:variable needs to be defined correctly.</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Receive_Reply_Sync']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Receive_Reply_Sync_Sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='reply'][@name='replyOutput']</loc>
+      <line>236</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Make sure that value "client:Update_Consumer_OH_BPELProcess" is resolvable (check imports, value of "portType").</fix>
+      <msg>"portType" is set to "client:Update_Consumer_OH_BPELProcess" on this &lt;bpel:reply> activity but it cannot be resolved (check value of "portType", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Invoke_Reply_RA_Async']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Invoke_Reply_RA_Async_Sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='get_Upd_RA_SALESFORCE_REQ_v1']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='to']</loc>
+      <line>274</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Check the bpel:variable specified on this node via attribute "variable" and make sure it is itself specified correctly.</fix>
+      <msg>The node &lt;bpel:to> refers to a bpel:variable (via the attribute "variable") - this bpel:variable needs to be defined correctly.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Invoke_Reply_RA_Async']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Invoke_Reply_RA_Async_Sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='invoke'][@name='Invoke_Upd_RA_SALESFORCE']</loc>
+      <line>279</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Check the bpel:partnerLink specified on this activity via attribute "partnerLink" and make sure it is itself specified correctly.</fix>
+      <msg>The activity &lt;bpel:invoke> refers to a bpel:partnerLink (via the attribute "partnerLink") - this bpel:partnerLink needs to be defined correctly.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Invoke_Reply_RA_Async']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Invoke_Reply_RA_Async_Sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='invoke'][@name='Invoke_Upd_RA_SALESFORCE']</loc>
+      <line>279</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Check the bpel:variable specified on this activity via attribute "inputVariable" and make sure it is itself specified correctly.</fix>
+      <msg>The activity &lt;bpel:invoke> refers to a bpel:variable (via the attribute "inputVariable") - this bpel:variable needs to be defined correctly.</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Invoke_Reply_RA_Async']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Invoke_Reply_RA_Async_Sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='invoke'][@name='Invoke_Upd_RA_SALESFORCE']</loc>
+      <line>279</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Make sure that value "ns2:Request_ptt" is resolvable (check imports, value of "portType").</fix>
+      <msg>"portType" is set to "ns2:Request_ptt" on this &lt;bpel:invoke> activity but it cannot be resolved (check value of "portType", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Invoke_Reply_RA_Async']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Invoke_Reply_RA_Async_Sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='receive'][@name='Receive_Upd_RA_SALESFORCE']</loc>
+      <line>285</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Check the bpel:partnerLink specified on this activity via attribute "partnerLink" and make sure it is itself specified correctly.</fix>
+      <msg>The activity &lt;bpel:receive> refers to a bpel:partnerLink (via the attribute "partnerLink") - this bpel:partnerLink needs to be defined correctly.</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Invoke_Reply_RA_Async']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Invoke_Reply_RA_Async_Sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='receive'][@name='Receive_Upd_RA_SALESFORCE']</loc>
+      <line>285</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Make sure that value "ns2:Reply_ptt" is resolvable (check imports, value of "portType").</fix>
+      <msg>"portType" is set to "ns2:Reply_ptt" on this &lt;bpel:receive> activity but it cannot be resolved (check value of "portType", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Invoke_Reply_RA_Async']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Invoke_Reply_RA_Async_Sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='receive'][@name='Receive_Upd_RA_SALESFORCE']</loc>
+      <line>285</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Check the bpel:variable specified on this activity via attribute "variable" and make sure it is itself specified correctly.</fix>
+      <msg>The activity &lt;bpel:receive> refers to a bpel:variable (via the attribute "variable") - this bpel:variable needs to be defined correctly.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Response_Evaluation']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence5']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Previous_Fault_or_Exists_Result_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='condition']</loc>
+      <line>295</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Make sure that the expression in &lt;bpel:condition> is a boolean expression.</fix>
+      <msg>The expression $existsError in &lt;bpel:condition> is not a boolean expression.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Response_Evaluation']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence5']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Previous_Fault_or_Exists_Result_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence6']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='Assign_ErrorManager_REQ']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][2]</loc>
+      <line>303</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Response_Evaluation']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence5']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Previous_Fault_or_Exists_Result_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence6']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='Assign_ErrorManager_REQ']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][3]</loc>
+      <line>307</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Response_Evaluation']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence5']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Previous_Fault_or_Exists_Result_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence6']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='Assign_ErrorManager_REQ']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][4]</loc>
+      <line>311</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Response_Evaluation']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence5']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Previous_Fault_or_Exists_Result_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence6']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='Assign_ErrorManager_REQ']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][5]</loc>
+      <line>315</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Response_Evaluation']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence5']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Previous_Fault_or_Exists_Result_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence6']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='Assign_ErrorManager_REQ']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][6]</loc>
+      <line>319</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Response_Evaluation']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence5']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Previous_Fault_or_Exists_Result_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence6']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='Assign_ErrorManager_REQ']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][7]</loc>
+      <line>323</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Response_Evaluation']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence5']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Previous_Fault_or_Exists_Result_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence6']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='Assign_ErrorManager_REQ']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][8]</loc>
+      <line>327</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Response_Evaluation']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence5']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Previous_Fault_or_Exists_Result_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence6']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='invoke'][@name='Invoke_ErrorManager']</loc>
+      <line>351</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Check the bpel:partnerLink specified on this activity via attribute "partnerLink" and make sure it is itself specified correctly.</fix>
+      <msg>The activity &lt;bpel:invoke> refers to a bpel:partnerLink (via the attribute "partnerLink") - this bpel:partnerLink needs to be defined correctly.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Response_Evaluation']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence5']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Previous_Fault_or_Exists_Result_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence6']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='invoke'][@name='Invoke_ErrorManager']</loc>
+      <line>351</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Check the bpel:variable specified on this activity via attribute "outputVariable" and make sure it is itself specified correctly.</fix>
+      <msg>The activity &lt;bpel:invoke> refers to a bpel:variable (via the attribute "outputVariable") - this bpel:variable needs to be defined correctly.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Response_Evaluation']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence5']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Previous_Fault_or_Exists_Result_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence6']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='invoke'][@name='Invoke_ErrorManager']</loc>
+      <line>351</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Check the bpel:variable specified on this activity via attribute "inputVariable" and make sure it is itself specified correctly.</fix>
+      <msg>The activity &lt;bpel:invoke> refers to a bpel:variable (via the attribute "inputVariable") - this bpel:variable needs to be defined correctly.</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Response_Evaluation']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence5']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Previous_Fault_or_Exists_Result_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence6']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='invoke'][@name='Invoke_ErrorManager']</loc>
+      <line>351</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Make sure that value "ns10:ErrorManager_PortType" is resolvable (check imports, value of "portType").</fix>
+      <msg>"portType" is set to "ns10:ErrorManager_PortType" on this &lt;bpel:invoke> activity but it cannot be resolved (check value of "portType", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Response_Evaluation']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence5']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Previous_Fault_or_Exists_Result_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence6']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='assign_CreateResponse']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][1]</loc>
+      <line>353</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Response_Evaluation']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence5']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Previous_Fault_or_Exists_Result_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence6']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='assign_CreateResponse']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][2]</loc>
+      <line>357</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Response_Evaluation']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence5']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Previous_Fault_or_Exists_Result_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence6']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='assign_CreateResponse']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][3]</loc>
+      <line>361</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Response_Evaluation']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence5']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Previous_Fault_or_Exists_Result_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence6']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='assign_CreateResponse']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][4]</loc>
+      <line>365</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Response_Evaluation']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence5']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Previous_Fault_or_Exists_Result_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='elseif']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence7']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='get_handleREQ']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='to']</loc>
+      <line>384</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Check the bpel:variable specified on this node via attribute "variable" and make sure it is itself specified correctly.</fix>
+      <msg>The node &lt;bpel:to> refers to a bpel:variable (via the attribute "variable") - this bpel:variable needs to be defined correctly.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Response_Evaluation']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence5']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Previous_Fault_or_Exists_Result_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='elseif']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence7']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='invoke'][@name='Invoke_ErrorManager']</loc>
+      <line>402</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Check the bpel:partnerLink specified on this activity via attribute "partnerLink" and make sure it is itself specified correctly.</fix>
+      <msg>The activity &lt;bpel:invoke> refers to a bpel:partnerLink (via the attribute "partnerLink") - this bpel:partnerLink needs to be defined correctly.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Response_Evaluation']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence5']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Previous_Fault_or_Exists_Result_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='elseif']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence7']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='invoke'][@name='Invoke_ErrorManager']</loc>
+      <line>402</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Check the bpel:variable specified on this activity via attribute "outputVariable" and make sure it is itself specified correctly.</fix>
+      <msg>The activity &lt;bpel:invoke> refers to a bpel:variable (via the attribute "outputVariable") - this bpel:variable needs to be defined correctly.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Response_Evaluation']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence5']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Previous_Fault_or_Exists_Result_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='elseif']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence7']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='invoke'][@name='Invoke_ErrorManager']</loc>
+      <line>402</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Check the bpel:variable specified on this activity via attribute "inputVariable" and make sure it is itself specified correctly.</fix>
+      <msg>The activity &lt;bpel:invoke> refers to a bpel:variable (via the attribute "inputVariable") - this bpel:variable needs to be defined correctly.</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Response_Evaluation']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence5']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Previous_Fault_or_Exists_Result_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='elseif']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence7']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='invoke'][@name='Invoke_ErrorManager']</loc>
+      <line>402</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Make sure that value "ns10:ErrorManager_PortType" is resolvable (check imports, value of "portType").</fix>
+      <msg>"portType" is set to "ns10:ErrorManager_PortType" on this &lt;bpel:invoke> activity but it cannot be resolved (check value of "portType", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Response_Evaluation']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence5']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Previous_Fault_or_Exists_Result_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='elseif']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence7']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='assign_CreateResponse']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][2]</loc>
+      <line>409</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Response_Evaluation']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence5']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Previous_Fault_or_Exists_Result_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='elseif']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence7']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='assign_CreateResponse']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][3]</loc>
+      <line>413</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Response_Evaluation']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence5']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Previous_Fault_or_Exists_Result_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='elseif']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence7']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='assign_CreateResponse']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][4]</loc>
+      <line>417</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Response_Evaluation']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence5']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Previous_Fault_or_Exists_Result_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='elseif']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence7']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='assign_CreateResponse']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][5]</loc>
+      <line>421</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Response_Evaluation']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence5']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Previous_Fault_or_Exists_Result_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='else']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='assign_CreateResponse']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][1]</loc>
+      <line>433</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Response_Evaluation']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence5']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Previous_Fault_or_Exists_Result_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='else']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='assign_CreateResponse']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][2]</loc>
+      <line>437</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Response_Evaluation']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence5']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Previous_Fault_or_Exists_Result_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='else']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='assign_CreateResponse']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][3]</loc>
+      <line>441</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Response_Evaluation']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence5']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Previous_Fault_or_Exists_Result_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='else']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='assign_CreateResponse']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][4]</loc>
+      <line>445</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Publish_Result']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence4']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='condition']</loc>
+      <line>461</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Make sure that the expression in &lt;bpel:condition> is a boolean expression.</fix>
+      <msg>The expression $existsError in &lt;bpel:condition> is not a boolean expression.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Publish_Result']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence4']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='assign_CreatePublishREQ']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][1]</loc>
+      <line>463</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Publish_Result']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence4']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='assign_CreatePublishREQ']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][2]</loc>
+      <line>467</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Publish_Result']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence4']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='assign_CreatePublishREQ']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][3]</loc>
+      <line>471</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Publish_Result']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence4']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='else']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='assign_CreatePublishREQ']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][1]</loc>
+      <line>487</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Publish_Result']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence4']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='else']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='assign_CreatePublishREQ']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][2]</loc>
+      <line>491</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Publish_Result']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence4']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='else']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='assign_CreatePublishREQ']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][3]</loc>
+      <line>501</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Publish_Result']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence4']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='invoke'][@name='Invoke_PublishResult']</loc>
+      <line>511</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Check the bpel:partnerLink specified on this activity via attribute "partnerLink" and make sure it is itself specified correctly.</fix>
+      <msg>The activity &lt;bpel:invoke> refers to a bpel:partnerLink (via the attribute "partnerLink") - this bpel:partnerLink needs to be defined correctly.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Publish_Result']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence4']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='invoke'][@name='Invoke_PublishResult']</loc>
+      <line>511</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Check the bpel:variable specified on this activity via attribute "outputVariable" and make sure it is itself specified correctly.</fix>
+      <msg>The activity &lt;bpel:invoke> refers to a bpel:variable (via the attribute "outputVariable") - this bpel:variable needs to be defined correctly.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Publish_Result']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence4']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='invoke'][@name='Invoke_PublishResult']</loc>
+      <line>511</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Check the bpel:variable specified on this activity via attribute "inputVariable" and make sure it is itself specified correctly.</fix>
+      <msg>The activity &lt;bpel:invoke> refers to a bpel:variable (via the attribute "inputVariable") - this bpel:variable needs to be defined correctly.</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Publish_Result']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence4']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='invoke'][@name='Invoke_PublishResult']</loc>
+      <line>511</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Make sure that value "ns11:ConversationManager_PortType" is resolvable (check imports, value of "portType").</fix>
+      <msg>"portType" is set to "ns11:ConversationManager_PortType" on this &lt;bpel:invoke> activity but it cannot be resolved (check value of "portType", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Publish_Result']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence4']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_PublishError']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='throw'][@name='Throw_RemoteFault']</loc>
+      <line>517</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Check the bpel:variable specified on this activity via attribute "faultVariable" and make sure it is itself specified correctly.</fix>
+      <msg>The activity &lt;bpel:throw> refers to a bpel:variable (via the attribute "faultVariable") - this bpel:variable needs to be defined correctly.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Update_Status']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence9']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='condition']</loc>
+      <line>533</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Make sure that the expression in &lt;bpel:condition> is a boolean expression.</fix>
+      <msg>The expression $existsError in &lt;bpel:condition> is not a boolean expression.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Update_Status']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence9']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='assign_UpdateConversationStatusREQ']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][1]</loc>
+      <line>537</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Update_Status']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence9']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='assign_UpdateConversationStatusREQ']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][3]</loc>
+      <line>551</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Update_Status']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence9']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='assign_UpdateConversationStatusREQ']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][4]</loc>
+      <line>555</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Update_Status']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence9']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='assign_UpdateConversationStatusREQ']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][5]</loc>
+      <line>559</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Update_Status']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence9']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='else']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='assign_UpdateConversationStatusREQ']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][1]</loc>
+      <line>570</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Update_Status']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence9']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='else']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='assign_UpdateConversationStatusREQ']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][3]</loc>
+      <line>584</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Update_Status']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence9']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='else']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='assign_UpdateConversationStatusREQ']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][4]</loc>
+      <line>588</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Update_Status']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence9']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_Error']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='else']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='assign_UpdateConversationStatusREQ']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][5]</loc>
+      <line>592</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "type" is not compatible with to-spec of "type"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Update_Status']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence9']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='invoke'][@name='Invoke_UpdConversationStatus']</loc>
+      <line>601</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Check the bpel:partnerLink specified on this activity via attribute "partnerLink" and make sure it is itself specified correctly.</fix>
+      <msg>The activity &lt;bpel:invoke> refers to a bpel:partnerLink (via the attribute "partnerLink") - this bpel:partnerLink needs to be defined correctly.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Update_Status']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence9']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='invoke'][@name='Invoke_UpdConversationStatus']</loc>
+      <line>601</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Check the bpel:variable specified on this activity via attribute "outputVariable" and make sure it is itself specified correctly.</fix>
+      <msg>The activity &lt;bpel:invoke> refers to a bpel:variable (via the attribute "outputVariable") - this bpel:variable needs to be defined correctly.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Update_Status']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence9']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='invoke'][@name='Invoke_UpdConversationStatus']</loc>
+      <line>601</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Check the bpel:variable specified on this activity via attribute "inputVariable" and make sure it is itself specified correctly.</fix>
+      <msg>The activity &lt;bpel:invoke> refers to a bpel:variable (via the attribute "inputVariable") - this bpel:variable needs to be defined correctly.</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Update_Status']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence9']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='invoke'][@name='Invoke_UpdConversationStatus']</loc>
+      <line>601</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Make sure that value "ns11:ConversationManager_PortType" is resolvable (check imports, value of "portType").</fix>
+      <msg>"portType" is set to "ns11:ConversationManager_PortType" on this &lt;bpel:invoke> activity but it cannot be resolved (check value of "portType", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Update_Status']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence9']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_UpdateError']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='throw'][@name='Throw_RemoteFault']</loc>
+      <line>608</line>
+      <col/>
+      <file>BPEL/Update_Consumer_OH_BPELProcess.bpel</file>
+      <name>BPEL/Update_Consumer_OH_BPELProcess.bpel</name>
+      <fix>Check the bpel:variable specified on this activity via attribute "faultVariable" and make sure it is itself specified correctly.</fix>
+      <msg>The activity &lt;bpel:throw> refers to a bpel:variable (via the attribute "faultVariable") - this bpel:variable needs to be defined correctly.</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/ns:composite/ns:wire/ns:target.uri[.='DReference_SBConversationManager']</loc>
+      <line>112</line>
+      <col>32</col>
+      <file>C:\Repos\ENTEL\branches\B_00000_v1.2\01_Workspace\02_SOA\ES_Consumer_v1\Update_Consumer_OH_CHL\SOA\composite.xml</file>
+      <name>C:\Repos\ENTEL\branches\B_00000_v1.2\01_Workspace\02_SOA\ES_Consumer_v1\Update_Consumer_OH_CHL\SOA\composite.xml</name>
+      <fix/>
+      <msg>Cannot find Port Type "{http://www.entel.cl/SC/ConversationManager/v1}ConversationManager_PortType" for "Update_Consumer_OH_BPELProcess" in WSDL Manager</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/ns:composite/ns:wire/ns:target.uri[.='DReference_SBConversationManager']</loc>
+      <line>112</line>
+      <col>32</col>
+      <file>C:\Repos\ENTEL\branches\B_00000_v1.2\01_Workspace\02_SOA\ES_Consumer_v1\Update_Consumer_OH_CHL\SOA\composite.xml</file>
+      <name>C:\Repos\ENTEL\branches\B_00000_v1.2\01_Workspace\02_SOA\ES_Consumer_v1\Update_Consumer_OH_CHL\SOA\composite.xml</name>
+      <fix/>
+      <msg>Cannot find Port Type "{http://www.entel.cl/SC/ConversationManager/v1}ConversationManager_PortType" for "DReference_SBConversationManager" in WSDL Manager</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/ns:composite/ns:wire/ns:target.uri[.='DReference_ErrorManager']</loc>
+      <line>108</line>
+      <col>32</col>
+      <file>C:\Repos\ENTEL\branches\B_00000_v1.2\01_Workspace\02_SOA\ES_Consumer_v1\Update_Consumer_OH_CHL\SOA\composite.xml</file>
+      <name>C:\Repos\ENTEL\branches\B_00000_v1.2\01_Workspace\02_SOA\ES_Consumer_v1\Update_Consumer_OH_CHL\SOA\composite.xml</name>
+      <fix/>
+      <msg>Cannot find Port Type "{http://www.entel.cl/SC/ErrorManager/v1}ErrorManager_PortType" for "Update_Consumer_OH_BPELProcess" in WSDL Manager</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/ns:composite/ns:wire/ns:target.uri[.='DReference_ErrorManager']</loc>
+      <line>108</line>
+      <col>32</col>
+      <file>C:\Repos\ENTEL\branches\B_00000_v1.2\01_Workspace\02_SOA\ES_Consumer_v1\Update_Consumer_OH_CHL\SOA\composite.xml</file>
+      <name>C:\Repos\ENTEL\branches\B_00000_v1.2\01_Workspace\02_SOA\ES_Consumer_v1\Update_Consumer_OH_CHL\SOA\composite.xml</name>
+      <fix/>
+      <msg>Cannot find Port Type "{http://www.entel.cl/SC/ErrorManager/v1}ErrorManager_PortType" for "DReference_ErrorManager" in WSDL Manager</msg>
+   </Fault>
+</Faults>

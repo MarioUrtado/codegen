@@ -1,0 +1,19 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/ESB_SP_ERROR_HOSPITAL_GET_MAIL" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/ESB_SP_ERROR_HOSPITAL_GET_MAIL" elementFormDefault="qualified">
+   <element name="InputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_ERROR_TRATEMENT_ID" type="decimal" db:index="1" db:type="NUMBER" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <element name="OutputParameters">
+      <complexType>
+         <sequence>
+            <element name="MAIL_TO" type="string" db:index="2" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="MAIL_SUBJET" type="string" db:index="3" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="MAIL_BODY" type="string" db:index="4" db:type="CLOB" minOccurs="0" nillable="true"/>
+            <element name="P_SOURCE_ERROR_CODE" type="string" db:index="5" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+</schema>

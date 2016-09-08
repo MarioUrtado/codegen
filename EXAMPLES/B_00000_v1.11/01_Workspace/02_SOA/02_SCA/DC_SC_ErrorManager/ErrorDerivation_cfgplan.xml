@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAConfigPlan xmlns:jca="http://platform.integration.oracle/blocks/adapter/fw/metadata" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:orawsp="http://schemas.oracle.com/ws/2006/01/policy" xmlns:edl="http://schemas.oracle.com/events/edl" xmlns="http://schemas.oracle.com/soa/configplan">
+   <composite name="ErrorDerivation">
+      <!--Add search and replace rules for the import section of a composite
+	Example:
+	<searchReplace>
+		<search>http://my-dev-server</search>
+		<replace>http://my-test-server</replace>
+	<searchReplace>
+	<searchReplace>
+		<search>8888</search>
+		<replace>8889</replace>
+	<searchReplace>-->
+      <import>
+         <searchReplace>
+            <search/>
+            <replace/>
+         </searchReplace>
+      </import>
+      <!--Add search and replace rules for the service properties-->
+      <service name="ESB_ERROR_DERIVATION_CONFIG_Polling">
+         <property name="jca.retry.count">
+            <replace>2147483647</replace>
+         </property>
+         <property name="jca.retry.interval">
+            <replace>1</replace>
+         </property>
+         <property name="jca.retry.backoff">
+            <replace>2</replace>
+         </property>
+         <property name="jca.retry.maxInterval">
+            <replace>120</replace>
+         </property>
+         <!--Add search and replace rules for the binding properties-->
+         <binding type="jca">
+            <property name="useRejectedMessageRecovery">
+               <replace>true</replace>
+            </property>
+         </binding>
+      </service>
+      <property name="productVersion">
+         <replace>12.2.1.0.0.151013</replace>
+      </property>
+      <property name="compositeID">
+         <replace>51135c1f-bd2d-41db-a48b-9444c2bb3835</replace>
+      </property>
+      <!--Add search and replace rules for the component properties
+	For components and service/reference bindings, you can add policy references.
+	Example:
+	<component name="*">
+		<wsp:PolicyReference orawsp:category="management" orawsp:status="enabled" URI="oracle/log_policy"/>
+	</component>-->
+      <component name="ErrorDerivation">
+         <property name="bpel.config.transaction">
+            <replace>required</replace>
+         </property>
+         <property name="bpel.config.oneWayDeliveryPolicy">
+            <replace>sync</replace>
+         </property>
+      </component>
+      <!--Add search and replace rules for the reference properties
+	Example:
+	<searchReplace>
+		<search>http://my-dev-server</search>
+		<replace>http://my-test-server</replace>
+	<searchReplace>
+	<searchReplace>
+		<search>8888
+		<replace>8889</replace>
+	<searchReplace>
+	or provide a new replace value like:
+	<replace>http://my-new-server:8889/myservice</replace>-->
+      <reference name="CALL_SP_ERROR_DERIVATION">
+         <property name="jca.retry.count">
+            <replace>4</replace>
+         </property>
+         <property name="jca.retry.interval">
+            <replace>1</replace>
+         </property>
+         <property name="jca.retry.backoff">
+            <replace>2</replace>
+         </property>
+         <property name="jca.retry.maxInterval">
+            <replace>120</replace>
+         </property>
+         <binding type="jca"/>
+      </reference>
+   </composite>
+   <!--To configure monitor.config: 
+	<property name="enabled"><replace>true</replace></property>
+	<property name="dataObjectsFolder"><searchReplace><search>mydev</search><replace>myproduction</replace></searchReplace></property>
+	
+	sample properties to configure for adapter: 
+	<jca:property name="QueueName"><replace>medmq1</replace></jca:property>
+	
+	To add search and replace rules for wsdls, xsd and jca files
+	Example:
+	<searchReplace>
+		<search>http://my-dev-server</search>
+		<replace>http://my-test-server</replace>
+	<searchReplace>
+	<searchReplace>
+		<search>8888</search>
+		<replace>8889</replace>
+	<searchReplace>
+	-->
+   <wsdlAndSchema name="Adapters/CALL_SP_ERROR_DERIVATION_db.jca|Adapters/ESB_ERROR_DERIVATION_CONFIG_Polling_db.jca|Schemas/CALL_SP_ERROR_DERIVATION_sp.xsd|Schemas/ErrorDerivation.xsd|Schemas/ESB_ERROR_DERIVATION_CONFIG_Polling_table.xsd|WSDLs/CALL_SP_ERROR_DERIVATION.wsdl|WSDLs/ESB_ERROR_DERIVATION_CONFIG_Polling.wsdl">
+      <searchReplace>
+         <search/>
+         <replace/>
+      </searchReplace>
+   </wsdlAndSchema>
+</SOAConfigPlan>

@@ -1,0 +1,49 @@
+<xsd:schema targetNamespace="http://www.entel.cl/CSM/LegacyWrapper/Aux/Common" elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.example.org" xmlns:eddns_dictionary="http://www.entel.cl/EDD/Dictionary/v1" xmlns:tns="http://www.entel.cl/CSM/LegacyWrapper/Aux/Common">
+
+  <xsd:import namespace="http://www.entel.cl/EDD/Dictionary/v1" schemaLocation="EDD/Dictionary_v1_EDD.xsd"/>
+
+    <xsd:element name="RaDetails" type="tns:RaDetails_Type"/>
+  <xsd:complexType name="RaDetails_Type">
+  
+        <xsd:annotation>
+          <xsd:documentation>
+              This element serves the purpose of propagating
+              details about the RA instance requesting the 
+              execution of the associated LW.
+          </xsd:documentation>
+        </xsd:annotation>
+  
+        <xsd:attribute name="name" use="required" type="eddns_dictionary:genericStringValue_SType">
+          <xsd:annotation>
+            <xsd:documentation>
+              The name of the Resource Adapter requesting the Excecution.
+            </xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        
+        <xsd:attribute name="addr" use="required" type="eddns_dictionary:sysCode_SType">
+          <xsd:annotation>
+            <xsd:documentation>
+              The address by which to deliver the Callback response message. 
+              If this attribute is sent, it will be assumed that the response 
+              to be sent to this address corresponds to the Callback/Functional 
+              response from the requested Legacy Operation. 
+              Syncrhronus LW Responses do not take this attribute in consideration.
+            </xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        
+        <xsd:attribute name="corrID" use="required" type="eddns_dictionary:sysCode_SType">
+          <xsd:annotation>
+            <xsd:documentation>
+              The RA CorrelationID, used to correlate the 
+              Sync with the Async RA Instances, and to their 
+              original (RA) Consumer.
+            </xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        
+  </xsd:complexType>
+
+
+</xsd:schema>

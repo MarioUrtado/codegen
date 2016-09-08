@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+                  xmlns:ns="http://schemas.xmlsoap.org/soap/encoding/"
+                  xmlns:tns="http://www.entel.cl/ESC/RequestPhysicalResource/v1"
+                  xmlns:ebmns_Create="http://www.entel.cl/EBM/RequestPhysicalResource/Create/v1"
+                  targetNamespace="http://www.entel.cl/ESC/RequestPhysicalResource/v1">
+   <wsdl:types>
+      <xs:schema>
+         <xs:import namespace="http://www.entel.cl/EBM/RequestPhysicalResource/Create/v1"
+                    schemaLocation="Create_RequestPhysicalResource_v1_EBM.xsd"/>
+      </xs:schema>
+   </wsdl:types>
+   <wsdl:message name="Create_Message_Callback">
+      <wsdl:part name="Callback"
+                 element="ebmns_Create:Create_RequestPhysicalResource_CRSP"/>
+   </wsdl:message>
+   <wsdl:message name="Create_Message_In">
+      <wsdl:part name="In" element="ebmns_Create:Create_RequestPhysicalResource_REQ"/>
+   </wsdl:message>
+   <wsdl:message name="Create_Message_Out">
+      <wsdl:part name="Out" element="ebmns_Create:Create_RequestPhysicalResource_RSP"/>
+   </wsdl:message>
+   <wsdl:message name="Create_Message_Fault">
+      <wsdl:part name="Fault" element="ebmns_Create:Create_RequestPhysicalResource_FRSP"/>
+   </wsdl:message>
+   <wsdl:portType name="RequestPhysicalResource_PortType">
+      <wsdl:operation name="Create">
+         <wsdl:input message="tns:Create_Message_In"/>
+         <wsdl:output message="tns:Create_Message_Out"/>
+         <wsdl:fault name="DefaultFault" message="tns:Create_Message_Fault"/>
+      </wsdl:operation>
+      <wsdl:operation name="Create_Callback">
+         <wsdl:output message="tns:Create_Message_Callback"/>
+      </wsdl:operation>
+   </wsdl:portType>
+   <wsdl:binding name="RequestPhysicalResource_SOAP12Binding"
+                 type="tns:RequestPhysicalResource_PortType">
+      <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+      <wsdl:operation name="Create">
+         <soap12:operation soapActionRequired="true"
+                           soapAction="http://www.entel.cl/EBM/RequestPhysicalResource/Create/v1"/>
+         <wsdl:input>
+            <soap12:body use="literal" parts="In"/>
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal" parts="Out"/>
+         </wsdl:output>
+         <wsdl:fault name="DefaultFault">
+            <soap12:fault use="literal" name="DefaultFault"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="Create_Callback">
+         <soap12:operation soapActionRequired="true"
+                           soapAction="http://www.entel.cl/EBM/RequestPhysicalResource/Create/v1"/>
+         <wsdl:output>
+            <soap12:body use="literal" parts="Callback"/>
+         </wsdl:output>
+      </wsdl:operation>
+   </wsdl:binding>
+   <wsdl:service name="RequestPhysicalResource_Service">
+      <wsdl:port name="RequestPhysicalResource_Port"
+                 binding="tns:RequestPhysicalResource_SOAP12Binding">
+         <soap12:address location="http://www.entel.cl/ESC/RequestPhysicalResource/v1"/>
+      </wsdl:port>
+   </wsdl:service>
+</wsdl:definitions>

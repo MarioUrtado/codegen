@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/alert/config">
+    <con:coreEntry>
+        <con:binding type="SOAP" isSoap12="true" xsi:type="con:SoapBindingType">
+            <con:wsdl ref="DC_SC_LoggerManager/SupportAPI/WSDL/LoggerManager"/>
+            <con:binding>
+                <con:name>LoggerManager_SOAP12Binding</con:name>
+                <con:namespace>http://www.entel.cl/SC/LoggerManager/v1</con:namespace>
+            </con:binding>
+            <con:selector type="SOAP body"/>
+        </con:binding>
+        <con:xqConfiguration>
+            <con:snippetVersion>1.0</con:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:router errorHandler="error-N3f57c325.6fb8d54e.0.1506785604d.N7f6a">
+        <con:pipeline type="error" name="error-N3f57c325.6fb8d54e.0.1506785604d.N7f6a">
+            <con:stage id="_StageId-N3f57c325.6fb8d54e.0.1506785604d.N7f69" name="LoggerManager - Error Handler">
+                <con:context/>
+                <con:actions>
+                    <con1:log>
+                        <con2:id>_ActionId-N3f57c325.6fb8d54e.0.1506785604d.N7f63</con2:id>
+                        <con1:logLevel>error</con1:logLevel>
+                        <con1:expr>
+                            <con2:xqueryText>$body</con2:xqueryText>
+                        </con1:expr>
+                        <con1:message>LoggerManager | LoggerManagerPipeline  - Error Handler | Body</con1:message>
+                    </con1:log>
+                    <con1:log>
+                        <con2:id>_ActionId-N3f57c320.N7d75eb57.0.152b37959a1.N7d80</con2:id>
+                        <con1:logLevel>error</con1:logLevel>
+                        <con1:expr>
+                            <con2:xqueryText>$fault</con2:xqueryText>
+                        </con1:expr>
+                        <con1:message>LoggerManager | LoggerManagerPipeline  - Error Handler | Fault</con1:message>
+                    </con1:log>
+                    <con5:alert>
+                        <con2:id>_ActionId-N3f57c320.N7d75eb57.0.152b37959a1.N7e67</con2:id>
+                        <con5:destination ref="SR_Commons/AlertDestinations/FW_Support"/>
+                        <con5:description>Framework - LoggerManager Failure</con5:description>
+                        <con5:severity>major</con5:severity>
+                        <con5:payload>
+                            <con2:xqueryTransform>
+                                <con2:resource ref="SR_Commons/XQuery/get_MailMessageContent_AlertFW"/>
+                                <con2:param name="mailFooter">
+                                    <con2:path>''</con2:path>
+                                </con2:param>
+                                <con2:param name="componentType">
+                                    <con2:path>'Support Component'</con2:path>
+                                </con2:param>
+                                <con2:param name="mailBody">
+                                    <con2:path>fn-bea:serialize($fault)</con2:path>
+                                </con2:param>
+                                <con2:param name="messageHeader">
+                                    <con2:path>$body/*[1]/*[1]/*[1]</con2:path>
+                                </con2:param>
+                                <con2:param name="componentOperation">
+                                    <con2:path>$operation</con2:path>
+                                </con2:param>
+                                <con2:param name="componentName">
+                                    <con2:path>'LoggerManagerPipeline'</con2:path>
+                                </con2:param>
+                                <con2:param name="mailHeader">
+                                    <con2:path>'Error no esperado durante la ejecucion del LoggerManager.'</con2:path>
+                                </con2:param>
+                            </con2:xqueryTransform>
+                        </con5:payload>
+                    </con5:alert>
+                    <con2:reply isError="true">
+                        <con2:id>_ActionId-N3f57c325.6fb8d54e.0.1506785604d.N7f66</con2:id>
+                    </con2:reply>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="request" name="request-N53ee33e4.20a2de6f.0.153c3a3b8ba.N7ce9">
+            <con:stage id="_StageId-N53ee33e4.20a2de6f.0.153c3a3b8ba.N7c7f" name="AuxVars">
+                <con:context/>
+                <con:actions>
+                    <con3:assign varName="LoggerSeverityKey">
+                        <con2:id>_ActionId-N53ee33e4.20a2de6f.0.153c3a3b8ba.N7c7c</con2:id>
+                        <con3:expr>
+                            <con2:xqueryText>(: Checks if the real severity does not match the severity showed at request :)
+concat('Logger.Severity.',$body/*[1]/*[1]/*[1]/*[2]/*[1]/@code,'.',$body/*[1]/*[1]/*[1]/*[2]/*[1]/@name,'.',$body/*[1]/*[1]/*[1]/*[2]/*[1]/@operation)</con2:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                    <con3:assign varName="LoggerEnabledKey">
+                        <con2:id>_ActionId-N53ee33e4.20a2de6f.0.153c3a3b8ba.N7c79</con2:id>
+                        <con3:expr>
+                            <con2:xqueryText>(: Checks if logging operation is enable :)
+concat('Logger.',$operation,'.IsEnabled.',$body/*[1]/*[1]/*[1]/*[2]/*[1]/@code,'.',$body/*[1]/*[1]/*[1]/*[2]/*[1]/@name,'.',$body/*[1]/*[1]/*[1]/*[2]/*[1]/@operation)</con2:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                    <con3:assign varName="LogSeveritySet">
+                        <con2:id>_ActionId-N53ee33e4.20a2de6f.0.153c3a3b8ba.N7c76</con2:id>
+                        <con3:expr>
+                            <con2:xqueryText>(: Severities that will be logged :)
+'LogSeveritySet'</con2:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-N53ee33e4.20a2de6f.0.153c3a3b8ba.N7ce7" name="GetLogParameters">
+                <con:context/>
+                <con:actions>
+                    <con3:wsCallout>
+                        <con2:id>_ActionId-N53ee33e4.20a2de6f.0.153c3a3b8ba.N7cf0</con2:id>
+                        <con3:service ref="DC_SC_ParameterManager/SupportAPI/Proxy/ParameterManager" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>get</con3:operation>
+                        <con3:request>
+                            <con3:body wrapped="false">GetREQ</con3:body>
+                        </con3:request>
+                        <con3:response>
+                            <con3:body wrapped="false">GetRSP</con3:body>
+                        </con3:response>
+                        <con3:requestTransform>
+                            <con3:assign varName="GetREQ">
+                                <con2:id>_ActionId-N53ee33e4.20a2de6f.0.153c3a3b8ba.N7cef</con2:id>
+                                <con3:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="SR_Commons/XQuery/SupportComponent/ParameterManager/get_getREQ_v1"/>
+                                        <con2:param name="Keys">
+                                            <con2:path><![CDATA[<Keys>
+<Key>{$LoggerEnabledKey}</Key>
+<Key>{$LoggerSeverityKey}</Key>
+<Key>{$LogSeveritySet}</Key>
+</Keys>]]></con2:path>
+                                        </con2:param>
+                                        <con2:param name="RequestHeader">
+                                            <con2:path>$body/*[1]/*[1]/*[1]</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con3:expr>
+                            </con3:assign>
+                        </con3:requestTransform>
+                        <con3:responseTransform/>
+                    </con3:wsCallout>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-N53ee33e4.20a2de6f.0.153c3a3b8ba.N7bcc" name="SetRoutingService">
+                <con:context/>
+                <con:actions>
+                    <con3:ifThenElse>
+                        <con2:comment>IF logger.[operation].enabled = 1 
+THEN Logeo Enterprise Habilitado
+ELSE Logeo Enterprise Deshabilitado</con2:comment>
+                        <con2:id>_ActionId-N53ee33e4.20a2de6f.0.153c3a3b8ba.N7cee</con2:id>
+                        <con3:case id="_BranchId-N53ee33e4.20a2de6f.0.153c3a3b8ba.N7ced">
+                            <con3:condition>
+                                <con2:xqueryText>xs:int($GetRSP/*[1]/*[@key=$LoggerEnabledKey]/@value) = 1</con2:xqueryText>
+                            </con3:condition>
+                            <con3:actions>
+                                <con3:assign varName="RoutingService">
+                                    <con2:id>_ActionId-N53ee33e4.20a2de6f.0.153c3a3b8ba.N7cec</con2:id>
+                                    <con3:expr>
+                                        <con2:xqueryText>'LoggerManagerEnterpriseBS'</con2:xqueryText>
+                                    </con3:expr>
+                                </con3:assign>
+                            </con3:actions>
+                        </con3:case>
+                        <con3:default>
+                            <con3:assign varName="RoutingService">
+                                <con2:id>_ActionId-N53ee33e4.20a2de6f.0.153c3a3b8ba.N7ceb</con2:id>
+                                <con3:expr>
+                                    <con2:xqueryText>'LoggerManagerDiscardedBS'</con2:xqueryText>
+                                </con3:expr>
+                            </con3:assign>
+                        </con3:default>
+                    </con3:ifThenElse>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-N53ee33e4.20a2de6f.0.153c3a3b8ba.N7ce8"/>
+        <con:pipeline type="request" name="request-N53ee33e4.20a2de6f.0.153c3a3b8ba.N7bc7">
+            <con:stage id="_StageId-N53ee33e4.20a2de6f.0.153c3a3b8ba.N7bc5" name="SeverityOverride">
+                <con:context/>
+                <con:actions>
+                    <con3:ifThenElse>
+                        <con2:id>_ActionId-N53ee33e4.20a2de6f.0.153c3a3b8ba.N7b58</con2:id>
+                        <con3:case id="_BranchId-N53ee33e4.20a2de6f.0.153c3a3b8ba.N7b57">
+                            <con3:condition>
+                                <con2:xqueryText>exists($GetRSP/*[1]/*[@key=$LoggerSeverityKey]/@value)</con2:xqueryText>
+                            </con3:condition>
+                            <con3:actions>
+                                <con3:replace varName="body" contents-only="true">
+                                    <con2:id>_ActionId-N53ee33e4.20a2de6f.0.153c3a3b8ba.N7b56</con2:id>
+                                    <con3:location>
+                                        <con2:xpathText>./*[1]/*[5]/@logSeverity</con2:xpathText>
+                                    </con3:location>
+                                    <con3:expr>
+                                        <con2:xqueryText>data($GetRSP/*[1]/*[@key=$LoggerSeverityKey]/@value)</con2:xqueryText>
+                                    </con3:expr>
+                                </con3:replace>
+                            </con3:actions>
+                        </con3:case>
+                        <con3:default/>
+                    </con3:ifThenElse>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-N53ee33e4.20a2de6f.0.153c3a3b8ba.N7bc6"/>
+        <con:pipeline type="request" name="request-N53ee33e4.20a2de6f.0.153c3a3b8ba.N7b55">
+            <con:stage id="_StageId-N53ee33e4.20a2de6f.0.153c3a3b8ba.N7b53" name="SeverityCheck">
+                <con:context/>
+                <con:actions>
+                    <con3:ifThenElse>
+                        <con2:id>_ActionId-N53ee33e4.20a2de6f.0.153c3a3b8ba.N7b48</con2:id>
+                        <con3:case id="_BranchId-N53ee33e4.20a2de6f.0.153c3a3b8ba.N7b47">
+                            <con3:condition>
+                                <con2:xqueryText>(: Checks whether the severity for this requests matches any element in the severity set :)
+fn:contains(data($GetRSP/*[1]/*[@key=$LogSeveritySet]/@value),data($body/*[1]/*[5]/@logSeverity))</con2:xqueryText>
+                            </con3:condition>
+                            <con3:actions/>
+                        </con3:case>
+                        <con3:default>
+                            <con3:assign varName="RoutingService">
+                                <con2:id>_ActionId-N53ee33e4.20a2de6f.0.153c3a3b8ba.N7ae2</con2:id>
+                                <con3:expr>
+                                    <con2:xqueryText>'LoggerManagerDiscardedBS'</con2:xqueryText>
+                                </con3:expr>
+                            </con3:assign>
+                        </con3:default>
+                    </con3:ifThenElse>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-N53ee33e4.20a2de6f.0.153c3a3b8ba.N7b54"/>
+        <con:flow>
+            <con:pipeline-node name="LoggerInterfacePipeline">
+                <con:request>request-N53ee33e4.20a2de6f.0.153c3a3b8ba.N7ce9</con:request>
+                <con:response>response-N53ee33e4.20a2de6f.0.153c3a3b8ba.N7ce8</con:response>
+            </con:pipeline-node>
+            <con:branch-node type="operation" id="_FlowId-N53ee33e4.20a2de6f.0.153c3a3b8ba.N7e68" name="LoggerOperations">
+                <con:context/>
+                <con:branch-table>
+                    <con:branch name="log">
+                        <con:operator>equals</con:operator>
+                        <con:value/>
+                        <con:flow>
+                            <con:pipeline-node name="SetSeverity">
+                                <con:request>request-N53ee33e4.20a2de6f.0.153c3a3b8ba.N7bc7</con:request>
+                                <con:response>response-N53ee33e4.20a2de6f.0.153c3a3b8ba.N7bc6</con:response>
+                            </con:pipeline-node>
+                            <con:pipeline-node name="SeverityCheck">
+                                <con:request>request-N53ee33e4.20a2de6f.0.153c3a3b8ba.N7b55</con:request>
+                                <con:response>response-N53ee33e4.20a2de6f.0.153c3a3b8ba.N7b54</con:response>
+                            </con:pipeline-node>
+                            <con:route-node name="RouteToJMSDestinyLog">
+                                <con:context/>
+                                <con:actions>
+                                    <con4:dynamic-route>
+                                        <con2:id>_ActionId-N53ee33e4.20a2de6f.0.153c3a3b8ba.N7dc7</con2:id>
+                                        <con4:service>
+                                            <con2:xqueryText><![CDATA[<ctx:route xmlns:ctx='http://www.bea.com/wli/sb/context'>
+    <ctx:service isProxy='false'>DC_SC_LoggerManager/SupportLogic/Business/{$RoutingService}</ctx:service>
+    <ctx:operation>{$operation}</ctx:operation>
+</ctx:route>]]></con2:xqueryText>
+                                        </con4:service>
+                                        <con4:outboundTransform/>
+                                        <con4:responseTransform/>
+                                    </con4:dynamic-route>
+                                </con:actions>
+                            </con:route-node>
+                        </con:flow>
+                    </con:branch>
+                    <con:branch name="error">
+                        <con:operator>equals</con:operator>
+                        <con:value/>
+                        <con:flow>
+                            <con:route-node name="RouteToJMSDestinyError">
+                                <con:context/>
+                                <con:actions>
+                                    <con4:dynamic-route>
+                                        <con2:id>_ActionId-N53ee33e4.20a2de6f.0.153c3a3b8ba.N7dfb</con2:id>
+                                        <con4:service>
+                                            <con2:xqueryText><![CDATA[<ctx:route xmlns:ctx='http://www.bea.com/wli/sb/context'>
+    <ctx:service isProxy='false'>DC_SC_LoggerManager/SupportLogic/Business/{$RoutingService}</ctx:service>
+    <ctx:operation>{$operation}</ctx:operation>
+</ctx:route>]]></con2:xqueryText>
+                                        </con4:service>
+                                        <con4:outboundTransform/>
+                                        <con4:responseTransform/>
+                                    </con4:dynamic-route>
+                                </con:actions>
+                            </con:route-node>
+                        </con:flow>
+                    </con:branch>
+                    <con:default-branch>
+                        <con:flow/>
+                    </con:default-branch>
+                </con:branch-table>
+            </con:branch-node>
+        </con:flow>
+    </con:router>
+</con:pipelineEntry>

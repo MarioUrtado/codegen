@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <con:coreEntry>
+        <con:binding type="SOAP" isSoap12="true" xsi:type="con:SoapBindingType">
+            <con:wsdl ref="ES_RequestPhysicalResource_v1/ESC/Primary/RequestPhysicalResource_v1_ESC"/>
+            <con:binding>
+                <con:name>RequestPhysicalResource_SOAP12Binding</con:name>
+                <con:namespace>http://www.entel.cl/ESC/RequestPhysicalResource/v1</con:namespace>
+            </con:binding>
+        </con:binding>
+        <con:xqConfiguration>
+            <con:snippetVersion>1.0</con:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:router errorHandler="error-N5601dfac.2b37aecc.0.15670568244.N7381">
+        <con:pipeline type="request" name="request-N5601dfac.2b37aecc.0.15670568244.N75b6" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con6="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/alert/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/typesystem/config">
+            <con:stage id="_StageId-N5601dfac.2b37aecc.0.15670568244.N75b5" name="call MessageManager~ checkin" errorHandler="error-N5601dfac.2b37aecc.0.15670568244.N75ae">
+                <con:context>
+                    <con2:userNsDecl prefix="v12" namespace="http://www.entel.cl/ESO/MessageHeader/v1"/>
+                    <con2:userNsDecl prefix="v11" namespace="http://www.entel.cl/EBM/Consumer/get/v1"/>
+                    <con2:userNsDecl prefix="v1" namespace="http://www.entel.cl/SC/MessageManager/checkIN/v1"/>
+                    <con3:variable name="checkINRSP" path="$checkINRSP" asChild="false">
+                        <con3:schema ref="DC_SC_MessageManager/SupportAPI/XSD/CSM/checkIN_MessageManager_v1_CSM" element="checkINRSP"/>
+                    </con3:variable>
+                </con:context>
+                <con:actions>
+                    <con1:wsCallout>
+                        <con2:id>_ActionId-N5601dfac.2b37aecc.0.15670568244.N75b4</con2:id>
+                        <con1:service ref="DC_SC_FrameworkGateway/SupportAPI/Proxy/MessageManager_Gateway" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con1:operation>checkIN</con1:operation>
+                        <con1:request>
+                            <con1:body wrapped="true">body</con1:body>
+                        </con1:request>
+                        <con1:response>
+                            <con1:body wrapped="true">body</con1:body>
+                        </con1:response>
+                        <con1:requestTransform>
+                            <con1:assign varName="ESArchitecture">
+                                <con2:id>_ActionId-N5601dfac.2b37aecc.0.15670568244.N75b3</con2:id>
+                                <con1:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="ES_RequestPhysicalResource_v1/get_ESArchitecture"/>
+                                    </con2:xqueryTransform>
+                                </con1:expr>
+                            </con1:assign>
+                            <con1:assign varName="RequestHeader">
+                                <con2:id>_ActionId-N5601dfac.2b37aecc.0.15670568244.N75b2</con2:id>
+                                <con1:expr>
+                                    <con2:xqueryText>$body/*[1]/*[1]</con2:xqueryText>
+                                </con1:expr>
+                            </con1:assign>
+                            <con1:replace varName="body" contents-only="true">
+                                <con2:id>_ActionId-N5601dfac.2b37aecc.0.15670568244.N75b1</con2:id>
+                                <con1:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="SR_Commons/XQuery/SupportComponent/MessageManager/get_checkINREQ_v2"/>
+                                        <con2:param name="ServiceMessage">
+                                            <con2:path>$body/*[1]</con2:path>
+                                        </con2:param>
+                                        <con2:param name="ESArchitecture">
+                                            <con2:path>$ESArchitecture</con2:path>
+                                        </con2:param>
+                                        <con2:param name="RequestedServiceOperation">
+                                            <con2:path>data($operation)</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con1:expr>
+                            </con1:replace>
+                        </con1:requestTransform>
+                        <con1:responseTransform>
+                            <con1:replace varName="body" contents-only="true">
+                                <con2:id>_ActionId-N5601dfac.2b37aecc.0.15670568244.N75b0</con2:id>
+                                <con1:expr>
+                                    <con2:xqueryText>$body/*[1]/*[1]/*[1]/*[1]</con2:xqueryText>
+                                </con1:expr>
+                            </con1:replace>
+                            <con1:replace varName="RequestHeader">
+                                <con2:id>_ActionId-N5601dfac.2b37aecc.0.15670568244.N75af</con2:id>
+                                <con1:expr>
+                                    <con2:xqueryText>$body/*[1]/*[1]</con2:xqueryText>
+                                </con1:expr>
+                            </con1:replace>
+                        </con1:responseTransform>
+                    </con1:wsCallout>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-N5601dfac.2b37aecc.0.15670568244.N75ae" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con6="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/alert/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/typesystem/config">
+            <con:stage id="_StageId-N5601dfac.2b37aecc.0.15670568244.N75ad" name="Message Issue Handling">
+                <con:context>
+                    <con2:userNsDecl prefix="v12" namespace="http://www.entel.cl/SC/MessageManager/checkIN/v1"/>
+                    <con2:userNsDecl prefix="v11" namespace="http://www.entel.cl/ESO/Error/v1"/>
+                    <con2:userNsDecl prefix="v14" namespace="http://www.entel.cl/ESO/MessageHeader/v1"/>
+                    <con2:userNsDecl prefix="v13" namespace="http://www.entel.cl/EBM/Consumer/get/v1"/>
+                    <con2:userNsDecl prefix="v1" namespace="http://www.entel.cl/ESO/Result/v1"/>
+                    <con2:userNsDecl prefix="v2" namespace="http://www.entel.cl/ESO/Result/v2"/>
+                </con:context>
+                <con:actions>
+                    <con1:wsCallout>
+                        <con2:id>_ActionId-N5601dfac.2b37aecc.0.15670568244.N75ac</con2:id>
+                        <con1:service ref="SR_Commons/CommonTools/MessageManager_CheckIN_ErrorHandler/MessageManager_CheckIN_ErrorHandler" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con1:request>
+                            <con1:payload wrapped="true">body</con1:payload>
+                        </con1:request>
+                        <con1:response>
+                            <con1:payload wrapped="true">body</con1:payload>
+                        </con1:response>
+                        <con1:requestTransform/>
+                        <con1:responseTransform/>
+                    </con1:wsCallout>
+                    <con1:ifThenElse>
+                        <con2:id>_ActionId-N5601dfac.2b37aecc.0.15670568244.N75ab</con2:id>
+                        <con1:case id="_BranchId-N5601dfac.2b37aecc.0.15670568244.N75aa">
+                            <con1:condition>
+                                <con2:xqueryText>local-name($body/*[1])='Fault'</con2:xqueryText>
+                            </con1:condition>
+                            <con1:actions>
+                                <con2:reply isError="true">
+                                    <con2:id>_ActionId-N5601dfac.2b37aecc.0.15670568244.N75a9</con2:id>
+                                </con2:reply>
+                            </con1:actions>
+                        </con1:case>
+                        <con1:default>
+                            <con2:reply isError="false">
+                                <con2:id>_ActionId-N5601dfac.2b37aecc.0.15670568244.N75a8</con2:id>
+                            </con2:reply>
+                        </con1:default>
+                    </con1:ifThenElse>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-N5601dfac.2b37aecc.0.15670568244.N75a7" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con6="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/alert/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/typesystem/config">
+            <con:stage id="_StageId-N5601dfac.2b37aecc.0.15670568244.N75a6" name="call MessageManager~ checkOut">
+                <con:context/>
+                <con:actions>
+                    <con1:wsCallout>
+                        <con2:id>_ActionId-N5601dfac.2b37aecc.0.15670568244.N75a5</con2:id>
+                        <con1:service ref="DC_SC_FrameworkGateway/SupportAPI/Proxy/MessageManager_Gateway" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con1:operation>checkOUT</con1:operation>
+                        <con1:request>
+                            <con1:body wrapped="true">body</con1:body>
+                        </con1:request>
+                        <con1:response>
+                            <con1:body wrapped="true">body</con1:body>
+                        </con1:response>
+                        <con1:requestTransform>
+                            <con1:replace varName="body" contents-only="true">
+                                <con2:id>_ActionId-N5601dfac.2b37aecc.0.15670568244.N75a4</con2:id>
+                                <con1:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="SR_Commons/XQuery/SupportComponent/MessageManager/get_checkOUTREQ"/>
+                                        <con2:param name="serviceResponse">
+                                            <con2:path>$body/*[1]</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con1:expr>
+                            </con1:replace>
+                        </con1:requestTransform>
+                        <con1:responseTransform>
+                            <con1:replace varName="body" contents-only="true">
+                                <con2:id>_ActionId-N5601dfac.2b37aecc.0.15670568244.N75a3</con2:id>
+                                <con1:expr>
+                                    <con2:xqueryText>$body/*[1]/*[1]/*[1]/*[1]</con2:xqueryText>
+                                </con1:expr>
+                            </con1:replace>
+                        </con1:responseTransform>
+                    </con1:wsCallout>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-N5601dfac.2b37aecc.0.15670568244.N7475">
+            <con:stage id="_StageId-N5601dfac.2b37aecc.0.15670568244.N73bc" name="Operation Error Handling" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con6="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/alert/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/typesystem/config">
+                <con:context/>
+                <con:actions>
+                    <con6:route>
+                        <con2:id>_ActionId-N5601dfac.2b37aecc.0.15670568244.N73bb</con2:id>
+                        <con6:service ref="DC_SC_FrameworkGateway/SupportAPI/Proxy/ErrorManager_Gateway" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con6:operation>handle</con6:operation>
+                        <con6:outboundTransform>
+                            <con1:replace varName="body" contents-only="true">
+                                <con2:id>_ActionId-N5601dfac.2b37aecc.0.15670568244.N73ba</con2:id>
+                                <con1:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="SR_Commons/XQuery/SupportComponent/ErrorManager/get_handleREQ_v2"/>
+                                        <con2:param name="messageHeader">
+                                            <con2:path>$RequestHeader</con2:path>
+                                        </con2:param>
+                                        <con2:param name="sourceErrorCode">
+                                            <con2:path>''</con2:path>
+                                        </con2:param>
+                                        <con2:param name="errorPlaceHolderPlace">
+                                            <con2:path>data($fault/*:location)</con2:path>
+                                        </con2:param>
+                                        <con2:param name="sourceErrorDesc">
+                                            <con2:path>''</con2:path>
+                                        </con2:param>
+                                        <con2:param name="sourceFault">
+                                            <con2:path>$body/*[1]</con2:path>
+                                        </con2:param>
+                                        <con2:param name="errorIndexSubModule">
+                                            <con2:path>data($RequestHeader/*[2]/*[1]/@operation)</con2:path>
+                                        </con2:param>
+                                        <con2:param name="errorPlaceHolderTime">
+                                            <con2:path>current-dateTime()</con2:path>
+                                        </con2:param>
+                                        <con2:param name="errorIndexModule">
+                                            <con2:path>data($RequestHeader/*[2]/*[1]/@name)</con2:path>
+                                        </con2:param>
+                                        <con2:param name="errorSourceDetails">
+                                            <con2:path>''</con2:path>
+                                        </con2:param>
+                                        <con2:param name="componentOperation">
+                                            <con2:path>$operation</con2:path>
+                                        </con2:param>
+                                        <con2:param name="errorSourceID">
+                                            <con2:path>'FRW'</con2:path>
+                                        </con2:param>
+                                        <con2:param name="componentName">
+                                            <con2:path>concat(data($RequestHeader/*[2]/*[1]/@name),'_PIF')</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con1:expr>
+                            </con1:replace>
+                        </con6:outboundTransform>
+                    </con6:route>
+                    <con1:wsCallout>
+                        <con2:id>_ActionId-N5601dfac.2b37aecc.0.15670568244.N73b9</con2:id>
+                        <con1:service ref="DC_SC_FrameworkGateway/SupportAPI/Proxy/MessageManager_Gateway" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con1:operation>checkOUT</con1:operation>
+                        <con1:request>
+                            <con1:body wrapped="true">body</con1:body>
+                        </con1:request>
+                        <con1:response>
+                            <con1:body wrapped="true">body</con1:body>
+                        </con1:response>
+                        <con1:requestTransform>
+                            <con1:replace varName="body" contents-only="true">
+                                <con2:id>_ActionId-N5601dfac.2b37aecc.0.15670568244.N73b8</con2:id>
+                                <con1:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="SR_Commons/XQuery/SupportComponent/MessageManager/get_checkOUTREQ"/>
+                                        <con2:param name="serviceResponse">
+                                            <con2:path>$body/*[1]</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con1:expr>
+                            </con1:replace>
+                        </con1:requestTransform>
+                        <con1:responseTransform>
+                            <con1:ifThenElse>
+                                <con2:id>_ActionId-N5601dfac.2b37aecc.0.15670568244.N73b7</con2:id>
+                                <con1:case id="_BranchId-N5601dfac.2b37aecc.0.15670568244.N73b6">
+                                    <con1:condition>
+                                        <con2:xqueryText>local-name($body/*[1]/*[1])='ValidMessage'</con2:xqueryText>
+                                    </con1:condition>
+                                    <con1:actions>
+                                        <con1:replace varName="body" contents-only="true">
+                                            <con2:id>_ActionId-N5601dfac.2b37aecc.0.15670568244.N73b5</con2:id>
+                                            <con1:expr>
+                                                <con2:xqueryText>$body/*[1]/*[1]/*[1]/*[1]</con2:xqueryText>
+                                            </con1:expr>
+                                        </con1:replace>
+                                    </con1:actions>
+                                </con1:case>
+                                <con1:default/>
+                            </con1:ifThenElse>
+                            <con1:replace varName="body" contents-only="true">
+                                <con2:id>_ActionId-N5601dfac.2b37aecc.0.15670568244.N73b4</con2:id>
+                                <con1:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="SR_Commons/XQuery/get_SOAP12Fault_Simple_v1"/>
+                                        <con2:param name="faultCode">
+                                            <con2:path>"Sender"</con2:path>
+                                        </con2:param>
+                                        <con2:param name="canonicalError">
+                                            <con2:path>$body/*[1]/*[1]/*:Result/*[1]</con2:path>
+                                        </con2:param>
+                                        <con2:param name="faultDetails">
+                                            <con2:path>$body/*[1]</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con1:expr>
+                            </con1:replace>
+                        </con1:responseTransform>
+                    </con1:wsCallout>
+                    <con2:reply isError="true">
+                        <con2:id>_ActionId-N5601dfac.2b37aecc.0.15670568244.N73b3</con2:id>
+                    </con2:reply>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-N5601dfac.2b37aecc.0.15670568244.N7381">
+            <con:stage id="_StageId-N5601dfac.2b37aecc.0.15670568244.N72f4" name="Service Error Handler" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con6="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/alert/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/typesystem/config">
+                <con:context>
+                    <con2:userNsDecl prefix="v1" namespace="http://www.entel.cl/SC/MessageManager/checkOUT/v1"/>
+                    <con2:userNsDecl prefix="v2" namespace="http://www.entel.cl/ESO/Result/v2"/>
+                </con:context>
+                <con:actions>
+                    <con1:wsCallout>
+                        <con2:id>_ActionId-N5601dfac.2b37aecc.0.15670568244.N72f3</con2:id>
+                        <con1:service ref="DC_SC_FrameworkGateway/SupportAPI/Proxy/ErrorManager_Gateway" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con1:operation>handle</con1:operation>
+                        <con1:request>
+                            <con1:body wrapped="true">body</con1:body>
+                        </con1:request>
+                        <con1:response>
+                            <con1:body wrapped="true">body</con1:body>
+                        </con1:response>
+                        <con1:requestTransform>
+                            <con1:replace varName="body" contents-only="true">
+                                <con2:id>_ActionId-N5601dfac.2b37aecc.0.15670568244.N72f2</con2:id>
+                                <con1:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="SR_Commons/XQuery/SupportComponent/ErrorManager/get_handleREQ_v2"/>
+                                        <con2:param name="messageHeader">
+                                            <con2:path>$RequestHeader</con2:path>
+                                        </con2:param>
+                                        <con2:param name="sourceErrorCode">
+                                            <con2:path>''</con2:path>
+                                        </con2:param>
+                                        <con2:param name="errorPlaceHolderPlace">
+                                            <con2:path>data($fault/ctx:location)</con2:path>
+                                        </con2:param>
+                                        <con2:param name="sourceErrorDesc">
+                                            <con2:path>''</con2:path>
+                                        </con2:param>
+                                        <con2:param name="sourceFault">
+                                            <con2:path>$fault</con2:path>
+                                        </con2:param>
+                                        <con2:param name="errorIndexSubModule">
+                                            <con2:path>data($RequestHeader/*[2]/*[1]/@operation)</con2:path>
+                                        </con2:param>
+                                        <con2:param name="errorPlaceHolderTime">
+                                            <con2:path>current-dateTime()</con2:path>
+                                        </con2:param>
+                                        <con2:param name="errorIndexModule">
+                                            <con2:path>data($RequestHeader/*[2]/*[1]/@name)</con2:path>
+                                        </con2:param>
+                                        <con2:param name="errorSourceDetails">
+                                            <con2:path>''</con2:path>
+                                        </con2:param>
+                                        <con2:param name="componentOperation">
+                                            <con2:path>$operation</con2:path>
+                                        </con2:param>
+                                        <con2:param name="errorSourceID">
+                                            <con2:path>'FRW'</con2:path>
+                                        </con2:param>
+                                        <con2:param name="componentName">
+                                            <con2:path>concat(data($RequestHeader/*[2]/*[1]/@name),'_PIF')</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con1:expr>
+                            </con1:replace>
+                        </con1:requestTransform>
+                        <con1:responseTransform>
+                            <con1:replace contents-only="true" varName="body">
+                                <con2:id>_ActionId-N5601dfac.2b37aecc.0.15670568244.N72f1</con2:id>
+                                <con1:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="SR_Commons/XQuery/get_ResponseHeader_v1"/>
+                                        <con2:param name="RequestHeader">
+                                            <con2:path>$RequestHeader</con2:path>
+                                        </con2:param>
+                                        <con2:param name="Result">
+                                            <con2:path>$body/*[1]/*[1]</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con1:expr>
+                            </con1:replace>
+                        </con1:responseTransform>
+                    </con1:wsCallout>
+                    <con1:replace contents-only="true" varName="body">
+                        <con2:id>_ActionId-N5601dfac.2b37aecc.0.15670568244.N72f0</con2:id>
+                        <con1:expr>
+                            <con2:xqueryTransform>
+                                <con2:resource ref="SR_Commons/XQuery/ServiceComponent/PIF/get_UnexpectedErrorRSP_v1"/>
+                                <con2:param name="ResponseHeader">
+                                    <con2:path>$body/*[1]</con2:path>
+                                </con2:param>
+                            </con2:xqueryTransform>
+                        </con1:expr>
+                    </con1:replace>
+                    <con1:ifThenElse>
+                        <con2:id>_ActionId-N5601dfac.2b37aecc.0.15670568244.N72ef</con2:id>
+                        <con1:case id="_BranchId-N5601dfac.2b37aecc.0.15670568244.N72ee">
+                            <con1:condition>
+                                <con2:xqueryText>(:: Did it make the CheckiN? ::)
+(data($RequestHeader/*[2]/@reqTimestamp) != '') 
+  and
+(data($RequestHeader/*[2]/*[1]/@code)!='')</con2:xqueryText>
+                            </con1:condition>
+                            <con1:actions>
+                                <con1:wsCallout>
+                                    <con2:id>_ActionId-N5601dfac.2b37aecc.0.15670568244.N72ed</con2:id>
+                                    <con1:service ref="DC_SC_FrameworkGateway/SupportAPI/Proxy/MessageManager_Gateway" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                    <con1:operation>checkOUT</con1:operation>
+                                    <con1:request>
+                                        <con1:body wrapped="true">body</con1:body>
+                                    </con1:request>
+                                    <con1:response>
+                                        <con1:body wrapped="true">body</con1:body>
+                                    </con1:response>
+                                    <con1:requestTransform>
+                                        <con1:replace varName="body" contents-only="true">
+                                            <con2:id>_ActionId-N5601dfac.2b37aecc.0.15670568244.N72ec</con2:id>
+                                            <con1:expr>
+                                                <con2:xqueryTransform>
+                                                    <con2:resource ref="SR_Commons/XQuery/SupportComponent/MessageManager/get_checkOUTREQ"/>
+                                                    <con2:param name="serviceResponse">
+                                                        <con2:path>$body/*[1]</con2:path>
+                                                    </con2:param>
+                                                </con2:xqueryTransform>
+                                            </con1:expr>
+                                        </con1:replace>
+                                    </con1:requestTransform>
+                                    <con1:responseTransform>
+                                        <con1:replace varName="body" contents-only="true">
+                                            <con2:id>_ActionId-N5601dfac.2b37aecc.0.15670568244.N72eb</con2:id>
+                                            <con1:expr>
+                                                <con2:xqueryTransform>
+                                                    <con2:resource ref="SR_Commons/XQuery/get_SOAP12Fault_Simple_v1"/>
+                                                    <con2:param name="faultCode">
+                                                        <con2:path>"Sender"</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="canonicalError">
+                                                        <con2:path>$body/*[1]/*[1]/*[1]/*[1]/*[1]/*[4]/*[1]</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="faultDetails">
+                                                        <con2:path>$body/*[1]/*[1]/*[1]/*[1]</con2:path>
+                                                    </con2:param>
+                                                </con2:xqueryTransform>
+                                            </con1:expr>
+                                        </con1:replace>
+                                    </con1:responseTransform>
+                                </con1:wsCallout>
+                            </con1:actions>
+                        </con1:case>
+                        <con1:default/>
+                    </con1:ifThenElse>
+                    <con2:reply isError="true">
+                        <con2:id>_ActionId-N5601dfac.2b37aecc.0.15670568244.N72ea</con2:id>
+                    </con2:reply>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:flow>
+            <con:pipeline-node name="Transaction Handling" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con6="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/alert/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/typesystem/config">
+                <con:request>request-N5601dfac.2b37aecc.0.15670568244.N75b6</con:request>
+                <con:response>response-N5601dfac.2b37aecc.0.15670568244.N75a7</con:response>
+            </con:pipeline-node>
+            <con:route-node name="Call OH" error-handler="error-N5601dfac.2b37aecc.0.15670568244.N7475">
+                <con:context/>
+                <con:actions>
+                    <con4:dynamic-route xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con6="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/alert/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/typesystem/config">
+                        <con2:id>_ActionId-N5601dfac.2b37aecc.0.15670568244.N7476</con2:id>
+                        <con4:service>
+                            <con2:xqueryTransform>
+                                <con2:resource ref="SR_Commons/XQuery/ServiceComponent/PIF/get_OHRoute_v3"/>
+                                <con2:param name="RequestHeader">
+                                    <con2:path>$RequestHeader</con2:path>
+                                </con2:param>
+                                <con2:param name="ESArchitecture">
+                                    <con2:path>$ESArchitecture</con2:path>
+                                </con2:param>
+                            </con2:xqueryTransform>
+                        </con4:service>
+                        <con4:outboundTransform/>
+                        <con4:responseTransform/>
+                    </con4:dynamic-route>
+                </con:actions>
+            </con:route-node>
+        </con:flow>
+    </con:router>
+</con:pipelineEntry>

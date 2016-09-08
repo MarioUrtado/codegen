@@ -1,0 +1,37 @@
+<xsd:schema targetNamespace="http://www.entel.cl/ESO/Exception/JSON/v1" elementFormDefault="qualified"
+            nxsd:version="JSON" nxsd:encoding="US-ASCII" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:tns="http://www.entel.cl/ESO/Exception/JSON/v1"
+            xmlns:header="http://www.entel.cl/ESO/MessageHeaderJSON/v1"
+            xmlns:nxsd="http://xmlns.oracle.com/pcbpel/nxsd">
+  <xsd:import schemaLocation="MessageHeaderJSON_v1_ESO.xsd" namespace="http://www.entel.cl/ESO/MessageHeaderJSON/v1"/>
+  <!-- Version 1-->
+  <xsd:element name="UnexpectedErrorException">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="exceptionDetail" type="xsd:string"/>
+        <xsd:choice>
+          <xsd:element ref="header:ResponseHeader"/>
+          <xsd:element ref="header:Result"/>
+        </xsd:choice>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Fault">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="faultcode" type="xsd:string"/>
+        <xsd:element name="faultstring" type="xsd:string"/>
+        <xsd:element name="detail" minOccurs="1" maxOccurs="1">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:choice>
+                <xsd:element ref="tns:UnexpectedErrorException" minOccurs="1" maxOccurs="1"/>
+                <xsd:element ref="header:Result" minOccurs="1" maxOccurs="1"/>
+              </xsd:choice>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

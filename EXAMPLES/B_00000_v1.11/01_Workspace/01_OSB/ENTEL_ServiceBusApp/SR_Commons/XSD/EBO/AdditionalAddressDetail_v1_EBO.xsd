@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/AdditionalAddressDetail/v1"
+	xmlns:ebons_geographicaddress="http://www.entel.cl/EBO/GeographicAddress/v1"
+	xmlns:ebons_contact="http://www.entel.cl/EBO/Contact/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/AdditionalAddressDetail/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/GeographicAddress/v1" schemaLocation="GeographicAddress_v1_EBO.xsd"/>
+	<xs:import namespace="http://www.entel.cl/EBO/Contact/v1" schemaLocation="Contact_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="contact" type="ebons_contact:Contact_Type"/>									
+	<xs:element name="geographicAddres" type="ebons_geographicaddress:GeographicAddress_Type"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="AdditionalAddressDetail" type="tns:AdditionalAddressDetail_Type"/>
+	<xs:complexType name="AdditionalAddressDetail_Type">
+		<xs:sequence> 
+		<xs:element ref="tns:contact" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:geographicAddres" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

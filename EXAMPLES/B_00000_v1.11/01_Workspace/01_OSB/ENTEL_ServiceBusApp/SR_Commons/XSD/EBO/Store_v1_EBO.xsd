@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/Store/v1"
+	xmlns:ebons_money="http://www.entel.cl/EBO/Money/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/Store/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/Money/v1" schemaLocation="Money_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="ID" type="xs:string"/>									
+	<xs:element name="class" type="xs:string"/>									
+	<xs:element name="closeDate" type="xs:dateTime"/>									
+	<xs:element name="name" type="xs:string"/>									
+	<xs:element name="openDate" type="xs:dateTime"/>									
+	<xs:element name="stockHoldingInd" type="xs:string"/>									
+	<xs:element name="type" type="xs:string"/>									
+	<xs:element name="money" type="ebons_money:Money_Type"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="Store" type="tns:Store_Type"/>
+	<xs:complexType name="Store_Type">
+		<xs:sequence> 
+		<xs:element ref="tns:ID" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:class" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:closeDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:name" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:openDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:stockHoldingInd" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:type" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:money" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

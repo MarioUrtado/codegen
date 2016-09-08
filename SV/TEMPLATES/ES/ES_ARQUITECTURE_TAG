@@ -1,0 +1,7 @@
+[COUNTRY_TAG]
+open=<ns1:Country code="%COUNTRY_NAME%">
+close=</ns1:Country>
+
+[CAPABILITY_TAG]
+open=<ns1:OH opName="%CAPABILITY_NAME%" opCode="%CAPABILITY_CODE%" name="%COUNTRY_NAME%_%CAPABILITY_NAME%_%SERVICE_NAME%">
+close=</ns1:OH>

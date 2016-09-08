@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.entel.cl/SC/ErrorManager/RetryManager/Aux"
+            targetNamespace="http://www.entel.cl/SC/ErrorManager/RetryManager/Aux" elementFormDefault="qualified">
+
+  <simpleType name="retryStatus_SType">
+    <annotation>
+      <documentation>
+        UNK: Unknown - Not found retry 
+        ORT: On Retry - Processing the retry configured
+        LRT: Last Retry - Processing is completed. Reached maximum retry configurated
+        FRT: Finish Retry - Processing is completed. Reached maximum retry set
+      </documentation>
+    </annotation>
+    <restriction  base="string" >
+      <enumeration value="UNK"/>
+      <enumeration value="ORT"/>
+      <enumeration value="LRT"/>
+      <enumeration value="FRT"/>
+    </restriction>
+  </simpleType>
+  
+  <simpleType name="count_SType" >
+    <restriction base="int" />
+  </simpleType>
+</schema>

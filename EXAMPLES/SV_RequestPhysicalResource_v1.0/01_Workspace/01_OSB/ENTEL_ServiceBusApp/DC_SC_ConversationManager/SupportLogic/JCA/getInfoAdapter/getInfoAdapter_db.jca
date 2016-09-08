@@ -1,0 +1,12 @@
+<adapter-config name="getInfoAdapter" adapter="db" wsdlLocation="getInfoAdapter.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="GL_ENTEL_DESA" location="eis/DB/FRW/ConversationManager"/>
+  <endpoint-interaction portType="getInfoAdapter_ptt" operation="getInfoAdapter">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="PackageName" value="ESB_CONVERSATION_MANAGER_PKG"/>
+      <property name="ProcedureName" value="GETINFO"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

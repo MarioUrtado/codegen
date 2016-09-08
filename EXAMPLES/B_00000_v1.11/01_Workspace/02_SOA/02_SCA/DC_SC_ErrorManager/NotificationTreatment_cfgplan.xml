@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAConfigPlan xmlns:jca="http://platform.integration.oracle/blocks/adapter/fw/metadata" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:orawsp="http://schemas.oracle.com/ws/2006/01/policy" xmlns:edl="http://schemas.oracle.com/events/edl" xmlns="http://schemas.oracle.com/soa/configplan">
+   <composite name="NotificationTreatment">
+      <!--Add search and replace rules for the import section of a composite
+	Example:
+	<searchReplace>
+		<search>http://my-dev-server</search>
+		<replace>http://my-test-server</replace>
+	<searchReplace>
+	<searchReplace>
+		<search>8888</search>
+		<replace>8889</replace>
+	<searchReplace>-->
+      <import>
+         <searchReplace>
+            <search/>
+            <replace/>
+         </searchReplace>
+      </import>
+      <service name="NotificationTreatment_DirectBinding">
+         <binding type="direct"/>
+      </service>
+      <property name="productVersion">
+         <replace>12.2.1.0.0.151013</replace>
+      </property>
+      <property name="compositeID">
+         <replace>2c831310-780c-42f6-b1a9-74527b24d23f</replace>
+      </property>
+      <!--Add search and replace rules for the component properties
+	For components and service/reference bindings, you can add policy references.
+	Example:
+	<component name="*">
+		<wsp:PolicyReference orawsp:category="management" orawsp:status="enabled" URI="oracle/log_policy"/>
+	</component>-->
+      <component name="ESB_NotificationTreatment_BPEL">
+         <property name="bpel.config.transaction">
+            <replace>required</replace>
+         </property>
+         <property name="bpel.config.oneWayDeliveryPolicy">
+            <replace>sync</replace>
+         </property>
+      </component>
+      <!--Add search and replace rules for the reference properties
+	Example:
+	<searchReplace>
+		<search>http://my-dev-server</search>
+		<replace>http://my-test-server</replace>
+	<searchReplace>
+	<searchReplace>
+		<search>8888
+		<replace>8889</replace>
+	<searchReplace>
+	or provide a new replace value like:
+	<replace>http://my-new-server:8889/myservice</replace>-->
+      <reference name="ESB_SP_ERROR_HOSPITAL_GET_MAIL">
+         <property name="jca.retry.count">
+            <replace>4</replace>
+         </property>
+         <property name="jca.retry.interval">
+            <replace>1</replace>
+         </property>
+         <property name="jca.retry.backoff">
+            <replace>2</replace>
+         </property>
+         <property name="jca.retry.maxInterval">
+            <replace>120</replace>
+         </property>
+         <binding type="jca"/>
+      </reference>
+      <reference name="ESB_SendToQueue">
+         <binding type="jca"/>
+      </reference>
+      <reference name="NotificationService1">
+         <binding type="wsif"/>
+      </reference>
+   </composite>
+   <!--To configure monitor.config: 
+	<property name="enabled"><replace>true</replace></property>
+	<property name="dataObjectsFolder"><searchReplace><search>mydev</search><replace>myproduction</replace></searchReplace></property>
+	
+	sample properties to configure for JMS adapter: 
+	<jca:property name="DestinationName"><replace>jms/DemoSupplierTopic</replace></jca:property>
+	<jca:property name="TimeToLive"><replace>0</replace></jca:property>
+	
+	To add search and replace rules for wsdls, xsd and jca files
+	Example:
+	<searchReplace>
+		<search>http://my-dev-server</search>
+		<replace>http://my-test-server</replace>
+	<searchReplace>
+	<searchReplace>
+		<search>8888</search>
+		<replace>8889</replace>
+	<searchReplace>
+	-->
+   <wsdlAndSchema name="Adapters/ESB_SendToQueue_jms.jca|Adapters/ESB_SP_ERROR_HOSPITAL_GET_MAIL_db.jca|Schemas/ESB_SP_ERROR_HOSPITAL_GET_MAIL_sp.xsd|Schemas/NotificationService.xsd|WSDLs/ESB_SendToQueue.wsdl|WSDLs/ESB_SP_ERROR_HOSPITAL_GET_MAIL.wsdl|WSDLs/NotificationService.wsdl|WSDLs/NotificationTreatmentWrapper.wsdl">
+      <searchReplace>
+         <search/>
+         <replace/>
+      </searchReplace>
+   </wsdlAndSchema>
+</SOAConfigPlan>

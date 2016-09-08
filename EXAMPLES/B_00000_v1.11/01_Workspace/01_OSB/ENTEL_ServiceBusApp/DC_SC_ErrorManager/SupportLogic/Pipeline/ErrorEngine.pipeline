@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/typesystem/config">
+    <con:coreEntry>
+        <con:binding type="SOAP" isSoap12="true" xsi:type="con:SoapBindingType">
+            <con:wsdl ref="DC_SC_ErrorManager/SupportAPI/WSDL/ErrorManager"/>
+            <con:binding>
+                <con:name>ErrorManager_SOAP12Binding</con:name>
+                <con:namespace>http://www.entel.cl/SC/ErrorManager/v1</con:namespace>
+            </con:binding>
+        </con:binding>
+        <con:xqConfiguration>
+            <con:snippetVersion>1.0</con:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:router errorHandler="error-N53ee3fce.N6d9a2234.0.15279415a3e.N7995">
+        <con:pipeline type="request" name="request-N53ee3fce.N6d9a2234.0.15279415a3e.N7fad">
+            <con:stage id="_StageId-N53ee3fce.N6d9a2234.0.15279415a3e.N7f0d" name="Variable Aux" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                <con:context>
+                    <con1:userNsDecl prefix="v11" namespace="http://www.entel.cl/ESO/Tracer/v1"/>
+                    <con1:userNsDecl prefix="v1" namespace="http://www.entel.cl/SC/ErrorManager/handle/v1"/>
+                </con:context>
+                <con:actions>
+                    <con2:assign varName="SourceError">
+                        <con1:id>_ActionId-N53ee3fce.N6d9a2234.0.15279415a3e.N7f0c</con1:id>
+                        <con2:expr>
+                            <con1:xqueryText>$body/*[1]/*[1]/*[2]</con1:xqueryText>
+                        </con2:expr>
+                    </con2:assign>
+                    <con2:assign varName="ErrorIndex">
+                        <con1:id>_ActionId-N53ee3fce.N6d9a2234.0.15279415a3e.N7f0b</con1:id>
+                        <con2:expr>
+                            <con1:xqueryText>$body/*[1]/*[2]</con1:xqueryText>
+                        </con2:expr>
+                    </con2:assign>
+                    <con2:assign varName="ErrorPlaceHolder">
+                        <con1:id>_ActionId-N53ee3fce.N6d9a2234.0.15279415a3e.N7f0a</con1:id>
+                        <con2:expr>
+                            <con1:xqueryText>$body/*[1]/*[3]</con1:xqueryText>
+                        </con2:expr>
+                    </con2:assign>
+                    <con2:assign varName="HeaderTracer">
+                        <con1:id>_ActionId-N3f57c320.N7d75eb57.0.152b37959a1.N7f58</con1:id>
+                        <con2:expr>
+                            <con1:xqueryTransform>
+                                <con1:resource ref="SR_Commons/XQuery/get_HeaderTracer_v1"/>
+                                <con1:param name="RequestHeader">
+                                    <con1:path>$body/*[1]/*[1]/*[1]</con1:path>
+                                </con1:param>
+                                <con1:param name="ComponentName">
+                                    <con1:path>data($body/*[1]/*[1]/@component)</con1:path>
+                                </con1:param>
+                                <con1:param name="ComponentOperation">
+                                    <con1:path>data($body/*[1]/*[1]/@operation)</con1:path>
+                                </con1:param>
+                            </con1:xqueryTransform>
+                        </con2:expr>
+                    </con2:assign>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-N53ee3fce.N6d9a2234.0.15279415a3e.N7dc5" name="Error Verification" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                <con:context>
+                    <con1:userNsDecl prefix="v12" namespace="http://www.entel.cl/ESO/Error/v1"/>
+                    <con1:userNsDecl prefix="v11" namespace="http://www.entel.cl/ESO/Tracer/v1"/>
+                    <con1:userNsDecl prefix="v1" namespace="http://www.entel.cl/SC/ErrorManager/handle/v1"/>
+                    <con5:variable name="SourceError" path="$SourceError" asChild="false" xmlns:con5="http://www.bea.com/wli/sb/typesystem/config">
+                        <con5:schema ref="SR_Commons/XSD/ESO/Error_v1_ESO" element="SourceError"/>
+                    </con5:variable>
+                </con:context>
+                <con:actions>
+                    <con2:ifThenElse>
+                        <con1:id>_ActionId-N53ee3fce.N6d9a2234.0.15279415a3e.N7dc4</con1:id>
+                        <con2:case id="_BranchId-N53ee3fce.N6d9a2234.0.15279415a3e.N7dc3">
+                            <con2:condition>
+                                <con1:xqueryText>data($body/*[1]/*[1]/*:SourceError/@code) != ''</con1:xqueryText>
+                            </con2:condition>
+                            <con2:actions>
+                                <con2:assign varName="ErrorMetadata">
+                                    <con1:id>_ActionId-N53ee3fce.N6d9a2234.0.15279415a3e.N7dc2</con1:id>
+                                    <con2:expr>
+                                        <con1:xqueryTransform>
+                                            <con1:resource ref="SR_Commons/XQuery/get_ErrorMetadata"/>
+                                            <con1:param name="errorDescription">
+                                                <con1:path>$SourceError/@description</con1:path>
+                                            </con1:param>
+                                            <con1:param name="errorCode">
+                                                <con1:path>string($SourceError/@code)</con1:path>
+                                            </con1:param>
+                                        </con1:xqueryTransform>
+                                    </con2:expr>
+                                </con2:assign>
+                            </con2:actions>
+                        </con2:case>
+                        <con2:default>
+                            <con2:assign varName="Result">
+                                <con1:id>_ActionId-N53ee3fce.N6d9a2234.0.15279415a3e.N7dc0</con1:id>
+                                <con2:expr>
+                                    <con1:xqueryTransform>
+                                        <con1:resource ref="DC_SC_ErrorManager/SupportLogic/XQuery/get_ResultFromSourceError"/>
+                                        <con1:param name="sourceError">
+                                            <con1:path>$SourceError/*[2]</con1:path>
+                                        </con1:param>
+                                    </con1:xqueryTransform>
+                                </con2:expr>
+                            </con2:assign>
+                            <con2:ifThenElse>
+                                <con1:id>_ActionId-N53ee3fce.N6d9a2234.0.15279415a3e.N7dbf</con1:id>
+                                <con2:case id="_BranchId-N53ee3fce.N6d9a2234.0.15279415a3e.N7dbe">
+                                    <con2:condition>
+                                        <con1:xqueryText>exists($Result/*[1])</con1:xqueryText>
+                                    </con2:condition>
+                                    <con2:actions>
+                                        <con2:replace varName="body" contents-only="true">
+                                            <con1:id>_ActionId-N53ee3fce.N6d9a2234.0.15279415a3e.N7dbd</con1:id>
+                                            <con2:expr>
+                                                <con1:xqueryTransform>
+                                                    <con1:resource ref="DC_SC_ErrorManager/SupportLogic/XQuery/get_HandleRSP"/>
+                                                    <con1:param name="Result">
+                                                        <con1:path>$Result</con1:path>
+                                                    </con1:param>
+                                                </con1:xqueryTransform>
+                                            </con2:expr>
+                                        </con2:replace>
+                                        <con3:route>
+                                            <con1:id>_ActionId-N53ee3fc6.4f5e4b06.0.152837a9c0c.N7ecb</con1:id>
+                                            <con3:service ref="DC_SC_LoggerManager/SupportAPI/Proxy/LoggerManager" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                            <con3:operation>error</con3:operation>
+                                            <con3:outboundTransform>
+                                                <con2:replace varName="body" contents-only="true">
+                                                    <con1:id>_ActionId-N53ee3fc6.4f5e4b06.0.152837a9c0c.N7eca</con1:id>
+                                                    <con2:expr>
+                                                        <con1:xqueryTransform>
+                                                            <con1:resource ref="SR_Commons/XQuery/SupportComponent/LoggerManager/get_errorREQ_v2"/>
+                                                            <con1:param name="HeaderTracer">
+                                                                <con1:path>$HeaderTracer</con1:path>
+                                                            </con1:param>
+                                                            <con1:param name="ErrorIndex">
+                                                                <con1:path>$ErrorIndex</con1:path>
+                                                            </con1:param>
+                                                            <con1:param name="ErrorPlaceHolder">
+                                                                <con1:path>$ErrorPlaceHolder</con1:path>
+                                                            </con1:param>
+                                                            <con1:param name="Result">
+                                                                <con1:path>$Result</con1:path>
+                                                            </con1:param>
+                                                        </con1:xqueryTransform>
+                                                    </con2:expr>
+                                                </con2:replace>
+                                            </con3:outboundTransform>
+                                        </con3:route>
+                                        <con1:reply isError="false">
+                                            <con1:id>_ActionId-N53ee3fce.N6d9a2234.0.15279415a3e.N7dba</con1:id>
+                                        </con1:reply>
+                                    </con2:actions>
+                                </con2:case>
+                                <con2:default>
+                                    <con2:assign varName="ErrorMetadata">
+                                        <con1:id>_ActionId-N53ee3fce.N6d9a2234.0.15279415a3e.N7db9</con1:id>
+                                        <con2:expr>
+                                            <con1:xqueryTransform>
+                                                <con1:resource ref="DC_SC_ErrorManager/SupportLogic/XQuery/get_UnknownErrorMetadata"/>
+                                                <con1:param name="ErrorFault">
+                                                    <con1:path>$body/*[1]/*[1]/*:SourceError/*</con1:path>
+                                                </con1:param>
+                                            </con1:xqueryTransform>
+                                        </con2:expr>
+                                    </con2:assign>
+                                    <con2:replace varName="SourceError">
+                                        <con1:id>_ActionId-N3f57c313.N57233d68.0.152c19dc020.N74b5</con1:id>
+                                        <con2:location>
+                                            <con1:xpathText>./@code</con1:xpathText>
+                                        </con2:location>
+                                        <con2:expr>
+                                            <con1:xqueryText>$ErrorMetadata/@code</con1:xqueryText>
+                                        </con2:expr>
+                                    </con2:replace>
+                                    <con2:replace varName="SourceError">
+                                        <con1:id>_ActionId-N3f57c313.N57233d68.0.152c19dc020.N74b2</con1:id>
+                                        <con2:location>
+                                            <con1:xpathText>./@description</con1:xpathText>
+                                        </con2:location>
+                                        <con2:expr>
+                                            <con1:xqueryText>$ErrorMetadata/@description</con1:xqueryText>
+                                        </con2:expr>
+                                    </con2:replace>
+                                </con2:default>
+                            </con2:ifThenElse>
+                        </con2:default>
+                    </con2:ifThenElse>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-N53ee3fce.N6d9a2234.0.15279415a3e.N7fac">
+            <con:stage id="_StageId-N53ee3fc6.4f5e4b06.0.152837a9c0c.N7f35" name="Error Logging" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                <con:context>
+                    <con1:userNsDecl prefix="v11" namespace="http://www.entel.cl/ESO/Result/v1"/>
+                    <con1:userNsDecl prefix="v1" namespace="http://www.entel.cl/SC/ErrorManager/handle/v1"/>
+                </con:context>
+                <con:actions>
+                    <con3:route>
+                        <con1:id>_ActionId-N53ee3fc6.4f5e4b06.0.152837a9c0c.N7f34</con1:id>
+                        <con3:service ref="DC_SC_LoggerManager/SupportAPI/Proxy/LoggerManager" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>error</con3:operation>
+                        <con3:outboundTransform>
+                            <con2:replace varName="body" contents-only="true">
+                                <con1:id>_ActionId-N53ee3fc6.4f5e4b06.0.152837a9c0c.N7f33</con1:id>
+                                <con2:expr>
+                                    <con1:xqueryTransform>
+                                        <con1:resource ref="SR_Commons/XQuery/SupportComponent/LoggerManager/get_errorREQ_v2"/>
+                                        <con1:param name="HeaderTracer">
+                                            <con1:path>$HeaderTracer</con1:path>
+                                        </con1:param>
+                                        <con1:param name="ErrorIndex">
+                                            <con1:path>$ErrorIndex</con1:path>
+                                        </con1:param>
+                                        <con1:param name="ErrorPlaceHolder">
+                                            <con1:path>$ErrorPlaceHolder</con1:path>
+                                        </con1:param>
+                                        <con1:param name="Result">
+                                            <con1:path>$body/*[1]/*[1]</con1:path>
+                                        </con1:param>
+                                    </con1:xqueryTransform>
+                                </con2:expr>
+                            </con2:replace>
+                        </con3:outboundTransform>
+                    </con3:route>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-N53ee3fce.N6d9a2234.0.15279415a3e.N7995">
+            <con:stage id="_StageId-N53ee3fce.N6d9a2234.0.15279415a3e.N7928" name="Error Handler" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con5="http://www.bea.com/wli/sb/typesystem/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
+                <con:context>
+                    <con1:userNsDecl prefix="v11" namespace="http://www.entel.cl/ESO/Result/v1"/>
+                    <con1:userNsDecl prefix="v1" namespace="http://www.entel.cl/SC/ErrorManager/handle/v1"/>
+                </con:context>
+                <con:actions>
+                    <con2:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-N53ee3fce.N6d9a2234.0.15279415a3e.N7927</con1:id>
+                        <con2:expr>
+                            <con1:xqueryText>&lt;v1:HandleRSP>
+	&lt;ns3:Result status="ERROR" description="ERROR VALIDO" xmlns:ns3="http://www.entel.cl/ESO/Result/v1">
+		&lt;ns4:CanonicalError code="10006" description="ERROR DURANTE EL PROCESAMIENTO DEL ERROR." type="FWNE" xmlns:ns4="http://www.entel.cl/ESO/Error/v1"/>
+	&lt;/ns3:Result>
+&lt;/v1:HandleRSP></con1:xqueryText>
+                        </con2:expr>
+                    </con2:replace>
+                    <con6:alert xmlns:con6="http://www.bea.com/wli/sb/stages/alert/config">
+                        <con1:id>_ActionId-N53ee3fc6.4f5e4b06.0.152837a9c0c.N7e89</con1:id>
+                        <con6:destination ref="SR_Commons/AlertDestinations/FW_Support"/>
+                        <con6:description>Framework - Error Dictionary Failure.</con6:description>
+                        <con6:severity>major</con6:severity>
+                        <con6:payload>
+                            <con1:xqueryTransform>
+                                <con1:resource ref="SR_Commons/XQuery/get_MailMessageContent_AlertFW"/>
+                                <con1:param name="mailFooter">
+                                    <con1:path>''</con1:path>
+                                </con1:param>
+                                <con1:param name="componentType">
+                                    <con1:path>'Support Component'</con1:path>
+                                </con1:param>
+                                <con1:param name="mailBody">
+                                    <con1:path>data($body)</con1:path>
+                                </con1:param>
+                                <con1:param name="messageHeader">
+                                    <con1:path>$body/*[1]/*:Header</con1:path>
+                                </con1:param>
+                                <con1:param name="componentOperation">
+                                    <con1:path>'handle'</con1:path>
+                                </con1:param>
+                                <con1:param name="componentName">
+                                    <con1:path>'Error Engine'</con1:path>
+                                </con1:param>
+                                <con1:param name="mailHeader">
+                                    <con1:path>''</con1:path>
+                                </con1:param>
+                            </con1:xqueryTransform>
+                        </con6:payload>
+                    </con6:alert>
+                    <con1:reply>
+                        <con1:id>_ActionId-N53ee3fce.N6d9a2234.0.15279415a3e.N7925</con1:id>
+                    </con1:reply>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:flow>
+            <con:pipeline-node name="Error Processing">
+                <con:request>request-N53ee3fce.N6d9a2234.0.15279415a3e.N7fad</con:request>
+                <con:response>response-N53ee3fce.N6d9a2234.0.15279415a3e.N7fac</con:response>
+            </con:pipeline-node>
+            <con:route-node name="Call - ErrorDictionary">
+                <con:context>
+                    <con1:userNsDecl prefix="v1" namespace="http://www.entel.cl/SC/ErrorManager/handle/v1"/>
+                    <con1:userNsDecl prefix="v2" namespace="http://www.entel.cl/ESO/Result/v2"/>
+                </con:context>
+                <con:actions>
+                    <con4:route xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con1:id>_ActionId-N53ee3fce.N6d9a2234.0.15279415a3e.N79ca</con1:id>
+                        <con4:service ref="DC_SC_ErrorManager/SupportLogic/Pipeline/ErrorDictionary" xsi:type="con:PipelineRef"/>
+                        <con4:outboundTransform>
+                            <con2:replace varName="body" contents-only="true">
+                                <con1:id>_ActionId-N53ee3fce.N6d9a2234.0.15279415a3e.N79c9</con1:id>
+                                <con2:expr>
+                                    <con1:xqueryTransform>
+                                        <con1:resource ref="DC_SC_ErrorManager/SupportLogic/XQuery/get_ErrDicREQ"/>
+                                        <con1:param name="ErrorSourceDetails">
+                                            <con1:path>$body/*[1]/*[1]/*:SourceError/*:ErrorSourceDetails</con1:path>
+                                        </con1:param>
+                                        <con1:param name="ErrorIndex">
+                                            <con1:path>$body/*[1]/*[2]</con1:path>
+                                        </con1:param>
+                                        <con1:param name="ErrorMetadata">
+                                            <con1:path>$ErrorMetadata</con1:path>
+                                        </con1:param>
+                                    </con1:xqueryTransform>
+                                </con2:expr>
+                            </con2:replace>
+                        </con4:outboundTransform>
+                        <con4:responseTransform>
+                            <con2:ifThenElse>
+                                <con1:id>_ActionId-N3f57c7ff.68a37ad.0.15471bd9688.N7ffa</con1:id>
+                                <con2:case id="_BranchId-N3f57c7ff.68a37ad.0.15471bd9688.N7ff9">
+                                    <con2:condition>
+                                        <con1:xqueryText>data($body/*[1]/*[1]/@status)='OK'</con1:xqueryText>
+                                    </con2:condition>
+                                    <con2:actions>
+                                        <con2:assign varName="ResultOk">
+                                            <con1:id>_ActionId-N3f57c7ff.68a37ad.0.15471bd9688.N7ff4</con1:id>
+                                            <con2:expr>
+                                                <con1:xqueryTransform>
+                                                    <con1:resource ref="SR_Commons/XQuery/get_Result_OK_Simple"/>
+                                                </con1:xqueryTransform>
+                                            </con2:expr>
+                                        </con2:assign>
+                                        <con2:replace varName="body" contents-only="true">
+                                            <con1:id>_ActionId-N3f57c7ff.68a37ad.0.15471bd9688.N7f8f</con1:id>
+                                            <con2:expr>
+                                                <con1:xqueryTransform>
+                                                    <con1:resource ref="DC_SC_ErrorManager/SupportLogic/XQuery/get_HandleRSP"/>
+                                                    <con1:param name="Result">
+                                                        <con1:path>$ResultOk</con1:path>
+                                                    </con1:param>
+                                                </con1:xqueryTransform>
+                                            </con2:expr>
+                                        </con2:replace>
+                                        <con1:reply isError="false">
+                                            <con1:id>_ActionId-N3f57c7ff.115fe206.0.15476c59b75.N7f98</con1:id>
+                                        </con1:reply>
+                                    </con2:actions>
+                                </con2:case>
+                                <con2:default>
+                                    <con2:replace varName="body" contents-only="true">
+                                        <con1:id>_ActionId-N53ee3fce.N6d9a2234.0.15279415a3e.N79c8</con1:id>
+                                        <con2:expr>
+                                            <con1:xqueryTransform>
+                                                <con1:resource ref="DC_SC_ErrorManager/SupportLogic/XQuery/get_HandleRSP"/>
+                                                <con1:param name="Result">
+                                                    <con1:path>$body/*[1]/*[1]</con1:path>
+                                                </con1:param>
+                                            </con1:xqueryTransform>
+                                        </con2:expr>
+                                    </con2:replace>
+                                    <con2:insert varName="body">
+                                        <con1:id>_ActionId-N53ee3fce.N6d9a2234.0.15279415a3e.N79c7</con1:id>
+                                        <con2:location>
+                                            <con1:xpathText>$body/*[1]/*[1]/*:CanonicalError</con1:xpathText>
+                                        </con2:location>
+                                        <con2:where>after</con2:where>
+                                        <con2:expr>
+                                            <con1:xqueryText>$SourceError</con1:xqueryText>
+                                        </con2:expr>
+                                    </con2:insert>
+                                </con2:default>
+                            </con2:ifThenElse>
+                        </con4:responseTransform>
+                    </con4:route>
+                </con:actions>
+            </con:route-node>
+        </con:flow>
+    </con:router>
+</con:pipelineEntry>

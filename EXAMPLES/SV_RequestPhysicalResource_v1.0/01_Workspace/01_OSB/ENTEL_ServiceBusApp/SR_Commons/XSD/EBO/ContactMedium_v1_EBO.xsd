@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/ContactMedium/v1"
+	xmlns:ebons_timeperiod="http://www.entel.cl/EBO/TimePeriod/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/ContactMedium/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/TimePeriod/v1" schemaLocation="TimePeriod_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="typeCode" type="xs:string"/>									
+	<xs:element name="value" type="xs:string"/>									
+	<xs:element name="validFor" type="ebons_timeperiod:TimePeriod_Type">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>the time period that the Contact Medium is valid for</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="ContactMedium" type="tns:ContactMedium_Type"/>
+	<xs:complexType name="ContactMedium_Type">
+		
+			<xs:annotation>
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">A means by which communication may be established with a party (individual or organization).Contact Medium is an abstract concept that should be subclassed as required.</xs:documentation>
+						
+			</xs:annotation>
+		<xs:sequence> 
+		<xs:element ref="tns:typeCode" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:value" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:validFor" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

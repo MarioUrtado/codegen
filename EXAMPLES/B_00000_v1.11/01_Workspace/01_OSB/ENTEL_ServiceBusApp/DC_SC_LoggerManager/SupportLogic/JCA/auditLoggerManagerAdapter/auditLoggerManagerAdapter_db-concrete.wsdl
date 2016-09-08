@@ -1,0 +1,12 @@
+<wsdl:definitions targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/ENTEL_SOAApp/DC_SC_LoggerManager/auditLoggerManagerAdapter" name="auditLoggerManagerAdapter_db-concrete" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+    <wsdl:import location="auditLoggerManagerAdapter.wsdl" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/ENTEL_SOAApp/DC_SC_LoggerManager/auditLoggerManagerAdapter"/>
+    <wsdl:binding name="auditLoggerManagerAdapter_ptt-binding" type="aud:auditLoggerManagerAdapter_ptt" xmlns:aud="http://xmlns.oracle.com/pcbpel/adapter/db/ENTEL_SOAApp/DC_SC_LoggerManager/auditLoggerManagerAdapter">
+        <soap:binding style="document" transport="http://www.bea.com/wli/sb/transports/jca"/>
+        <wsdl:operation name="auditLoggerManagerAdapter">
+            <soap:operation soapAction="auditLoggerManagerAdapter"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+</wsdl:definitions>

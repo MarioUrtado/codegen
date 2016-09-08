@@ -1,0 +1,66 @@
+<schema targetNamespace="http://www.entel.cl/ESO/Result/v2" elementFormDefault="qualified" version="1.0" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.entel.cl/ESO/Result/v2" xmlns:esons_error="http://www.entel.cl/ESO/Error/v1" xmlns:eddns_dictionary="http://www.entel.cl/EDD/Dictionary/v1">
+   <import namespace="http://www.entel.cl/ESO/Error/v1" schemaLocation="XMLSchema_-1814056809.xsd"/>
+   <import namespace="http://www.entel.cl/EDD/Dictionary/v1" schemaLocation="XMLSchema_212053839.xsd"/>
+   <annotation>
+      <documentation>
+				Meta-Information related to a certain execution result.
+			</documentation>
+   </annotation>
+   <complexType name="Result_Type">
+      <sequence>
+         <element ref="esons_error:CanonicalError" minOccurs="0">
+            <annotation>
+               <documentation>Canonical Representation of an unique non-successfull outcome status, if there is any. The Error modifier is applied as this element will be sent mainly on Error/Warning outcomes</documentation>
+            </annotation>
+         </element>
+         <element ref="esons_error:SourceError" minOccurs="0">
+            <annotation>
+               <documentation>
+							Main Native Error associated with the Canonical Error, which was obtained by the use if the former.
+					</documentation>
+            </annotation>
+         </element>
+         <element name="CorrelativeErrors" minOccurs="0">
+            <annotation>
+               <documentation>
+							Native Errors correlative with the main Source Error, that may be included for trace purposes.
+					</documentation>
+            </annotation>
+            <complexType>
+               <sequence>
+                  <element ref="esons_error:SourceError" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element>
+      </sequence>
+      <attribute name="status" use="required" type="tns:resultStatus_SType">
+         <annotation>
+            <documentation>
+						Result status of the Execution.
+					</documentation>
+         </annotation>
+      </attribute>
+      <attribute name="description" type="eddns_dictionary:genericStringValue_SType">
+         <annotation>
+            <documentation>
+						Non-Technical Information related to this
+						particular result.
+					</documentation>
+         </annotation>
+      </attribute>
+   </complexType>
+   <simpleType name="resultStatus_SType">
+      <restriction base="string">
+         <enumeration value="OK"/>
+         <enumeration value="WARNING"/>
+         <enumeration value="ERROR"/>
+      </restriction>
+   </simpleType>
+   <element name="Result" type="tns:Result_Type">
+      <annotation>
+         <documentation>
+				Meta-Information related to a certain execution result.
+			</documentation>
+      </annotation>
+   </element>
+</schema>

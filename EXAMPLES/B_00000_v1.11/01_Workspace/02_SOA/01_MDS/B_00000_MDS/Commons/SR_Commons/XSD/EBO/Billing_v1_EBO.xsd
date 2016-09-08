@@ -1,0 +1,48 @@
+<schema targetNamespace="http://www.entel.cl/EBO/Billing/v1" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.entel.cl/EBO/Billing/v1" xmlns:eddns_dictionary="http://www.entel.cl/EDD/Dictionary/v1">
+    <import namespace="http://www.entel.cl/EDD/Dictionary/v1" schemaLocation="../EDD/Dictionary_v1_EDD.xsd"/>
+
+    <complexType name="Client_Type">
+		<annotation/>
+		<sequence>
+			<element ref="tns:ClientID" maxOccurs="1" minOccurs="1"/>
+			<element ref="tns:ClientSurname" maxOccurs="1" minOccurs="0"/>
+                        <element ref="tns:ClientName" maxOccurs="1" minOccurs="0"/>
+			<element ref="tns:NotificationEmail" maxOccurs="1" minOccurs="0"/>
+			<element ref="tns:NotificationSMS" maxOccurs="1" minOccurs="0"/>
+                        <element ref="tns:NotificationHomeBanking" maxOccurs="1" minOccurs="0"/>
+		</sequence>
+    </complexType>
+    <element name="Client" type="tns:Client_Type"/>   
+    
+    <element name="TransferID" type="eddns_dictionary:id_SType"/>
+    <element name="ClientID" type="eddns_dictionary:id_SType"/>
+    <element name="ClientSurname" type="eddns_dictionary:genericStringValue_SType"/>
+    <element name="ClientName" type="eddns_dictionary:genericStringValue_SType"/>
+    <element name="NotificationEmail" type="eddns_dictionary:genericStringValue_SType"/>
+    <element name="NotificationSMS" type="eddns_dictionary:genericStringValue_SType"/>
+    <element name="NotificationHomeBanking" type="eddns_dictionary:genericStringValue_SType"/>
+    
+    <complexType name="Notification_Type">
+		<annotation/>
+		<sequence>
+			<element ref="tns:NotifyChannel" maxOccurs="1" minOccurs="1"/>
+			<element ref="tns:NotifyCode" maxOccurs="1" minOccurs="1"/>
+                        <element ref="tns:NotifyDescription" maxOccurs="1" minOccurs="1"/>
+		</sequence>
+    </complexType>
+    <element name="Notification" type="tns:Notification_Type"/>   
+
+    <simpleType name="NotifyChannel_SType">
+          <restriction base="string">
+                <enumeration value="EMAIL"/>
+		<enumeration value="SMS"/>
+                <enumeration value="HOMEBANKING"/>
+		<enumeration value="ALL"/>
+          </restriction>
+    </simpleType>	
+    <element name="NotifyChannel" type="tns:NotifyChannel_SType"/>
+    
+    <element name="NotifyCode" type="eddns_dictionary:genericStringValue_SType"/>
+    <element name="NotifyDescription" type="eddns_dictionary:genericStringValue_SType"/>
+    
+</schema>

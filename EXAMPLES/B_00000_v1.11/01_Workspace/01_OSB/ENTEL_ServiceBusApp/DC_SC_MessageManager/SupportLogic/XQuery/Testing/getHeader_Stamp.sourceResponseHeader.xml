@@ -1,0 +1,22 @@
+<v1:Get_Consumer_RSP xmlns:v1="http://www.entel.cl/EBM/Consumer/get/v1"
+                     xmlns:v11="http://www.entel.cl/ESO/MessageHeader/v1" xmlns:v12="http://www.entel.cl/ESO/Result/v1"
+                     xmlns:v13="http://www.entel.cl/ESO/Error/v1" xmlns:v14="http://www.entel.cl/EBO/Consumer/v1">
+  <v11:ResponseHeader>
+    <v11:Consumer sysCode="001" enterpriseCode="260" countryCode="CHL"/>
+    <v11:Trace clientReqTimestamp="2015-12-17T09:30:47.0Z" reqTimestamp="2015-12-17T09:31:52.0Z"
+               processID="ORDER_TO_PAYMENT" eventID="123123-AGH-221?"
+               conversationID="CHL_17112015155030_1042" correlationID="">
+      <v11:Service code="001" name="Consumer" operation="get"/>
+    </v11:Trace>
+    <v11:Channel name="WEB" mode=""/>
+    <v12:Result status="OK" description="Ejecucion Exitosa"/>
+  </v11:ResponseHeader>
+  <v1:Body>
+    <v14:Consumer>
+      <v14:ConsumerName>Mario</v14:ConsumerName>
+      <v14:ConsumerSurename>Mesaglio</v14:ConsumerSurename>
+      <v14:ConsumerAge>26</v14:ConsumerAge>
+      <v14:ConsumerStatus>Defaulter</v14:ConsumerStatus>
+    </v14:Consumer>
+  </v1:Body>
+</v1:Get_Consumer_RSP>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/AppliedCustomerBillingCharge/v1"
+	xmlns:ebons_quantity="http://www.entel.cl/EBO/Quantity/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/AppliedCustomerBillingCharge/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/Quantity/v1" schemaLocation="../CommonBusinessEntitiesDomain/Quantity_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="CDRGenerator" type="xs:string"/>									
+	<xs:element name="billed" type="xs:boolean"/>									
+	<xs:element name="callID" type="xs:string"/>									
+	<xs:element name="callPrePayInd" type="xs:string"/>									
+	<xs:element name="callStartDate" type="xs:dateTime"/>									
+	<xs:element name="callType" type="xs:string"/>									
+	<xs:element name="callUnitMeasure" type="xs:string"/>									
+	<xs:element name="description" type="xs:string"/>									
+	<xs:element name="destinationCall" type="xs:string"/>									
+	<xs:element name="destinyCall" type="xs:string"/>									
+	<xs:element name="entryCallDate" type="xs:dateTime"/>									
+	<xs:element name="externalPackID" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>Identification service package for use external</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="externalPlanID" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>Tariff plan identifier for use external</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="originCall" type="xs:string"/>									
+	<xs:element name="roamingCall" type="xs:boolean"/>									
+	<xs:element name="taxTimeName" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>Short Name time rates.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="taxZoneName" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>zone name rate</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="callVolume" type="ebons_quantity:Quantity_Type"/>									
+	<xs:element name="downloadVolume" type="ebons_quantity:Quantity_Type"/>									
+	<xs:element name="durationCall" type="ebons_quantity:Quantity_Type"/>									
+	<xs:element name="eventDuration" type="ebons_quantity:Quantity_Type">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>Event Duraction (SMS, MMS, VAS Service)</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="messageVolume" type="ebons_quantity:Quantity_Type"/>									
+	<xs:element name="ratedVolume" type="ebons_quantity:Quantity_Type">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>Volume tariffed call</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="AppliedCustomerBillingCharge" type="tns:AppliedCustomerBillingCharge_Type"/>
+	<xs:complexType name="AppliedCustomerBillingCharge_Type">
+		<xs:sequence> 
+		<xs:element ref="tns:CDRGenerator" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:billed" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:callID" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:callPrePayInd" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:callStartDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:callType" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:callUnitMeasure" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:description" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:destinationCall" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:destinyCall" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:entryCallDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:externalPackID" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:externalPlanID" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:originCall" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:roamingCall" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:taxTimeName" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:taxZoneName" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:callVolume" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:downloadVolume" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:durationCall" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:eventDuration" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:messageVolume" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:ratedVolume" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/CustomerBill/v1"
+	xmlns:ebons_money="http://www.entel.cl/EBO/Money/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/CustomerBill/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/Money/v1" schemaLocation="../CommonBusinessEntitiesDomain/Money_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="addiotionalIdRef" type="xs:string"/>									
+	<xs:element name="additionalCharge" type="xs:string"/>									
+	<xs:element name="amountCashed" type="xs:float"/>									
+	<xs:element name="baseAmount" type="xs:float"/>									
+	<xs:element name="billComments1" type="xs:string"/>									
+	<xs:element name="billComments2" type="xs:string"/>									
+	<xs:element name="billDate" type="xs:dateTime"/>									
+	<xs:element name="billDateRef" type="xs:dateTime"/>									
+	<xs:element name="billNo" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>A unique identification number of a bill.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="billNoOriginal" type="xs:string"/>									
+	<xs:element name="billNoRef" type="xs:string"/>									
+	<xs:element name="billType" type="xs:integer"/>									
+	<xs:element name="causalCode" type="xs:string"/>									
+	<xs:element name="command" type="xs:string"/>									
+	<xs:element name="compensatedBillNo" type="xs:string"/>									
+	<xs:element name="correlativeNumber" type="xs:string"/>									
+	<xs:element name="dateDigitalSignature" type="xs:string"/>									
+	<xs:element name="debtType" type="xs:string"/>									
+	<xs:element name="descriptionRef" type="xs:string"/>									
+	<xs:element name="digitalSignature" type="xs:string"/>									
+	<xs:element name="discountAmount" type="xs:float"/>									
+	<xs:element name="discountPercentage" type="xs:float"/>									
+	<xs:element name="dispatchType" type="xs:integer"/>									
+	<xs:element name="docId" type="xs:string"/>									
+	<xs:element name="documentId" type="xs:string"/>									
+	<xs:element name="documentOriginalId" type="xs:string"/>									
+	<xs:element name="documentStatus" type="xs:string"/>									
+	<xs:element name="documentType" type="xs:integer"/>									
+	<xs:element name="documentTypeDTE" type="xs:string"/>									
+	<xs:element name="documentTypeRef" type="xs:string"/>									
+	<xs:element name="exemptAmount" type="xs:float"/>									
+	<xs:element name="generationFormat" type="xs:string"/>									
+	<xs:element name="globalIndicator" type="xs:string"/>									
+	<xs:element name="grossAmountInd" type="xs:integer"/>									
+	<xs:element name="header" type="xs:string"/>									
+	<xs:element name="idTransaction" type="xs:string"/>									
+	<xs:element name="indPaymenMethod" type="xs:integer"/>									
+	<xs:element name="line" type="xs:string"/>									
+	<xs:element name="liquidateCode" type="xs:string"/>									
+	<xs:element name="listenerCode" type="xs:string"/>									
+	<xs:element name="lowerBillNo" type="xs:string"/>									
+	<xs:element name="lowerCorrelativeNumber" type="xs:string"/>									
+	<xs:element name="marginAmount" type="xs:float"/>									
+	<xs:element name="netAmount" type="xs:float"/>									
+	<xs:element name="noDebitIndicator" type="xs:integer"/>									
+	<xs:element name="nonBillable" type="xs:float"/>									
+	<xs:element name="numberOfCopies" type="xs:integer"/>									
+	<xs:element name="observation" type="xs:string"/>									
+	<xs:element name="operation" type="xs:string"/>									
+	<xs:element name="paymentAmount" type="xs:float"/>									
+	<xs:element name="paymentConcept" type="xs:string"/>									
+	<xs:element name="paymentDueDate" type="xs:dateTime">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>A customer bill payment due date.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="paymentTermsCode" type="xs:string"/>									
+	<xs:element name="paymentTermsDays" type="xs:integer"/>									
+	<xs:element name="paymentTermsDescription" type="xs:string"/>									
+	<xs:element name="presentIndicator" type="xs:string"/>									
+	<xs:element name="previousBalance" type="xs:float"/>									
+	<xs:element name="printType" type="xs:string"/>									
+	<xs:element name="rateFlat" type="xs:float"/>									
+	<xs:element name="receptionCode" type="xs:string"/>									
+	<xs:element name="rechargeAmount" type="xs:float"/>									
+	<xs:element name="rechargePercentage" type="xs:float"/>									
+	<xs:element name="referenceCode" type="xs:integer"/>									
+	<xs:element name="referenceNumber" type="xs:integer"/>									
+	<xs:element name="relationshipType" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>Defines the type of connection between two CustomerAccounts.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="serialNumber" type="xs:string"/>									
+	<xs:element name="taxCompany" type="xs:float"/>									
+	<xs:element name="taxPayerId" type="xs:string"/>									
+	<xs:element name="taxRate" type="xs:float"/>									
+	<xs:element name="taxThirdParty" type="xs:string"/>									
+	<xs:element name="taxUnretained" type="xs:float"/>									
+	<xs:element name="totalAmount" type="xs:float"/>									
+	<xs:element name="totalTaxRate" type="xs:float"/>									
+	<xs:element name="totalTaxValue" type="xs:float"/>									
+	<xs:element name="transferId" type="xs:integer"/>									
+	<xs:element name="upperBillNo" type="xs:string"/>									
+	<xs:element name="upperCorrelativeNumber" type="xs:string"/>									
+	<xs:element name="urlAttachedDocument" type="xs:string"/>									
+	<xs:element name="urlDocument" type="xs:string"/>									
+	<xs:element name="vendorId" type="xs:string"/>									
+	<xs:element name="billAmount" type="ebons_money:Money_Type">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>A total customer bill amount due.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="unit" type="ebons_money:Money_Type"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="CustomerBill" type="tns:CustomerBill_Type"/>
+	<xs:complexType name="CustomerBill_Type">
+		
+			<xs:annotation>
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">A total amount due from a CustomerAccount for all products during the billing period.</xs:documentation>
+						
+			</xs:annotation>
+		<xs:sequence> 
+		<xs:element ref="tns:addiotionalIdRef" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:additionalCharge" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:amountCashed" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:baseAmount" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:billComments1" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:billComments2" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:billDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:billDateRef" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:billNo" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:billNoOriginal" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:billNoRef" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:billType" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:causalCode" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:command" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:compensatedBillNo" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:correlativeNumber" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:dateDigitalSignature" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:debtType" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:descriptionRef" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:digitalSignature" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:discountAmount" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:discountPercentage" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:dispatchType" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:docId" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:documentId" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:documentOriginalId" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:documentStatus" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:documentType" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:documentTypeDTE" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:documentTypeRef" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:exemptAmount" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:generationFormat" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:globalIndicator" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:grossAmountInd" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:header" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:idTransaction" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:indPaymenMethod" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:line" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:liquidateCode" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:listenerCode" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:lowerBillNo" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:lowerCorrelativeNumber" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:marginAmount" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:netAmount" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:noDebitIndicator" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:nonBillable" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:numberOfCopies" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:observation" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:operation" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:paymentAmount" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:paymentConcept" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:paymentDueDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:paymentTermsCode" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:paymentTermsDays" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:paymentTermsDescription" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:presentIndicator" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:previousBalance" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:printType" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:rateFlat" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:receptionCode" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:rechargeAmount" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:rechargePercentage" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:referenceCode" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:referenceNumber" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:relationshipType" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:serialNumber" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:taxCompany" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:taxPayerId" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:taxRate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:taxThirdParty" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:taxUnretained" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:totalAmount" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:totalTaxRate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:totalTaxValue" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:transferId" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:upperBillNo" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:upperCorrelativeNumber" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:urlAttachedDocument" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:urlDocument" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:vendorId" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:billAmount" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:unit" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

@@ -1,0 +1,15 @@
+<wsdl:definitions targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/ENTEL_ServiceBusApp/DC_SC_ParameterManager/getEndpointParameterManagerAdapter" name="getEndpointParameterManagerAdapter-concrete" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+    <wsdl:import location="getEndpointParameterManagerAdapter.wsdl" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/ENTEL_ServiceBusApp/DC_SC_ParameterManager/getEndpointParameterManagerAdapter"/>
+    <wsdl:binding name="getEndpointParameterManagerAdapter_ptt-binding" type="get:getEndpointParameterManagerAdapter_ptt" xmlns:get="http://xmlns.oracle.com/pcbpel/adapter/db/ENTEL_ServiceBusApp/DC_SC_ParameterManager/getEndpointParameterManagerAdapter">
+        <soap:binding style="document" transport="http://www.bea.com/wli/sb/transports/jca"/>
+        <wsdl:operation name="getEndpointParameterManagerAdapter">
+            <soap:operation soapAction="getEndpointParameterManagerAdapter"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+</wsdl:definitions>

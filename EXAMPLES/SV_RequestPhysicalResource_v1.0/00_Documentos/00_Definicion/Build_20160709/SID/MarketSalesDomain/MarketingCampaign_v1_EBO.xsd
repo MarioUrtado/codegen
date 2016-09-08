@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/MarketingCampaign/v1"
+	xmlns:ebons_timeperiod="http://www.entel.cl/EBO/TimePeriod/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/MarketingCampaign/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/TimePeriod/v1" schemaLocation="../CommonBusinessEntitiesDomain/TimePeriod_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="ID" type="xs:string"/>									
+	<xs:element name="customerType" type="xs:string"/>									
+	<xs:element name="description" type="xs:string"/>									
+	<xs:element name="destinationTarget" type="xs:string"/>									
+	<xs:element name="maximumAttempts" type="xs:integer"/>									
+	<xs:element name="maximumTimeFrame" type="xs:integer"/>									
+	<xs:element name="mcType" type="xs:string"/>									
+	<xs:element name="name" type="xs:string"/>									
+	<xs:element name="resume" type="xs:string"/>									
+	<xs:element name="status" type="xs:string"/>									
+	<xs:element name="subType" type="xs:string"/>									
+	<xs:element name="waveCode" type="xs:string"/>									
+	<xs:element name="validFor" type="ebons_timeperiod:TimePeriod_Type"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="MarketingCampaign" type="tns:MarketingCampaign_Type"/>
+	<xs:complexType name="MarketingCampaign_Type">
+		
+			<xs:annotation>
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">A depiction of how the launch or re-launch of a ProductOffering is or will be undertaken.</xs:documentation>
+						
+			</xs:annotation>
+		<xs:sequence> 
+		<xs:element ref="tns:ID" maxOccurs="1" minOccurs="1"/>
+		<xs:element ref="tns:customerType" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:description" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:destinationTarget" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:maximumAttempts" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:maximumTimeFrame" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:mcType" maxOccurs="1" minOccurs="1"/>
+		<xs:element ref="tns:name" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:resume" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:status" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:subType" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:waveCode" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:validFor" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

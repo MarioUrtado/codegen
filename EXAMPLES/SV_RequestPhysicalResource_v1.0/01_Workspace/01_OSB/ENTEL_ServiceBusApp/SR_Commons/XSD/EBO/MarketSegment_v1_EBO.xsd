@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/MarketSegment/v1"
+	xmlns:ebons_timeperiod="http://www.entel.cl/EBO/TimePeriod/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/MarketSegment/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/TimePeriod/v1" schemaLocation="TimePeriod_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="ID" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>A unique identifier for the MarketSegment.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="class" type="xs:string"/>									
+	<xs:element name="combination" type="xs:string"/>									
+	<xs:element name="description" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>A narrative that explains what the MarketSegment is.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="marketSegmentCategory" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>A classification of MarketSegments because they share common characteristics. For example a vertical or horizontal MarketSegment. Vertical MarketSegments put a PartyRole in a single segment, while a PartyRole can exist in multiple horizontal MarketSegments</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="marketSegmentSubCategory" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>A further classification of MarketSegments because they share common characteristics. For example, a vertical category MarketSegment may be further categorized as consumer, business, or carrier.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="marketType" type="xs:string"/>									
+	<xs:element name="name" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>A word, term, or phrase by which a MarketSegment is known and distinguished from other MarketSegments.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="qualitative1" type="xs:string"/>									
+	<xs:element name="qualitative2" type="xs:string"/>									
+	<xs:element name="quantitative1" type="xs:string"/>									
+	<xs:element name="quantitative2" type="xs:string"/>									
+	<xs:element name="validFor" type="ebons_timeperiod:TimePeriod_Type">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>The period during which the MarketSegment is applicable.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="MarketSegment" type="tns:MarketSegment_Type"/>
+	<xs:complexType name="MarketSegment_Type">
+		
+			<xs:annotation>
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">A grouping of Parties, GeographicAreas, SalesChannels, and so forth. MarketSegments are the target of MarketingCampaigns, ProductOfferings, ProductPromotions, ProductPlacements, and ProductPrograms from both internal and external (Competitors, and other Providers) perspective.</xs:documentation>
+						
+			</xs:annotation>
+		<xs:sequence> 
+		<xs:element ref="tns:ID" maxOccurs="1" minOccurs="1"/>
+		<xs:element ref="tns:class" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:combination" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:description" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:marketSegmentCategory" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:marketSegmentSubCategory" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:marketType" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:name" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:qualitative1" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:qualitative2" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:quantitative1" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:quantitative2" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:validFor" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

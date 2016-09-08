@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/AppliedCustomerBillingProductCharge/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/AppliedCustomerBillingProductCharge/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="conceptCode" type="xs:string"/>									
+	<xs:element name="costCenter" type="xs:string"/>									
+	<xs:element name="description" type="xs:string"/>									
+	<xs:element name="discountAmount" type="xs:float"/>									
+	<xs:element name="discountPercentage" type="xs:float"/>									
+	<xs:element name="exemptIndicator" type="xs:string"/>			
+	<xs:element name="itemCode" type="xs:string"/>								
+	<xs:element name="itemDescription" type="xs:string"/>									
+	<xs:element name="itemDueDate" type="xs:dateTime"/>									
+	<xs:element name="itemNumber" type="xs:string"/>									
+	<xs:element name="itemPrice" type="xs:float"/>
+	<xs:element name="fundedValue" type="xs:string">
+	<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+		<xs:documentation>Indica si el producto es financiado.</xs:documentation>
+	</xs:annotation>
+	</xs:element>									
+	<xs:element name="itemType" type="xs:string"/>
+	<xs:element name="itemPriceWithTax" type="xs:float"/>									
+	<xs:element name="marketPrice" type="xs:float"/>									
+	<xs:element name="minutes" type="xs:string"/>									
+	<xs:element name="name" type="xs:string"/>									
+	<xs:element name="netAmount" type="xs:float"/>									
+	<xs:element name="quantityItem" type="xs:integer"/>
+	<xs:element name="productId" type="xs:string"/>									
+	<xs:element name="rechargeAmount" type="xs:float"/>
+	<xs:element name="productOperation" type="xs:string"/>									
+										
+										
+	<xs:element name="rechargePercentage" type="xs:float">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+			</xs:element>									
+	<xs:element name="referencePrice" type="xs:float"/>									
+	<xs:element name="referenceQuality" type="xs:integer"/>									
+	<xs:element name="referenceQuantity" type="xs:float"/>									
+	<xs:element name="referenceUnit" type="xs:string"/>									
+	<xs:element name="serialNumber" type="xs:string"/>									
+	<xs:element name="taxIndicator" type="xs:string"/>									
+	<xs:element name="totalItem" type="xs:float"/>									
+	<xs:element name="unit" type="xs:string"/>									
+	<xs:element name="unitOfMeasure" type="xs:string"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="AppliedCustomerBillingProductCharge" type="tns:AppliedCustomerBillingProductCharge_Type"/>
+	<xs:complexType name="AppliedCustomerBillingProductCharge_Type">
+		
+			<xs:annotation>
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">A charge applied to a product.</xs:documentation>
+						
+			</xs:annotation>
+		<xs:sequence> 
+		<xs:element ref="tns:conceptCode" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:costCenter" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:description" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:discountAmount" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:discountPercentage" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:exemptIndicator" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:fundedValue" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:itemCode" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:itemDescription" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:itemDueDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:itemNumber" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:itemPrice" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:itemPriceWithTax" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:itemType" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:marketPrice" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:minutes" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:name" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:netAmount" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:productId" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:productOperation" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:quantityItem" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:rechargeAmount" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:rechargePercentage" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:referencePrice" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:referenceQuality" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:referenceQuantity" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:referenceUnit" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:serialNumber" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:taxIndicator" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:totalItem" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:unit" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:unitOfMeasure" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

@@ -1,0 +1,31 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+   <entry key="ESB_ERROR_DERIVATION_CONF.COUNT_PRIORITY_1:db_column_precision">38</entry>
+   <entry key="ESB_ERROR_DERIVATION_CONF.COUNT_PRIORITY_1:db_column_scale">0</entry>
+   <entry key="ESB_ERROR_DERIVATION_CONF.COUNT_PRIORITY_1:db_column_type">NUMBER</entry>
+   <entry key="ESB_ERROR_DERIVATION_CONF:db_column_4">RUN_STATE</entry>
+   <entry key="ESB_ERROR_DERIVATION_CONF:db_column_3">COUNT_PRIORITY_3</entry>
+   <entry key="ESB_ERROR_DERIVATION_CONF.COUNT_PRIORITY_2:db_column_not_null">true</entry>
+   <entry key="ESB_ERROR_DERIVATION_CONF.RUN_STATE:db_column_not_null">true</entry>
+   <entry key="ESB_ERROR_DERIVATION_CONF:db_column_2">COUNT_PRIORITY_2</entry>
+   <entry key="ESB_ERROR_DERIVATION_CONF.ID:db_column_not_null">true</entry>
+   <entry key="ESB_ERROR_DERIVATION_CONF:db_column_1">COUNT_PRIORITY_1</entry>
+   <entry key="ESB_ERROR_DERIVATION_CONF.ID:db_column_type">NUMBER</entry>
+   <entry key="ESB_ERROR_DERIVATION_CONF:db_column_0">ID</entry>
+   <entry key="ESB_ERROR_DERIVATION_CONF.RUN_STATE:db_column_type">VARCHAR2</entry>
+   <entry key="ESB_ERROR_DERIVATION_CONF.ID:db_column_scale">0</entry>
+   <entry key="ESB_ERROR_DERIVATION_CONF.COUNT_PRIORITY_2:db_column_type">NUMBER</entry>
+   <entry key="ESB_ERROR_DERIVATION_CONF.ID:db_column_precision">38</entry>
+   <entry key="ESB_ERROR_DERIVATION_CONF:db_table_type">TABLE</entry>
+   <entry key="return_single_result_set">false</entry>
+   <entry key="ESB_ERROR_DERIVATION_CONF.COUNT_PRIORITY_2:db_column_precision">38</entry>
+   <entry key="ESB_ERROR_DERIVATION_CONF.COUNT_PRIORITY_3:db_column_precision">38</entry>
+   <entry key="ESB_ERROR_DERIVATION_CONF.COUNT_PRIORITY_3:db_column_type">NUMBER</entry>
+   <entry key="ESB_ERROR_DERIVATION_CONF.RUN_STATE:db_column_size">20</entry>
+   <entry key="root_descriptor_alias">ESB_ERROR_DERIVATION_CONF</entry>
+   <entry key="ESB_ERROR_DERIVATION_CONF.COUNT_PRIORITY_2:db_column_scale">0</entry>
+   <entry key="ESB_ERROR_DERIVATION_CONF.COUNT_PRIORITY_1:db_column_not_null">true</entry>
+   <entry key="ESB_ERROR_DERIVATION_CONF.COUNT_PRIORITY_3:db_column_scale">0</entry>
+   <entry key="ESB_ERROR_DERIVATION_CONF.COUNT_PRIORITY_3:db_column_not_null">true</entry>
+</properties>

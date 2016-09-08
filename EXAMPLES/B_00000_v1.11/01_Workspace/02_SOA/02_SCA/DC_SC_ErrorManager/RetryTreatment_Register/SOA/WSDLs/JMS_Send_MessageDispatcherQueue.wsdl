@@ -1,0 +1,28 @@
+<wsdl:definitions
+     name="JMS_Send_MessageDispatcherQueue"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/jms/DC_SC_ErrorManager/RetryTreatment_Register/JMS_Send_MessageDispatcherQueue"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/DC_SC_ErrorManager/RetryTreatment_Register/JMS_Send_MessageDispatcherQueue"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:imp1="http://www.entel.cl/ESO/ErrorTreatmentStatus/v1"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+  <plt:partnerLinkType name="Produce_Message_plt" >
+    <plt:role name="Produce_Message_role" >
+      <plt:portType name="tns:Produce_Message_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://www.entel.cl/ESO/ErrorTreatmentStatus/v1" schemaLocation="oramds:/apps/Commons/DC_SC_ErrorManager/ErrorHospital/XSD/ErrorTreatmentStatus_v1_ESO.xsd" />
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="Produce_Message_msg">
+        <wsdl:part name="body" element="imp1:ErrorTreatmentStatus"/>
+    </wsdl:message>
+    <wsdl:portType name="Produce_Message_ptt">
+        <wsdl:operation name="Produce_Message">
+            <wsdl:input message="tns:Produce_Message_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

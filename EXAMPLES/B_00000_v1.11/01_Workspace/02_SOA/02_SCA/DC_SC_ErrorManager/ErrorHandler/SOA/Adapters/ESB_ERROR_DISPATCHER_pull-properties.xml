@@ -1,0 +1,31 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+   <entry key="ESB_ERROR_DISPATCHER.ERROR_HOSPITAL_ID:db_column_scale">0</entry>
+   <entry key="ESB_ERROR_DISPATCHER.COUNT_RETRY:db_column_not_null">false</entry>
+   <entry key="ESB_ERROR_DISPATCHER.TREATMENT_ID:db_column_not_null">false</entry>
+   <entry key="ESB_ERROR_DISPATCHER.TREATMENT_ID:db_column_scale">0</entry>
+   <entry key="ESB_ERROR_DISPATCHER:db_column_4">COUNT_RETRY</entry>
+   <entry key="ESB_ERROR_DISPATCHER:db_column_3">STATUS</entry>
+   <entry key="ESB_ERROR_DISPATCHER.COUNT_RETRY:db_column_type">NUMBER</entry>
+   <entry key="ESB_ERROR_DISPATCHER.ERROR_HOSPITAL_ID:db_column_type">NUMBER</entry>
+   <entry key="ESB_ERROR_DISPATCHER.COUNT_RETRY:db_column_scale">0</entry>
+   <entry key="ESB_ERROR_DISPATCHER.COUNT_RETRY:db_column_precision">38</entry>
+   <entry key="ESB_ERROR_DISPATCHER:db_column_2">TREATMENT_ID</entry>
+   <entry key="ESB_ERROR_DISPATCHER:db_column_1">ERROR_HOSPITAL_ID</entry>
+   <entry key="ESB_ERROR_DISPATCHER:db_column_0">ID</entry>
+   <entry key="ESB_ERROR_DISPATCHER.TREATMENT_ID:db_column_precision">38</entry>
+   <entry key="ESB_ERROR_DISPATCHER.ID:db_column_not_null">true</entry>
+   <entry key="ESB_ERROR_DISPATCHER.STATUS:db_column_type">VARCHAR2</entry>
+   <entry key="ESB_ERROR_DISPATCHER.TREATMENT_ID:db_column_type">NUMBER</entry>
+   <entry key="ESB_ERROR_DISPATCHER.ERROR_HOSPITAL_ID:db_column_precision">38</entry>
+   <entry key="ESB_ERROR_DISPATCHER.ID:db_column_type">NUMBER</entry>
+   <entry key="return_single_result_set">false</entry>
+   <entry key="ESB_ERROR_DISPATCHER.ID:db_column_scale">0</entry>
+   <entry key="ESB_ERROR_DISPATCHER.ID:db_column_precision">38</entry>
+   <entry key="ESB_ERROR_DISPATCHER.ERROR_HOSPITAL_ID:db_column_not_null">true</entry>
+   <entry key="ESB_ERROR_DISPATCHER:db_table_type">TABLE</entry>
+   <entry key="root_descriptor_alias">ESB_ERROR_DISPATCHER</entry>
+   <entry key="ESB_ERROR_DISPATCHER.STATUS:db_column_size">20</entry>
+   <entry key="ESB_ERROR_DISPATCHER.STATUS:db_column_not_null">true</entry>
+</properties>

@@ -1,0 +1,15 @@
+<wsdl:definitions targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/ENTEL_ServiceBusApp/DC_SC_MessageManager/getTransactionCheck" name="getTransactionCheck-concrete" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+    <wsdl:import location="getTransactionCheck.wsdl" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/ENTEL_ServiceBusApp/DC_SC_MessageManager/getTransactionCheck"/>
+    <wsdl:binding name="getTransactionCheck_ptt-binding" type="get:getTransactionCheck_ptt" xmlns:get="http://xmlns.oracle.com/pcbpel/adapter/db/ENTEL_ServiceBusApp/DC_SC_MessageManager/getTransactionCheck">
+        <soap:binding style="document" transport="http://www.bea.com/wli/sb/transports/jca"/>
+        <wsdl:operation name="getTransactionCheck">
+            <soap:operation soapAction="getTransactionCheck"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+</wsdl:definitions>

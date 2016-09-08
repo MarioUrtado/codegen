@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/CustomerCreditProfile/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/CustomerCreditProfile/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="ID" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>A unique identifier that enables different instances of a CustomerCreditProfile to be distinguished from each other.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="creditProfileDate" type="xs:dateTime">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>The date the profile was established.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="creditRiskRating" type="xs:integer">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>This is an integer whose value is used to rate the risk of this Customer paying late or defaulting versus paying on time.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="creditScore" type="xs:integer">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>A measure of a person?s or organization?s creditworthiness calculated on the basis of a combination of factors such as their income and credit history.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="CustomerCreditProfile" type="tns:CustomerCreditProfile_Type"/>
+	<xs:complexType name="CustomerCreditProfile_Type">
+		
+			<xs:annotation>
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">An outline of a Customer's credit worthiness.</xs:documentation>
+						
+			</xs:annotation>
+		<xs:sequence> 
+		<xs:element ref="tns:ID" maxOccurs="1" minOccurs="1"/>
+		<xs:element ref="tns:creditProfileDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:creditRiskRating" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:creditScore" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

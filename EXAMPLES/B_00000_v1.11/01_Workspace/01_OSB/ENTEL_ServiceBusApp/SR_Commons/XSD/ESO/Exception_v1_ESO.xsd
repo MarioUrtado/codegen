@@ -1,0 +1,33 @@
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+	xmlns:tns="http://www.entel.cl/ESO/Exception/v1" 
+	targetNamespace="http://www.entel.cl/ESO/Exception/v1" 
+	xmlns:eddns_dictionary="http://www.entel.cl/EDD/Dictionary/v1" 
+	xmlns:esons_messageHeader="http://www.entel.cl/ESO/MessageHeader/v1"
+	xmlns:esons_result="http://www.entel.cl/ESO/Result/v2"
+	elementFormDefault="qualified" >
+  
+  <import namespace="http://www.entel.cl/EDD/Dictionary/v1" schemaLocation="../EDD/Dictionary_v1_EDD.xsd"/>
+  <import namespace="http://www.entel.cl/ESO/MessageHeader/v1" schemaLocation="../ESO/MessageHeader_v1_ESO.xsd"/>
+  <import namespace="http://www.entel.cl/ESO/Result/v2" schemaLocation="../ESO/Result_v2_ESO.xsd"/>
+  
+   <element name="Target" type="tns:TargetOperation_Type"/>
+    <complexType name="TargetOperation_Type">
+        <attribute name="operation" use="required" type="eddns_dictionary:genericStringValue_SType"/>
+        <attribute name="provider" use="required" type="eddns_dictionary:sysCode_SType"/>
+        <attribute name="api" use="required" type="eddns_dictionary:sysCode_SType"/>
+        <attribute name="version" use="required" type="eddns_dictionary:genericStringValue_SType"/>
+    </complexType>
+  
+   <element name="UnexpectedErrorException" type="tns:UnexpectedErrorException_Type"/>
+   <complexType name="UnexpectedErrorException_Type">
+        <sequence>
+            <choice>
+              <element ref="esons_messageHeader:ResponseHeader"/>
+              <element ref="esons_result:Result"/>
+            </choice>
+        </sequence>
+      <attribute name="exceptionDetail" type="eddns_dictionary:genericStringValue_SType"/>
+    </complexType>
+  
+  
+</schema>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/IssuingCompany/v1"
+	xmlns:ebons_telephonenumber="http://www.entel.cl/EBO/TelephoneNumber/v1"
+	xmlns:ebons_thirdpartycollectionpm="http://www.entel.cl/EBO/ThirdPartyCollectionPM/v1"
+	xmlns:ebons_organizationname="http://www.entel.cl/EBO/OrganizationName/v1"
+	xmlns:ebons_saleschannel="http://www.entel.cl/EBO/SalesChannel/v1"
+	xmlns:ebons_emailcontact="http://www.entel.cl/EBO/EmailContact/v1"
+	xmlns:ebons_geographicarea="http://www.entel.cl/EBO/GeographicArea/v1"
+	xmlns:ebons_partyidentification="http://www.entel.cl/EBO/PartyIdentification/v1"
+	xmlns:ebons_organization="http://www.entel.cl/EBO/Organization/v1"
+	xmlns:ebons_skill="http://www.entel.cl/EBO/Skill/v1"
+	xmlns:ebons_partyrole="http://www.entel.cl/EBO/PartyRole/v1"
+	xmlns:ebons_streetname="http://www.entel.cl/EBO/StreetName/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/IssuingCompany/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/TelephoneNumber/v1" schemaLocation="../EngagedPartyDomain/TelephoneNumber_v1_EBO.xsd"/>
+	<xs:import namespace="http://www.entel.cl/EBO/ThirdPartyCollectionPM/v1" schemaLocation="../CustomerDomain/ThirdPartyCollectionPM_v1_EBO.xsd"/>
+	<xs:import namespace="http://www.entel.cl/EBO/OrganizationName/v1" schemaLocation="../EngagedPartyDomain/OrganizationName_v1_EBO.xsd"/>
+	<xs:import namespace="http://www.entel.cl/EBO/SalesChannel/v1" schemaLocation="../MarketSalesDomain/SalesChannel_v1_EBO.xsd"/>
+	<xs:import namespace="http://www.entel.cl/EBO/EmailContact/v1" schemaLocation="../EngagedPartyDomain/EmailContact_v1_EBO.xsd"/>
+	<xs:import namespace="http://www.entel.cl/EBO/GeographicArea/v1" schemaLocation="../CommonBusinessEntitiesDomain/GeographicArea_v1_EBO.xsd"/>
+	<xs:import namespace="http://www.entel.cl/EBO/PartyIdentification/v1" schemaLocation="../EngagedPartyDomain/PartyIdentification_v1_EBO.xsd"/>
+	<xs:import namespace="http://www.entel.cl/EBO/Organization/v1" schemaLocation="../EngagedPartyDomain/Organization_v1_EBO.xsd"/>
+	<xs:import namespace="http://www.entel.cl/EBO/Skill/v1" schemaLocation="../EngagedPartyDomain/Skill_v1_EBO.xsd"/>
+	<xs:import namespace="http://www.entel.cl/EBO/PartyRole/v1" schemaLocation="../EngagedPartyDomain/PartyRole_v1_EBO.xsd"/>
+	<xs:import namespace="http://www.entel.cl/EBO/StreetName/v1" schemaLocation="../CommonBusinessEntitiesDomain/StreetName_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="stockholdingInd" type="xs:string"/>									
+	<xs:element name="storeType" type="xs:string"/>									
+	<xs:element name="emailContact" type="ebons_emailcontact:EmailContact_Type"/>									
+	<xs:element name="geographicArea" type="ebons_geographicarea:GeographicArea_Type"/>									
+	<xs:element name="organization" type="ebons_organization:Organization_Type"/>									
+	<xs:element name="organizationName" type="ebons_organizationname:OrganizationName_Type"/>									
+	<xs:element name="partyIdentification" type="ebons_partyidentification:PartyIdentification_Type"/>									
+	<xs:element name="partyRole" type="ebons_partyrole:PartyRole_Type"/>									
+	<xs:element name="salesChannel" type="ebons_saleschannel:SalesChannel_Type"/>									
+	<xs:element name="skill" type="ebons_skill:Skill_Type"/>									
+	<xs:element name="streetName" type="ebons_streetname:StreetName_Type"/>									
+	<xs:element name="telephoneNumber" type="ebons_telephonenumber:TelephoneNumber_Type"/>									
+	<xs:element name="thirdPartyCollectionPM" type="ebons_thirdpartycollectionpm:ThirdPartyCollectionPM_Type"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="IssuingCompany" type="tns:IssuingCompany_Type"/>
+	<xs:complexType name="IssuingCompany_Type">
+		<xs:sequence> 
+		<xs:element ref="tns:stockholdingInd" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:storeType" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:emailContact" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:geographicArea" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:organization" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:organizationName" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:partyIdentification" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:partyRole" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:salesChannel" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:skill" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:streetName" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:telephoneNumber" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:thirdPartyCollectionPM" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

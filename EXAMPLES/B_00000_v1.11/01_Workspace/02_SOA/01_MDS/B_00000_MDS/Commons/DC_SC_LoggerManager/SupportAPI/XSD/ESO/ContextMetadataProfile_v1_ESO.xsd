@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema
+    targetNamespace="http://www.entel.cl/ESO/ContextMetadataProfile/v1"
+    elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
+    xmlns:tns="http://www.entel.cl/ESO/ContextMetadataProfile/v1">
+    
+    <annotation>
+        <documentation>
+            -- Generar documentacion del Enterprise Support Object (ESO) Context Metadata
+        </documentation>
+    </annotation>
+    
+    <complexType name="ContextMetadataProfile_Type">
+        <annotation>
+            <documentation>
+                -- Generar documentacion del ContextMetadataProfile_Type
+            </documentation>
+        </annotation>
+        <attribute name="Family" type="tns:Family_SType" use="required"/>
+        <attribute name="Class" type="tns:Class_SType" use="required"/>
+        <attribute name="Member" type="tns:Member_SType"/>
+        <attribute name="Module" type="tns:Module_Type"/>
+    </complexType>
+
+    <simpleType name="Family_SType">
+        <restriction base="string"></restriction>
+    </simpleType>
+
+    <simpleType name="Class_SType">
+        <restriction base="string"></restriction>
+    </simpleType>
+    
+    <simpleType name="Member_SType">
+        <restriction base="string"></restriction>
+    </simpleType>
+
+    <simpleType name="Module_Type">
+        <restriction base="string"></restriction>
+    </simpleType>
+    
+</schema>

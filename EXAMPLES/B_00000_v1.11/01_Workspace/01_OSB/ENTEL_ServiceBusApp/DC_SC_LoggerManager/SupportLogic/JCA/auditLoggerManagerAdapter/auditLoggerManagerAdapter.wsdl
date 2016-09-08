@@ -1,0 +1,29 @@
+<wsdl:definitions
+     name="auditLoggerManagerAdapter"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/ENTEL_SOAApp/DC_SC_LoggerManager/auditLoggerManagerAdapter"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/ENTEL_SOAApp/DC_SC_LoggerManager/auditLoggerManagerAdapter"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/auditLoggerManagerAdapter"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+  <plt:partnerLinkType name="auditLoggerManagerAdapter_plt" >
+    <plt:role name="auditLoggerManagerAdapter_role" >
+      <plt:portType name="tns:auditLoggerManagerAdapter_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+     <schema xmlns="http://www.w3.org/2001/XMLSchema">
+       <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/auditLoggerManagerAdapter"
+               schemaLocation="auditLoggerManagerAdapter_sp.xsd" />
+     </schema>
+    </wsdl:types>
+    <wsdl:message name="args_in_msg">
+        <wsdl:part name="InputParameters" element="db:InputParameters"/>
+    </wsdl:message>
+    <wsdl:portType name="auditLoggerManagerAdapter_ptt">
+        <wsdl:operation name="auditLoggerManagerAdapter">
+            <wsdl:input message="tns:args_in_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

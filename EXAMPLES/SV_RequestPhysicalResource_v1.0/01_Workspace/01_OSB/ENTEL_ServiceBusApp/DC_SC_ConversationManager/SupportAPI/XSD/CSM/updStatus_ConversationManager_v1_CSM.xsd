@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+        xmlns:tns="http://www.entel.cl/SC/ConversationManager/updStatus/v1"
+        xmlns:esons_result="http://www.entel.cl/ESO/Result/v2" 
+        xmlns:conversationStatus="http://www.entel.cl/SC/ConversationManager/Aux/ConversationStatus"
+        xmlns:esons_messageHeader="http://www.entel.cl/ESO/MessageHeader/v1" 
+        xmlns:esons_tracer="http://www.entel.cl/ESO/Tracer/v1" 
+        targetNamespace="http://www.entel.cl/SC/ConversationManager/updStatus/v1" 
+        elementFormDefault="qualified" version="1.0">
+  
+  <import namespace="http://www.entel.cl/SC/ConversationManager/Aux/ConversationStatus" schemaLocation="../ConversationStatus.xsd"/>
+  <import namespace="http://www.entel.cl/ESO/Result/v2" schemaLocation="../../../../SR_Commons/XSD/ESO/Result_v2_ESO.xsd"/>
+  <import namespace="http://www.entel.cl/ESO/MessageHeader/v1" schemaLocation="../../../../SR_Commons/XSD/ESO/MessageHeader_v1_ESO.xsd"/>
+  <import namespace="http://www.entel.cl/ESO/Tracer/v1" schemaLocation="../../../../SR_Commons/XSD/ESO/Tracer_v1_ESO.xsd"/>
+
+  <element name="UpdStatusREQ" type="tns:UpdStatusREQ_Type"/>
+  <element name="UpdStatusRSP" type="tns:UpdStatusRSP_Type"/>
+  
+  <complexType name="UpdStatusREQ_Type">
+    <sequence>
+      <element name="ConversationID" type="esons_messageHeader:conversationID_SType">
+        <annotation>
+          <documentation>Conversation that is intended to be updated</documentation>
+	</annotation>
+      </element>
+      <element name="ConversationStatus" type="conversationStatus:ConversationStatus_UPD_REQ_Type">
+        <annotation>
+          <documentation>The new Status to be assigned by update to the Conversation sent as parameter</documentation>
+	</annotation>
+      </element>
+      <element name="SourceComponent" type="esons_tracer:Tracer_Type">
+        <annotation>
+          <documentation>Who is asking for this update</documentation>
+	</annotation>
+      </element>
+    </sequence>
+  </complexType>
+  
+  <complexType name="UpdStatusRSP_Type">
+    <sequence>
+      <element ref="esons_result:Result">
+        <annotation>
+          <documentation>Result information regarding the execution of this capability (updStatus)</documentation>
+	</annotation>
+      </element>
+    </sequence>
+  </complexType>
+  
+</schema>

@@ -1,0 +1,112 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/auditLoggerManagerAdapter" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/auditLoggerManagerAdapter" elementFormDefault="qualified">
+   <element name="InputParameters">
+      <complexType>
+         <sequence>
+            <element name="AUDITREQ" type="db:AUDIT_T" db:index="1" db:type="Struct" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <complexType name="TRACE_T">
+      <sequence>
+         <element name="REQTIMESTAMP_" type="dateTime" db:type="TIMESTAMP" minOccurs="0" nillable="true"/>
+         <element name="RSPTIMESTAMP_" type="dateTime" db:type="TIMESTAMP" minOccurs="0" nillable="true"/>
+         <element name="MESSAGEID_" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="CORRELATIONID_" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="CONVERSATIONID_" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="SERVICE_" type="db:SERVICE_T" db:type="Struct" minOccurs="0" nillable="true"/>
+      </sequence>
+   </complexType>
+   <complexType name="AUDIT_T">
+      <sequence>
+         <element name="TRACE_" type="db:TRACEHEADER_T" db:type="Struct" minOccurs="0" nillable="true"/>
+         <element name="MESSAGE_" type="string" db:type="CLOB" minOccurs="0" nillable="true"/>
+         <element name="TYPE_" type="db:string50" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="DESCRIPTION_" type="db:string255" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+      </sequence>
+   </complexType>
+   <complexType name="CHANNEL_T">
+      <sequence>
+         <element name="NAME_" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="MODE_" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+      </sequence>
+   </complexType>
+   <complexType name="SERVICE_T">
+      <sequence>
+         <element name="CODE_" type="db:string50" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="NAME_" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="OPERATION_" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+      </sequence>
+   </complexType>
+   <complexType name="HEADER_T">
+      <sequence>
+         <element name="CONSUMER_" type="db:CONSUMER_T" db:type="Struct" minOccurs="0" nillable="true"/>
+         <element name="TRACE_" type="db:TRACE_T" db:type="Struct" minOccurs="0" nillable="true"/>
+         <element name="COUNTRY_" type="db:COUNTRY_T" db:type="Struct" minOccurs="0" nillable="true"/>
+         <element name="CHANNEL_" type="db:CHANNEL_T" db:type="Struct" minOccurs="0" nillable="true"/>
+         <element name="QOS_" type="db:QUALITYOFSERVICE_T" db:type="Struct" minOccurs="0" nillable="true"/>
+      </sequence>
+   </complexType>
+   <complexType name="CONSUMER_T">
+      <sequence>
+         <element name="CODE_" type="int" db:type="INTEGER" minOccurs="0" nillable="true"/>
+         <element name="NAME_" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="CREDENTIAL_" type="db:CREDENTIAL_T" db:type="Struct" minOccurs="0" nillable="true"/>
+      </sequence>
+   </complexType>
+   <complexType name="CONTEXTMETADATA_T">
+      <sequence>
+         <element name="FAMILY_" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="CLASS_" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="MEMBER_" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="MODULE_" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+      </sequence>
+   </complexType>
+   <complexType name="LOGGER_T">
+      <sequence>
+         <element name="COMPONENT_" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="OPERATION_" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+      </sequence>
+   </complexType>
+   <complexType name="CREDENTIAL_T">
+      <sequence>
+         <element name="USER_" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="PASSWORD_" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+      </sequence>
+   </complexType>
+   <complexType name="QUALITYOFSERVICE_T">
+      <sequence>
+         <element name="TTL_" type="int" db:type="INTEGER" minOccurs="0" nillable="true"/>
+         <element name="PRIORITY_" type="int" db:type="INTEGER" minOccurs="0" nillable="true"/>
+         <element name="RETRYCOUNTER_" type="int" db:type="INTEGER" minOccurs="0" nillable="true"/>
+         <element name="MAXRETRYCOUNT_" type="int" db:type="INTEGER" minOccurs="0" nillable="true"/>
+      </sequence>
+   </complexType>
+   <complexType name="COUNTRY_T">
+      <sequence>
+         <element name="CODE_" type="db:string50" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="NAME_" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+      </sequence>
+   </complexType>
+   <complexType name="TRACEHEADER_T">
+      <sequence>
+         <element name="HEADER_" type="db:HEADER_T" db:type="Struct" minOccurs="0" nillable="true"/>
+         <element name="LOGGER_" type="db:LOGGER_T" db:type="Struct" minOccurs="0" nillable="true"/>
+         <element name="CONTEXTMETADATA_" type="db:CONTEXTMETADATA_T" db:type="Struct" minOccurs="0" nillable="true"/>
+      </sequence>
+   </complexType>
+   <simpleType name="string100">
+      <restriction base="string">
+         <maxLength value="100"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string50">
+      <restriction base="string">
+         <maxLength value="50"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string255">
+      <restriction base="string">
+         <maxLength value="255"/>
+      </restriction>
+   </simpleType>
+</schema>

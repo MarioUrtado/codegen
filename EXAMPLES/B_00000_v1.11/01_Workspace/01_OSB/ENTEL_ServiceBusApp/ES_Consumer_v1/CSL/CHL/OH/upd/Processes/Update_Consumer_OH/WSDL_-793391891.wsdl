@@ -1,0 +1,23 @@
+<wsdl:definitions name="DService" targetNamespace="http://oracle.com/sca/soapservice/ES_Consumer_v1/Update_Consumer_OH_Template/DService" xmlns:tns="http://oracle.com/sca/soapservice/ES_Consumer_v1/Update_Consumer_OH_Template/DService" xmlns:inp1="http://www.entel.cl/EBM/Consumer/upd/v1" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    <wsdl:types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://www.entel.cl/EBM/Consumer/upd/v1" schemaLocation="XMLSchema_1196375794.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="requestMessage">
+        <wsdl:part name="REQ_part" element="inp1:Upd_Consumer_REQ"/>
+    </wsdl:message>
+    <wsdl:message name="replyMessage">
+        <wsdl:part name="RSP_part" element="inp1:Upd_Consumer_RSP"/>
+    </wsdl:message>
+    <wsdl:message name="faultMessage">
+        <wsdl:part name="FAULT_part" element="inp1:Upd_Consumer_FRSP"/>
+    </wsdl:message>
+    <wsdl:portType name="execute_ptt">
+        <wsdl:operation name="execute">
+            <wsdl:input message="tns:requestMessage"/>
+            <wsdl:output message="tns:replyMessage"/>
+            <wsdl:fault name="executefault" message="tns:faultMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

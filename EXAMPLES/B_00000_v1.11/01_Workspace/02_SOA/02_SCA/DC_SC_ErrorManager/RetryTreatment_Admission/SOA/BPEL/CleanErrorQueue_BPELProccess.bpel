@@ -1,0 +1,88 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer
+
+  Created: Tue Apr 12 14:35:48 ART 2016
+  Author:  jorge.pastorino
+  Type: BPEL 2.0 Process
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="CleanErrorQueue_BPELProccess"
+               targetNamespace="http://xmlns.oracle.com/DC_SC_ErrorManager/RetryTreatment_Admission/CleanErrorQueue_BPELProccess"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/DC_SC_ErrorManager/RetryTreatment_Admission/CleanErrorQueue_BPELProccess"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/jms/DC_SC_ErrorManager/RetryTreatment_Admission/ESB_ReciveToRetryManagerAdmissionErrorQueue"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/jms/DC_SC_ErrorManager/RetryTreatment_Admission/JMS_Send_MessageDispatcherQueue"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/top/ESB_RETRYMANAGER_Pooling"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap" xmlns:ui="http://xmlns.oracle.com/soa/designer"
+         xmlns:ns4="http://www.entel.cl/ESO/ErrorTreatmentStatus/v1">
+
+  <!--
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC
+     Set of activities coordinating the flow of messages across the
+     services integrated within this business process
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <import namespace="http://www.entel.cl/ESO/ErrorTreatmentStatus/v1"
+          location="oramds:/apps/Commons/DC_SC_ErrorManager/ErrorHospital/XSD/ErrorTreatmentStatus_v1_ESO.xsd" importType="http://www.w3.org/2001/XMLSchema"/>
+  <import namespace="http://xmlns.oracle.com/pcbpel/adapter/jms/DC_SC_ErrorManager/RetryTreatment_Admission/JMS_Send_MessageDispatcherQueue"
+          location="../WSDLs/JMS_Send_MessageDispatcherQueue.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"
+          ui:processWSDL="true"/>
+  <partnerLinks>
+    <partnerLink name="ESB_ReciveToRetryManagerAdmissionErrorQueue" partnerLinkType="ns1:Consume_Message_plt"
+                 myRole="Consume_Message_role"/>
+    <partnerLink name="JMS_Send_MessageDispatcherQueue" partnerLinkType="ns2:Produce_Message_plt"
+                 partnerRole="Produce_Message_role"/>
+  </partnerLinks>
+  <variables>
+    <variable name="InputVariable" messageType="ns1:Consume_Message_msg"/>
+  </variables>
+  <sequence name="main">
+    <receive name="Receive" createInstance="yes" partnerLink="ESB_ReciveToRetryManagerAdmissionErrorQueue"
+             portType="ns1:Consume_Message_ptt" operation="Consume_Message" variable="InputVariable"/>
+    <forEach parallel="no" counterName="Index" name="ForEach">
+      <startCounterValue>1</startCounterValue>
+      <finalCounterValue>count($InputVariable.body/ns3:EsbRetrymanager)</finalCounterValue>
+      <scope name="Scope1">
+        <variables>
+          <variable name="Out_variable" element="ns4:ErrorTreatmentStatus"/>
+        </variables>
+        <sequence name="Sequence_EsbRetrymanager">
+          <assign name="AssignToQueue">
+            <copy>
+              <from>$InputVariable.body/ns3:EsbRetrymanager[$Index]/ns3:errorTreatmentId</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Out_variable/ns4:Error_Treatment_Id</to>
+            </copy>
+            <copy>
+              <from>'Mensaje obtenido de la queue RetryManagerAdmissionErrorQueue'</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Out_variable/ns4:Description</to>
+            </copy>
+            <copy>
+              <from>'FATAL_FAIL'</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Out_variable/ns4:Status</to>
+            </copy>
+          </assign>
+          <invoke name="InvokeQueue" partnerLink="JMS_Send_MessageDispatcherQueue"
+                  portType="ns2:Produce_Message_ptt" operation="Produce_Message"
+                  inputVariable="Out_variable" bpelx:invokeAsDetail="no"/>
+        </sequence>
+      </scope>
+    </forEach>
+  </sequence>
+</process>

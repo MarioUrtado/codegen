@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/AppliedCustomerBillingChargeDetail/v1"
+	xmlns:ebons_appliedcustomerbillingtaxrate="http://www.entel.cl/EBO/AppliedCustomerBillingTaxRate/v1"
+	xmlns:ebons_paymentitem="http://www.entel.cl/EBO/PaymentItem/v1"
+	xmlns:ebons_appliedcustomerbillingproductcharge="http://www.entel.cl/EBO/AppliedCustomerBillingProductCharge/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/AppliedCustomerBillingChargeDetail/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/AppliedCustomerBillingTaxRate/v1" schemaLocation="AppliedCustomerBillingTaxRate_v1_EBO.xsd"/>
+	<xs:import namespace="http://www.entel.cl/EBO/PaymentItem/v1" schemaLocation="PaymentItem_v1_EBO.xsd"/>
+	<xs:import namespace="http://www.entel.cl/EBO/AppliedCustomerBillingProductCharge/v1" schemaLocation="AppliedCustomerBillingProductCharge_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="contract" type="xs:string"/>									
+	<xs:element name="purchaseOrder" type="xs:string"/>									
+	<xs:element name="appliedCustomerBillingProductCharge" type="ebons_appliedcustomerbillingproductcharge:AppliedCustomerBillingProductCharge_Type"/>									
+	<xs:element name="appliedCustomerBillingTaxRate" type="ebons_appliedcustomerbillingtaxrate:AppliedCustomerBillingTaxRate_Type"/>									
+	<xs:element name="paymentItem" type="ebons_paymentitem:PaymentItem_Type"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="AppliedCustomerBillingChargeDetail" type="tns:AppliedCustomerBillingChargeDetail_Type"/>
+	<xs:complexType name="AppliedCustomerBillingChargeDetail_Type">
+		<xs:sequence> 
+		<xs:element ref="tns:contract" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:purchaseOrder" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:appliedCustomerBillingProductCharge" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:appliedCustomerBillingTaxRate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:paymentItem" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

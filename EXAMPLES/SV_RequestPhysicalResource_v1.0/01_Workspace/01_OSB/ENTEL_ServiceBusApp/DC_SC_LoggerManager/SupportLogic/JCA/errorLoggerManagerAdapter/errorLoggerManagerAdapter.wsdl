@@ -1,0 +1,29 @@
+<wsdl:definitions
+     name="errorLoggerManagerAdapter"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/ENTEL_SOAApp/DC_SC_LoggerManager/errorLoggerManagerAdapter"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/ENTEL_SOAApp/DC_SC_LoggerManager/errorLoggerManagerAdapter"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/ENTEL01/ESB_LOGGERMANAGER_PKG/ERROR/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+  <plt:partnerLinkType name="errorLoggerManagerAdapter_plt" >
+    <plt:role name="errorLoggerManagerAdapter_role" >
+      <plt:portType name="tns:errorLoggerManagerAdapter_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+     <schema xmlns="http://www.w3.org/2001/XMLSchema">
+       <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/ENTEL01/ESB_LOGGERMANAGER_PKG/ERROR/"
+               schemaLocation="errorLoggerManagerAdapter_sp.xsd" />
+     </schema>
+    </wsdl:types>
+    <wsdl:message name="args_in_msg">
+        <wsdl:part name="InputParameters" element="db:InputParameters"/>
+    </wsdl:message>
+    <wsdl:portType name="errorLoggerManagerAdapter_ptt">
+        <wsdl:operation name="errorLoggerManagerAdapter">
+            <wsdl:input message="tns:args_in_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

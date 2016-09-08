@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/CustomerAccountBalanceDedicated/v1"
+	xmlns:ebons_timeperiod="http://www.entel.cl/EBO/TimePeriod/v1"
+	xmlns:ebons_quantity="http://www.entel.cl/EBO/Quantity/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/CustomerAccountBalanceDedicated/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/TimePeriod/v1" schemaLocation="TimePeriod_v1_EBO.xsd"/>
+	<xs:import namespace="http://www.entel.cl/EBO/Quantity/v1" schemaLocation="Quantity_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="ID" type="xs:string"/>									
+	<xs:element name="balance" type="ebons_quantity:Quantity_Type"/>									
+	<xs:element name="validFor" type="ebons_timeperiod:TimePeriod_Type"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="CustomerAccountBalanceDedicated" type="tns:CustomerAccountBalanceDedicated_Type"/>
+	<xs:complexType name="CustomerAccountBalanceDedicated_Type">
+		<xs:sequence> 
+		<xs:element ref="tns:ID" maxOccurs="1" minOccurs="1"/>
+		<xs:element ref="tns:balance" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:validFor" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

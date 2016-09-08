@@ -1,0 +1,14 @@
+<adapter-config name="ESB_SendToQueue" adapter="jms" wsdlLocation="oramds:/apps/Commons/DC_SC_ErrorManager/ErrorHospital/WSDL/ESB_SendToQueue.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/JMS/FRW/ErrorHospital" UIJmsProvider="THIRDPARTY"/>
+  <endpoint-interaction portType="Produce_Message_ptt" operation="Produce_Message">
+    <interaction-spec className="oracle.tip.adapter.jms.outbound.JmsProduceInteractionSpec">
+      <property name="TimeToLive" value="0"/>
+      <property name="Priority" value="0"/>
+      <property name="DestinationName" value="/jms/FRW/ErrorManager/ErrorHospital/MessageDispatcherQueue"/>
+      <property name="DeliveryMode" value="Persistent"/>
+      <property name="PayloadType" value="TextMessage"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/PostalDeliveryAddress/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/PostalDeliveryAddress/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="address" type="xs:string"/>									
+	<xs:element name="city" type="xs:string"/>									
+	<xs:element name="commune" type="xs:string"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="PostalDeliveryAddress" type="tns:PostalDeliveryAddress_Type"/>
+	<xs:complexType name="PostalDeliveryAddress_Type">
+		
+			<xs:annotation>
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">The address to which posts (mail) are delivered.</xs:documentation>
+						
+			</xs:annotation>
+		<xs:sequence> 
+		<xs:element ref="tns:address" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:city" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:commune" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

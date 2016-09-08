@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/AppliedCustomerBillingDiscount/v1"
+	xmlns:ebons_money="http://www.entel.cl/EBO/Money/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/AppliedCustomerBillingDiscount/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/Money/v1" schemaLocation="../CommonBusinessEntitiesDomain/Money_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="ID" type="xs:integer"/>									
+	<xs:element name="description" type="xs:string"/>									
+	<xs:element name="exemptInd" type="xs:integer"/>									
+	<xs:element name="type" type="xs:string"/>									
+	<xs:element name="valueType" type="xs:string"/>									
+	<xs:element name="value" type="ebons_money:Money_Type"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="AppliedCustomerBillingDiscount" type="tns:AppliedCustomerBillingDiscount_Type"/>
+	<xs:complexType name="AppliedCustomerBillingDiscount_Type">
+		
+			<xs:annotation>
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">AppliedCustomerBillingDiscount</xs:documentation>
+							
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">A reduction in the price of a Product that is applied to reduce the associated charge.</xs:documentation>
+						
+			</xs:annotation>
+		<xs:sequence> 
+		<xs:element ref="tns:ID" maxOccurs="1" minOccurs="1"/>
+		<xs:element ref="tns:description" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:exemptInd" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:type" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:valueType" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:value" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

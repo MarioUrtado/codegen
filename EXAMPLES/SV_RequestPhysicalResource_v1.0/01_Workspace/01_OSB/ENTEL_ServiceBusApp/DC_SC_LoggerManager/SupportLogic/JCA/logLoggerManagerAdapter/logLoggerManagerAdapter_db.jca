@@ -1,0 +1,12 @@
+<adapter-config name="logLoggerManagerAdapter_db" adapter="db" wsdlLocation="logLoggerManagerAdapter.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="ENTEL01" location="eis/DB/FRW/LoggerManager"/>
+  <endpoint-interaction portType="logLoggerManagerAdapter_ptt" operation="logLoggerManagerAdapter">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="PackageName" value="ESB_LOGGERMANAGER_PKG"/>
+      <property name="ProcedureName" value="LOG"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/ProductSpecCharacteristicValue/v1"
+	xmlns:ebo_timeperiod="http://www.entel.cl/EBO/TimePeriod/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/ProductSpecCharacteristicValue/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/TimePeriod/v1" schemaLocation="TimePeriod_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="clasificationName" type="xs:string"/>									
+	<xs:element name="displayValue" type="xs:string"/>									
+	<xs:element name="isDefault" type="xs:boolean"/>									
+	<xs:element name="rangeInterval" type="xs:string"/>									
+	<xs:element name="rangeStep" type="xs:long"/>									
+	<xs:element name="regularExpression" type="xs:string"/>									
+	<xs:element name="value" type="xs:string"/>									
+	<xs:element name="valueFrom" type="xs:string"/>									
+	<xs:element name="valueTo" type="xs:string"/>									
+	<xs:element name="valueType" type="xs:string"/>									
+	<xs:element name="validFor" type="ebo_timeperiod:TimePeriod_Type"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="ProductSpecCharacteristicValue" type="tns:ProductSpecCharacteristicValue_Type"/>
+	<xs:complexType name="ProductSpecCharacteristicValue_Type">
+		
+			<xs:annotation>
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">A number or text that can be assigned to a ProductSpecCharacteristic.</xs:documentation>
+						
+			</xs:annotation>
+		<xs:sequence> 
+		<xs:element ref="tns:clasificationName" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:displayValue" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:isDefault" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:rangeInterval" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:rangeStep" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:regularExpression" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:value" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:valueFrom" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:valueTo" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:valueType" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:validFor" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

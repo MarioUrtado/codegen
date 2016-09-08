@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:con="http://www.bea.com/wli/sb/resources/config">
+    <con:serverURL>smtp.gmail.com</con:serverURL>
+    <con:description/>
+    <con:portNumber>465</con:portNumber>
+    <con:username/>
+    <con:password/>
+</xml-fragment>

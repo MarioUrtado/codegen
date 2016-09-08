@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAConfigPlan xmlns:jca="http://platform.integration.oracle/blocks/adapter/fw/metadata" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:orawsp="http://schemas.oracle.com/ws/2006/01/policy" xmlns:edl="http://schemas.oracle.com/events/edl" xmlns="http://schemas.oracle.com/soa/configplan">
+   <composite name="RetryTreatment_Register">
+      <!--Add search and replace rules for the import section of a composite
+	Example:
+	<searchReplace>
+		<search>http://my-dev-server</search>
+		<replace>http://my-test-server</replace>
+	<searchReplace>
+	<searchReplace>
+		<search>8888</search>
+		<replace>8889</replace>
+	<searchReplace>-->
+      <import>
+         <searchReplace>
+            <search/>
+            <replace/>
+         </searchReplace>
+      </import>
+      <service name="RetryTreatment_Register_direct">
+         <binding type="direct"/>
+      </service>
+      <service name="ESB_RETRY_NOTIFICATION_Polling">
+         <property name="jca.retry.count">
+            <replace>2147483647</replace>
+         </property>
+         <property name="jca.retry.interval">
+            <replace>1</replace>
+         </property>
+         <property name="jca.retry.backoff">
+            <replace>2</replace>
+         </property>
+         <property name="jca.retry.maxInterval">
+            <replace>120</replace>
+         </property>
+         <!--Add search and replace rules for the binding properties-->
+         <binding type="jca">
+            <property name="useRejectedMessageRecovery">
+               <replace>true</replace>
+            </property>
+         </binding>
+      </service>
+      <property name="productVersion">
+         <replace>12.2.1.0.0.151013</replace>
+      </property>
+      <property name="compositeID">
+         <replace>31527793-86f1-4860-b235-a1491d816d1f</replace>
+      </property>
+      <!--Add search and replace rules for the component properties
+	For components and service/reference bindings, you can add policy references.
+	Example:
+	<component name="*">
+		<wsp:PolicyReference orawsp:category="management" orawsp:status="enabled" URI="oracle/log_policy"/>
+	</component>-->
+      <component name="RetryTreatment_RegisterBPEL">
+         <property name="bpel.config.transaction">
+            <replace>required</replace>
+         </property>
+         <property name="bpel.config.oneWayDeliveryPolicy">
+            <replace>sync</replace>
+         </property>
+      </component>
+      <component name="RetryTraetment_Notification_BPELProcess">
+         <property name="bpel.config.transaction">
+            <replace>required</replace>
+         </property>
+         <property name="bpel.config.oneWayDeliveryPolicy">
+            <replace>sync</replace>
+         </property>
+      </component>
+      <!--Add search and replace rules for the reference properties
+	Example:
+	<searchReplace>
+		<search>http://my-dev-server</search>
+		<replace>http://my-test-server</replace>
+	<searchReplace>
+	<searchReplace>
+		<search>8888
+		<replace>8889</replace>
+	<searchReplace>
+	or provide a new replace value like:
+	<replace>http://my-new-server:8889/myservice</replace>-->
+      <reference name="call_sp_register_retry">
+         <property name="jca.retry.count">
+            <replace>4</replace>
+         </property>
+         <property name="jca.retry.interval">
+            <replace>1</replace>
+         </property>
+         <property name="jca.retry.backoff">
+            <replace>2</replace>
+         </property>
+         <property name="jca.retry.maxInterval">
+            <replace>120</replace>
+         </property>
+         <binding type="jca"/>
+      </reference>
+      <reference name="ESB_SendToQueue">
+         <binding type="jca"/>
+      </reference>
+      <reference name="SP_PROCESS_NOTIFICATION">
+         <property name="jca.retry.count">
+            <replace>4</replace>
+         </property>
+         <property name="jca.retry.interval">
+            <replace>1</replace>
+         </property>
+         <property name="jca.retry.backoff">
+            <replace>2</replace>
+         </property>
+         <property name="jca.retry.maxInterval">
+            <replace>120</replace>
+         </property>
+         <binding type="jca"/>
+      </reference>
+   </composite>
+   <!--To configure monitor.config: 
+	<property name="enabled"><replace>true</replace></property>
+	<property name="dataObjectsFolder"><searchReplace><search>mydev</search><replace>myproduction</replace></searchReplace></property>
+	
+	sample properties to configure for JMS adapter: 
+	<jca:property name="DestinationName"><replace>jms/DemoSupplierTopic</replace></jca:property>
+	<jca:property name="TimeToLive"><replace>0</replace></jca:property>
+	
+	To add search and replace rules for wsdls, xsd and jca files
+	Example:
+	<searchReplace>
+		<search>http://my-dev-server</search>
+		<replace>http://my-test-server</replace>
+	<searchReplace>
+	<searchReplace>
+		<search>8888</search>
+		<replace>8889</replace>
+	<searchReplace>
+	-->
+   <wsdlAndSchema name="Adapters/call_sp_register_retry_db.jca|Adapters/ESB_RETRY_NOTIFICATION_Polling_db.jca|Adapters/ESB_SendToQueue_jms.jca|Adapters/SP_PROCESS_NOTIFICATION_db.jca|Schemas/call_sp_register_retry_sp.xsd|Schemas/ESB_RETRY_NOTIFICATION_Polling_table.xsd|Schemas/RetryTraetment_Notification_BPELProcess.xsd|Schemas/SP_PROCESS_NOTIFICATION_sp.xsd|WSDLs/call_sp_register_retry.wsdl|WSDLs/ESB_RETRY_NOTIFICATION_Polling.wsdl|WSDLs/ESB_SendToQueue.wsdl|WSDLs/RetryTreatmentWrapper.wsdl|WSDLs/SP_PROCESS_NOTIFICATION.wsdl">
+      <searchReplace>
+         <search/>
+         <replace/>
+      </searchReplace>
+   </wsdlAndSchema>
+</SOAConfigPlan>

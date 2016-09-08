@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/ProductAccount/v1"
+	xmlns:ebons_msisdn="http://www.entel.cl/EBO/MSISDN/v1"
+	xmlns:ebons_simcard="http://www.entel.cl/EBO/SIMCard/v1"
+	xmlns:ebons_imsi="http://www.entel.cl/EBO/IMSI/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/ProductAccount/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/MSISDN/v1" schemaLocation="../ResourceDomain/MSISDN_v1_EBO.xsd"/>
+	<xs:import namespace="http://www.entel.cl/EBO/SIMCard/v1" schemaLocation="../ResourceDomain/SIMCard_v1_EBO.xsd"/>
+	<xs:import namespace="http://www.entel.cl/EBO/IMSI/v1" schemaLocation="../ResourceDomain/IMSI_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="contractID" type="xs:string"/>									
+	<xs:element name="customerID" type="xs:string"/>									
+	<xs:element name="productAccountID" type="xs:string"/>									
+	<xs:element name="productID" type="xs:string"/>									
+	<xs:element name="ICCID" type="ebons_simcard:SIMCard_Type"/>									
+	<xs:element name="IMSI" type="ebons_imsi:IMSI_Type"/>									
+	<xs:element name="MSISDN" type="ebons_msisdn:MSISDN_Type"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="ProductAccount" type="tns:ProductAccount_Type"/>
+	<xs:complexType name="ProductAccount_Type">
+		<xs:sequence> 
+		<xs:element ref="tns:contractID" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:customerID" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:productAccountID" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:productID" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:ICCID" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:IMSI" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:MSISDN" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

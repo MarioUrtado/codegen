@@ -1,0 +1,12 @@
+<adapter-config name="udpateRetryStatus" adapter="db" wsdlLocation="udpateRetryStatus.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="ENTEL_DESA" location="eis/DB/FRW/ErrorHospital"/>
+  <endpoint-interaction portType="udpateRetryStatus_ptt" operation="udpateRetryStatus">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="PackageName" value="ESB_RETRY_MANAGER_PKG"/>
+      <property name="ProcedureName" value="SP_REGISTER_STATUS"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

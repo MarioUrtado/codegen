@@ -1,0 +1,15 @@
+<schema targetNamespace="http://www.entel.cl/SC/LoggerManager/refreshCache_LoggerManager/v1" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.entel.cl/SC/LoggerManager/refreshCache_LoggerManager/v1" xmlns:eddns_dictionary="http://www.entel.cl/EDD/Dictionary/v1" xmlns:esons_result="http://www.entel.cl/ESO/Result/v2">
+  <import namespace="http://www.entel.cl/EDD/Dictionary/v1" schemaLocation="../../../../SR_Commons/XSD/EDD/Dictionary_v1_EDD.xsd"/>
+  <import namespace="http://www.entel.cl/ESO/Result/v2" schemaLocation="../../../../SR_Commons/XSD/ESO/Result_v2_ESO.xsd"/>
+  <element name="RefreshCache_LoggerManagerREQ" type="tns:RefreshCacheREQ_Type"/>
+  <element name="RefreshCache_LoggerManagerRSP" type="tns:RefreshCacheRSP_Type"/>
+  <complexType name="RefreshCacheREQ_Type">
+    <sequence>
+    </sequence>
+  </complexType>
+  <complexType name="RefreshCacheRSP_Type">
+    <sequence>
+      <element ref="esons_result:Result"/>
+    </sequence>
+  </complexType>
+</schema>

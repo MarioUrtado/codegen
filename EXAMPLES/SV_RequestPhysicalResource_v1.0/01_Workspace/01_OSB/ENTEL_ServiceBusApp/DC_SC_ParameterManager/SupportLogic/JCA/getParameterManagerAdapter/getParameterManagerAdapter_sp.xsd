@@ -1,0 +1,60 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getParameterManagerAdapter" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getParameterManagerAdapter" elementFormDefault="qualified">
+   <element name="InputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_KEYS" type="db:KEYS_T" db:index="1" db:type="Array" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <element name="OutputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_KEYVALUES" type="db:P_KEYVALUES_RowSet" db:index="2" db:type="RowSet" minOccurs="0" nillable="true"/>
+            <element name="P_SOURCEERROR" type="db:SOURCERROR_T" db:index="3" db:type="Struct" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <complexType name="P_KEYVALUES_RowSet">
+      <sequence>
+         <element name="P_KEYVALUES_Row" minOccurs="0" maxOccurs="unbounded">
+            <complexType>
+               <sequence>
+                  <element name="KEY" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="VALUE" type="db:string255" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+               </sequence>
+            </complexType>
+         </element>
+      </sequence>
+   </complexType>
+   <complexType name="SOURCERROR_T">
+      <sequence>
+         <element name="CODE_" type="db:string5" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="DESCRIPTION_" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+      </sequence>
+   </complexType>
+   <complexType name="KEYS_T">
+      <sequence>
+         <element name="P_KEYS_ITEM" type="db:string100" db:type="VARCHAR2" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+      </sequence>
+   </complexType>
+   <simpleType name="string5">
+      <restriction base="string">
+         <maxLength value="5"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string30">
+      <restriction base="string">
+         <maxLength value="30"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string255">
+      <restriction base="string">
+         <maxLength value="255"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string100">
+      <restriction base="string">
+         <maxLength value="100"/>
+      </restriction>
+   </simpleType>
+</schema>

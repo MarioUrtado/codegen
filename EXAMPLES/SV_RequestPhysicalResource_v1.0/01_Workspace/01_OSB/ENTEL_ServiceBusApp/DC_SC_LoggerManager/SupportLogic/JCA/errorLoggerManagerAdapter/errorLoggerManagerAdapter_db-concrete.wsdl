@@ -1,0 +1,12 @@
+<wsdl:definitions targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/ENTEL_SOAApp/DC_SC_LoggerManager/errorLoggerManagerAdapter" name="errorLoggerManagerAdapter_db-concrete" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+    <wsdl:import location="errorLoggerManagerAdapter.wsdl" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/ENTEL_SOAApp/DC_SC_LoggerManager/errorLoggerManagerAdapter"/>
+    <wsdl:binding name="errorLoggerManagerAdapter_ptt-binding" type="err:errorLoggerManagerAdapter_ptt" xmlns:err="http://xmlns.oracle.com/pcbpel/adapter/db/ENTEL_SOAApp/DC_SC_LoggerManager/errorLoggerManagerAdapter">
+        <soap:binding style="document" transport="http://www.bea.com/wli/sb/transports/jca"/>
+        <wsdl:operation name="errorLoggerManagerAdapter">
+            <soap:operation soapAction="errorLoggerManagerAdapter"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+</wsdl:definitions>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.entel.cl/EBO/CustomerBillAttachment/v1" xmlns:ebons_quantity="http://www.entel.cl/EBO/Quantity/v1" targetNamespace="http://www.entel.cl/EBO/CustomerBillAttachment/v1" elementFormDefault="qualified" version="1.0">
+	<!---=- start:Imports -=- -->
+	<import namespace="http://www.entel.cl/EBO/Quantity/v1" schemaLocation="Quantity_v1_EBO.xsd"/>
+	<!---=- end:Imports -=- -->
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+	<element name="SAPDocument" type="xs:string"/>
+	<element name="claimNumber" type="xs:string"/>
+	<element name="customerIdentificationType" type="xs:integer"/>
+	<element name="deliveryNumberSAPDocument" type="xs:string"/>
+	<element name="globalIndicatorExempt" type="xs:string"/>
+	<element name="internalCorrelative" type="xs:string"/>
+	<element name="netAmountIndicator" type="xs:integer"/>
+	<element name="referenceGuideNumber" type="xs:string"/>
+	<element name="segment" type="xs:string"/>
+	<element name="signatureDate" type="xs:dateTime"/>
+	<element name="totalAmountDescription" type="xs:string"/>
+	<element name="newTotal" type="ebons_quantity:Quantity_Type"/>
+	<!---=- end:EBO root elements defs -=- -->
+	<!---=- start:EBO complexType defs -=- -->
+	<element name="CustomerBillAttachment" type="tns:CustomerBillAttachment_Type"/>
+	<complexType name="CustomerBillAttachment_Type">
+		<sequence>
+			<element ref="tns:SAPDocument" minOccurs="0"/>
+			<element ref="tns:claimNumber" minOccurs="0"/>
+			<element ref="tns:customerIdentificationType" minOccurs="0"/>
+			<element ref="tns:deliveryNumberSAPDocument" minOccurs="0"/>
+			<element ref="tns:globalIndicatorExempt" minOccurs="0"/>
+			<element ref="tns:internalCorrelative" minOccurs="0"/>
+			<element ref="tns:netAmountIndicator" minOccurs="0"/>
+			<element ref="tns:referenceGuideNumber" minOccurs="0"/>
+			<element ref="tns:segment" minOccurs="0"/>
+			<element ref="tns:signatureDate" minOccurs="0"/>
+			<element ref="tns:totalAmountDescription" minOccurs="0"/>
+			<element ref="tns:newTotal" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+</schema>

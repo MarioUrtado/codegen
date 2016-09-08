@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/ResourceFacingService/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/ResourceFacingService/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="id" type="xs:string"/>									
+	<xs:element name="rfsStatus" type="xs:integer">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>This is an enumerated integer that defines the status of this particular ResourceFacingService</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="service" type="xs:string"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="ResourceFacingService" type="tns:ResourceFacingService_Type"/>
+	<xs:complexType name="ResourceFacingService_Type">
+		
+			<xs:annotation>
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">This is an abstract base class for ResourceFacingServices. A ResourceFacingService is an abstraction that defines the characteristics and behavior of a particular Service that is not directly seen or purchased by the Customer. ResourceFacingServices are &amp;ldquo;internal&amp;rdquo; Services that are required to support a CustomerFacingService. The Customer obtains CustomerFacingServices via Products, and is not aware of the ResourceFacingServices which support the CustomerFacingService(s) that is being obtained directly by the Customer via a Product. For example, a VPN is an example of a CustomerFacingService. This particular type of VPN may require BGP to support it. Customers don&amp;rsquo;t purchase BGP, and hopefully aren&amp;rsquo;t even aware that BGP is running. Therefore, BGP is an example of a ResourceFacingService. </xs:documentation>
+							
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">CustomerFacingServices are directly related to Products as well as to ResourceFacingServices. ResourceFacingServices are indirectly related to Products through the relationship between Product and Resource. This enforces the relationship to Products while keeping Services that are not directly obtainable via Products (i.e., ResourceFacingServices) separated from Products.</xs:documentation>
+						
+			</xs:annotation>
+		<xs:sequence> 
+		<xs:element ref="tns:id" maxOccurs="unbounded" minOccurs="0"/>
+		<xs:element ref="tns:rfsStatus" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:service" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

@@ -1,0 +1,32 @@
+<schema targetNamespace="http://www.entel.cl/CSM/RA/CHL/SALESFORCE/CRM/ClientDelete/v1" elementFormDefault="qualified" version="1.0" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:res="http://www.entel.cl/ESO/Result/v2" xmlns:header="http://www.entel.cl/ESO/MessageHeader/v1" xmlns:tns="http://www.entel.cl/CSM/RA/CHL/SALESFORCE/CRM/ClientDelete/v1" xmlns:ebons_consumer="http://www.entel.cl/EBO/Consumer/v1">
+
+	<import namespace="http://www.entel.cl/ESO/Result/v2" schemaLocation="../../../../SR_Commons/XSD/ESO/Result_v2_ESO.xsd"/>
+
+	<import namespace="http://www.entel.cl/EBO/Consumer/v1" schemaLocation="../../../../SR_Commons/XSD/EBO/Consumer_v1_EBO.xsd"/>
+
+	<import namespace="http://www.entel.cl/ESO/MessageHeader/v1" schemaLocation="../../../../SR_Commons/XSD/ESO/MessageHeader_v1_ESO.xsd"/>
+
+	<complexType name="CHL-SALESFORCE-CRM_ClientDelete_REQ_Type">
+		<sequence>
+			<element ref="header:RequestHeader"/>
+			<element name="Body">
+				<complexType>
+					<sequence>
+						<element ref="ebons_consumer:ConsumerID"/>
+						<element ref="ebons_consumer:ConsumerType"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<element name="CHL-SALESFORCE-CRM_ClientDelete_REQ" type="tns:CHL-SALESFORCE-CRM_ClientDelete_REQ_Type"/>
+	
+	<complexType name="CHL-SALESFORCE-CRM_ClientDelete_RSP_Type">
+		<sequence>
+			<element ref="res:Result"/>
+			<element name="Body" minOccurs="0"/> <!-- No retorna Body cuando constituye una salida por Error -->
+		</sequence>
+	</complexType>
+	<element name="CHL-SALESFORCE-CRM_ClientDelete_RSP" type="tns:CHL-SALESFORCE-CRM_ClientDelete_RSP_Type"/>
+
+</schema>

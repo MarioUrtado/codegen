@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/FreightInvoiceItem/v1"
+	xmlns:ebons_money="http://www.entel.cl/EBO/Money/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/FreightInvoiceItem/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/Money/v1" schemaLocation="Money_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="comments" type="xs:string"/>									
+	<xs:element name="consumerDirect" type="xs:string"/>									
+	<xs:element name="custumerOrderNumber" type="xs:string"/>									
+	<xs:element name="discountPercentage" type="xs:float"/>									
+	<xs:element name="fullfillOrderNumber" type="xs:string"/>									
+	<xs:element name="itemNumber" type="xs:string"/>									
+	<xs:element name="needDate" type="xs:dateTime"/>									
+	<xs:element name="quantity" type="xs:integer"/>									
+	<xs:element name="requirementDate" type="xs:dateTime"/>									
+	<xs:element name="taxType" type="xs:string"/>									
+	<xs:element name="amountCashed" type="ebons_money:Money_Type"/>									
+	<xs:element name="discountAmount" type="ebons_money:Money_Type"/>									
+	<xs:element name="financeAmount" type="ebons_money:Money_Type"/>									
+	<xs:element name="itemPrice" type="ebons_money:Money_Type"/>									
+	<xs:element name="netAmount" type="ebons_money:Money_Type"/>									
+	<xs:element name="regularItemPrice" type="ebons_money:Money_Type"/>									
+	<xs:element name="totalAmount" type="ebons_money:Money_Type"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="FreightInvoiceItem" type="tns:FreightInvoiceItem_Type"/>
+	<xs:complexType name="FreightInvoiceItem_Type">
+		<xs:sequence> 
+		<xs:element ref="tns:comments" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:consumerDirect" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:custumerOrderNumber" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:discountPercentage" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:fullfillOrderNumber" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:itemNumber" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:needDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:quantity" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:requirementDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:taxType" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:amountCashed" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:discountAmount" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:financeAmount" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:itemPrice" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:netAmount" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:regularItemPrice" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:totalAmount" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

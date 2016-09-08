@@ -1,0 +1,180 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer
+
+  Created: Wed Feb 10 14:58:18 ART 2016
+  Author:  m.rodriguez
+  Type: BPEL 2.0 Process
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ESB_NotificationTreatment_BPEL"
+               targetNamespace="http://xmlns.oracle.com/DC_SC_ErrorManager/NotificationTreatment/ESB_NotificationTreatment_BPEL"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/DC_SC_ErrorManager/NotificationTreatment/ESB_NotificationTreatment_BPEL"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/DC_SC_ErrorManager/NotificationTreatment/ESB_SP_ERROR_HOSPITAL_GET_MAIL"
+         xmlns:ns2="http://www.entel.cl/ESO/NotificationTreatment/v1" xmlns:ui="http://xmlns.oracle.com/soa/designer"
+         xmlns:ns3="http://www.entel.cl/ESO/ErrorTreatment/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/sp/ESB_SP_ERROR_HOSPITAL_GET_MAIL"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns5="http://xmlns.oracle.com/pcbpel/adapter/jms/DC_SC_ErrorManager/NotificationTreatment/ESB_SendToQueue"
+         xmlns:ns6="http://www.entel.cl/ESO/ErrorTreatmentStatus/v1"
+         xmlns:ns7="http://xmlns.oracle.com/ias/pcbpel/NotificationService">
+
+  <!--
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC
+     Set of activities coordinating the flow of messages across the
+     services integrated within this business process
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/DC_SC_ErrorManager/NotificationTreatment/ESB_SP_ERROR_HOSPITAL_GET_MAIL"
+          location="../WSDLs/ESB_SP_ERROR_HOSPITAL_GET_MAIL.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"
+          ui:processWSDL="true"/>
+  <import namespace="http://www.entel.cl/ESO/ErrorTreatment/v1" location="oramds:/apps/Commons/DC_SC_ErrorManager/ErrorHospital/XSD/Treatment_v1_ESO.xsd"
+          importType="http://www.w3.org/2001/XMLSchema"/>
+  <partnerLinks>
+    <partnerLink name="ESB_SP_ERROR_HOSPITAL_GET_MAIL" partnerLinkType="ns1:ESB_SP_ERROR_HOSPITAL_GET_MAIL_plt"
+                 partnerRole="ESB_SP_ERROR_HOSPITAL_GET_MAIL_role"/>
+    <partnerLink name="NotificationTreatment" partnerLinkType="ns2:NotificationTreatment"
+                 myRole="NotificationTreatment_PortType"/>
+    <partnerLink name="ESB_SendToQueue" partnerLinkType="ns5:Produce_Message_plt" partnerRole="Produce_Message_role"/>
+    <partnerLink name="NotificationService1" partnerLinkType="ns7:NotificationServiceLink"
+                 partnerRole="NotificationServiceProvider"/>
+  </partnerLinks>
+  <variables>
+    <variable name="Input_SP_ERROR_HOSPITAL_GET_MAIL" messageType="ns1:args_in_msg"/>
+    <variable name="Output_SP_ERROR_HOSPITAL_GET_MAIL" messageType="ns1:args_out_msg"/>
+    <variable name="Receive_Input" messageType="ns2:notification_Treatment"/>
+    <variable name="In_SendToQueue" messageType="ns5:Produce_Message_msg"/>
+  </variables>
+  <sequence name="main">
+    <receive name="ReceiveInput" createInstance="yes" partnerLink="NotificationTreatment"
+             portType="ns2:NotificationTreatment_PortType" operation="In" variable="Receive_Input"/>
+    <scope name="CALL_getMail_SP">
+      <faultHandlers>
+        <catchAll>
+          <throw name="ThrowRollBack" faultName="bpelx:rollback"/>
+        </catchAll>
+      </faultHandlers>
+      <sequence name="Sequence1">
+        <assign name="CreateRequest_To_GetMail_SP">
+          <copy>
+            <from>$Receive_Input.In/ns3:Error_Treatment_Id</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Input_SP_ERROR_HOSPITAL_GET_MAIL.InputParameters/ns4:P_ERROR_TRATEMENT_ID</to>
+          </copy>
+        </assign>
+        <invoke name="CALL_ESB_SP_ERROR_HOSPITAL_GET_MAIL" partnerLink="ESB_SP_ERROR_HOSPITAL_GET_MAIL"
+                portType="ns1:ESB_SP_ERROR_HOSPITAL_GET_MAIL_ptt" operation="ESB_SP_ERROR_HOSPITAL_GET_MAIL"
+                inputVariable="Input_SP_ERROR_HOSPITAL_GET_MAIL" outputVariable="Output_SP_ERROR_HOSPITAL_GET_MAIL"
+                bpelx:invokeAsDetail="no"/>
+        <if name="IF_ErrorGetMail">
+          <documentation>
+            <![CDATA[ErrorCode = 0]]>
+          </documentation>
+          <condition>$Output_SP_ERROR_HOSPITAL_GET_MAIL.OutputParameters/ns4:P_SOURCE_ERROR_CODE = "0"</condition>
+          <sequence name="Sequence2">
+            <scope name="SendEmail">
+              <bpelx:annotation>
+                <bpelx:pattern patternName="bpelx:email"></bpelx:pattern>
+              </bpelx:annotation>
+              <variables>
+                <variable name="varNotificationReq" messageType="ns7:EmailNotificationRequest"/>
+                <variable name="varNotificationResponse" messageType="ns7:ArrayOfResponse"/>
+                <variable name="NotificationServiceFaultVariable" messageType="ns7:NotificationServiceErrorMessage"/>
+              </variables>
+              <sequence name="Sequence3">
+                <assign name="EmailParamsAssign">
+                  <copy>
+                    <from>string('Default')</from>
+                    <to>$varNotificationReq.EmailPayload/ns7:FromAccountName</to>
+                  </copy>
+                  <copy>
+                    <from>string('')</from>
+                    <to>$varNotificationReq.EmailPayload/ns7:Bcc</to>
+                  </copy>
+                  <copy>
+                    <from>string('')</from>
+                    <to>$varNotificationReq.EmailPayload/ns7:Cc</to>
+                  </copy>
+                  <copy>
+                    <from>string('')</from>
+                    <to>$varNotificationReq.EmailPayload/ns7:ReplyToAddress</to>
+                  </copy>
+                  <copy>
+                    <from>$Output_SP_ERROR_HOSPITAL_GET_MAIL.OutputParameters/ns4:MAIL_SUBJET</from>
+                    <to>$varNotificationReq.EmailPayload/ns7:Subject</to>
+                  </copy>
+                  <copy>
+                    <from>concat($Output_SP_ERROR_HOSPITAL_GET_MAIL.OutputParameters/ns4:MAIL_TO, $Output_SP_ERROR_HOSPITAL_GET_MAIL.OutputParameters/ns4:MAIL_TO)</from>
+                    <to>$varNotificationReq.EmailPayload/ns7:To</to>
+                  </copy>
+                  <copy>
+                    <from>$Output_SP_ERROR_HOSPITAL_GET_MAIL.OutputParameters/ns4:MAIL_BODY</from>
+                    <to>$varNotificationReq.EmailPayload/ns7:Content/ns7:ContentBody</to>
+                  </copy>
+                  <copy>
+                    <from>string('text/html; charset=UTF-8')</from>
+                    <to>$varNotificationReq.EmailPayload/ns7:Content/ns7:MimeType</to>
+                  </copy>
+                </assign>
+                <invoke name="InvokeNotificationService" portType="ns7:NotificationService"
+                        partnerLink="NotificationService1" inputVariable="varNotificationReq"
+                        outputVariable="varNotificationResponse" operation="sendEmailNotification"/>
+              </sequence>
+            </scope>
+            <assign name="SetRequestQueue_Status_OK">
+              <copy>
+                <from>"OK"</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$In_SendToQueue.body/ns6:Status</to>
+              </copy>
+              <copy>
+                <from>$Receive_Input.In/ns3:Error_Treatment_Id</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$In_SendToQueue.body/ns6:Error_Treatment_Id</to>
+              </copy>
+              <copy>
+                <from>"Mail OK!"</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$In_SendToQueue.body/ns6:Description</to>
+              </copy>
+            </assign>
+          </sequence>
+          <else>
+            <documentation>
+              <![CDATA[ErrorCode != 0]]>
+            </documentation>
+            <assign name="SetRequestQueue_Status_FAIL">
+              <copy>
+                <from>"FAIL"</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$In_SendToQueue.body/ns6:Status</to>
+              </copy>
+              <copy>
+                <from>$Receive_Input.In/ns3:Error_Treatment_Id</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$In_SendToQueue.body/ns6:Error_Treatment_Id</to>
+              </copy>
+              <copy>
+                <from>"Mail FAIL!"</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$In_SendToQueue.body/ns6:Description</to>
+              </copy>
+            </assign>
+          </else>
+        </if>
+        <invoke name="CALL_ESB_SendToQueue" partnerLink="ESB_SendToQueue"
+                portType="ns5:Produce_Message_ptt" operation="Produce_Message" inputVariable="In_SendToQueue"
+                bpelx:invokeAsDetail="no"/>
+      </sequence>
+    </scope>
+  </sequence>
+</process>

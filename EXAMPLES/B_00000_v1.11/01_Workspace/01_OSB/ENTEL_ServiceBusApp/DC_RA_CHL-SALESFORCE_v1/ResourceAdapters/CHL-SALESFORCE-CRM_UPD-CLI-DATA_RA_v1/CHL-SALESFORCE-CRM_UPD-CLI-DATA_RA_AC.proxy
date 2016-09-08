@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ser:proxyServiceEntry xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:oper="http://xmlns.oracle.com/servicebus/proxy/operations" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <ser:coreEntry>
+        <ser:binding type="abstract XML"/>
+        <oper:operations enabled="true"/>
+        <ser:invoke ref="DC_RA_CHL-SALESFORCE_v1/ResourceAdapters/CHL-SALESFORCE-CRM_UPD-CLI-DATA_RA_v1/CHL-SALESFORCE-CRM_UPD-CLI-DATA_RA_AC" xsi:type="con:PipelineRef" xmlns:con="http://www.bea.com/wli/sb/pipeline/config"/>
+        <ser:xqConfiguration>
+            <ser:snippetVersion>1.0</ser:snippetVersion>
+        </ser:xqConfiguration>
+    </ser:coreEntry>
+    <ser:endpointConfig>
+        <tran:provider-id>sb</tran:provider-id>
+        <tran:inbound>true</tran:inbound>
+        <tran:URI>
+            <env:value>CHL-SALESFORCE-CRM_UPD-CLI-DATA_RA_AsyncCallback</env:value>
+        </tran:URI>
+        <tran:inbound-properties/>
+        <tran:provider-specific xsi:type="sb:SBEndPointConfiguration" xmlns:sb="http://www.bea.com/wli/sb/transports/sb">
+            <sb:inbound-properties>
+                <sb:use-ssl>false</sb:use-ssl>
+            </sb:inbound-properties>
+        </tran:provider-specific>
+    </ser:endpointConfig>
+</ser:proxyServiceEntry>

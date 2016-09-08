@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con5="http://www.bea.com/wli/sb/typesystem/config" xmlns:con6="http://www.bea.com/wli/sb/stages/alert/config">
+    <con:coreEntry>
+        <con:binding type="Mixed" xsi:type="con:MixedBindingType">
+            <con:request type="XML">
+                <con5:schema ref="DC_SC_ErrorManager/SupportLogic/XSD/ErrorDictionary" element="ErrDicREQ"/>
+            </con:request>
+            <con:response type="XML">
+                <con5:schema ref="DC_SC_ErrorManager/SupportLogic/XSD/ErrorDictionary" element="ErrDicRSP"/>
+            </con:response>
+        </con:binding>
+        <con:xqConfiguration>
+            <con:snippetVersion>1.0</con:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:router errorHandler="error-N3f57fe7d.73497bee.0.1525a2b179c.N7fcf">
+        <con:pipeline type="request" name="request-N3f57c310.35ffddfd.0.152377960d2.N7f68">
+            <con:stage id="_StageId-N3f57c310.35ffddfd.0.152377960d2.N7b19" name="Get -  Cache Manager">
+                <con:context>
+                    <con1:userNsDecl prefix="v1" namespace="http://www.entel.cl/SC/ErrorDictionary/handle/v1"/>
+                </con:context>
+                <con:actions>
+                    <con2:wsCallout>
+                        <con1:id>_ActionId-N3f57c310.35ffddfd.0.152377960d2.N7b18</con1:id>
+                        <con2:service ref="DC_SC_CacheManager/SupportAPI/Proxy/CacheManager" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con2:operation>get</con2:operation>
+                        <con2:request>
+                            <con2:body wrapped="false">getCacheRequest</con2:body>
+                        </con2:request>
+                        <con2:response>
+                            <con2:body wrapped="false">getCacheResponse</con2:body>
+                        </con2:response>
+                        <con2:requestTransform>
+                            <con2:assign varName="getCacheRequest">
+                                <con1:id>_ActionId-N3f57c310.35ffddfd.0.152377960d2.N7b17</con1:id>
+                                <con2:expr>
+                                    <con1:xqueryTransform>
+                                        <con1:resource ref="SR_Commons/XQuery/SupportComponent/CacheManager/get_getREQ"/>
+                                        <con1:param name="instance">
+                                            <con1:path>concat($body/*[1]/*[1]/@code,$body/*[1]/*[3]/@source,$body/*[1]/*[2]/@module,$body/*[1]/*[2]/@subModule)</con1:path>
+                                        </con1:param>
+                                        <con1:param name="source">
+                                            <con1:path>'ErrorManager'</con1:path>
+                                        </con1:param>
+                                        <con1:param name="category">
+                                            <con1:path>'GETCANONICALERROR'</con1:path>
+                                        </con1:param>
+                                    </con1:xqueryTransform>
+                                </con2:expr>
+                            </con2:assign>
+                        </con2:requestTransform>
+                        <con2:responseTransform>
+                            <con2:ifThenElse>
+                                <con1:id>_ActionId-N3f57c310.35ffddfd.0.152377960d2.N7b16</con1:id>
+                                <con2:case id="_BranchId-N3f57c310.35ffddfd.0.152377960d2.N7b15">
+                                    <con2:condition>
+                                        <con1:xqueryText>exists($getCacheResponse/*[1]/*[1])</con1:xqueryText>
+                                    </con2:condition>
+                                    <con2:actions>
+                                        <con2:replace varName="body" contents-only="true">
+                                            <con1:id>_ActionId-N3f57c310.35ffddfd.0.152377960d2.N7b14</con1:id>
+                                            <con2:expr>
+                                                <con1:xqueryText>$getCacheResponse/*[1]/*:Value/*</con1:xqueryText>
+                                            </con2:expr>
+                                        </con2:replace>
+                                        <con1:reply>
+                                            <con1:id>_ActionId-N3f57c310.35ffddfd.0.152377960d2.N7b13</con1:id>
+                                        </con1:reply>
+                                    </con2:actions>
+                                </con2:case>
+                                <con2:default/>
+                            </con2:ifThenElse>
+                        </con2:responseTransform>
+                    </con2:wsCallout>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-N3f57c310.35ffddfd.0.152377960d2.N7f67">
+            <con:stage id="_StageId-N3f57c310.35ffddfd.0.152377960d2.N7aa9" name="Put - Cache Manager">
+                <con:context/>
+                <con:actions>
+                    <con2:wsCallout>
+                        <con1:id>_ActionId-N3f57c310.35ffddfd.0.152377960d2.N7aa8</con1:id>
+                        <con2:service ref="DC_SC_CacheManager/SupportAPI/Proxy/CacheManager" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con2:operation>put</con2:operation>
+                        <con2:request>
+                            <con2:body wrapped="false">putCacheRequest</con2:body>
+                        </con2:request>
+                        <con2:response>
+                            <con2:body wrapped="false">putCacheResponse</con2:body>
+                        </con2:response>
+                        <con2:requestTransform>
+                            <con2:assign varName="putCacheRequest">
+                                <con1:id>_ActionId-N3f57c310.35ffddfd.0.152377960d2.N7aa7</con1:id>
+                                <con2:expr>
+                                    <con1:xqueryTransform>
+                                        <con1:resource ref="SR_Commons/XQuery/SupportComponent/CacheManager/get_putREQ"/>
+                                        <con1:param name="instance">
+                                            <con1:path>data($getCacheRequest/*[1]/@instance)</con1:path>
+                                        </con1:param>
+                                        <con1:param name="putRequest">
+                                            <con1:path>$body/*</con1:path>
+                                        </con1:param>
+                                        <con1:param name="source">
+                                            <con1:path>'ErrorManager'</con1:path>
+                                        </con1:param>
+                                        <con1:param name="category">
+                                            <con1:path>'GETCANONICALERROR'</con1:path>
+                                        </con1:param>
+                                    </con1:xqueryTransform>
+                                </con2:expr>
+                            </con2:assign>
+                        </con2:requestTransform>
+                        <con2:responseTransform/>
+                    </con2:wsCallout>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-N3f57fe7d.73497bee.0.1525a2b179c.N7fcf">
+            <con:stage id="_StageId-N3f57fe7d.73497bee.0.1525a2b179c.N7fce" name="Error Handler">
+                <con:context/>
+                <con:actions>
+                    <con2:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-N53ee3fc6.4f5e4b06.0.152837a9c0c.N7e8f</con1:id>
+                        <con2:expr>
+                            <con1:xqueryText>&lt;ErrDicRSP >
+	&lt;ns3:Result status="ERROR" description="ERROR VALIDO" xmlns:ns3="http://www.entel.cl/ESO/Result/v2">
+		&lt;ns4:CanonicalError code="50005" description="ERROR DURANTE EL PROCESO DE TRADUCCION." type="FWCF" xmlns:ns4="http://www.entel.cl/ESO/Error/v1"/>
+        &lt;/ns3:Result>
+&lt;/ErrDicRSP></con1:xqueryText>
+                        </con2:expr>
+                    </con2:replace>
+                    <con6:alert>
+                        <con1:id>_ActionId-N53ee3fc6.4f5e4b06.0.152837a9c0c.N7e8c</con1:id>
+                        <con6:destination ref="SR_Commons/AlertDestinations/FW_Support"/>
+                        <con6:description>Framework - Error Dictionary Failure.</con6:description>
+                        <con6:severity>major</con6:severity>
+                        <con6:payload>
+                            <con1:xqueryTransform>
+                                <con1:resource ref="SR_Commons/XQuery/get_MailMessageContent_AlertFW"/>
+                                <con1:param name="mailFooter">
+                                    <con1:path>''</con1:path>
+                                </con1:param>
+                                <con1:param name="componentType">
+                                    <con1:path>'Support Component'</con1:path>
+                                </con1:param>
+                                <con1:param name="mailBody">
+                                    <con1:path>fn-bea:serialize($fault)</con1:path>
+                                </con1:param>
+                                <con1:param name="messageHeader">
+                                    <con1:path>$body/*[1]/*:Header</con1:path>
+                                </con1:param>
+                                <con1:param name="componentOperation">
+                                    <con1:path>'handle'</con1:path>
+                                </con1:param>
+                                <con1:param name="componentName">
+                                    <con1:path>'Error Dictionary'</con1:path>
+                                </con1:param>
+                                <con1:param name="mailHeader">
+                                    <con1:path>''</con1:path>
+                                </con1:param>
+                            </con1:xqueryTransform>
+                        </con6:payload>
+                    </con6:alert>
+                    <con1:reply>
+                        <con1:id>_ActionId-N3f57fe7d.73497bee.0.1525a2b179c.N7fc7</con1:id>
+                    </con1:reply>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:flow>
+            <con:pipeline-node name="Check Message Status">
+                <con:request>request-N3f57c310.35ffddfd.0.152377960d2.N7f68</con:request>
+                <con:response>response-N3f57c310.35ffddfd.0.152377960d2.N7f67</con:response>
+            </con:pipeline-node>
+            <con:route-node name="RouteToErrorManager_db">
+                <con:context/>
+                <con:actions>
+                    <con3:route>
+                        <con1:id>_ActionId-N3f57c310.35ffddfd.0.152377960d2.N7ccf</con1:id>
+                        <con3:service ref="DC_SC_ErrorManager/SupportLogic/JCA/errorManagerAdapter/ErrorDictionary" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>ErrorManager</con3:operation>
+                        <con3:outboundTransform>
+                            <con2:replace varName="body" contents-only="true">
+                                <con1:id>_ActionId-N3f57c310.35ffddfd.0.152377960d2.N7cce</con1:id>
+                                <con2:location>
+                                    <con1:xpathText>.</con1:xpathText>
+                                </con2:location>
+                                <con2:expr>
+                                    <con1:xqueryTransform>
+                                        <con1:resource ref="DC_SC_ErrorManager/SupportLogic/XQuery/get_GETCANONICALERROR_REQ"/>
+                                        <con1:param name="entrada">
+                                            <con1:path>$body/*[1]</con1:path>
+                                        </con1:param>
+                                    </con1:xqueryTransform>
+                                </con2:expr>
+                            </con2:replace>
+                        </con3:outboundTransform>
+                        <con3:responseTransform>
+                            <con2:replace varName="body" contents-only="true">
+                                <con1:id>_ActionId-N53ee3fc4.N339c965.0.15254f2b1b6.N7fad</con1:id>
+                                <con2:expr>
+                                    <con1:xqueryTransform>
+                                        <con1:resource ref="DC_SC_ErrorManager/SupportLogic/XQuery/get_ResultFromGETCANONICALERROR"/>
+                                        <con1:param name="InputParameters">
+                                            <con1:path>$body/*[1]</con1:path>
+                                        </con1:param>
+                                    </con1:xqueryTransform>
+                                </con2:expr>
+                            </con2:replace>
+                            <con2:replace varName="body" contents-only="true">
+                                <con1:id>_ActionId-N53ee3fc4.N339c965.0.15254f2b1b6.N7fa7</con1:id>
+                                <con2:expr>
+                                    <con1:xqueryTransform>
+                                        <con1:resource ref="DC_SC_ErrorManager/SupportLogic/XQuery/get_ErrDicRSP"/>
+                                        <con1:param name="result">
+                                            <con1:path>$body/*[1]</con1:path>
+                                        </con1:param>
+                                    </con1:xqueryTransform>
+                                </con2:expr>
+                            </con2:replace>
+                        </con3:responseTransform>
+                    </con3:route>
+                </con:actions>
+            </con:route-node>
+        </con:flow>
+    </con:router>
+</con:pipelineEntry>

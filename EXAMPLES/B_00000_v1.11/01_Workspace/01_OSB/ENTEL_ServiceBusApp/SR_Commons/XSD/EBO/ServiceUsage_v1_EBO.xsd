@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/ServiceUsage/v1"
+	xmlns:ebons_msisdn="http://www.entel.cl/EBO/MSISDN/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/ServiceUsage/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/MSISDN/v1" schemaLocation="MSISDN_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="direction" type="xs:string"/>									
+	<xs:element name="message" type="xs:string"/>									
+	<xs:element name="usageDate" type="xs:dateTime"/>									
+	<xs:element name="usageStatus" type="xs:string"/>									
+	<xs:element name="destinyMSISDN" type="ebons_msisdn:MSISDN_Type"/>									
+	<xs:element name="originMSISDN" type="ebons_msisdn:MSISDN_Type"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="ServiceUsage" type="tns:ServiceUsage_Type"/>
+	<xs:complexType name="ServiceUsage_Type">
+		<xs:sequence> 
+		<xs:element ref="tns:direction" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:message" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:usageDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:usageStatus" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:destinyMSISDN" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:originMSISDN" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

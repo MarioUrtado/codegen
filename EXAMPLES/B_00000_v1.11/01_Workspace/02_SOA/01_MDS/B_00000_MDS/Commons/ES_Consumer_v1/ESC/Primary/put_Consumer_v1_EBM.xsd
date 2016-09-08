@@ -1,0 +1,58 @@
+<!-- Ref EBM template: v1.0 - NO 
+BORRAR -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:esons_messageHeader="http://www.entel.cl/ESO/MessageHeader/v1" xmlns:tns="http://www.entel.cl/EBM/Consumer/put/v1" xmlns:ebons_consumer="http://www.entel.cl/EBO/Consumer/v1" targetNamespace="http://www.entel.cl/EBM/Consumer/put/v1" elementFormDefault="qualified" version="1.0">
+	
+	<import namespace="http://www.entel.cl/ESO/MessageHeader/v1" schemaLocation="../../../SR_Commons/XSD/ESO/MessageHeader_v1_ESO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/Consumer/v1" schemaLocation="../../../SR_Commons/XSD/EBO/Consumer_v1_EBO.xsd"/>
+	
+        <!-- ********** Synchronus Message Structures ********** -->
+        
+        <complexType name="Put_Consumer_REQ_Type">
+		<sequence>
+			<element ref="esons_messageHeader:RequestHeader"/>
+			<element name="Body">
+				<complexType>
+					<sequence>
+						<element ref="ebons_consumer:Consumer"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>	
+	<element name="Put_Consumer_REQ" type="tns:Put_Consumer_REQ_Type"/>
+	
+	<complexType name="Put_Consumer_RSP_Type">
+		<sequence>
+			<element ref="esons_messageHeader:ResponseHeader"/>
+			<element name="Body">
+			</element>
+		</sequence>
+	</complexType>
+	<element name="Put_Consumer_RSP" type="tns:Put_Consumer_RSP_Type"/>
+	
+	<complexType name="Put_Consumer_FRSP_Type">
+		<sequence>
+			<element ref="esons_messageHeader:ResponseHeader"/>
+			<element name="Body">
+			</element>
+		</sequence>
+	</complexType>
+	<element name="Put_Consumer_FRSP" type="tns:Put_Consumer_FRSP_Type"/>
+        
+        <!-- ********** Asynchronus Message Structures ********** -->
+        
+        <complexType name="Put_Consumer_CRSP_Type">
+		<sequence>
+			<element ref="esons_messageHeader:ResponseHeader"/>
+			<element name="Body" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element ref="ebons_consumer:ConsumerID"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+        <element name="Put_Consumer_CRSP" type="tns:Put_Consumer_CRSP_Type"/>
+        
+</schema>

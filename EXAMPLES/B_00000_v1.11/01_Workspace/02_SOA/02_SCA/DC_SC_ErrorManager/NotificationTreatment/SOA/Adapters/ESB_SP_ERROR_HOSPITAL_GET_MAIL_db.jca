@@ -1,0 +1,12 @@
+<adapter-config name="ESB_SP_ERROR_HOSPITAL_GET_MAIL" adapter="db" wsdlLocation="../WSDLs/ESB_SP_ERROR_HOSPITAL_GET_MAIL.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="ENTEL01_Deprec" location="eis/DB/FRW/ErrorHospital"/>
+  <endpoint-interaction portType="ESB_SP_ERROR_HOSPITAL_GET_MAIL_ptt" operation="ESB_SP_ERROR_HOSPITAL_GET_MAIL">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="PackageName" value="ESB_ERROR_HOSPITAL_PKG"/>
+      <property name="ProcedureName" value="SP_ERROR_HOSPITAL_GET_MAIL"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

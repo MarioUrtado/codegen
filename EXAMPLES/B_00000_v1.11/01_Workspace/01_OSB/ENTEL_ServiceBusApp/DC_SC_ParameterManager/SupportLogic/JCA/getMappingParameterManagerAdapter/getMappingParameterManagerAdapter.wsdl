@@ -1,0 +1,24 @@
+<wsdl:definitions name="getMappingParameterManagerAdapter" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/ENTEL_ServiceBusApp/DC_SC_ParameterManager/getMappingParameterManagerAdapter" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/ENTEL_ServiceBusApp/DC_SC_ParameterManager/getMappingParameterManagerAdapter" xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getMappingParameterManagerAdapter" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <plt:partnerLinkType name="getMappingParameterManagerAdapter_plt">
+    <plt:role name="getMappingParameterManagerAdapter_role">
+      <plt:portType name="tns:getMappingParameterManagerAdapter_ptt"/>
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+     <schema xmlns="http://www.w3.org/2001/XMLSchema">
+       <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getMappingParameterManagerAdapter" schemaLocation="getMappingParameterManagerAdapter_sp.xsd"/>
+     </schema>
+    </wsdl:types>
+    <wsdl:message name="args_in_msg">
+        <wsdl:part name="InputParameters" element="db:InputParameters"/>
+    </wsdl:message>
+    <wsdl:message name="args_out_msg">
+        <wsdl:part name="OutputParameters" element="db:OutputParameters"/>
+    </wsdl:message>
+    <wsdl:portType name="getMappingParameterManagerAdapter_ptt">
+        <wsdl:operation name="getMappingParameterManagerAdapter">
+            <wsdl:input message="tns:args_in_msg"/>
+            <wsdl:output message="tns:args_out_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,158 @@
+<schema targetNamespace="http://www.entel.cl/ESO/Error/v1" elementFormDefault="qualified" version="1.0" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.entel.cl/ESO/Error/v1" xmlns:eddns_dictionary="http://www.entel.cl/EDD/Dictionary/v1">
+   <import namespace="http://www.entel.cl/EDD/Dictionary/v1" schemaLocation="XMLSchema_-2102225122.xsd"/>
+   <annotation>
+      <documentation>Data structures related to Error information handling.</documentation>
+   </annotation>
+   <complexType name="Canonical_Error_Type">
+      <annotation>
+         <documentation>
+                        It holds the information of an error in Canonical format. This should not be taken as an autonomous Error Object, 
+                        as it is always to be contextualized within a Result Element. This object alone serves no other puirpose as to represent
+                        detailed outcome information regarding an particular execution of any capability/method/function.
+			</documentation>
+      </annotation>
+      <complexContent>
+         <extension base="tns:ErrorMetadata_Type">
+            <attribute name="type" type="tns:CanonicalErrorType_SType">
+               <annotation>
+                  <documentation>Canonical Error Type. This element can change during the error interpretation process, within each service execution.</documentation>
+               </annotation>
+            </attribute>
+         </extension>
+      </complexContent>
+   </complexType>
+   <element name="CanonicalError" type="tns:Canonical_Error_Type"/>
+   <simpleType name="CanonicalErrorType_SType">
+      <restriction base="string">
+         <enumeration value="NEG">
+            <annotation>
+               <documentation>Indica la existencia de un error relacionada a negocio (Expected Error).</documentation>
+            </annotation>
+         </enumeration>
+         <enumeration value="DAT">
+            <annotation>
+               <documentation>Indica la existencia de un error originado por:
+                                                ��� formato de datos
+                                                ��� obligatoriedad
+                                                ��� validaci��n de la estructura del mensaje no corresponde con el contrato de servicio,
+                                                  ya sea en la petici��n enviada al Proveedor de Datos, como en la respuesta obtenida del mismo.
+                                        </documentation>
+            </annotation>
+         </enumeration>
+         <enumeration value="TEC">
+            <annotation>
+               <documentation>Indica la presencia de un error de naturaleza t��cnica en el proveedor de datos (Unexpected Errors).</documentation>
+            </annotation>
+         </enumeration>
+         <enumeration value="UNK">
+            <annotation>
+               <documentation>Indica la ocurrencia de un error no identificado (mapeado).</documentation>
+            </annotation>
+         </enumeration>
+         <enumeration value="SEG">
+            <annotation>
+               <documentation>Indica la ocurrencia de un error relacionado al ��mbito de la seguridad (Unexpected Error), 
+                                                ��� Validaci��n de credenciales.
+                                                ��� Permisos de ejecuci��n.
+                                        </documentation>
+            </annotation>
+         </enumeration>
+         <enumeration value="FWNE">
+            <annotation>
+               <documentation>Indica la existencia de un error relacionada a negocio (Expected Error).</documentation>
+            </annotation>
+         </enumeration>
+         <enumeration value="FWDA">
+            <annotation>
+               <documentation>Indica la existencia de un error originado por:
+                                                ��� formato de datos,
+                                                ��� obligatoriedad
+                                                ��� validaci��n de la estructura del mensaje no corresponde con el contrato de servicio, ya sea en la petici��n enviada al servicio consumidor, como en la respuesta obtenida del mismo.
+                                        </documentation>
+            </annotation>
+         </enumeration>
+         <enumeration value="FWTE">
+            <annotation>
+               <documentation>Indica la presencia de un error de naturaleza t��cnica en el framework (Unexpected Errors):
+                                                ��� No disponibilidad.
+                                                ��� Error en la comunicaci��n, (por ejemplo: timeouts).
+                                                ��� Otros errores propios del sistema productor de datos.
+                                        </documentation>
+            </annotation>
+         </enumeration>
+         <enumeration value="FWUN">
+            <annotation>
+               <documentation>Indica la ocurrencia de un error que no identificado (mapeado).</documentation>
+            </annotation>
+         </enumeration>
+         <enumeration value="FWSE">
+            <annotation>
+               <documentation>Indica la ocurrencia de un error relacionado al ��mbito de la seguridad (Unexpected Error), 
+                                                ��� Validaci��n de credenciales.
+                                                ��� Permisos de ejecuci��n.
+                                        </documentation>
+            </annotation>
+         </enumeration>
+         <enumeration value="FWCF">
+            <annotation>
+               <documentation>Indica la ocurrencia de un error relacionado a la configuracion (inconsistente).</documentation>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <complexType name="ErrorMetadata_Type">
+      <attribute name="code" type="eddns_dictionary:genericStringValue_SType">
+         <annotation>
+            <documentation>Error Code.</documentation>
+         </annotation>
+      </attribute>
+      <attribute name="description" type="eddns_dictionary:genericStringValue_SType">
+         <annotation>
+            <documentation>Error Description. There may be no description if the error is represented in a non-canonical form, but this element should be populated if its on the canonical form.</documentation>
+         </annotation>
+      </attribute>
+   </complexType>
+   <element name="ErrorMetadata" type="tns:ErrorMetadata_Type"/>
+   <complexType name="ErrorSourceDetails_Type">
+      <attribute name="source" type="eddns_dictionary:sysCode_SType">
+         <annotation>
+            <documentation>An error Source. It depicts the source of an associated error, as described by the component that handled it in each case. This should be a known System Code.</documentation>
+         </annotation>
+      </attribute>
+      <attribute name="details" type="eddns_dictionary:genericStringValue_SType">
+         <annotation>
+            <documentation>An error Source Details. It depicts the original source detailes of an associated  Error, as described by the component that handled it in each case. This data should not be restricted to a known code, as it is descriptive information.</documentation>
+         </annotation>
+      </attribute>
+   </complexType>
+   <element name="ErrorSourceDetails" type="tns:ErrorSourceDetails_Type"/>
+   <complexType name="SourceError_Type">
+      <annotation>
+         <documentation>It holds the information of error in non-canonical format, with its associated information.</documentation>
+      </annotation>
+      <complexContent>
+         <extension base="tns:ErrorMetadata_Type">
+            <sequence>
+               <element ref="tns:ErrorSourceDetails" minOccurs="1"/>
+               <element name="SourceFault" type="anyType" minOccurs="0">
+                  <annotation>
+                     <documentation>
+								Source Fault Message. This can be an exception, an controlled message, etc. This should represent where the ErrorMetadata was interpreted from, and it should be provided by the Source described on the ErrorSourceDetails. Its an optional element, and should be used only when this type of information can be shown and when it is neccesary.
+							</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <element name="SourceError" type="tns:SourceError_Type"/>
+   <element name="ErrorIndex" type="eddns_dictionary:SimpleIndexDetail_Type">
+      <annotation>
+         <documentation>
+                               It allows the specific indexation of an error to a certain context or resource. It is used to increase 
+                               the level of specificity to be considered for Error Translation within the ErrorManager. This element is completely 
+                               optional, as this level of detail is not mandatory for sucessfull error translation.
+            </documentation>
+      </annotation>
+   </element>
+</schema>

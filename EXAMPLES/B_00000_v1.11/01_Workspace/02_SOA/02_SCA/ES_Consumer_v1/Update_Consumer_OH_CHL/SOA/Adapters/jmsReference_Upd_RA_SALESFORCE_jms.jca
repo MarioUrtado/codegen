@@ -1,0 +1,19 @@
+<adapter-config name="jmsReference_Upd_RA_SALESFORCE" adapter="jms" wsdlLocation="../WSDLs/jmsReference_Upd_RA_SALESFORCE.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  <connection-factory UIConnectionName="GlobalLogic1221_VM" location="eis/JMS/SALESFORCE" UIJmsProvider="WLSJMS" UiOperationMode="Asynchronous"/>
+  <endpoint-activation portType="Reply_ptt" operation="Reply" UITransmissionPrimitive="Request-response">
+    <activation-spec className="oracle.tip.adapter.jms.inbound.JmsConsumeActivationSpec">
+      <property name="DestinationName" value="/jms/RA/SALESFORCE/CHL-SALESFORCE-CRM_UPD-CLI-DATA_RA_RSP_Queue"/>
+      <property name="UseMessageListener" value="false"/>
+      <property name="MessageSelector" value="JMSType='Update_Consumer_OH_CHL'"/>
+      <property name="PayloadType" value="BytesMessage"/>
+    </activation-spec>
+  </endpoint-activation>
+  <endpoint-interaction portType="Request_ptt" operation="Request" UITransmissionPrimitive="Request-response">
+    <interaction-spec className="oracle.tip.adapter.jms.outbound.JmsProduceInteractionSpec">
+      <property name="TimeToLive" value="0"/>
+      <property name="DestinationName" value="/jms/RA/SALESFORCE/CHL-SALESFORCE-CRM_UPD-CLI-DATA_RA_REQ_Queue"/>
+      <property name="DeliveryMode" value="Persistent"/>
+      <property name="PayloadType" value="BytesMessage"/>
+    </interaction-spec>
+  </endpoint-interaction>
+</adapter-config>

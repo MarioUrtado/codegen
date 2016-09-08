@@ -1,0 +1,311 @@
+<schema targetNamespace="http://www.entel.cl/ESO/MessageHeader/v1" elementFormDefault="qualified" version="1.0" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.entel.cl/ESO/MessageHeader/v1" xmlns:esons_result="http://www.entel.cl/ESO/Result/v2" xmlns:esons_error="http://www.entel.cl/ESO/Error/v1" xmlns:eddns_dictionary="http://www.entel.cl/EDD/Dictionary/v1">
+   <import namespace="http://www.entel.cl/EDD/Dictionary/v1" schemaLocation="XMLSchema_212053839.xsd"/>
+   <annotation>
+      <documentation>Data structures representing metadata related to a certain Service Operation Execution.</documentation>
+   </annotation>
+   <import namespace="http://www.entel.cl/ESO/Result/v2" schemaLocation="XMLSchema_-1264000451.xsd"/>
+   <complexType name="MessageHeader_Type">
+      <annotation>
+         <documentation>
+				It represents important metadata related to the
+				execution of a certain service operation, during its
+				original request, propagation and final response.
+			</documentation>
+      </annotation>
+      <sequence>
+         <element ref="tns:Consumer"/>
+         <element ref="tns:Trace"/>
+         <element ref="tns:Channel" minOccurs="0"/>
+      </sequence>
+   </complexType>
+   <complexType name="Consumer_Type">
+      <annotation>
+         <documentation>
+				Information about the Service Consumer.
+			</documentation>
+      </annotation>
+      <attribute name="sysCode" type="eddns_dictionary:sysCode_SType" use="required">
+         <annotation>
+            <documentation>
+					Unique System Code. Represents the service
+					consumer.
+				</documentation>
+         </annotation>
+      </attribute>
+      <attribute name="enterpriseCode" type="eddns_dictionary:sysCode_SType" use="required">
+         <annotation>
+            <documentation>
+					Unique Enterprise Code. Represents the enterprise service
+					consumer.
+				</documentation>
+         </annotation>
+      </attribute>
+      <attribute name="countryCode" type="eddns_dictionary:countryCode_SType" use="required">
+         <annotation>
+            <documentation>
+					Unique Country Code. Represents the Country from which
+				the execution was made.
+				</documentation>
+         </annotation>
+      </attribute>
+   </complexType>
+   <complexType name="Trace_Type">
+      <annotation>
+         <documentation>
+				Meta-Information related to traceability, which uniquely
+				identifies this particular execution.
+			</documentation>
+      </annotation>
+      <sequence>
+         <element ref="tns:Service" minOccurs="0">
+            <annotation>
+               <documentation>
+						Service that holds the control of the
+						execution. This is expected to change each time
+						a Service becomes statefull.
+					</documentation>
+            </annotation>
+         </element>
+      </sequence>
+      <attribute name="clientReqTimestamp" use="required" type="eddns_dictionary:messageTimeStamp_SType">
+         <annotation>
+            <documentation>
+					Represents the exact date-time when the consumer/client sent the message to 
+					the Service. This should be sent by Service
+					Consumer, and never changed by the Requested Service.
+				</documentation>
+         </annotation>
+      </attribute>
+      <attribute name="reqTimestamp" type="eddns_dictionary:messageTimeStamp_SType">
+         <annotation>
+            <documentation>
+					Represents the date-time when the request was taken
+					by the Service. This should not be sent by a Service
+					Consumer, but populated by the Requested Service.
+				</documentation>
+         </annotation>
+      </attribute>
+      <attribute name="rspTimestamp" type="eddns_dictionary:messageTimeStamp_SType">
+         <annotation>
+            <documentation>
+					Represents the date-time when the response was
+					delivered by the Service. This should not be sent by
+					a Service Consumer, but populated by the Requested
+					Service.
+				</documentation>
+         </annotation>
+      </attribute>
+      <attribute name="processID" type="eddns_dictionary:genericStringValue_SType">
+         <annotation>
+            <documentation>
+					Unique process execution instance identifier. This should
+					be sent by a Service Consumer, and never changed on
+					the Requested Service.
+				</documentation>
+         </annotation>
+      </attribute>
+      <attribute name="eventID" use="required" type="eddns_dictionary:genericStringValue_SType">
+         <annotation>
+            <documentation>
+					Unique event execution instance identifier. This should
+					be sent by a Service Consumer, and never changed on
+					the Requested Service.
+				</documentation>
+         </annotation>
+      </attribute>
+      <attribute name="sourceID" type="eddns_dictionary:genericStringValue_SType">
+         <annotation>
+            <documentation>
+					Another level of detail to be used on-demand by service 
+					consumers, in compliance with any propouse they may 
+					see fit in each case. It should be sent by a Service 
+					Consumer, and never changed on the Requested Service.
+				</documentation>
+         </annotation>
+      </attribute>
+      <attribute name="correlationEventID" type="eddns_dictionary:genericStringValue_SType">
+         <annotation>
+            <documentation>
+					Unique EventyID correlation identifier, used to relate one
+					execution to another. It should be sent by a Service Consumer, 
+					and never changed on the Requested Service.
+				</documentation>
+         </annotation>
+      </attribute>
+      <attribute name="conversationID" type="tns:conversationID_SType">
+         <annotation>
+            <documentation>
+					Unique correlation identifier, used to relate one
+					execution to another. This should not be polulated by consumer, 
+					it is for internal use only.
+				</documentation>
+         </annotation>
+      </attribute>
+      <attribute name="correlationID" type="tns:conversationID_SType">
+         <annotation>
+            <documentation>
+					Unique correlation identifier, used to relate one
+					excecution to another. This should not be polulated by consumer, 
+					it is for internal use only.
+				</documentation>
+         </annotation>
+      </attribute>
+   </complexType>
+   <simpleType name="conversationID_SType">
+      <annotation>
+         <documentation>
+                Unique correlation identifier, used to relate one
+					excecution to another. This should not be polulated by consumer, 
+					it is for internal use only.
+            </documentation>
+      </annotation>
+      <restriction base="string"/>
+   </simpleType>
+   <complexType name="Channel_Type">
+      <annotation>
+         <documentation>
+				It holds information about which channel is being used.
+			</documentation>
+      </annotation>
+      <attribute name="name">
+         <annotation>
+            <documentation>
+					Unique Channel Code. Represents the channel being
+					used.
+				</documentation>
+         </annotation>
+         <simpleType>
+            <restriction base="eddns_dictionary:genericStringValue_SType"/>
+         </simpleType>
+      </attribute>
+      <attribute name="mode">
+         <annotation>
+            <documentation>
+					Unique channel Mode. Represents the mode on which
+					the channel is being used.
+				</documentation>
+         </annotation>
+         <simpleType>
+            <restriction base="eddns_dictionary:genericStringValue_SType"/>
+         </simpleType>
+      </attribute>
+   </complexType>
+   <complexType name="Country_Type">
+      <annotation>
+         <documentation>
+				Country from which a certain Service Operation is requested.
+			</documentation>
+      </annotation>
+      <attribute name="code" type="int" use="required">
+         <annotation>
+            <documentation>
+					Unique Country Code. Represents the Country from which
+				the execution was made.
+				</documentation>
+         </annotation>
+      </attribute>
+      <attribute name="name" type="string">
+         <annotation>
+            <documentation>Name of the Country.</documentation>
+         </annotation>
+      </attribute>
+   </complexType>
+   <complexType name="Service_Type">
+      <annotation>
+         <documentation>Meta-Information about a Service, during a certain operation execution.</documentation>
+      </annotation>
+      <attribute name="code" type="string">
+         <annotation>
+            <documentation>
+					Unique Service Code. Represents the Service being
+					requested. This should not be sent by a Service
+					Consumer, but populated by the Requested Service.
+				</documentation>
+         </annotation>
+      </attribute>
+      <attribute name="name" type="string">
+         <annotation>
+            <documentation>
+					Name of the Service Being Requested. This should not
+					be sent by a Service Consumer, but populated by the
+					Requested Service.
+				</documentation>
+         </annotation>
+      </attribute>
+      <attribute name="operation" type="string">
+         <annotation>
+            <documentation>
+					Name of the Operation being requested for the
+					Service. This should not be sent by a Service
+					Consumer, but populated by the Requested Service.
+				</documentation>
+         </annotation>
+      </attribute>
+   </complexType>
+   <complexType name="RequestHeader_Type">
+      <annotation>
+         <documentation>
+				It represents important metadata related to the
+				execution of a certain service operation, during its
+				request.
+			</documentation>
+      </annotation>
+      <complexContent>
+         <extension base="tns:MessageHeader_Type">
+            <sequence>
+               <element ref="esons_result:Result" minOccurs="0">
+                  <annotation>
+                     <documentation>Result information associated with a Service request.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="ResponseHeader_Type">
+      <annotation>
+         <documentation>
+				It represents important metadata related to the
+				execution of a certain service operation, during its
+				response.
+			</documentation>
+      </annotation>
+      <complexContent>
+         <extension base="tns:MessageHeader_Type">
+            <sequence>
+               <element ref="esons_result:Result">
+                  <annotation>
+                     <documentation>Result information related to this response.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <element name="RequestHeader" type="tns:RequestHeader_Type">
+      <annotation>
+         <documentation>
+				It represents important metadata related to the
+				execution of a certain service operation, during its
+				request.
+			</documentation>
+      </annotation>
+   </element>
+   <element name="ResponseHeader" type="tns:ResponseHeader_Type">
+      <annotation>
+         <documentation>
+				It represents important metadata related to the
+				execution of a certain service operation, during its
+				response.
+			</documentation>
+      </annotation>
+   </element>
+   <element name="Service" type="tns:Service_Type">
+      <annotation>
+         <documentation>Meta-Information about a Service, during a certain operation execution.</documentation>
+      </annotation>
+   </element>
+   <element name="Consumer" type="tns:Consumer_Type"/>
+   <element name="Channel" type="tns:Channel_Type"/>
+   <element name="Trace" type="tns:Trace_Type"/>
+</schema>

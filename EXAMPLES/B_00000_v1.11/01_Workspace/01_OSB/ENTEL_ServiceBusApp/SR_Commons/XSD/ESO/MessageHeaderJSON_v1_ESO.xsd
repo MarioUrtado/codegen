@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.entel.cl/ESO/MessageHeaderJSON/v1" xmlns:nxsd="http://xmlns.oracle.com/pcbpel/nxsd" targetNamespace="http://www.entel.cl/ESO/MessageHeaderJSON/v1" elementFormDefault="qualified" nxsd:version="JSON" nxsd:encoding="US-ASCII">
+	<xsd:element name="RequestHeader" type="tns:RequestHeader_Type"/>
+	<xsd:element name="ResponseHeader" type="tns:ResponseHeader_Type"/>
+	<xsd:complexType name="RequestHeader_Type">
+		<xsd:sequence>
+			<xsd:element name="Consumer" type="tns:Consumer_Type"/>
+			<xsd:element name="Trace" type="tns:Trace_Type"/>
+			<xsd:element name="Channel" type="tns:Channel_Type" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="tns:Result" minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+        <xsd:complexType name="ResponseHeader_Type">
+		<xsd:sequence>
+			<xsd:element name="Consumer" type="tns:Consumer_Type"/>
+			<xsd:element name="Trace" type="tns:Trace_Type"/>
+			<xsd:element name="Channel" type="tns:Channel_Type" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="tns:Result" minOccurs="1" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+        <xsd:element name="Result">
+          <xsd:complexType>
+                  <xsd:sequence>
+                          <xsd:element name="status" type="xsd:string"/>
+                          <xsd:element name="description" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                          <xsd:element name="CanonicalError" type="tns:CanonicalError_Type" minOccurs="0" maxOccurs="1"/>
+                          <xsd:element name="SourceError" type="tns:SourceError_Type" minOccurs="0" maxOccurs="1"/>
+                          <xsd:element name="CorrelativeErrors" type="tns:CorrelativeErrors_Type" minOccurs="0" maxOccurs="1"/>
+                  </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+	<xsd:complexType name="Consumer_Type">
+		<xsd:sequence>
+			<xsd:element name="sysCode" type="xsd:string"/>
+			<xsd:element name="enterpriseCode" type="xsd:string"/>
+			<xsd:element name="countryCode" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Trace_Type">
+		<xsd:sequence>
+			<xsd:element name="clientReqTimestamp" type="xsd:string"/>
+			<xsd:element name="reqTimestamp" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="rspTimestamp" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="processID" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="eventID" type="xsd:string"/>
+			<xsd:element name="sourceID" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="correlationEventID" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="conversationID" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="correlationID" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="Service" type="tns:Service_Type" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Service_Type">
+		<xsd:sequence>
+			<xsd:element name="code" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="name" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="operation" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Channel_Type">
+		<xsd:sequence>
+			<xsd:element name="name" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="mode" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CanonicalError_Type">
+		<xsd:sequence>
+			<xsd:element name="type" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="code" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="description" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SourceError_Type">
+		<xsd:sequence>
+			<xsd:element name="code" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="description" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="ErrorSourceDetails">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="source" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+						<xsd:element name="details" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="SourceFault" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CorrelativeErrors_Type">
+		<xsd:sequence>
+			<xsd:element name="SourceError" type="tns:SourceError_Type" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

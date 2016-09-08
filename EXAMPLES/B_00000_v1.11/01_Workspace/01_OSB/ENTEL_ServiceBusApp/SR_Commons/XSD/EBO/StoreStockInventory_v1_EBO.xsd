@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/StoreStockInventory/v1"
+	xmlns:ebons_quantity="http://www.entel.cl/EBO/Quantity/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/StoreStockInventory/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/Quantity/v1" schemaLocation="Quantity_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="nextPurchaseOrderDate" type="xs:dateTime"/>									
+	<xs:element name="reasonCode" type="xs:string"/>									
+	<xs:element name="transactionType" type="xs:string"/>									
+	<xs:element name="availableQuantity" type="ebons_quantity:Quantity_Type"/>									
+	<xs:element name="nextPurchaseOrderQuantity" type="ebons_quantity:Quantity_Type"/>									
+	<xs:element name="quantity" type="ebons_quantity:Quantity_Type"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="StoreStockInventory" type="tns:StoreStockInventory_Type"/>
+	<xs:complexType name="StoreStockInventory_Type">
+		<xs:sequence> 
+		<xs:element ref="tns:nextPurchaseOrderDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:reasonCode" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:transactionType" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:availableQuantity" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:nextPurchaseOrderQuantity" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:quantity" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/LogicalResource/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/LogicalResource/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="format" type="xs:string"/>									
+	<xs:element name="isOperational" type="xs:boolean">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>This attribute is used to define the operational status of the object, and is implemented as a Boolean: TRUE means that the object is currently operational, and FALSE means that the object is not currently operational.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="lrStatus" type="xs:integer">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>This is an enumerated integer whose value indicates the current status of the object. </xs:documentation>
+					<xs:documentation>Stopped indicates that the LogicalResource is known to still exist, but it is no longer operational. However, it has not failed.</xs:documentation>
+					<xs:documentation>	</xs:documentation>
+					<xs:documentation>Stressed indicates that the LogicalResource is functioning, but needs attention (e.g., it may be overheating, or overloaded in some way). This is similar to Predicted Failure, which indicates that this LogicalResource is functioning properly, but is predicting a failure in the near future.</xs:documentation>
+					<xs:documentation>In Maintenance indicates that this LogicalResource is being configured, maintained, or otherwise administered and is NOT available for service.</xs:documentation>
+					<xs:documentation>Unable To Contact indicates that the monitoring system has knowledge of this LogicalResource but has never been able to establish communications with it. In contrast, Lost Commmunications indicates that the LogicalResource has been contacted successfully in the past and is known to still exist; however, it is currently unreachable.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="serviceState" type="xs:integer">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>This is an enumerated integer that defines the availability and usage (i.e., the service state) of this LogicalResource.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="LogicalResource" type="tns:LogicalResource_Type"/>
+	<xs:complexType name="LogicalResource_Type">
+		
+			<xs:annotation>
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">This is an abstract base class for describing different logical aspects of devices (e.g., services) that constitute a Product. It has two main purposes: (1) to collect common attributes and relationships for all logical entities, and (2) to provide a convenient, single point where relationships with other managed objects can be defined.</xs:documentation>
+						
+			</xs:annotation>
+		<xs:sequence> 
+		<xs:element ref="tns:format" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:isOperational" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:lrStatus" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:serviceState" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

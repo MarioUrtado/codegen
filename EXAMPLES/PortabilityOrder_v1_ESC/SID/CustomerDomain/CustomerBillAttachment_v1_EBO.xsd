@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/CustomerBillAttachment/v1"
+	xmlns:ebons_quantity="http://www.entel.cl/EBO/Quantity/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/CustomerBillAttachment/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/Quantity/v1" schemaLocation="../CommonBusinessEntitiesDomain/Quantity_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="SAPDocument" type="xs:string"/>									
+	<xs:element name="claimNumber" type="xs:string"/>									
+	<xs:element name="customerIdentificationType" type="xs:integer"/>									
+	<xs:element name="deliveryNumberSAPDocument" type="xs:string"/>									
+	<xs:element name="globalIndicatorExempt" type="xs:string"/>									
+	<xs:element name="internalCorrelative" type="xs:string"/>									
+	<xs:element name="netAmountIndicator" type="xs:integer"/>									
+	<xs:element name="referenceGuideNumber" type="xs:string"/>									
+	<xs:element name="segment" type="xs:string"/>									
+	<xs:element name="signatureDate" type="xs:dateTime"/>									
+	<xs:element name="totalAmountDescription" type="xs:string"/>									
+	<xs:element name="newTotal" type="ebons_quantity:Quantity_Type"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="CustomerBillAttachment" type="tns:CustomerBillAttachment_Type"/>
+	<xs:complexType name="CustomerBillAttachment_Type">
+		<xs:sequence> 
+		<xs:element ref="tns:SAPDocument" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:claimNumber" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:customerIdentificationType" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:deliveryNumberSAPDocument" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:globalIndicatorExempt" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:internalCorrelative" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:netAmountIndicator" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:referenceGuideNumber" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:segment" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:signatureDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:totalAmountDescription" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:newTotal" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

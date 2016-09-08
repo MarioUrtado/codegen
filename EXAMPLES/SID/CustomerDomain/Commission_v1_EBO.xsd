@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/Commission/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/Commission/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="commisionExemptAmount" type="xs:float"/>									
+	<xs:element name="commisionNetAmount" type="xs:float"/>									
+	<xs:element name="commissionDescription" type="xs:string"/>									
+	<xs:element name="commissionNumber" type="xs:float"/>									
+	<xs:element name="commissionRate" type="xs:float"/>									
+	<xs:element name="commissionTaxAmount" type="xs:float"/>									
+	<xs:element name="commissionType" type="xs:string"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="Commission" type="tns:Commission_Type"/>
+	<xs:complexType name="Commission_Type">
+		<xs:sequence> 
+		<xs:element ref="tns:commisionExemptAmount" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:commisionNetAmount" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:commissionDescription" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:commissionNumber" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:commissionRate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:commissionTaxAmount" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:commissionType" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

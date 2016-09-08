@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/ProductBucketSpecThreshold/v1"
+	xmlns:ebons_activedates="http://www.entel.cl/EBO/ActiveDates/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/ProductBucketSpecThreshold/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/ActiveDates/v1" schemaLocation="../CommonBusinessEntitiesDomain/ActiveDates_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="id" type="xs:string"/>									
+	<xs:element name="values" type="ebons_activedates:ActiveDates_Type"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="ProductBucketSpecThreshold" type="tns:ProductBucketSpecThreshold_Type"/>
+	<xs:complexType name="ProductBucketSpecThreshold_Type">
+		<xs:sequence> 
+		<xs:element ref="tns:id" maxOccurs="unbounded" minOccurs="0"/>
+		<xs:element ref="tns:values" maxOccurs="1" minOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

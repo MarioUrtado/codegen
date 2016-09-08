@@ -1,0 +1,5 @@
+SPOOL salida_CREATE_all_tables.txt
+
+@CREATE_ESB_ERROR_CONV_STATUS.sql
+
+SPOOL OFF;

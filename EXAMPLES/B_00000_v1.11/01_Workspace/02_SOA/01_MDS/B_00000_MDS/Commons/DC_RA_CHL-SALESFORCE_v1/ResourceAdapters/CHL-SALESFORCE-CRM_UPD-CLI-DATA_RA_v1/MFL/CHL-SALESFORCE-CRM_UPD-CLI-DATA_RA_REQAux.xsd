@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+          xmlns:mfl="http://www.bea.com/mfl"
+          elementFormDefault="qualified">
+
+    <xsd:element name="CHL-SALESFORCE-CRM_UPD-CLI-DATA_RA_REQAux">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="RequestData">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="ConsumerID" type="xsd:string"/>
+                            <xsd:element name="ConsumerName" type="xsd:string"/>
+                            <xsd:element name="ConsumerSurename" type="xsd:string"/>
+                            <xsd:element name="ConsumerAge" type="xsd:string"/>
+                            <xsd:element name="ConsumerStatus" type="xsd:string"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="RequestDetails">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="VerDigit">
+                                <xsd:simpleType>
+                                    <xsd:restriction base="xsd:string">
+                                        <xsd:length value="1"/>
+                                    </xsd:restriction>
+                                </xsd:simpleType>
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+</xsd:schema>

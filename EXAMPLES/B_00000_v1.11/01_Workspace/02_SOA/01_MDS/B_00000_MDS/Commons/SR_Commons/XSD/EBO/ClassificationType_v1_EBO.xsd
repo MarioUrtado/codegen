@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/ClassificationType/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/ClassificationType/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="displayValue" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>Display value of the classification Type in browser language</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="isSelected" type="xs:boolean">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>If the classification selected for the characteristic</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="value" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>code of the classification Type Value</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="ClassificationType" type="tns:ClassificationType_Type"/>
+	<xs:complexType name="ClassificationType_Type">
+		
+			<xs:annotation>
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">Indicadores de propiedades para Product Offering Price</xs:documentation>
+						
+			</xs:annotation>
+		<xs:sequence> 
+		<xs:element ref="tns:displayValue" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:isSelected" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:value" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

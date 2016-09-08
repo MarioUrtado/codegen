@@ -1,0 +1,12 @@
+<adapter-config name="getCapabilityCheckStatus" adapter="db" wsdlLocation="getCapabilityCheckStatus.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="ENTEL" location="eis/DB/FRW/MessageManager"/>
+  <endpoint-interaction portType="getCapabilityCheckStatus_ptt" operation="getCapabilityCheckStatus">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="PackageName" value="ESB_MESSAGEMANAGER_PKG"/>
+      <property name="ProcedureName" value="GETCAPABILITYCHECKSTATUS"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

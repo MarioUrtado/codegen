@@ -1,0 +1,475 @@
+create or replace PACKAGE BODY ESB_ERROR_MANAGER_PKG AS
+
+  /* ================== MAIN PROCEDURE ==================
+  
+    Se manejan cuatro pasos de ejecusiÃ³n:
+      1.- Sys_Code, Raw_Code, Module, Sub-Module
+      2.- Sys_Code, Module, Sub_Module.
+      3.- Sys_Code, Module
+      4.- Sys_Code
+    
+    El primer paso busca si existe una traducciÃ³n para los datos ingresados (traducciÃ³n para un error particular).
+    En caso que no se encuentre una traducciÃ³n para el paso 1, se continua con el paso 2, el cual busca una traducciÃ³n un 
+    poco mas genÃ©rica utilizando solo 3 parametros (Sistema, API, Operacion).
+    En caso de que tampoco se encuentre una traducciÃ³n, se continua con el paso 3, con 2 parÃ¡metros (Sistema, API).
+    Finalmente, si no se encuentra ninguna traducciÃ³n para el paso 3, se busca un error generico para el sistema.
+    
+    */
+
+  PROCEDURE getCanonicalError(
+      p_MODULE IN VARCHAR2, 
+      p_SUB_MODULE IN VARCHAR2, 
+      p_RAW_CODE IN VARCHAR2, 
+      p_ERROR_DETAILS_SOURCE IN VARCHAR2, 
+      
+      p_RESULT_STATUS OUT VARCHAR2,
+      p_RESULT_DESCRIPTION OUT VARCHAR2,
+      p_CANONICAL_ERROR_CODE OUT VARCHAR2,
+      p_CANONICAL_ERROR_TYPE OUT VARCHAR2,
+      p_CANONICAL_ERROR_DESCRIPTION OUT VARCHAR2,
+      p_SOURCE_ERROR_CODE OUT NUMBER,
+      p_SOURCE_ERROR_DESCRIPTION OUT VARCHAR2,
+      p_ERROR_DETAILS OUT VARCHAR2,
+      p_ERROR_SOURCE OUT VARCHAR2) AS
+  
+ 
+  
+  BEGIN
+        
+    /* Paso 1: se busca un error canonico para un Sys_Code, Raw_Code, Modulo y SubModulo dados. */    
+         
+    IF ((p_MODULE IS NOT NULL) AND (p_SUB_MODULE IS NOT NULL) AND (p_RAW_CODE IS NOT NULL) ) THEN
+      Get_Can_Err_Complete(p_MODULE, p_SUB_MODULE, p_RAW_CODE, p_ERROR_DETAILS_SOURCE, p_RESULT_STATUS,
+      p_RESULT_DESCRIPTION, p_CANONICAL_ERROR_CODE, p_CANONICAL_ERROR_TYPE, p_CANONICAL_ERROR_DESCRIPTION,
+      p_SOURCE_ERROR_CODE, p_SOURCE_ERROR_DESCRIPTION, p_ERROR_DETAILS, p_ERROR_SOURCE);
+    END IF; 
+    
+    /* En caso de que el paso anterior no encuentre un error canonico, se busca para el Sys_Code, Modulo y SubModulo dados. */
+    
+    IF (p_CANONICAL_ERROR_CODE IS NULL) then
+      Get_Can_Err_For_Sys_API_Oper(p_MODULE, p_SUB_MODULE,p_ERROR_DETAILS_SOURCE, p_RESULT_STATUS,
+      p_RESULT_DESCRIPTION, p_CANONICAL_ERROR_CODE, p_CANONICAL_ERROR_TYPE, p_CANONICAL_ERROR_DESCRIPTION,
+      p_SOURCE_ERROR_CODE, p_SOURCE_ERROR_DESCRIPTION, p_ERROR_DETAILS, p_ERROR_SOURCE);
+    END IF;
+    
+    /* En caso de que el paso anterior no encuentre un error canonico, se busca para el Sys_Code y Modulo dados. */
+    
+    IF (p_CANONICAL_ERROR_CODE IS NULL ) then
+        Get_Can_Err_For_Sys_API(p_MODULE, p_ERROR_DETAILS_SOURCE, p_RESULT_STATUS,
+        p_RESULT_DESCRIPTION, p_CANONICAL_ERROR_CODE, p_CANONICAL_ERROR_TYPE, p_CANONICAL_ERROR_DESCRIPTION,
+        p_SOURCE_ERROR_CODE, p_SOURCE_ERROR_DESCRIPTION, p_ERROR_DETAILS, p_ERROR_SOURCE);
+    END IF;
+    
+    /* En caso de que el paso anterior no encuentre un error canonico, se busca para el Sys_Code dado. */
+    
+    IF (p_CANONICAL_ERROR_CODE IS NULL) then
+        Get_Can_Err_For_System(p_ERROR_DETAILS_SOURCE, p_RESULT_STATUS,
+        p_RESULT_DESCRIPTION, p_CANONICAL_ERROR_CODE, p_CANONICAL_ERROR_TYPE, p_CANONICAL_ERROR_DESCRIPTION,
+        p_SOURCE_ERROR_CODE, p_SOURCE_ERROR_DESCRIPTION, p_ERROR_DETAILS, p_ERROR_SOURCE);
+    END IF;
+
+    /*En caso de que el paso anterior no encuentre un error canonico, se busca para caso generico para API*/
+     IF (p_CANONICAL_ERROR_CODE IS NULL) then
+         Get_Generic_Err_For_API(p_MODULE,p_RAW_CODE, p_ERROR_DETAILS_SOURCE, p_RESULT_STATUS, p_RESULT_DESCRIPTION,
+                                 p_CANONICAL_ERROR_CODE, p_CANONICAL_ERROR_TYPE, p_CANONICAL_ERROR_DESCRIPTION,
+                                 p_SOURCE_ERROR_CODE, p_SOURCE_ERROR_DESCRIPTION, p_ERROR_DETAILS,p_ERROR_SOURCE);
+      END IF;
+    /*En caso de que el paso anterior no encuentre un error canonico, se busca para caso generico para SYSTEM*/
+    IF (p_CANONICAL_ERROR_CODE IS NULL) then
+        Get_Generic_Err_For_System(p_RAW_CODE,p_ERROR_DETAILS_SOURCE, p_RESULT_STATUS,p_RESULT_DESCRIPTION,
+                                   p_CANONICAL_ERROR_CODE,p_CANONICAL_ERROR_TYPE,p_CANONICAL_ERROR_DESCRIPTION, p_SOURCE_ERROR_CODE,
+                                   p_SOURCE_ERROR_DESCRIPTION, p_ERROR_DETAILS, p_ERROR_SOURCE);
+    END IF;
+    /**/
+    IF (p_CANONICAL_ERROR_CODE IS NULL) then
+      p_RESULT_STATUS := 'ERROR';
+      p_RESULT_DESCRIPTION := 'Ejecucion finalizada con Errores';
+      p_CANONICAL_ERROR_TYPE := 'FWCF';
+      p_CANONICAL_ERROR_DESCRIPTION := 'NO SE HAN ENCONTRADO DATOS.';
+      p_CANONICAL_ERROR_CODE := -1;
+    END IF;
+    
+  EXCEPTION
+
+    WHEN OTHERS THEN
+      p_RESULT_STATUS := 'ERROR';
+      p_CANONICAL_ERROR_TYPE := 'FRW';
+      p_CANONICAL_ERROR_DESCRIPTION := 'ERROR GENERICO.';
+      p_CANONICAL_ERROR_CODE := -2;
+      
+  END getCanonicalError;
+  
+  /* Procedure para buscar un error canonico para el Sys_Code, Raw_Code, Modulo y SubModulo dados. */
+  
+  PROCEDURE Get_Can_Err_Complete (p_MODULE IN VARCHAR2, 
+  p_SUB_MODULE IN VARCHAR2, 
+  p_RAW_CODE IN VARCHAR2, 
+  p_ERROR_DETAILS_SOURCE IN VARCHAR2, 
+
+  p_RESULT_STATUS OUT VARCHAR2,
+  p_RESULT_DESCRIPTION OUT VARCHAR2,
+  p_CANONICAL_ERROR_CODE OUT VARCHAR2,
+  p_CANONICAL_ERROR_TYPE OUT VARCHAR2,
+  p_CANONICAL_ERROR_DESCRIPTION OUT VARCHAR2,
+  p_SOURCE_ERROR_CODE OUT NUMBER,
+  p_SOURCE_ERROR_DESCRIPTION OUT VARCHAR2,
+  p_ERROR_DETAILS OUT VARCHAR2,
+  p_ERROR_SOURCE OUT VARCHAR2) IS
+  
+  BEGIN
+    p_RESULT_STATUS := '';
+    p_RESULT_DESCRIPTION := '';
+    p_CANONICAL_ERROR_CODE := '';
+    p_CANONICAL_ERROR_TYPE := '';
+    p_CANONICAL_ERROR_DESCRIPTION := '';
+    p_SOURCE_ERROR_CODE := '';
+    p_SOURCE_ERROR_DESCRIPTION := '';
+    p_ERROR_DETAILS := '';
+    p_ERROR_SOURCE := '';  
+  SELECT ET.NAME, 
+      ET.DESCRIPTION, 
+      CANERR.CODE, 
+      CANERRTY.TYPE, 
+      CANERR.DESCRIPTION, 
+      p_RAW_CODE, 
+      p_ERROR_DETAILS_SOURCE, 
+      SYS.DESCRIPTION, 
+      SYS.NAME
+      
+    INTO p_RESULT_STATUS, 
+     p_RESULT_DESCRIPTION, 
+     p_CANONICAL_ERROR_CODE, 
+     p_CANONICAL_ERROR_TYPE, 
+     p_CANONICAL_ERROR_DESCRIPTION, 
+     p_SOURCE_ERROR_CODE, 
+     p_SOURCE_ERROR_DESCRIPTION, 
+     p_ERROR_DETAILS, 
+     p_ERROR_SOURCE
+    
+  FROM ESB_ERROR_MAPPING MA   
+     INNER JOIN ESB_SYSTEM SYS ON SYS.ID = MA.ERROR_SOURCE
+     INNER JOIN ESB_CANONICAL_ERROR CANERR ON CANERR.ID = MA.CAN_ERR_ID
+     INNER JOIN ESB_ERROR_STATUS_TYPE ET ON ET.ID = MA.STATUS_ID
+     INNER JOIN ESB_CANONICAL_ERROR_TYPE CANERRTY ON CANERRTY.ID = CANERR.TYPE_ID
+     
+   WHERE (SYS.CODE = p_ERROR_DETAILS_SOURCE) 
+     AND (MA.RAW_CODE = p_RAW_CODE) 
+     AND (MA.MODULE = p_MODULE) 
+     AND (MA.SUB_MODULE = p_SUB_MODULE)
+       ;
+   EXCEPTION WHEN OTHERS THEN 
+    NULL;     
+  END Get_Can_Err_Complete;
+
+  
+  /* Procedure para buscar un error canonico para el Sys_Code dado. */
+  
+  PROCEDURE Get_Can_Err_For_System (p_ERROR_DETAILS_SOURCE IN VARCHAR2,
+  p_RESULT_STATUS OUT VARCHAR2,
+      p_RESULT_DESCRIPTION OUT VARCHAR2,
+      p_CANONICAL_ERROR_CODE OUT VARCHAR2,
+      p_CANONICAL_ERROR_TYPE OUT VARCHAR2,
+      p_CANONICAL_ERROR_DESCRIPTION OUT VARCHAR2,
+      p_SOURCE_ERROR_CODE OUT NUMBER,
+      p_SOURCE_ERROR_DESCRIPTION OUT VARCHAR2,
+      p_ERROR_DETAILS OUT VARCHAR2,
+      p_ERROR_SOURCE OUT VARCHAR2) IS
+      
+      BEGIN
+  
+      p_RESULT_STATUS := '';
+      p_RESULT_DESCRIPTION := '';
+      p_CANONICAL_ERROR_CODE := '';
+      p_CANONICAL_ERROR_TYPE := '';
+      p_CANONICAL_ERROR_DESCRIPTION := '';
+      p_SOURCE_ERROR_CODE := '';
+      p_SOURCE_ERROR_DESCRIPTION := '';
+      p_ERROR_DETAILS := '';
+      p_ERROR_SOURCE := '';
+  
+      SELECT ET.NAME, 
+      ET.DESCRIPTION, 
+      CANERR.CODE, 
+      CANERRTY.TYPE, 
+      CANERR.DESCRIPTION, 
+    /*  p_RAW_CODE,  */
+      p_ERROR_DETAILS_SOURCE, 
+      SYS.DESCRIPTION, 
+      SYS.NAME
+      
+      INTO p_RESULT_STATUS, 
+           p_RESULT_DESCRIPTION, 
+           p_CANONICAL_ERROR_CODE, 
+           p_CANONICAL_ERROR_TYPE, 
+           p_CANONICAL_ERROR_DESCRIPTION, 
+           /* p_SOURCE_ERROR_CODE, */
+           p_SOURCE_ERROR_DESCRIPTION, 
+           p_ERROR_DETAILS, 
+           p_ERROR_SOURCE
+      
+         
+      FROM ESB_ERROR_MAPPING MA   
+         INNER JOIN ESB_SYSTEM SYS ON SYS.ID = MA.ERROR_SOURCE
+         INNER JOIN ESB_CANONICAL_ERROR CANERR ON CANERR.ID = MA.CAN_ERR_ID
+         INNER JOIN ESB_ERROR_STATUS_TYPE ET ON ET.ID = MA.STATUS_ID
+         INNER JOIN ESB_CANONICAL_ERROR_TYPE CANERRTY ON CANERRTY.ID = CANERR.TYPE_ID
+
+    WHERE (SYS.CODE = p_ERROR_DETAILS_SOURCE) 
+      AND (MA.RAW_CODE IS NULL) 
+      AND (MA.MODULE IS NULL) 
+      AND (MA.SUB_MODULE IS NULL);
+        
+  EXCEPTION WHEN OTHERS THEN 
+    NULL;          
+  END Get_Can_Err_For_System;
+  
+  
+  /* Procedure para buscar un error canonico para el Sys_Code, Modulo y SubModulo dados. */
+  
+  PROCEDURE Get_Can_Err_For_Sys_API_Oper(p_MODULE IN VARCHAR2, 
+  p_SUB_MODULE IN VARCHAR2, 
+  p_ERROR_DETAILS_SOURCE IN VARCHAR2, 
+
+  p_RESULT_STATUS OUT VARCHAR2,
+  p_RESULT_DESCRIPTION OUT VARCHAR2,
+  p_CANONICAL_ERROR_CODE OUT VARCHAR2,
+  p_CANONICAL_ERROR_TYPE OUT VARCHAR2,
+  p_CANONICAL_ERROR_DESCRIPTION OUT VARCHAR2,
+  p_SOURCE_ERROR_CODE OUT NUMBER,
+  p_SOURCE_ERROR_DESCRIPTION OUT VARCHAR2,
+  p_ERROR_DETAILS OUT VARCHAR2,
+  p_ERROR_SOURCE OUT VARCHAR2) IS
+  
+  BEGIN
+    p_RESULT_STATUS := '';
+    p_RESULT_DESCRIPTION := '';
+    p_CANONICAL_ERROR_CODE := '';
+    p_CANONICAL_ERROR_TYPE := '';
+    p_CANONICAL_ERROR_DESCRIPTION := '';
+    p_SOURCE_ERROR_CODE := '';
+    p_SOURCE_ERROR_DESCRIPTION := '';
+    p_ERROR_DETAILS := '';
+    p_ERROR_SOURCE := '';
+  
+  SELECT ET.NAME, 
+      ET.DESCRIPTION, 
+      CANERR.CODE, 
+      CANERRTY.TYPE, 
+      CANERR.DESCRIPTION, 
+    /*  p_RAW_CODE,  */
+      p_ERROR_DETAILS_SOURCE, 
+      SYS.DESCRIPTION, 
+      SYS.NAME
+      
+      INTO p_RESULT_STATUS, 
+           p_RESULT_DESCRIPTION, 
+           p_CANONICAL_ERROR_CODE, 
+           p_CANONICAL_ERROR_TYPE, 
+           p_CANONICAL_ERROR_DESCRIPTION, 
+           /* p_SOURCE_ERROR_CODE, */
+           p_SOURCE_ERROR_DESCRIPTION, 
+           p_ERROR_DETAILS, 
+           p_ERROR_SOURCE
+      
+         
+      FROM ESB_ERROR_MAPPING MA   
+         INNER JOIN ESB_SYSTEM SYS ON SYS.ID = MA.ERROR_SOURCE
+         INNER JOIN ESB_CANONICAL_ERROR CANERR ON CANERR.ID = MA.CAN_ERR_ID
+         INNER JOIN ESB_ERROR_STATUS_TYPE ET ON ET.ID = MA.STATUS_ID
+         INNER JOIN ESB_CANONICAL_ERROR_TYPE CANERRTY ON CANERRTY.ID = CANERR.TYPE_ID
+
+    WHERE (SYS.CODE = p_ERROR_DETAILS_SOURCE) 
+      AND (MA.RAW_CODE IS NULL) 
+      AND (MA.MODULE = p_MODULE) 
+      AND (MA.SUB_MODULE = p_SUB_MODULE);
+    
+   EXCEPTION WHEN OTHERS THEN 
+    NULL;   
+  END Get_Can_Err_For_Sys_API_Oper;
+  
+  
+  /* Procedure para buscar un error canonico para el Sys_Code y Modulo dados. */
+  
+  PROCEDURE Get_Can_Err_For_Sys_API(p_MODULE IN VARCHAR2, 
+    p_ERROR_DETAILS_SOURCE IN VARCHAR2, 
+  
+    p_RESULT_STATUS OUT VARCHAR2,
+    p_RESULT_DESCRIPTION OUT VARCHAR2,
+    p_CANONICAL_ERROR_CODE OUT VARCHAR2,
+    p_CANONICAL_ERROR_TYPE OUT VARCHAR2,
+    p_CANONICAL_ERROR_DESCRIPTION OUT VARCHAR2,
+    p_SOURCE_ERROR_CODE OUT NUMBER,
+    p_SOURCE_ERROR_DESCRIPTION OUT VARCHAR2,
+    p_ERROR_DETAILS OUT VARCHAR2,
+    p_ERROR_SOURCE OUT VARCHAR2) IS
+  
+  BEGIN
+    p_RESULT_STATUS := '';
+    p_RESULT_DESCRIPTION := '';
+    p_CANONICAL_ERROR_CODE := '';
+    p_CANONICAL_ERROR_TYPE := '';
+    p_CANONICAL_ERROR_DESCRIPTION := '';
+    p_SOURCE_ERROR_CODE := '';
+    p_SOURCE_ERROR_DESCRIPTION := '';
+    p_ERROR_DETAILS := '';
+    p_ERROR_SOURCE := '';
+    
+    SELECT ET.NAME, 
+        ET.DESCRIPTION, 
+        CANERR.CODE, 
+        CANERRTY.TYPE, 
+        CANERR.DESCRIPTION, 
+      /*  p_RAW_CODE,  */
+        p_ERROR_DETAILS_SOURCE, 
+        SYS.DESCRIPTION, 
+        SYS.NAME
+        
+        INTO p_RESULT_STATUS, 
+             p_RESULT_DESCRIPTION, 
+             p_CANONICAL_ERROR_CODE, 
+             p_CANONICAL_ERROR_TYPE, 
+             p_CANONICAL_ERROR_DESCRIPTION, 
+             /* p_SOURCE_ERROR_CODE, */
+             p_SOURCE_ERROR_DESCRIPTION, 
+             p_ERROR_DETAILS, 
+             p_ERROR_SOURCE
+                  
+        FROM ESB_ERROR_MAPPING MA   
+           INNER JOIN ESB_SYSTEM SYS ON SYS.ID = MA.ERROR_SOURCE
+           INNER JOIN ESB_CANONICAL_ERROR CANERR ON CANERR.ID = MA.CAN_ERR_ID
+           INNER JOIN ESB_ERROR_STATUS_TYPE ET ON ET.ID = MA.STATUS_ID
+           INNER JOIN ESB_CANONICAL_ERROR_TYPE CANERRTY ON CANERRTY.ID = CANERR.TYPE_ID
+  
+      WHERE (SYS.CODE = p_ERROR_DETAILS_SOURCE) 
+        AND (MA.RAW_CODE IS NULL) 
+        AND (MA.MODULE = p_MODULE) 
+        AND (MA.SUB_MODULE IS NULL);
+  EXCEPTION WHEN OTHERS THEN 
+    NULL;   
+  END Get_Can_Err_For_Sys_API;
+
+  /* Procedure para buscar un error canonico para el Sys_Code, Raw_Code, Modulo indicado y SubModulo generico. */
+  PROCEDURE Get_Generic_Err_For_API(
+      p_MODULE               IN VARCHAR2,
+      /* p_SUB_MODULE           IN VARCHAR2, */
+      p_RAW_CODE             IN VARCHAR2,
+      p_ERROR_DETAILS_SOURCE IN VARCHAR2,
+      p_RESULT_STATUS OUT VARCHAR2,
+      p_RESULT_DESCRIPTION OUT VARCHAR2,
+      p_CANONICAL_ERROR_CODE OUT VARCHAR2,
+      p_CANONICAL_ERROR_TYPE OUT VARCHAR2,
+      p_CANONICAL_ERROR_DESCRIPTION OUT VARCHAR2,
+      p_SOURCE_ERROR_CODE OUT NUMBER,
+      p_SOURCE_ERROR_DESCRIPTION OUT VARCHAR2,
+      p_ERROR_DETAILS OUT VARCHAR2,
+      p_ERROR_SOURCE OUT VARCHAR2)
+  IS
+  BEGIN
+    p_RESULT_STATUS               := '';
+    p_RESULT_DESCRIPTION          := '';
+    p_CANONICAL_ERROR_CODE        := '';
+    p_CANONICAL_ERROR_TYPE        := '';
+    p_CANONICAL_ERROR_DESCRIPTION := '';
+    p_SOURCE_ERROR_CODE           := '';
+    p_SOURCE_ERROR_DESCRIPTION    := '';
+    p_ERROR_DETAILS               := '';
+    p_ERROR_SOURCE                := '';
+    SELECT ET.NAME,
+      ET.DESCRIPTION,
+      CANERR.CODE,
+      CANERRTY.TYPE,
+      CANERR.DESCRIPTION,
+      p_RAW_CODE,
+      p_ERROR_DETAILS_SOURCE,
+      SYS.DESCRIPTION,
+      SYS.NAME
+    INTO p_RESULT_STATUS,
+      p_RESULT_DESCRIPTION,
+      p_CANONICAL_ERROR_CODE,
+      p_CANONICAL_ERROR_TYPE,
+      p_CANONICAL_ERROR_DESCRIPTION,
+      p_SOURCE_ERROR_CODE,
+      p_SOURCE_ERROR_DESCRIPTION,
+      p_ERROR_DETAILS,
+      p_ERROR_SOURCE
+    FROM ESB_ERROR_MAPPING MA
+    INNER JOIN ESB_SYSTEM SYS
+    ON SYS.ID = MA.ERROR_SOURCE
+    INNER JOIN ESB_CANONICAL_ERROR CANERR
+    ON CANERR.ID = MA.CAN_ERR_ID
+    INNER JOIN ESB_ERROR_STATUS_TYPE ET
+    ON ET.ID = MA.STATUS_ID
+    INNER JOIN ESB_CANONICAL_ERROR_TYPE CANERRTY
+    ON CANERRTY.ID     = CANERR.TYPE_ID
+    WHERE (SYS.CODE    = p_ERROR_DETAILS_SOURCE)
+    AND (MA.RAW_CODE   = p_RAW_CODE)
+    AND (MA.MODULE     = p_MODULE)
+    AND (MA.SUB_MODULE IS NULL) ;
+  EXCEPTION
+  WHEN OTHERS THEN
+    NULL;
+  END Get_Generic_Err_For_API;
+
+/* Procedure para buscar un error canonico para el Sys_Code, Raw_Code, Modulo y SubModulo generico. */
+  PROCEDURE Get_Generic_Err_For_System(
+     /* p_MODULE               IN VARCHAR2,
+       p_SUB_MODULE           IN VARCHAR2, */
+      p_RAW_CODE             IN VARCHAR2,
+      p_ERROR_DETAILS_SOURCE IN VARCHAR2,
+      p_RESULT_STATUS OUT VARCHAR2,
+      p_RESULT_DESCRIPTION OUT VARCHAR2,
+      p_CANONICAL_ERROR_CODE OUT VARCHAR2,
+      p_CANONICAL_ERROR_TYPE OUT VARCHAR2,
+      p_CANONICAL_ERROR_DESCRIPTION OUT VARCHAR2,
+      p_SOURCE_ERROR_CODE OUT NUMBER,
+      p_SOURCE_ERROR_DESCRIPTION OUT VARCHAR2,
+      p_ERROR_DETAILS OUT VARCHAR2,
+      p_ERROR_SOURCE OUT VARCHAR2)
+  IS
+  BEGIN
+    p_RESULT_STATUS               := '';
+    p_RESULT_DESCRIPTION          := '';
+    p_CANONICAL_ERROR_CODE        := '';
+    p_CANONICAL_ERROR_TYPE        := '';
+    p_CANONICAL_ERROR_DESCRIPTION := '';
+    p_SOURCE_ERROR_CODE           := '';
+    p_SOURCE_ERROR_DESCRIPTION    := '';
+    p_ERROR_DETAILS               := '';
+    p_ERROR_SOURCE                := '';
+    SELECT ET.NAME,
+      ET.DESCRIPTION,
+      CANERR.CODE,
+      CANERRTY.TYPE,
+      CANERR.DESCRIPTION,
+      p_RAW_CODE,
+      p_ERROR_DETAILS_SOURCE,
+      SYS.DESCRIPTION,
+      SYS.NAME
+    INTO p_RESULT_STATUS,
+      p_RESULT_DESCRIPTION,
+      p_CANONICAL_ERROR_CODE,
+      p_CANONICAL_ERROR_TYPE,
+      p_CANONICAL_ERROR_DESCRIPTION,
+      p_SOURCE_ERROR_CODE,
+      p_SOURCE_ERROR_DESCRIPTION,
+      p_ERROR_DETAILS,
+      p_ERROR_SOURCE
+    FROM ESB_ERROR_MAPPING MA
+    INNER JOIN ESB_SYSTEM SYS
+    ON SYS.ID = MA.ERROR_SOURCE
+    INNER JOIN ESB_CANONICAL_ERROR CANERR
+    ON CANERR.ID = MA.CAN_ERR_ID
+    INNER JOIN ESB_ERROR_STATUS_TYPE ET
+    ON ET.ID = MA.STATUS_ID
+    INNER JOIN ESB_CANONICAL_ERROR_TYPE CANERRTY
+    ON CANERRTY.ID     = CANERR.TYPE_ID
+    WHERE (SYS.CODE    = p_ERROR_DETAILS_SOURCE)
+    AND (MA.RAW_CODE   = p_RAW_CODE)
+    AND (MA.MODULE     IS NULL)
+    AND (MA.SUB_MODULE IS NULL) ;
+  EXCEPTION
+  WHEN OTHERS THEN
+    NULL;
+  END Get_Generic_Err_For_System;
+
+END ESB_ERROR_MANAGER_PKG;

@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+                  xmlns:ns="http://schemas.xmlsoap.org/soap/encoding/"
+                  xmlns:tns="http://www.entel.cl/IE/PortabilityOrder/v1"
+                  xmlns:ebmns_Authenticate="http://www.entel.cl/EBM/PortabilityOrder/Authenticate/v1"
+                  xmlns:ebmns_ReturnValidate="http://www.entel.cl/EBM/PortabilityOrder/ReturnValidate/v1"
+                  xmlns:ebmns_Create="http://www.entel.cl/EBM/PortabilityOrder/Create/v1"
+                  xmlns:ebmns_Update="http://www.entel.cl/EBM/PortabilityOrder/Update/v1"
+                  xmlns:ebmns_Publish="http://www.entel.cl/EBM/PortabilityOrder/Publish/v1"
+                  xmlns:ebmns_Cancel="http://www.entel.cl/EBM/PortabilityOrder/Cancel/v1"
+                  xmlns:ebmns_Validate="http://www.entel.cl/EBM/PortabilityOrder/Validate/v1"
+                  targetNamespace="http://www.entel.cl/IE/PortabilityOrder/v1">
+   <wsdl:types>
+      <xs:schema>
+         <xs:import namespace="http://www.entel.cl/EBM/PortabilityOrder/Authenticate/v1"
+                    schemaLocation="EBM/Authenticate_PortabilityOrder_v1_EBM.xsd"/>
+         <xs:import namespace="http://www.entel.cl/EBM/PortabilityOrder/ReturnValidate/v1"
+                    schemaLocation="EBM/ReturnValidate_PortabilityOrder_v1_EBM.xsd"/>
+         <xs:import namespace="http://www.entel.cl/EBM/PortabilityOrder/Create/v1"
+                    schemaLocation="EBM/Create_PortabilityOrder_v1_EBM.xsd"/>
+         <xs:import namespace="http://www.entel.cl/EBM/PortabilityOrder/Update/v1"
+                    schemaLocation="EBM/Update_PortabilityOrder_v1_EBM.xsd"/>
+         <xs:import namespace="http://www.entel.cl/EBM/PortabilityOrder/Publish/v1"
+                    schemaLocation="EBM/Publish_PortabilityOrder_v1_EBM.xsd"/>
+         <xs:import namespace="http://www.entel.cl/EBM/PortabilityOrder/Cancel/v1"
+                    schemaLocation="EBM/Cancel_PortabilityOrder_v1_EBM.xsd"/>
+         <xs:import namespace="http://www.entel.cl/EBM/PortabilityOrder/Validate/v1"
+                    schemaLocation="EBM/Validate_PortabilityOrder_v1_EBM.xsd"/>
+      </xs:schema>
+   </wsdl:types>
+   <wsdl:message name="Authenticate_Message_Callback">
+      <wsdl:part name="Callback"
+                 element="ebmns_Authenticate:Authenticate_PortabilityOrder_CRSP"/>
+   </wsdl:message>
+   <wsdl:message name="Authenticate_Message_In">
+      <wsdl:part name="In"
+                 element="ebmns_Authenticate:Authenticate_PortabilityOrder_REQ"/>
+   </wsdl:message>
+   <wsdl:message name="Authenticate_Message_Out">
+      <wsdl:part name="Out"
+                 element="ebmns_Authenticate:Authenticate_PortabilityOrder_RSP"/>
+   </wsdl:message>
+   <wsdl:message name="Authenticate_Message_Fault">
+      <wsdl:part name="Fault"
+                 element="ebmns_Authenticate:Authenticate_PortabilityOrder_FRSP"/>
+   </wsdl:message>
+   <wsdl:message name="ReturnValidate_Message_In">
+      <wsdl:part name="In"
+                 element="ebmns_ReturnValidate:ReturnValidate_PortabilityOrder_REQ"/>
+   </wsdl:message>
+   <wsdl:message name="ReturnValidate_Message_Out">
+      <wsdl:part name="Out"
+                 element="ebmns_ReturnValidate:ReturnValidate_PortabilityOrder_RSP"/>
+   </wsdl:message>
+   <wsdl:message name="ReturnValidate_Message_Fault">
+      <wsdl:part name="Fault"
+                 element="ebmns_ReturnValidate:ReturnValidate_PortabilityOrder_FRSP"/>
+   </wsdl:message>
+   <wsdl:message name="Create_Message_Callback">
+      <wsdl:part name="Callback" element="ebmns_Create:Create_PortabilityOrder_CRSP"/>
+   </wsdl:message>
+   <wsdl:message name="Create_Message_In">
+      <wsdl:part name="In" element="ebmns_Create:Create_PortabilityOrder_REQ"/>
+   </wsdl:message>
+   <wsdl:message name="Create_Message_Out">
+      <wsdl:part name="Out" element="ebmns_Create:Create_PortabilityOrder_RSP"/>
+   </wsdl:message>
+   <wsdl:message name="Create_Message_Fault">
+      <wsdl:part name="Fault" element="ebmns_Create:Create_PortabilityOrder_FRSP"/>
+   </wsdl:message>
+   <wsdl:message name="Update_Message_Callback">
+      <wsdl:part name="Callback" element="ebmns_Update:Update_PortabilityOrder_CRSP"/>
+   </wsdl:message>
+   <wsdl:message name="Update_Message_In">
+      <wsdl:part name="In" element="ebmns_Update:Update_PortabilityOrder_REQ"/>
+   </wsdl:message>
+   <wsdl:message name="Update_Message_Out">
+      <wsdl:part name="Out" element="ebmns_Update:Update_PortabilityOrder_RSP"/>
+   </wsdl:message>
+   <wsdl:message name="Update_Message_Fault">
+      <wsdl:part name="Fault" element="ebmns_Update:Update_PortabilityOrder_FRSP"/>
+   </wsdl:message>
+   <wsdl:message name="Publish_Message_In">
+      <wsdl:part name="In" element="ebmns_Publish:Publish_PortabilityOrder_REQ"/>
+   </wsdl:message>
+   <wsdl:message name="Publish_Message_Out">
+      <wsdl:part name="Out" element="ebmns_Publish:Publish_PortabilityOrder_RSP"/>
+   </wsdl:message>
+   <wsdl:message name="Publish_Message_Fault">
+      <wsdl:part name="Fault" element="ebmns_Publish:Publish_PortabilityOrder_FRSP"/>
+   </wsdl:message>
+   <wsdl:message name="Cancel_Message_Callback">
+      <wsdl:part name="Callback" element="ebmns_Cancel:Cancel_PortabilityOrder_CRSP"/>
+   </wsdl:message>
+   <wsdl:message name="Cancel_Message_In">
+      <wsdl:part name="In" element="ebmns_Cancel:Cancel_PortabilityOrder_REQ"/>
+   </wsdl:message>
+   <wsdl:message name="Cancel_Message_Out">
+      <wsdl:part name="Out" element="ebmns_Cancel:Cancel_PortabilityOrder_RSP"/>
+   </wsdl:message>
+   <wsdl:message name="Cancel_Message_Fault">
+      <wsdl:part name="Fault" element="ebmns_Cancel:Cancel_PortabilityOrder_FRSP"/>
+   </wsdl:message>
+   <wsdl:message name="Validate_Message_In">
+      <wsdl:part name="In" element="ebmns_Validate:Validate_PortabilityOrder_REQ"/>
+   </wsdl:message>
+   <wsdl:message name="Validate_Message_Out">
+      <wsdl:part name="Out" element="ebmns_Validate:Validate_PortabilityOrder_RSP"/>
+   </wsdl:message>
+   <wsdl:message name="Validate_Message_Fault">
+      <wsdl:part name="Fault" element="ebmns_Validate:Validate_PortabilityOrder_FRSP"/>
+   </wsdl:message>
+   <wsdl:portType name="PortabilityOrder_PortType">
+      <wsdl:operation name="Authenticate">
+         <wsdl:input message="tns:Authenticate_Message_In"/>
+         <wsdl:output message="tns:Authenticate_Message_Out"/>
+         <wsdl:fault name="DefaultFault" message="tns:Authenticate_Message_Fault"/>
+      </wsdl:operation>
+      <wsdl:operation name="Authenticate_Callback">
+         <wsdl:output message="tns:Authenticate_Message_Callback"/>
+      </wsdl:operation>
+      <wsdl:operation name="ReturnValidate">
+         <wsdl:input message="tns:ReturnValidate_Message_In"/>
+         <wsdl:output message="tns:ReturnValidate_Message_Out"/>
+         <wsdl:fault name="DefaultFault" message="tns:ReturnValidate_Message_Fault"/>
+      </wsdl:operation>
+      <wsdl:operation name="Create">
+         <wsdl:input message="tns:Create_Message_In"/>
+         <wsdl:output message="tns:Create_Message_Out"/>
+         <wsdl:fault name="DefaultFault" message="tns:Create_Message_Fault"/>
+      </wsdl:operation>
+      <wsdl:operation name="Create_Callback">
+         <wsdl:output message="tns:Create_Message_Callback"/>
+      </wsdl:operation>
+      <wsdl:operation name="Update">
+         <wsdl:input message="tns:Update_Message_In"/>
+         <wsdl:output message="tns:Update_Message_Out"/>
+         <wsdl:fault name="DefaultFault" message="tns:Update_Message_Fault"/>
+      </wsdl:operation>
+      <wsdl:operation name="Update_Callback">
+         <wsdl:output message="tns:Update_Message_Callback"/>
+      </wsdl:operation>
+      <wsdl:operation name="Publish">
+         <wsdl:input message="tns:Publish_Message_In"/>
+         <wsdl:output message="tns:Publish_Message_Out"/>
+         <wsdl:fault name="DefaultFault" message="tns:Publish_Message_Fault"/>
+      </wsdl:operation>
+      <wsdl:operation name="Cancel">
+         <wsdl:input message="tns:Cancel_Message_In"/>
+         <wsdl:output message="tns:Cancel_Message_Out"/>
+         <wsdl:fault name="DefaultFault" message="tns:Cancel_Message_Fault"/>
+      </wsdl:operation>
+      <wsdl:operation name="Cancel_Callback">
+         <wsdl:output message="tns:Cancel_Message_Callback"/>
+      </wsdl:operation>
+      <wsdl:operation name="Validate">
+         <wsdl:input message="tns:Validate_Message_In"/>
+         <wsdl:output message="tns:Validate_Message_Out"/>
+         <wsdl:fault name="DefaultFault" message="tns:Validate_Message_Fault"/>
+      </wsdl:operation>
+   </wsdl:portType>
+   <wsdl:binding name="PortabilityOrder_soapBinding"
+                 type="tns:PortabilityOrder_PortType">
+      <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+      <wsdl:operation name="Authenticate">
+         <soap:operation soapAction="http://www.entel.cl/EBM/PortabilityOrder/Authenticate/v1"/>
+         <wsdl:input>
+            <soap:body use="literal" parts="In"/>
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body use="literal" parts="Out"/>
+         </wsdl:output>
+         <wsdl:fault name="DefaultFault">
+            <soap:fault use="literal" name="DefaultFault"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="Authenticate_Callback">
+         <soap:operation soapAction="http://www.entel.cl/EBM/PortabilityOrder/Authenticate/v1"/>
+         <wsdl:output>
+            <soap:body use="literal" parts="Callback"/>
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="ReturnValidate">
+         <soap:operation soapAction="http://www.entel.cl/EBM/PortabilityOrder/ReturnValidate/v1"/>
+         <wsdl:input>
+            <soap:body use="literal" parts="In"/>
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body use="literal" parts="Out"/>
+         </wsdl:output>
+         <wsdl:fault name="DefaultFault">
+            <soap:fault use="literal" name="DefaultFault"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="Create">
+         <soap:operation soapAction="http://www.entel.cl/EBM/PortabilityOrder/Create/v1"/>
+         <wsdl:input>
+            <soap:body use="literal" parts="In"/>
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body use="literal" parts="Out"/>
+         </wsdl:output>
+         <wsdl:fault name="DefaultFault">
+            <soap:fault use="literal" name="DefaultFault"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="Create_Callback">
+         <soap:operation soapAction="http://www.entel.cl/EBM/PortabilityOrder/Create/v1"/>
+         <wsdl:output>
+            <soap:body use="literal" parts="Callback"/>
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="Update">
+         <soap:operation soapAction="http://www.entel.cl/EBM/PortabilityOrder/Update/v1"/>
+         <wsdl:input>
+            <soap:body use="literal" parts="In"/>
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body use="literal" parts="Out"/>
+         </wsdl:output>
+         <wsdl:fault name="DefaultFault">
+            <soap:fault use="literal" name="DefaultFault"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="Update_Callback">
+         <soap:operation soapAction="http://www.entel.cl/EBM/PortabilityOrder/Update/v1"/>
+         <wsdl:output>
+            <soap:body use="literal" parts="Callback"/>
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="Publish">
+         <soap:operation soapAction="http://www.entel.cl/EBM/PortabilityOrder/Publish/v1"/>
+         <wsdl:input>
+            <soap:body use="literal" parts="In"/>
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body use="literal" parts="Out"/>
+         </wsdl:output>
+         <wsdl:fault name="DefaultFault">
+            <soap:fault use="literal" name="DefaultFault"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="Cancel">
+         <soap:operation soapAction="http://www.entel.cl/EBM/PortabilityOrder/Cancel/v1"/>
+         <wsdl:input>
+            <soap:body use="literal" parts="In"/>
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body use="literal" parts="Out"/>
+         </wsdl:output>
+         <wsdl:fault name="DefaultFault">
+            <soap:fault use="literal" name="DefaultFault"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="Cancel_Callback">
+         <soap:operation soapAction="http://www.entel.cl/EBM/PortabilityOrder/Cancel/v1"/>
+         <wsdl:output>
+            <soap:body use="literal" parts="Callback"/>
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="Validate">
+         <soap:operation soapAction="http://www.entel.cl/EBM/PortabilityOrder/Validate/v1"/>
+         <wsdl:input>
+            <soap:body use="literal" parts="In"/>
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body use="literal" parts="Out"/>
+         </wsdl:output>
+         <wsdl:fault name="DefaultFault">
+            <soap:fault use="literal" name="DefaultFault"/>
+         </wsdl:fault>
+      </wsdl:operation>
+   </wsdl:binding>
+   <wsdl:service name="PortabilityOrder_Service">
+      <wsdl:port name="PortabilityOrder_Port" binding="tns:PortabilityOrder_soapBinding">
+         <soap:address location="http://www.entel.cl/IE/PortabilityOrder/v1"/>
+      </wsdl:port>
+   </wsdl:service>
+</wsdl:definitions>

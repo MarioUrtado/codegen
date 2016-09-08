@@ -1,0 +1,143 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Fri Mar 11 16:16:35 ART 2016
+  Author:  lucio.acosta
+  Type: BPEL 2.0 Process
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="UpdatesAdmission_BPELProcess"
+               targetNamespace="http://xmlns.oracle.com/DC_SC_ErrorManager/RetryTreatment_Admission/UpdatesAdmission_BPELProcess"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/DC_SC_ErrorManager/RetryTreatment_Admission/UpdatesAdmission_BPELProcess"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/jms/DC_SC_ErrorManager/RetryTreatment_Admission/JMS_Receive_RetryManagerAdmissionQueue"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/DC_SC_ErrorManager/RetryTreatment_Admission/RETRY_UPDATE_STATUS"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/jms/DC_SC_ErrorManager/RetryTreatment_Admission/JMS_Send_RetryManagerQueue"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/top/ESB_RETRYMANAGER_Pooling"
+         xmlns:ns5="http://xmlns.oracle.com/pcbpel/adapter/db/sp/RETRY_UPDATE_STATUS">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <import namespace="http://xmlns.oracle.com/pcbpel/adapter/jms/DC_SC_ErrorManager/RetryTreatment_Admission/JMS_Receive_RetryManagerAdmissionQueue"
+          location="../WSDLs/JMS_Receive_RetryManagerAdmissionQueue.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"
+          ui:processWSDL="true"/>
+  <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/RETRY_UPDATE_STATUS"
+          location="../Schemas/RETRY_UPDATE_STATUS_sp.xsd" importType="http://www.w3.org/2001/XMLSchema"/>
+  
+  <partnerLinks>
+    <partnerLink name="JMS_Receive_RetryManagerAdmissionQueue" partnerLinkType="ns1:Consume_Message_plt"
+                 partnerRole="Consume_Message_role"/>
+    <partnerLink name="RETRY_UPDATE_STATUS" partnerLinkType="ns2:RETRY_UPDATE_STATUS_plt"
+                 partnerRole="RETRY_UPDATE_STATUS_role"/>
+    <partnerLink name="JMS_Send_RetryManagerQueue" partnerLinkType="ns3:Produce_Message_plt"
+                 partnerRole="Produce_Message_role"/>
+  </partnerLinks>
+  <variables>
+    <variable name="tiempoActual" type="xsd:dateTime"/>
+    <variable name="InputVariable" messageType="ns1:Consume_Message_msg"/>
+    <variable name="InvokeRetryQueue" messageType="ns3:Produce_Message_msg"/>
+    <variable name="In_Sp" messageType="ns2:args_in_msg"/>
+    <variable name="Out_Sp" messageType="ns2:args_out_msg"/>
+  </variables>
+  <faultHandlers>
+    <catchAll><throw name="ThrowRollBack" faultName="bpelx:rollback"
+                     xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"/></catchAll>
+  </faultHandlers>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in UpdatesAdmission_BPELProcess.wsdl) -->
+    <receive name="receiveInput" variable="InputVariable" createInstance="yes"
+             partnerLink="JMS_Receive_RetryManagerAdmissionQueue" portType="ns1:Consume_Message_ptt" operation="Consume_Message"/>
+    <assign name="TempoActual">
+      <copy>
+        <from>xp20:current-dateTime()</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$tiempoActual</to>
+      </copy>
+    </assign>
+    <forEach parallel="no" counterName="Index" name="ForEach">
+      <startCounterValue expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">1</startCounterValue>
+      <finalCounterValue expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">count($InputVariable.body/ns4:EsbRetrymanager)</finalCounterValue>
+      <scope name="Scope1">
+        <if name="EvaluaTiempo">
+          <documentation>
+            <![CDATA[Procesing]]>
+          </documentation>
+          <condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InputVariable.body/ns4:EsbRetrymanager[$Index]/ns4:dateNextRetry &lt;= data($tiempoActual)</condition>
+          <sequence name="Sequence1">
+            <assign name="AssignToQueue">
+              <copy>
+                <from>$InputVariable.body/ns4:EsbRetrymanager[$Index]</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeRetryQueue.body</to>
+              </copy>
+            </assign>
+            <assign name="AssignStatus">
+              <copy bpelx:insertMissingToData="yes">
+                <from>$InputVariable.body/ns4:EsbRetrymanager[$Index]/ns4:id</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$In_Sp.InputParameters/ns5:P_IDS/ns5:P_IDS_ITEM[$Index]</to>
+              </copy>
+              <copy bpelx:insertMissingToData="yes">
+                <from>'IN_PROGRESS'</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$In_Sp.InputParameters/ns5:P_STATUS/ns5:P_STATUS_ITEM[$Index]</to>
+              </copy>
+            </assign>
+            <invoke name="InvokeRetryQueu" partnerLink="JMS_Send_RetryManagerQueue"
+                    portType="ns3:Produce_Message_ptt" operation="Produce_Message" inputVariable="InvokeRetryQueue"
+                    bpelx:invokeAsDetail="no"/>
+          </sequence>
+          <else>
+            <documentation>
+              <![CDATA[Pending]]>
+            </documentation><sequence name="Sequence3"><assign name="AssignStatus"
+                                                                                     xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      
+      
+   <copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>$InputVariable.body/ns4:EsbRetrymanager[$Index]/ns4:id</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$In_Sp.InputParameters/ns5:P_IDS/ns5:P_IDS_ITEM[$Index]</to>
+      </copy><copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>'PENDING'</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$In_Sp.InputParameters/ns5:P_STATUS/ns5:P_STATUS_ITEM[$Index]</to>
+      </copy></assign></sequence></else>
+        </if>
+      </scope>
+    </forEach>
+    <invoke name="InvokeUpdateInProgess" partnerLink="RETRY_UPDATE_STATUS" portType="ns2:RETRY_UPDATE_STATUS_ptt"
+            operation="RETRY_UPDATE_STATUS" inputVariable="In_Sp" outputVariable="Out_Sp" bpelx:invokeAsDetail="no"/>
+  </sequence>
+</process>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/ProductAccount/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/ProductAccount/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="contractID" type="xs:string"/>									
+	<xs:element name="customerID" type="xs:string"/>									
+	<xs:element name="productAccountID" type="xs:string"/>									
+	<xs:element name="productID" type="xs:string"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="ProductAccount" type="tns:ProductAccount_Type"/>
+	<xs:complexType name="ProductAccount_Type">
+		<xs:sequence> 
+		<xs:element ref="tns:contractID" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:customerID" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:productAccountID" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:productID" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

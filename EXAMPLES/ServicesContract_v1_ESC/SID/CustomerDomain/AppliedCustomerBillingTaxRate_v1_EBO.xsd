@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/AppliedCustomerBillingTaxRate/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/AppliedCustomerBillingTaxRate/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="ID" type="xs:string"/>									
+	<xs:element name="amount" type="xs:float"/>									
+	<xs:element name="description" type="xs:string"/>									
+	<xs:element name="rate" type="xs:float"/>									
+	<xs:element name="taxCategory" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>A categorization of the tax rate.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="taxCode" type="xs:string"/>									
+	<xs:element name="taxIndicator" type="xs:string"/>									
+	<xs:element name="type" type="xs:string"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="AppliedCustomerBillingTaxRate" type="tns:AppliedCustomerBillingTaxRate_Type"/>
+	<xs:complexType name="AppliedCustomerBillingTaxRate_Type">
+		
+			<xs:annotation>
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">An amount of money levied on the price of a Product by a legislative body.</xs:documentation>
+						
+			</xs:annotation>
+		<xs:sequence> 
+		<xs:element ref="tns:ID" maxOccurs="1" minOccurs="1"/>
+		<xs:element ref="tns:amount" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:description" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:rate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:taxCategory" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:taxCode" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:taxIndicator" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:type" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

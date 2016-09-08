@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+        xmlns:tns="http://www.entel.cl/SC/ConversationManager/getNewConversation/v1"
+        xmlns:esons_result="http://www.entel.cl/ESO/Result/v2" 
+        xmlns:conversationStatus="http://www.entel.cl/SC/ConversationManager/Aux/ConversationStatus"
+        xmlns:esons_messageHeader="http://www.entel.cl/ESO/MessageHeader/v1" 
+        xmlns:esons_tracer="http://www.entel.cl/ESO/Tracer/v1" 
+        targetNamespace="http://www.entel.cl/SC/ConversationManager/getNewConversation/v1" 
+        elementFormDefault="qualified" version="1.0">
+  
+  <import namespace="http://www.entel.cl/SC/ConversationManager/Aux/ConversationStatus" schemaLocation="../ConversationStatus.xsd"/>
+  <import namespace="http://www.entel.cl/ESO/Result/v2" schemaLocation="../../../../SR_Commons/XSD/ESO/Result_v2_ESO.xsd"/>
+  <import namespace="http://www.entel.cl/ESO/MessageHeader/v1" schemaLocation="../../../../SR_Commons/XSD/ESO/MessageHeader_v1_ESO.xsd"/>
+  <import namespace="http://www.entel.cl/ESO/Tracer/v1" schemaLocation="../../../../SR_Commons/XSD/ESO/Tracer_v1_ESO.xsd"/>
+
+  <element name="GetNewConversationREQ" type="tns:GetNewConversationREQ_Type"/>
+  <element name="GetNewConversationRSP" type="tns:GetNewConversationRSP_Type"/>
+  
+  <complexType name="GetNewConversationREQ_Type">
+    
+  </complexType>
+  
+  <complexType name="GetNewConversationRSP_Type">
+    <sequence>
+      <element ref="esons_result:Result">
+        <annotation>
+          <documentation>Result information regarding the execution of this capability (getNewConversation)</documentation>
+	</annotation>
+      </element>
+      <element name="ConversationID" type="esons_messageHeader:conversationID_SType">
+      <annotation>
+          <documentation>The requested new Conversation_ID.</documentation>
+	</annotation>
+      </element>
+    </sequence>
+  </complexType>
+  
+</schema>

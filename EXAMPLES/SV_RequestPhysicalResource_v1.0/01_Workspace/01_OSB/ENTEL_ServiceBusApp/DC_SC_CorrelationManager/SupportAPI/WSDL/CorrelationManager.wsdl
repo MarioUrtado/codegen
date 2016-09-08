@@ -1,0 +1,77 @@
+<wsdl:definitions name="CorrelationManager" 
+ targetNamespace="http://www.entel.cl/SC/CorrelationManager/v1"
+ xmlns:tns="http://www.entel.cl/SC/CorrelationManager/v1" 
+ xmlns:registerMem="http://www.entel.cl/SC/CorrelationMember/registerGroup/v1" 
+ xmlns:getMem="http://www.entel.cl/SC/CorrelationManager/getCorrelation/v1" 
+ xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+ xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+ xmlns:http="http://schemas.xmlsoap.org/wsdl/http/">
+
+	<wsdl:types>
+		<xs:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			<xs:import namespace="http://www.entel.cl/SC/CorrelationMember/registerGroup/v1"
+              schemaLocation="../XSD/CSM/registerGroup_CorrelationManager_v1_CSM.xsd"/>
+			<xs:import namespace="http://www.entel.cl/SC/CorrelationManager/getCorrelation/v1"
+              schemaLocation="../XSD/CSM/getCorrelation_CorrelationManager_v1_CSM.xsd"/>
+		</xs:schema>
+	</wsdl:types>
+
+	<wsdl:message name="registerGroup_Message_In">
+		<wsdl:part name="In" element="registerMem:RegisterGroupREQ"/>		
+	</wsdl:message>
+	
+	<wsdl:message name="registerGroup_Message_Out">
+		<wsdl:part name="Out" element="registerMem:RegisterGroupRSP"/>
+	</wsdl:message>
+
+	<wsdl:message name="getCorrelation_Message_In">
+		<wsdl:part name="In" element="getMem:GetCorrelationREQ"/>
+	</wsdl:message>
+	
+	<wsdl:message name="getCorrelation_Message_Out">
+		<wsdl:part name="Out" element="getMem:GetCorrelationRSP"/>
+	</wsdl:message>
+
+	<wsdl:portType name="CorrelationManager_PortType">
+		<wsdl:operation name="registerGroup">
+			<wsdl:input message="tns:registerGroup_Message_In"/>
+			<wsdl:output message="tns:registerGroup_Message_Out"/>
+		</wsdl:operation>
+               
+          <wsdl:operation name="getCorrelation">
+			<wsdl:input message="tns:getCorrelation_Message_In"/>
+			<wsdl:output message="tns:getCorrelation_Message_Out"/>
+		</wsdl:operation>
+	</wsdl:portType>
+
+	
+	<wsdl:binding name="CorrelationManager_SOAP12Binding" type="tns:CorrelationManager_PortType">
+		<wsoap12:binding style="document" transport="http://www.bea.com/wli/sb/transports/sb"/>
+		<wsdl:operation name="registerGroup">
+			<wsoap12:operation style="document" soapAction=""/>
+			<wsdl:input>
+				<wsoap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<wsoap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+
+		<wsdl:operation name="getCorrelation">
+			<wsoap12:operation style="document" soapAction=""/>
+			<wsdl:input>
+				<wsoap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<wsoap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+
+	</wsdl:binding>
+	<wsdl:service name="CorrelationManager_Service">
+		<wsdl:port name="CorrelationManager_Port" binding="tns:CorrelationManager_SOAP12Binding">
+			<wsoap12:address location="sb://CorrelationManager"/>
+		</wsdl:port>
+	</wsdl:service>
+
+</wsdl:definitions>

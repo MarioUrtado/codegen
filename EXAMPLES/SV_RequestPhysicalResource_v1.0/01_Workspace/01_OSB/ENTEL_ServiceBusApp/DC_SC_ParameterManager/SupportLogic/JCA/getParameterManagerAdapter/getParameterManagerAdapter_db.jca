@@ -1,0 +1,13 @@
+<adapter-config name="getParameterManagerAdapter" adapter="db"
+                wsdlLocation="getParameterManagerAdapter.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="SupportComponentConnection" location="eis/DB/FRW/ParameterManager"/>
+  <endpoint-interaction portType="getParameterManagerAdapter_ptt" operation="getParameterManagerAdapter">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="PackageName" value="ESB_PARAMETERMANAGER_PKG"/>
+      <property name="ProcedureName" value="GET"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

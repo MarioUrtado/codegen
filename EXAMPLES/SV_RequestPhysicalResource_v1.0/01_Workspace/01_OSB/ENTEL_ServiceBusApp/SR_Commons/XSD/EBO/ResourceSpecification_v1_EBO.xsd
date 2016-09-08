@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/ResourceSpecification/v1"
+	xmlns:ebons_timeperiod="http://www.entel.cl/EBO/TimePeriod/v1"
+	xmlns:ebons_resources="http://www.entel.cl/EBO/Resources/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/ResourceSpecification/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/TimePeriod/v1" schemaLocation="TimePeriod_v1_EBO.xsd"/>
+	<xs:import namespace="http://www.entel.cl/EBO/Resources/v1" schemaLocation="Resources_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="ID" type="xs:string"/>									
+	<xs:element name="description" type="xs:string"/>									
+	<xs:element name="href" type="xs:string"/>									
+	<xs:element name="name" type="xs:string"/>									
+	<xs:element name="resourceCandidate" type="xs:string"/>									
+	<xs:element name="resourceSpecification" type="xs:string"/>									
+	<xs:element name="specificationSubtype" type="xs:string"/>									
+	<xs:element name="specificationType" type="xs:string"/>									
+	<xs:element name="state" type="xs:string"/>									
+	<xs:element name="resources" type="ebons_resources:Resources_Type"/>									
+	<xs:element name="validFor" type="ebons_timeperiod:TimePeriod_Type"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="ResourceSpecification" type="tns:ResourceSpecification_Type"/>
+	<xs:complexType name="ResourceSpecification_Type">
+		<xs:sequence> 
+		<xs:element ref="tns:ID" maxOccurs="1" minOccurs="1"/>
+		<xs:element ref="tns:description" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:href" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:name" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:resourceCandidate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:resourceSpecification" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:specificationSubtype" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:specificationType" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:state" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:resources" maxOccurs="unbounded" minOccurs="0"/>
+		<xs:element ref="tns:validFor" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

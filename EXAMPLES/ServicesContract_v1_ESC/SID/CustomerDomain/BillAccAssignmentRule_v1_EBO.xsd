@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/BillAccAssignmentRule/v1"
+	xmlns:ebons_timeperiod="http://www.entel.cl/EBO/TimePeriod/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/BillAccAssignmentRule/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/TimePeriod/v1" schemaLocation="../CommonBusinessEntitiesDomain/TimePeriod_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="ListOfPriceTypes" type="xs:string"/>									
+	<xs:element name="definesPeriod" type="xs:boolean">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>Indicator for Bill Cycle aligned PA. A product having PA can have charge assignments to multiple BA. For determination of the BC aligned PA reset it is necessary to indicate which BC specification shall be used (BCspec is assigned to the BA).</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="id" type="xs:string"/>									
+	<xs:element name="priority" type="xs:integer">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>Priority for multiple assignment rules. Implicit in RMLab</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="validFor" type="ebons_timeperiod:TimePeriod_Type"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="BillAccAssignmentRule" type="tns:BillAccAssignmentRule_Type"/>
+	<xs:complexType name="BillAccAssignmentRule_Type">
+		<xs:sequence> 
+		<xs:element ref="tns:ListOfPriceTypes" maxOccurs="unbounded" minOccurs="0"/>
+		<xs:element ref="tns:definesPeriod" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:id" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:priority" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:validFor" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

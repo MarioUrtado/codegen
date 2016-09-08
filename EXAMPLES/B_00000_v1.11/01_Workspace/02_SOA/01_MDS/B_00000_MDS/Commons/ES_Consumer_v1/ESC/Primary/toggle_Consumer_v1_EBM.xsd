@@ -1,0 +1,50 @@
+<!-- Ref EBM template: v1.0 - NO 
+BORRAR -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:esons_messageHeader="http://www.entel.cl/ESO/MessageHeader/v1" xmlns:ebons_consumer="http://www.entel.cl/EBO/Consumer/v1" xmlns:tns="http://www.entel.cl/EBM/Consumer/toggle/v1" targetNamespace="http://www.entel.cl/EBM/Consumer/toggle/v1" elementFormDefault="qualified"  version="1.0">
+
+       <import namespace="http://www.entel.cl/ESO/MessageHeader/v1" schemaLocation="../../../SR_Commons/XSD/ESO/MessageHeader_v1_ESO.xsd"/>
+       <import namespace="http://www.entel.cl/EBO/Consumer/v1" schemaLocation="../../../SR_Commons/XSD/EBO/Consumer_v1_EBO.xsd"/>
+	
+        <complexType name="Toggle_Consumer_REQ_Type">
+		<sequence>
+			<element ref="esons_messageHeader:RequestHeader"/>
+			<element name="Body">
+				<complexType>
+					<sequence>
+						<element ref="ebons_consumer:ConsumerID"/>
+                                                <element ref="ebons_consumer:ConsumerStatus"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>	
+        <element name="Toggle_Consumer_REQ" type="tns:Toggle_Consumer_REQ_Type"/>
+        
+        <complexType name="Toggle_Consumer_RSP_Type">
+		<sequence>
+			<element ref="esons_messageHeader:ResponseHeader"/>
+			<element name="Body">
+				<complexType>
+					<sequence>
+                                            <element ref="ebons_consumer:ConsumerStatus"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<element name="Toggle_Consumer_RSP" type="tns:Toggle_Consumer_RSP_Type"/>
+	
+	<complexType name="Toggle_Consumer_FRSP_Type">
+		<sequence>
+			<element ref="esons_messageHeader:ResponseHeader"/>
+			<element name="Body">
+				<complexType>
+					<sequence>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<element name="Toggle_Consumer_FRSP" type="tns:Toggle_Consumer_FRSP_Type"/>          
+   
+</schema>

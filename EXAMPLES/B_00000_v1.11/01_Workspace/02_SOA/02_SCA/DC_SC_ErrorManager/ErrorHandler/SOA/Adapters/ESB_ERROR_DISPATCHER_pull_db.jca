@@ -1,0 +1,21 @@
+<adapter-config name="ESB_ERROR_DISPATCHER_pull" adapter="db" wsdlLocation="../WSDLs/ESB_ERROR_DISPATCHER_pull.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="ENTEL01" location="eis/DB/FRW/ErrorHospital"/>
+  <endpoint-activation portType="ESB_ERROR_DISPATCHER_pull_ptt" operation="receive">
+    <activation-spec className="oracle.tip.adapter.db.DBActivationSpec">
+      <property name="DescriptorName" value="ESB_ERROR_DISPATCHER_pull.EsbErrorDispatcher"/>
+      <property name="QueryName" value="ESB_ERROR_DISPATCHER_pullSelect"/>
+      <property name="MappingsMetaDataURL" value="ESB_ERROR_DISPATCHER_pull-or-mappings.xml"/>
+      <property name="PollingStrategy" value="LogicalDeletePollingStrategy"/>
+      <property name="MarkReadColumn" value="STATUS"/>
+      <property name="MarkReadValue" value="IN_PROGRESS"/>
+      <property name="MarkUnreadValue" value="PENDING"/>
+      <property name="PollingInterval" value="15"/>
+      <property name="MaxRaiseSize" value="1"/>
+      <property name="MaxTransactionSize" value="10"/>
+      <property name="NumberOfThreads" value="1"/>
+      <property name="ReturnSingleResultSet" value="false"/>
+    </activation-spec>
+  </endpoint-activation>
+
+</adapter-config>

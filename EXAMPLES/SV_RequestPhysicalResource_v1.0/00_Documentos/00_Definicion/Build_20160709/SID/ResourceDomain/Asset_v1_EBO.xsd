@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/Asset/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/Asset/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="ID" type="xs:string"/>									
+	<xs:element name="assetIntegrationId" type="xs:string"/>									
+	<xs:element name="blackListInd" type="xs:boolean"/>									
+	<xs:element name="createDate" type="xs:dateTime"/>									
+	<xs:element name="description" type="xs:string"/>									
+	<xs:element name="plan" type="xs:string"/>									
+	<xs:element name="status" type="xs:string"/>									
+	<xs:element name="statusChangeDate" type="xs:dateTime"/>									
+	<xs:element name="statusDetail" type="xs:string"/>									
+	<xs:element name="type" type="xs:string"/>									
+	<xs:element name="updateDate" type="xs:dateTime"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="Asset" type="tns:Asset_Type"/>
+	<xs:complexType name="Asset_Type">
+		<xs:sequence> 
+		<xs:element ref="tns:ID" maxOccurs="1" minOccurs="1"/>
+		<xs:element ref="tns:assetIntegrationId" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:blackListInd" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:createDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:description" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:plan" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:status" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:statusChangeDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:statusDetail" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:type" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:updateDate" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

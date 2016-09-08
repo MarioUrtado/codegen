@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.entel.cl/SC/ParameterManager/getEndpoint/v1" elementFormDefault="qualified" version="1.0" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.entel.cl/SC/ParameterManager/getEndpoint/v1" xmlns:esons_endpointConfiguration="http://www.entel.cl/ESO/EndpointConfiguration/v1" xmlns:esons_header="http://www.entel.cl/ESO/MessageHeader/v1" xmlns:esons_result="http://www.entel.cl/ESO/Result/v2" xmlns:eddns_dictionary="http://www.entel.cl/EDD/Dictionary/v1">
+        
+    <import namespace="http://www.entel.cl/EDD/Dictionary/v1" schemaLocation="../../../../SR_Commons/XSD/EDD/Dictionary_v1_EDD.xsd"/>   
+    <import namespace="http://www.entel.cl/ESO/MessageHeader/v1" schemaLocation="../../../../SR_Commons/XSD/ESO/MessageHeader_v1_ESO.xsd"/>
+    <import namespace="http://www.entel.cl/ESO/Result/v2" schemaLocation="../../../../SR_Commons/XSD/ESO/Result_v2_ESO.xsd"/>   
+    <import namespace="http://www.entel.cl/ESO/EndpointConfiguration/v1" schemaLocation="../../../../SR_Commons/XSD/ESO/EndpointConfiguration_v1_ESO.xsd"/>   
+        
+    <element name="GetEndpointREQ" type="tns:GetEndpointREQ_Type"/>
+    <element name="GetEndpointRSP" type="tns:GetEndpointRSP_Type"/>
+
+    <complexType name="GetEndpointREQ_Type">
+        <sequence>
+            <element ref="esons_header:RequestHeader"/>
+            <element ref="esons_endpointConfiguration:Target"/>
+        </sequence>
+    </complexType>
+    
+    <complexType name="GetEndpointRSP_Type">
+        <sequence>
+            <element ref="esons_endpointConfiguration:Endpoint"/>
+            <element ref="esons_result:Result" minOccurs="0"/>
+        </sequence>
+    </complexType>
+    
+</schema>

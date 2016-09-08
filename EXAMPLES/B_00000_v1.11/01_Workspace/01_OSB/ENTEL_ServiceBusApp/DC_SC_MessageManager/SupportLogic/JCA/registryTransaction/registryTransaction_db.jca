@@ -1,0 +1,12 @@
+<adapter-config name="registryTransaction" adapter="db" wsdlLocation="registryTransaction.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="ENTEL" location="eis/DB/FRW/MessageManager"/>
+  <endpoint-interaction portType="registryTransaction_ptt" operation="registryTransaction">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="PackageName" value="ESB_MESSAGEMANAGER_PKG"/>
+      <property name="ProcedureName" value="REGISTRYTRANSACTION"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

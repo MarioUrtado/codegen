@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
+    <con:coreEntry>
+        <con:binding type="SOAP" isSoap12="true" xsi:type="con:SoapBindingType">
+            <con:wsdl ref="DC_SC_ParameterManager/SupportAPI/WSDL/ParameterManager"/>
+            <con:binding>
+                <con:name>ParameterManager_CFG_SOAP12Binding</con:name>
+                <con:namespace>http://www.entel.cl/SC/ParameterManager/v1</con:namespace>
+            </con:binding>
+        </con:binding>
+        <con:xqConfiguration>
+            <con:snippetVersion>1.0</con:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:router>
+        <con:flow>
+            <con:branch-node type="operation" id="_FlowId-N53ee33e3.N2add2975.0.1521c79f707.N8000" name="Non-Functional Operations">
+                <con:context/>
+                <con:branch-table>
+                    <con:branch name="refreshCache_Get">
+                        <con:operator>equals</con:operator>
+                        <con:value/>
+                        <con:flow>
+                            <con:route-node name="CacheManager_CFG - get">
+                                <con:context/>
+                                <con:actions>
+                                    <con1:route>
+                                        <con2:id>_ActionId-N53ee33e3.N2add2975.0.1521c79f707.N7ffc</con2:id>
+                                        <con1:service ref="DC_SC_CacheManager/SupportAPI/Proxy/CacheManager_CFG" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                        <con1:operation>lazyRefresh</con1:operation>
+                                        <con1:outboundTransform>
+                                            <con3:replace varName="body" contents-only="true">
+                                                <con2:id>_ActionId-N53ee33e3.N2add2975.0.1521c79f707.N7ff3</con2:id>
+                                                <con3:expr>
+                                                    <con2:xqueryTransform>
+                                                        <con2:resource ref="DC_SC_ParameterManager/SupportLogic/XQuery/refreshCacheREQ"/>
+                                                        <con2:param name="category">
+                                                            <con2:path>'get'</con2:path>
+                                                        </con2:param>
+                                                    </con2:xqueryTransform>
+                                                </con3:expr>
+                                            </con3:replace>
+                                        </con1:outboundTransform>
+                                        <con1:responseTransform>
+                                            <con3:replace varName="body" contents-only="true">
+                                                <con2:id>_ActionId-N53ee33e3.N2add2975.0.1521c79f707.N7ff0</con2:id>
+                                                <con3:expr>
+                                                    <con2:xqueryTransform>
+                                                        <con2:resource ref="DC_SC_ParameterManager/SupportLogic/XQuery/refreshCacheRSP"/>
+                                                        <con2:param name="refreshCacheRSP">
+                                                            <con2:path>$body/*[1]</con2:path>
+                                                        </con2:param>
+                                                    </con2:xqueryTransform>
+                                                </con3:expr>
+                                            </con3:replace>
+                                        </con1:responseTransform>
+                                    </con1:route>
+                                </con:actions>
+                            </con:route-node>
+                        </con:flow>
+                    </con:branch>
+                    <con:branch name="refreshCache_GetConfig">
+                        <con:operator>equals</con:operator>
+                        <con:value/>
+                        <con:flow>
+                            <con:route-node name="CacheManager_CFG - getConfig">
+                                <con:context/>
+                                <con:actions>
+                                    <con1:route>
+                                        <con2:id>_ActionId-N53ee33e3.N2add2975.0.1521c79f707.N7f67</con2:id>
+                                        <con1:service ref="DC_SC_CacheManager/SupportAPI/Proxy/CacheManager_CFG" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                        <con1:operation>lazyRefresh</con1:operation>
+                                        <con1:outboundTransform>
+                                            <con3:replace varName="body" contents-only="true">
+                                                <con2:id>_ActionId-N53ee33e3.N2add2975.0.1521c79f707.N7f61</con2:id>
+                                                <con3:expr>
+                                                    <con2:xqueryTransform>
+                                                        <con2:resource ref="DC_SC_ParameterManager/SupportLogic/XQuery/refreshCacheREQ"/>
+                                                        <con2:param name="category">
+                                                            <con2:path>'getConfig'</con2:path>
+                                                        </con2:param>
+                                                    </con2:xqueryTransform>
+                                                </con3:expr>
+                                            </con3:replace>
+                                        </con1:outboundTransform>
+                                        <con1:responseTransform>
+                                            <con3:replace varName="body" contents-only="true">
+                                                <con2:id>_ActionId-N53ee33e3.N2add2975.0.1521c79f707.N7f64</con2:id>
+                                                <con3:expr>
+                                                    <con2:xqueryTransform>
+                                                        <con2:resource ref="DC_SC_ParameterManager/SupportLogic/XQuery/refreshCacheRSP"/>
+                                                        <con2:param name="refreshCacheRSP">
+                                                            <con2:path>$body/*[1]</con2:path>
+                                                        </con2:param>
+                                                    </con2:xqueryTransform>
+                                                </con3:expr>
+                                            </con3:replace>
+                                        </con1:responseTransform>
+                                    </con1:route>
+                                </con:actions>
+                            </con:route-node>
+                        </con:flow>
+                    </con:branch>
+                    <con:branch name="refreshCache_GetEndpoint">
+                        <con:operator>equals</con:operator>
+                        <con:value/>
+                        <con:flow>
+                            <con:route-node name="CacheManager_CFG - getEndpoint">
+                                <con:context/>
+                                <con:actions>
+                                    <con1:route>
+                                        <con2:id>_ActionId-N53ee33e3.N2add2975.0.1521c79f707.N7f5b</con2:id>
+                                        <con1:service ref="DC_SC_CacheManager/SupportAPI/Proxy/CacheManager_CFG" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                        <con1:operation>lazyRefresh</con1:operation>
+                                        <con1:outboundTransform>
+                                            <con3:replace varName="body" contents-only="true">
+                                                <con2:id>_ActionId-N53ee33e3.N2add2975.0.1521c79f707.N7f58</con2:id>
+                                                <con3:expr>
+                                                    <con2:xqueryTransform>
+                                                        <con2:resource ref="DC_SC_ParameterManager/SupportLogic/XQuery/refreshCacheREQ"/>
+                                                        <con2:param name="category">
+                                                            <con2:path>'getEndpoint'</con2:path>
+                                                        </con2:param>
+                                                    </con2:xqueryTransform>
+                                                </con3:expr>
+                                            </con3:replace>
+                                        </con1:outboundTransform>
+                                        <con1:responseTransform>
+                                            <con3:replace varName="body" contents-only="true">
+                                                <con2:id>_ActionId-N53ee33e3.N2add2975.0.1521c79f707.N7f55</con2:id>
+                                                <con3:expr>
+                                                    <con2:xqueryTransform>
+                                                        <con2:resource ref="DC_SC_ParameterManager/SupportLogic/XQuery/refreshCacheRSP"/>
+                                                        <con2:param name="refreshCacheRSP">
+                                                            <con2:path>$body/*[1]</con2:path>
+                                                        </con2:param>
+                                                    </con2:xqueryTransform>
+                                                </con3:expr>
+                                            </con3:replace>
+                                        </con1:responseTransform>
+                                    </con1:route>
+                                </con:actions>
+                            </con:route-node>
+                        </con:flow>
+                    </con:branch>
+                    <con:branch name="refreshCache_GetMapping">
+                        <con:operator>equals</con:operator>
+                        <con:value/>
+                        <con:flow>
+                            <con:route-node name="CacheManager_CFG - getMapping">
+                                <con:context/>
+                                <con:actions>
+                                    <con1:route>
+                                        <con2:id>_ActionId-N53ee33e3.N2add2975.0.1521c79f707.N7f51</con2:id>
+                                        <con1:service ref="DC_SC_CacheManager/SupportAPI/Proxy/CacheManager_CFG" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                        <con1:operation>lazyRefresh</con1:operation>
+                                        <con1:outboundTransform>
+                                            <con3:replace varName="body" contents-only="true">
+                                                <con2:id>_ActionId-N53ee33e3.N2add2975.0.1521c79f707.N7f4a</con2:id>
+                                                <con3:expr>
+                                                    <con2:xqueryTransform>
+                                                        <con2:resource ref="DC_SC_ParameterManager/SupportLogic/XQuery/refreshCacheREQ"/>
+                                                        <con2:param name="category">
+                                                            <con2:path>'getMapping'</con2:path>
+                                                        </con2:param>
+                                                    </con2:xqueryTransform>
+                                                </con3:expr>
+                                            </con3:replace>
+                                        </con1:outboundTransform>
+                                        <con1:responseTransform>
+                                            <con3:replace varName="body" contents-only="true">
+                                                <con2:id>_ActionId-N53ee33e3.N2add2975.0.1521c79f707.N7f47</con2:id>
+                                                <con3:expr>
+                                                    <con2:xqueryTransform>
+                                                        <con2:resource ref="DC_SC_ParameterManager/SupportLogic/XQuery/refreshCacheRSP"/>
+                                                        <con2:param name="refreshCacheRSP">
+                                                            <con2:path>$body/*[1]</con2:path>
+                                                        </con2:param>
+                                                    </con2:xqueryTransform>
+                                                </con3:expr>
+                                            </con3:replace>
+                                        </con1:responseTransform>
+                                    </con1:route>
+                                </con:actions>
+                            </con:route-node>
+                        </con:flow>
+                    </con:branch>
+                    <con:branch name="refreshCache">
+                        <con:operator>equals</con:operator>
+                        <con:value/>
+                        <con:flow>
+                            <con:route-node name="CacheManager_CFG -  Parameter">
+                                <con:context/>
+                                <con:actions>
+                                    <con1:route>
+                                        <con2:id>_ActionId-N53ee33e3.N2add2975.0.1521c79f707.N7f4d</con2:id>
+                                        <con1:service ref="DC_SC_CacheManager/SupportAPI/Proxy/CacheManager_CFG" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                        <con1:operation>lazyRefresh</con1:operation>
+                                        <con1:outboundTransform>
+                                            <con3:replace varName="body" contents-only="true">
+                                                <con2:id>_ActionId-N53ee33e3.N2add2975.0.1521c79f707.N7f44</con2:id>
+                                                <con3:expr>
+                                                    <con2:xqueryTransform>
+                                                        <con2:resource ref="DC_SC_ParameterManager/SupportLogic/XQuery/refreshCacheREQ"/>
+                                                        <con2:param name="category">
+                                                            <con2:path>''</con2:path>
+                                                        </con2:param>
+                                                    </con2:xqueryTransform>
+                                                </con3:expr>
+                                            </con3:replace>
+                                        </con1:outboundTransform>
+                                        <con1:responseTransform>
+                                            <con3:replace varName="body" contents-only="true">
+                                                <con2:id>_ActionId-N53ee33e3.N2add2975.0.1521c79f707.N7f41</con2:id>
+                                                <con3:expr>
+                                                    <con2:xqueryTransform>
+                                                        <con2:resource ref="DC_SC_ParameterManager/SupportLogic/XQuery/refreshCacheRSP"/>
+                                                        <con2:param name="refreshCacheRSP">
+                                                            <con2:path>$body/*[1]</con2:path>
+                                                        </con2:param>
+                                                    </con2:xqueryTransform>
+                                                </con3:expr>
+                                            </con3:replace>
+                                        </con1:responseTransform>
+                                    </con1:route>
+                                </con:actions>
+                            </con:route-node>
+                        </con:flow>
+                    </con:branch>
+                    <con:default-branch>
+                        <con:flow/>
+                    </con:default-branch>
+                </con:branch-table>
+            </con:branch-node>
+        </con:flow>
+    </con:router>
+</con:pipelineEntry>

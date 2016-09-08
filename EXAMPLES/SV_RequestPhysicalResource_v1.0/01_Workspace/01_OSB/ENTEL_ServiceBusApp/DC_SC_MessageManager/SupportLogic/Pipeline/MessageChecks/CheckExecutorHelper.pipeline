@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/typesystem/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config">
+    <con:coreEntry>
+        <con:binding type="Mixed" xsi:type="con:MixedBindingType">
+            <con:request type="XML">
+                <con1:schema ref="DC_SC_MessageManager/SupportLogic/XSD/CheckExecutorHelper" element="checkExecutorHelperREQ"/>
+            </con:request>
+            <con:response type="XML">
+                <con1:schema ref="DC_SC_MessageManager/SupportLogic/XSD/CheckExecutorHelper" element="checkExecutorHelperRSP"/>
+            </con:response>
+        </con:binding>
+        <con:xqConfiguration>
+            <con:snippetVersion>1.0</con:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:router errorHandler="error-N3f57c31a.N51c06c90.0.151c48ae847.N7f24">
+        <con:pipeline type="error" name="error-N3f57c31a.N51c06c90.0.151c48ae847.N7f24">
+            <con:stage id="_StageId-N3f57c31a.N51c06c90.0.151c48ae847.N7f23" name="Error Handler">
+                <con:context/>
+                <con:actions>
+                    <con2:assign varName="RSPMessage">
+                        <con3:id>_ActionId-N3f57c309.5759ba55.0.152cbda74c5.N7e25</con3:id>
+                        <con2:expr>
+                            <con3:xqueryText>$body/*[1]/*:details/*</con3:xqueryText>
+                        </con2:expr>
+                    </con2:assign>
+                    <con2:replace varName="body" contents-only="true">
+                        <con3:id>_ActionId-N3f57c309.5759ba55.0.152cbda74c5.N7e1f</con3:id>
+                        <con2:location>
+                            <con3:xpathText>//*:details</con3:xpathText>
+                        </con2:location>
+                        <con2:expr>
+                            <con3:xqueryText>$Request/*[1]/*</con3:xqueryText>
+                        </con2:expr>
+                    </con2:replace>
+                    <con6:insert varName="fault" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con7:id xmlns:con7="http://www.bea.com/wli/sb/stages/config">_ActionId-N3f57c309.5759ba55.0.152cbda74c5.N7e1c</con7:id>
+                        <con4:location>
+                            <con7:xpathText xmlns:con7="http://www.bea.com/wli/sb/stages/config">/*[1]/ctx:details</con7:xpathText>
+                        </con4:location>
+                        <con4:where>first-child</con4:where>
+                        <con4:expr>
+                            <con7:xqueryText xmlns:con7="http://www.bea.com/wli/sb/stages/config">fn-bea:inlinedXML(data($getTransactionCheckRSP/*[1]/*[1]/*:Column[@name="RSP_MSG"]))</con7:xqueryText>
+                        </con4:expr>
+                    </con6:insert>
+                    <con6:wsCallout xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con7:id xmlns:con7="http://www.bea.com/wli/sb/stages/config">_ActionId-N3f57c317.7b70ca9b.0.152bbff11ea.N7d39</con7:id>
+                        <con4:service ref="DC_SC_ErrorManager/SupportAPI/Proxy/ErrorManager" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con4:operation>handle</con4:operation>
+                        <con4:request>
+                            <con4:body wrapped="true">body</con4:body>
+                        </con4:request>
+                        <con4:response>
+                            <con4:body wrapped="true">body</con4:body>
+                        </con4:response>
+                        <con4:requestTransform>
+                            <con6:replace contents-only="true" varName="body">
+                                <con7:id xmlns:con7="http://www.bea.com/wli/sb/stages/config">_ActionId-N3f57c317.7b70ca9b.0.152bbff11ea.N7a7d</con7:id>
+                                <con6:expr>
+                                    <con7:xqueryTransform xmlns:con7="http://www.bea.com/wli/sb/stages/config">
+                                        <con7:resource ref="SR_Commons/XQuery/SupportComponent/ErrorManager/get_handleREQ_v2"/>
+                                        <con7:param name="messageHeader">
+                                            <con7:path>$Request/*[1]/*[1]/*[1]</con7:path>
+                                        </con7:param>
+                                        <con7:param name="sourceErrorCode">
+                                            <con7:path>data($body/*[1]/ctx:errorCode)</con7:path>
+                                        </con7:param>
+                                        <con7:param name="errorPlaceHolderPlace">
+                                            <con7:path>data($body/*[1]/ctx:location)</con7:path>
+                                        </con7:param>
+                                        <con7:param name="sourceErrorDesc">
+                                            <con7:path>data($body/*[1]/ctx:reason)</con7:path>
+                                        </con7:param>
+                                        <con7:param name="sourceFault">
+                                            <con7:path>$body/*[1]</con7:path>
+                                        </con7:param>
+                                        <con7:param name="errorIndexSubModule">
+                                            <con7:path>'checkIN'</con7:path>
+                                        </con7:param>
+                                        <con7:param name="errorPlaceHolderTime">
+                                            <con7:path>current-dateTime()</con7:path>
+                                        </con7:param>
+                                        <con7:param name="errorIndexModule">
+                                            <con7:path>'MessageManager'</con7:path>
+                                        </con7:param>
+                                        <con7:param name="errorSourceDetails">
+                                            <con7:path>concat('CheckExecutorHelper.', $Request/@name)</con7:path>
+                                        </con7:param>
+                                        <con7:param name="componentOperation">
+                                            <con7:path>'checkIN'</con7:path>
+                                        </con7:param>
+                                        <con7:param name="errorSourceID">
+                                            <con7:path>'FRW'</con7:path>
+                                        </con7:param>
+                                        <con7:param name="componentName">
+                                            <con7:path>'MessageManager'</con7:path>
+                                        </con7:param>
+                                    </con7:xqueryTransform>
+                                </con6:expr>
+                            </con6:replace>
+                        </con4:requestTransform>
+                        <con4:responseTransform>
+                            <con6:replace varName="body" contents-only="true">
+                                <con7:id xmlns:con7="http://www.bea.com/wli/sb/stages/config">_ActionId-N3f57c317.7b70ca9b.0.152bbff11ea.N7ab7</con7:id>
+                                <con4:expr>
+                                    <con7:xqueryTransform xmlns:con7="http://www.bea.com/wli/sb/stages/config">
+                                        <con7:resource ref="DC_SC_MessageManager/SupportLogic/XQuery/get_checkExecutorHelperRSP"/>
+                                        <con7:param name="result">
+                                            <con7:path>$body/*[1]/*[1]</con7:path>
+                                        </con7:param>
+                                        <con7:param name="message">
+                                            <con7:path>if($RSPMessage/*[1]) then
+  $RSPMessage 
+else 
+  $body/*[1]/*[1]</con7:path>
+                                        </con7:param>
+                                    </con7:xqueryTransform>
+                                </con4:expr>
+                            </con6:replace>
+                        </con4:responseTransform>
+                    </con6:wsCallout>
+                    <con3:reply isError="true">
+                        <con3:id>_ActionId-N3f57c317.7b70ca9b.0.152bbff11ea.N7aeb</con3:id>
+                    </con3:reply>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:flow>
+            <con:route-node name="RouteToCheck">
+                <con:context/>
+                <con:actions>
+                    <con4:dynamic-route>
+                        <con3:id>_ActionId-N3f57c310.23695df6.0.151a6c62568.N7e2c</con3:id>
+                        <con4:service>
+                            <con3:xqueryTransform>
+                                <con3:resource ref="DC_SC_MessageManager/SupportLogic/XQuery/get_MessageCheck_DynamicRouting"/>
+                                <con3:param name="CheckExecutorHelperREQ">
+                                    <con3:path>$body/*</con3:path>
+                                </con3:param>
+                            </con3:xqueryTransform>
+                        </con4:service>
+                        <con4:outboundTransform>
+                            <con2:assign varName="Request">
+                                <con3:id>_ActionId-N3f57c317.7b70ca9b.0.152bbff11ea.N7b91</con3:id>
+                                <con2:expr>
+                                    <con3:xqueryText>$body/*[1]</con3:xqueryText>
+                                </con2:expr>
+                            </con2:assign>
+                            <con2:routing-options>
+                                <con3:id>_ActionId-N3f57c310.23695df6.0.151a6c62568.N7e26</con3:id>
+                                <con2:mode>request-response</con2:mode>
+                                <con2:qualityOfService>exactly-once</con2:qualityOfService>
+                            </con2:routing-options>
+                        </con4:outboundTransform>
+                        <con4:responseTransform>
+                            <con6:replace varName="body" contents-only="true" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                                <con7:id xmlns:con7="http://www.bea.com/wli/sb/stages/config">_ActionId-N3f57c317.7b70ca9b.0.152bbff11ea.N7d35</con7:id>
+                                <con4:expr>
+                                    <con7:xqueryTransform xmlns:con7="http://www.bea.com/wli/sb/stages/config">
+                                        <con7:resource ref="DC_SC_MessageManager/SupportLogic/XQuery/get_checkExecutorHelperRSP"/>
+                                        <con7:param name="result">
+                                            <con7:path>()</con7:path>
+                                        </con7:param>
+                                        <con7:param name="message">
+                                            <con7:path>$Request/*[1]/*[1]</con7:path>
+                                        </con7:param>
+                                    </con7:xqueryTransform>
+                                </con4:expr>
+                            </con6:replace>
+                        </con4:responseTransform>
+                    </con4:dynamic-route>
+                </con:actions>
+            </con:route-node>
+        </con:flow>
+    </con:router>
+</con:pipelineEntry>

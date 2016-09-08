@@ -1,0 +1,275 @@
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.entel.cl/ESO/EnterpriseService/v1"
+        targetNamespace="http://www.entel.cl/ESO/EnterpriseService/v1"
+        xmlns:eddns_dictionary="http://www.entel.cl/EDD/Dictionary/v1" elementFormDefault="qualified">
+  
+  <import namespace="http://www.entel.cl/EDD/Dictionary/v1" schemaLocation="../EDD/Dictionary_v1_EDD.xsd"/>
+  
+  <!--  ********** Enterprise Service ********** -->
+  
+  <simpleType name="serviceVersionDigit_SType">
+    <restriction base="int">
+      <totalDigits value="2"/>
+    </restriction>
+  </simpleType>
+  
+  <element name="EnterpriseService" type="tns:EnterpriseService_Type"/>
+  <complexType name="EnterpriseService_Type">
+    <annotation>
+      <documentation>
+					Depicts the Architecture (ESAS) of an Enterprise Service Instance.
+              </documentation>
+    </annotation>
+    <sequence>
+      <element ref="tns:ESC" minOccurs="1" maxOccurs="1"/>
+      <element ref="tns:MPL" minOccurs="1" maxOccurs="1"/>
+      <element ref="tns:CSL" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+    <attribute name="name" use="required" type="eddns_dictionary:genericStringValue_SType"/>
+    <attribute name="code" use="required" type="eddns_dictionary:genericStringValue_SType"/>
+    <attribute name="majorVersion" use="required" type="tns:serviceVersionDigit_SType"/>
+    <attribute name="minorVersion" use="optional" type="tns:serviceVersionDigit_SType"/>
+  </complexType>
+  
+  <!--  ********** ESAS Areas ********** -->
+  
+  <complexType name="ESAS_Area_Type"></complexType>
+  
+  <element name="ESC" type="tns:ESC_Type"/>
+  <complexType name="ESC_Type">
+    <annotation>
+      <documentation>
+					Service Architecture (ESAS) Area : Enterprise Service Contract
+              </documentation>
+    </annotation>
+    <complexContent>
+      <extension base="tns:ESAS_Area_Type">
+        <sequence>
+          <choice>
+            <element ref="tns:EBSC" minOccurs="1" maxOccurs="1"/>
+            <element ref="tns:ESSC" minOccurs="1" maxOccurs="1"/>
+          </choice>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  
+  <element name="MPL" type="tns:MPL_Type"/>
+  <complexType name="MPL_Type">
+    <annotation>
+      <documentation>
+					Service Architecture (ESAS) Area : Message Processing Logic
+              </documentation>
+    </annotation>
+    <complexContent>
+      <extension base="tns:ESAS_Area_Type">
+        <sequence>
+          <element ref="tns:PIF" minOccurs="1" maxOccurs="1"/>
+          <element ref="tns:SIF" minOccurs="0" maxOccurs="1"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  
+  <simpleType name="CSL_CountryCode_SType">
+    <annotation>
+      <documentation>
+                 Used for univoquely identifing which country a component was made to handle requests from.
+                        </documentation>
+    </annotation>
+    <restriction base="eddns_dictionary:countryCode_SType">
+      <enumeration value="CHL">
+        <annotation>
+          <documentation>Component made to handle request from Chile.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="PER">
+        <annotation>
+          <documentation>Component made to handle request from Peru.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="INT">
+        <annotation>
+          <documentation>Component made to handle request from every country indistinctly.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  
+  <element name="CSL" type="tns:CSL_Type"/>
+  <complexType name="CSL_Type">
+    <annotation>
+      <documentation>
+					Service Architecture (ESAS) Area : Core Service Logic
+              </documentation>
+    </annotation>
+    <complexContent>
+      <extension base="tns:ESAS_Area_Type">
+        <sequence>
+          <element name="Country" minOccurs="0" maxOccurs="unbounded">
+            <complexType>
+              <sequence>
+                <element ref="tns:OH" minOccurs="1" maxOccurs="unbounded"/>
+                <element ref="tns:ISF" minOccurs="0" maxOccurs="unbounded"/>
+              </sequence>
+              <attribute name="code" use="required" type="tns:CSL_CountryCode_SType"/>
+            </complexType>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  
+  <!--  ********** Service Contract ********** -->
+  
+  <complexType name="TechnicalContract_Type">
+    <annotation>
+      <documentation>The Techichal Contract, of the Service Contract. 
+			Note : This element is incomplete, as it is described on the Reference Architecture; 
+			it is made up to this point to maintain the overall Service Architecture structure that is depicted by this ESO. When an effective use of the detailed
+			information about a service Technichal Contract is required, as EBMs for example, this element should then be completed.</documentation>
+    </annotation>
+    <attribute name="name" use="required" type="eddns_dictionary:genericStringValue_SType"/>
+  </complexType>
+  
+  <element name="PrimaryContract" type="tns:PrimaryContract_Type"/>
+  <complexType name="PrimaryContract_Type">
+    <complexContent>
+      <extension base="tns:TechnicalContract_Type"></extension>
+    </complexContent>
+  </complexType>
+  
+  <element name="SecondaryContract" type="tns:SecondaryContract_Type"/>
+  <complexType name="SecondaryContract_Type">
+    <complexContent>
+      <extension base="tns:TechnicalContract_Type"></extension>
+    </complexContent>
+  </complexType>
+  
+  <complexType name="ServiceContract_Type">
+    <sequence>
+      <element ref="tns:PrimaryContract" minOccurs="1" maxOccurs="1"/>
+      <element ref="tns:SecondaryContract" minOccurs="0" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+  
+  <element name="EBSC" type="tns:EBSC_Type"/>
+  <complexType name="EBSC_Type">
+    <complexContent>
+      <extension base="tns:ServiceContract_Type"></extension>
+    </complexContent>
+  </complexType>
+  
+  <element name="ESSC" type="tns:ESSC_Type"/>
+  <complexType name="ESSC_Type">
+    <complexContent>
+      <extension base="tns:ServiceContract_Type"></extension>
+    </complexContent>
+  </complexType>
+  
+  <!--  ********** Service Components ********** -->
+  
+  <complexType name="ServiceComponent_Type">
+    <attribute name="name" use="required" type="eddns_dictionary:genericStringValue_SType"/>
+  </complexType>
+  
+  <complexType name="CSL_ServiceComponent_Type">
+    <complexContent>
+      <extension base="tns:ServiceComponent_Type"></extension>
+    </complexContent>
+  </complexType>
+  
+  <complexType name="ESC_ServiceComponent_Type">
+    <complexContent>
+      <extension base="tns:ServiceComponent_Type"></extension>
+    </complexContent>
+  </complexType>
+  
+  <complexType name="MPL_ServiceComponent_Type">
+    <complexContent>
+      <extension base="tns:ServiceComponent_Type"></extension>
+    </complexContent>
+  </complexType>
+  
+  <simpleType name="OH_SupportedCountries_SType">
+    <restriction base="string">
+      <pattern value="[A-Z][A-Z][A-Z](,[A-Z][A-Z][A-Z])*"/>
+    </restriction>
+  </simpleType>
+  
+  <element name="OH" type="tns:OH_Type"/>
+  <complexType name="OH_Type">
+    <annotation>
+      <documentation>
+					Service Component : Operation Handler
+              </documentation>
+    </annotation>
+    <complexContent>
+      <extension base="tns:CSL_ServiceComponent_Type">
+        <attribute name="opName" use="required" type="eddns_dictionary:sysCode_SType"/>
+        <attribute name="opCode" use="required" type="eddns_dictionary:sysCode_SType"/>
+        <attribute name="supports" use="optional" type="tns:OH_SupportedCountries_SType">
+          <annotation>
+            <documentation>
+              Note : This attribute should be used only within INT type Operation Handlers. Using them in  
+              Country-Specific Operation Handlers is redundant, and prone to misunderstandings.
+              
+              * It holds a list depicting which countries are supported by an INT type Operation Handler instance.
+                
+              Note : 
+                It is assumed that Service Operation Requests made from a Consumer for which its country is not supported 
+                by the OH associated with that Service Operation, will not entail the execcution of its expected functional 
+                behaviour; but will instead return an error return message with descriptive correlative information.
+              
+              * If this attribute is ommitted, then the supported country should be taken from the Country in which 
+                the OH is placed within. In the particular case of INT Type OHs, all the countries should be considered
+                to be supported.
+                
+                * The supported countries are expected to be listed with their ISO-3-Alpa code, separated by a Comma.
+                
+                Examples :
+                  > CHL
+                  > CHL,PER
+            </documentation>
+          </annotation>
+        </attribute>
+      </extension>
+    </complexContent>
+  </complexType>
+  
+  <element name="ISF" type="tns:ISF_Type"/>
+  <complexType name="ISF_Type">
+    <annotation>
+      <documentation>
+					Service Component : Internal Service Function
+              </documentation>
+    </annotation>
+    <complexContent>
+      <extension base="tns:CSL_ServiceComponent_Type"></extension>
+    </complexContent>
+  </complexType>
+  
+  <element name="PIF" type="tns:PIF_Type"/>
+  <complexType name="PIF_Type">
+    <annotation>
+      <documentation>
+					Service Component : Primary Interface
+              </documentation>
+    </annotation>
+    <complexContent>
+      <extension base="tns:MPL_ServiceComponent_Type"></extension>
+    </complexContent>
+  </complexType>
+  
+  <element name="SIF" type="tns:SIF_Type"/>
+  <complexType name="SIF_Type">
+    <complexContent>
+      <annotation>
+        <documentation>
+					Service Component : Secondary Interface
+              </documentation>
+      </annotation>
+      <extension base="tns:MPL_ServiceComponent_Type"></extension>
+    </complexContent>
+  </complexType>
+  
+</schema>

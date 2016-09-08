@@ -1,0 +1,88 @@
+<wsdl:definitions name="Update_Consumer_OH_BPELProcess" targetNamespace="http://xmlns.oracle.com/ES_Consumer_v1/Update_Consumer_OH/Update_Consumer_OH_BPELProcess" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:client="http://xmlns.oracle.com/ES_Consumer_v1/Update_Consumer_OH/Update_Consumer_OH_BPELProcess" xmlns:ns1="http://www.entel.cl/EBM/Consumer/upd/v1" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:cor="http://xmlns.oracle.com/ES_Consumer_v1/Update_Consumer_OH/Update_Consumer_OH_BPELProcess/correlationset" xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable" xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop" xmlns:ns="http://xmlns.oracle.com/pcbpel/adapter/jms/ES_Consumer_v1/Update_Consumer_OH/jmsReference_Upd_RA_SALESFORCE" xmlns:ns2="http://schemas.oracle.com/bpel/extension" xmlns:ns3="http://www.entel.cl/ESO/MessageHeader/v1" xmlns:ns4="http://www.entel.cl/ESO/Result/v2" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+    <wsdl:documentation>
+        <abstractWSDL>https://ENTEL03:8006/soa-infra/services/default/Update_Consumer_OH!1.0/WSDLs/Update_Consumer_OH_BPELProcess.wsdl</abstractWSDL>
+        <abstractWSDL>https://ENTEL03:8006/soa-infra/directWsdl/default/Update_Consumer_OH!1.0/DService?resource=%2FWSDLs%2FUpdate_Consumer_OH_BPELProcess.wsdl</abstractWSDL>
+    </wsdl:documentation>
+  <plnk:partnerLinkType name="Update_Consumer_OH_BPELProcess">
+    <plnk:role name="Update_Consumer_OH_BPELProcessProvider" portType="client:Update_Consumer_OH_BPELProcess"/>
+  </plnk:partnerLinkType>
+  <vprop:propertyAlias propertyName="cor:conversationId" messageType="client:Update_Consumer_OH_BPELProcessRequestMessage" part="payload" xmlns:ns2="http://www.entel.cl/ESO/MessageHeader/v1">
+  <vprop:query>ns2:RequestHeader/ns2:Trace/@conversationID</vprop:query>
+</vprop:propertyAlias>
+  <vprop:propertyAlias propertyName="cor:conversationId" messageType="ns19:Reply_msg_in" part="SALESFORCE_CRM_UPD-CLI-DATA_RSP" xmlns:ns19="http://xmlns.oracle.com/pcbpel/adapter/jms/ES_Consumer_v1/Update_Consumer_OH/jmsReference_Upd_RA_SALESFORCE">
+  <vprop:query>ns3:RequestHeader/ns3:Trace/@conversationID</vprop:query>
+</vprop:propertyAlias>
+    <wsdl:import namespace="http://xmlns.oracle.com/pcbpel/adapter/jms/ES_Consumer_v1/Update_Consumer_OH/jmsReference_Upd_RA_SALESFORCE" location="WSDL_1294191878.wsdl"/>
+    <wsdl:import namespace="http://xmlns.oracle.com/ES_Consumer_v1/Update_Consumer_OH/Update_Consumer_OH_BPELProcess/correlationset" location="WSDL_-1366634956.wsdl"/>
+    <wsdl:import namespace="http://schemas.oracle.com/bpel/extension" location="WSDL_989334779.wsdl"/>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://www.entel.cl/EBM/Consumer/upd/v1" schemaLocation="XMLSchema_-1458483409.xsd"/>
+        </schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://www.entel.cl/ESO/MessageHeader/v1" schemaLocation="XMLSchema_1311465731.xsd"/>
+        </xsd:schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://www.entel.cl/ESO/Result/v2" schemaLocation="XMLSchema_-1264000451.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="Update_Consumer_OH_BPELProcessRequestMessage">
+        <wsdl:part name="payload" element="ns1:Upd_Consumer_REQ"/>
+    </wsdl:message>
+    <wsdl:message name="Update_Consumer_OH_BPELProcessResponseMessage">
+        <wsdl:part name="payload" element="ns1:Upd_Consumer_RSP"/>
+    </wsdl:message>
+    <wsdl:portType name="Update_Consumer_OH_BPELProcess">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:Update_Consumer_OH_BPELProcessRequestMessage"/>
+            <wsdl:output message="client:Update_Consumer_OH_BPELProcessResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="Update_Consumer_OH_BPELProcessBinding" type="client:Update_Consumer_OH_BPELProcess">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="process">
+            <soap:operation style="document" soapAction="process"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="Update_Consumer_OH_BPELProcessDirectBinding1.1" type="client:Update_Consumer_OH_BPELProcess">
+        <soap:binding transport="http://xmlns.oracle.com/soa/direct"/>
+        <wsdl:operation name="process">
+            <soap:operation style="document" soapAction="process"/>
+            <wsdl:input>
+                <soap:body use="literal" namespace="http://xmlns.oracle.com/ES_Consumer_v1/Update_Consumer_OH/Update_Consumer_OH_BPELProcess"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" namespace="http://xmlns.oracle.com/ES_Consumer_v1/Update_Consumer_OH/Update_Consumer_OH_BPELProcess"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="Update_Consumer_OH_BPELProcessDirectBinding1.2" type="client:Update_Consumer_OH_BPELProcess">
+        <soap12:binding transport="http://xmlns.oracle.com/soa/direct" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"/>
+        <wsdl:operation name="process">
+            <soap12:operation style="document" soapAction="process" soapActionRequired="false" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"/>
+            <wsdl:input>
+                <soap12:body use="literal" namespace="http://xmlns.oracle.com/ES_Consumer_v1/Update_Consumer_OH/Update_Consumer_OH_BPELProcess" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal" namespace="http://xmlns.oracle.com/ES_Consumer_v1/Update_Consumer_OH/Update_Consumer_OH_BPELProcess" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="update_consumer_oh_bpelprocess_client_ep">
+        <wsdl:port name="Update_Consumer_OH_BPELProcess_pt" binding="client:Update_Consumer_OH_BPELProcessBinding">
+            <soap:address location="t3://ENTEL03:8005,ENTEL03:8007/REPLACE_WITH_ACTUAL_URL"/>
+        </wsdl:port>
+        <wsdl:port name="DServiceDirectBindingPort11" binding="client:Update_Consumer_OH_BPELProcessDirectBinding1.1">
+            <soap:address location="t3://ENTEL03:8005,ENTEL03:8007/default/Update_Consumer_OH!1.0/DService"/>
+        </wsdl:port>
+        <wsdl:port name="DServiceDirectBindingPort12" binding="client:Update_Consumer_OH_BPELProcessDirectBinding1.2">
+            <soap12:address location="t3://ENTEL03:8005,ENTEL03:8007/default/Update_Consumer_OH!1.0/DService" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

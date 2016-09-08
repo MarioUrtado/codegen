@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/ProductBucket/v1"
+	xmlns:ebons_timeperiod="http://www.entel.cl/EBO/TimePeriod/v1"
+	xmlns:ebons_activedates="http://www.entel.cl/EBO/ActiveDates/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/ProductBucket/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/TimePeriod/v1" schemaLocation="TimePeriod_v1_EBO.xsd"/>
+	<xs:import namespace="http://www.entel.cl/EBO/ActiveDates/v1" schemaLocation="ActiveDates_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="id" type="xs:string"/>									
+	<xs:element name="productBucketSpec" type="xs:string"/>									
+	<xs:element name="thresholdSpec" type="xs:string"/>									
+	<xs:element name="versionNumber" type="xs:string"/>									
+	<xs:element name="initialValues" type="ebons_activedates:ActiveDates_Type"/>									
+	<xs:element name="maxValues" type="ebons_activedates:ActiveDates_Type"/>									
+	<xs:element name="minValues" type="ebons_activedates:ActiveDates_Type"/>									
+	<xs:element name="validFor" type="ebons_timeperiod:TimePeriod_Type"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="ProductBucket" type="tns:ProductBucket_Type"/>
+	<xs:complexType name="ProductBucket_Type">
+		
+			<xs:annotation>
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">An instantiation of a ProductBucketSpec that serves to accumulate quantities like minutes, events, or MBytes to control the application of the functions granting allowances, discounts etc.</xs:documentation>
+							
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">ToDo</xs:documentation>
+							
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">ValidFor for the ProductBucket (needs some thinking)</xs:documentation>
+						
+			</xs:annotation>
+		<xs:sequence> 
+		<xs:element ref="tns:id" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:productBucketSpec" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:thresholdSpec" maxOccurs="1" minOccurs="1"/>
+		<xs:element ref="tns:versionNumber" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:initialValues" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:maxValues" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:minValues" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:validFor" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

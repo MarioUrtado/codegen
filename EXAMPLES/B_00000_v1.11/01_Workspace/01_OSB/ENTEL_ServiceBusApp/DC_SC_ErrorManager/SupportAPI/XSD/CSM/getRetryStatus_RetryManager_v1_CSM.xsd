@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.entel.cl/SC/ErrorManager/RetryManager/getRetryStatus/v1"
+            targetNamespace="http://www.entel.cl/SC/ErrorManager/RetryManager/getRetryStatus/v1" 
+            xmlns:esons_result="http://www.entel.cl/ESO/Result/v2"
+            xmlns:ebons_dictionary="http://www.entel.cl/EDD/Dictionary/v1"
+            xmlns:ebons_header="http://www.entel.cl/ESO/MessageHeader/v1"
+            xmlns:retryManager="http://www.entel.cl/SC/ErrorManager/RetryManager/Aux"
+            elementFormDefault="qualified">
+            
+  <import namespace="http://www.entel.cl/ESO/MessageHeader/v1" schemaLocation="../../../../SR_Commons/XSD/ESO/MessageHeader_v1_ESO.xsd" />
+  <import namespace="http://www.entel.cl/EDD/Dictionary/v1" schemaLocation="../../../../SR_Commons/XSD/EDD/Dictionary_v1_EDD.xsd" />
+  <import namespace="http://www.entel.cl/ESO/Result/v2" schemaLocation="../../../../SR_Commons/XSD/ESO/Result_v2_ESO.xsd"/>
+  <import namespace="http://www.entel.cl/SC/ErrorManager/RetryManager/Aux" schemaLocation="../RetryManager.xsd"/>
+  
+  <element name="GetRetryStatus_REQ" type="tns:GetRetryStatus_REQ_Type" />
+  <complexType name="GetRetryStatus_REQ_Type">
+    <sequence>
+      <element ref="ebons_header:Trace" />
+    </sequence>
+  </complexType>
+
+  <element name="GetRetryStatus_RSP" type="tns:GetRetryStatus_RSP_Type" />
+  <complexType name="GetRetryStatus_RSP_Type">
+     <sequence>
+       <element name="RetryConfig" type="tns:RetryConfig_Type" >
+        <annotation>
+          <documentation>
+            Retry Configurations a conversation, if this exists
+          </documentation>
+        </annotation>
+       </element>
+       <element name="RetryStatus" type="tns:RetryStatus_Type" >
+        <annotation>
+          <documentation>
+            Status and number of current retry of the conversation, if this a retry.
+          </documentation>
+        </annotation>
+       </element>
+       <element ref="esons_result:Result" >
+          <annotation>
+            <documentation>
+              Result instance describing the outcome of operation. This may be sent OK,  
+              or WARNING if not found configuration from retry.
+            </documentation>
+          </annotation>
+       </element>
+     </sequence>
+  </complexType>
+  
+  <complexType name="RetryConfig_Type">
+    <sequence>
+      <element name="Config" type="tns:Config_Type" minOccurs="0" maxOccurs="unbounded" />
+    </sequence>
+  </complexType>
+  
+  <complexType name="Config_Type">
+    <attribute name="maxRetry" type="retryManager:count_SType" />
+    <attribute name="intervalTime" type="ebons_dictionary:genericStringValue_SType" />
+  </complexType>
+
+  <complexType name="RetryStatus_Type" >
+    <attribute name="status" type="retryManager:retryStatus_SType" />
+    <attribute name="retryCount" type="retryManager:count_SType" use="optional" />
+  </complexType>
+</schema>

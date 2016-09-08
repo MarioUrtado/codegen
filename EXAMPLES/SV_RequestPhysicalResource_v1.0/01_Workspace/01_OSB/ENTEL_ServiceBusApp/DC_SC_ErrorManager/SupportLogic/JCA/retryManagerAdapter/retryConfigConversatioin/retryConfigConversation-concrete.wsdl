@@ -1,0 +1,15 @@
+<wsdl:definitions targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/ENTEL_ServiceBusApp/DC_SC_ErrorManager/retryConfigConversation" name="retryConfigConversation-concrete" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+    <wsdl:import location="retryConfigConversation.wsdl" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/ENTEL_ServiceBusApp/DC_SC_ErrorManager/retryConfigConversation"/>
+    <wsdl:binding name="retryConfigConversation_ptt-binding" type="ret:retryConfigConversation_ptt" xmlns:ret="http://xmlns.oracle.com/pcbpel/adapter/db/ENTEL_ServiceBusApp/DC_SC_ErrorManager/retryConfigConversation">
+        <soap:binding style="document" transport="http://www.bea.com/wli/sb/transports/jca"/>
+        <wsdl:operation name="retryConfigConversation">
+            <soap:operation soapAction="retryConfigConversation"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+</wsdl:definitions>

@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/typesystem/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config">
+    <con:coreEntry>
+        <con:binding type="Mixed" xsi:type="con:MixedBindingType">
+            <con:request type="XML">
+                <con1:schema ref="SR_Commons/XSD/CSM/LegacyWrapper_v1_CSM" element="LwREQ"/>
+            </con:request>
+            <con:response type="XML">
+                <con1:schema ref="SR_Commons/XSD/CSM/LegacyWrapper_v1_CSM" element="LwRSP"/>
+            </con:response>
+        </con:binding>
+        <con:xqConfiguration>
+            <con:snippetVersion>1.0</con:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:router errorHandler="error-N3f57c313.N57233d68.0.152c19dc020.N7ead">
+        <con:pipeline type="request" name="request-N3f57fff2.4508908d.0.1529d9d38da.N8000">
+            <con:stage id="_StageId-N3f57fff2.4508908d.0.1529d9d38da.N7ffe" name="call - ParamManager - getEndpoint">
+                <con:context>
+                    <con2:userNsDecl prefix="v12" namespace="http://www.entel.cl/ESO/MessageHeader/v1"/>
+                    <con2:userNsDecl prefix="v11" namespace="http://www.entel.cl/ESO/EndpointConfiguration/v1"/>
+                    <con2:userNsDecl prefix="v1" namespace="http://www.entel.cl/CSM/LegacyWrapper/v1"/>
+                    <con1:variable name="$LwREQ" path="$body" asChild="false">
+                        <con1:schema ref="SR_Commons/XSD/CSM/LegacyWrapper_v1_CSM" element="LwREQ"/>
+                    </con1:variable>
+                </con:context>
+                <con:actions>
+                    <con3:wsCallout>
+                        <con2:id>_ActionId-N3f57fff2.4508908d.0.1529d9d38da.N7ffa</con2:id>
+                        <con3:service ref="DC_SC_FrameworkGateway/SupportAPI/Proxy/ParameterManager_Gateway" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>getEndpoint</con3:operation>
+                        <con3:request>
+                            <con3:body wrapped="false">GetEndpoint</con3:body>
+                        </con3:request>
+                        <con3:response>
+                            <con3:body wrapped="false">GetEndpoint</con3:body>
+                        </con3:response>
+                        <con3:requestTransform>
+                            <con3:assign varName="GetEndpoint">
+                                <con2:id>_ActionId-N3f57fff2.4508908d.0.1529d9d38da.N7ff7</con2:id>
+                                <con3:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="SR_Commons/XQuery/SupportComponent/ParameterManager/get_getEndpointREQ_wTarget"/>
+                                        <con2:param name="requestHeader">
+                                            <con2:path>$RequestHeader</con2:path>
+                                        </con2:param>
+                                        <con2:param name="target">
+                                            <con2:path>$Target</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con3:expr>
+                            </con3:assign>
+                        </con3:requestTransform>
+                        <con3:responseTransform>
+                            <con3:replace varName="body" contents-only="true">
+                                <con2:id>_ActionId-N3f57fff2.2106b3f5.0.1529db10a98.N7ffe</con2:id>
+                                <con3:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="SR_Commons/XQuery/DiscreteComponents/LegacyWrapper/get_TwREQ"/>
+                                        <con2:param name="Endpoint">
+                                            <con2:path>$GetEndpoint/*[1]</con2:path>
+                                        </con2:param>
+                                        <con2:param name="RequestHeader">
+                                            <con2:path>$RequestHeader</con2:path>
+                                        </con2:param>
+                                        <con2:param name="RaDetails">
+                                            <con2:path>$RaDetails</con2:path>
+                                        </con2:param>
+                                        <con2:param name="LegacyREQ">
+                                            <con2:path>$body/*[1]/*[1]</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con3:expr>
+                            </con3:replace>
+                        </con3:responseTransform>
+                    </con3:wsCallout>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-N3f57fff2.4508908d.0.1529d9d38da.N7fff"/>
+        <con:pipeline type="error" name="error-N53ee35ec.N6badf89f.0.152a2014e68.N7f9a">
+            <con:stage id="_StageId-N53ee35ec.N6badf89f.0.152a2014e68.N7f99" name="Call ErrorHandler">
+                <con:context/>
+                <con:actions>
+                    <con3:ifThenElse>
+                        <con2:id>_ActionId-N3f57c313.N57233d68.0.152c19dc020.N7355</con2:id>
+                        <con3:case id="_BranchId-N3f57c313.N57233d68.0.152c19dc020.N7354">
+                            <con3:condition>
+                                <con2:xqueryText>local-name($body/*[1])='LwRSP'</con2:xqueryText>
+                            </con3:condition>
+                            <con3:actions>
+                                <con2:reply isError="true" xmlns:con6="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con7="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con5="http://www.bea.com/wli/sb/stages/alert/config">
+                                    <con2:id>_ActionId-N53ee35fb.N4db5cb3a.0.1548285e554.N7dc7</con2:id>
+                                </con2:reply>
+                            </con3:actions>
+                        </con3:case>
+                        <con3:default/>
+                    </con3:ifThenElse>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-N3f57c313.N57233d68.0.152c19dc020.N7ead">
+            <con:stage id="_StageId-N3f57c313.N57233d68.0.152c19dc020.N7eac" name="APIW Error Handler">
+                <con:context/>
+                <con:actions>
+                    <con3:wsCallout>
+                        <con2:id>_ActionId-N3f57c313.N57233d68.0.152c19dc020.N7dbb</con2:id>
+                        <con3:service ref="DC_SC_FrameworkGateway/SupportAPI/Proxy/ErrorManager_Gateway" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>handle</con3:operation>
+                        <con3:request>
+                            <con3:body wrapped="true">body</con3:body>
+                        </con3:request>
+                        <con3:response>
+                            <con3:body wrapped="true">body</con3:body>
+                        </con3:response>
+                        <con3:requestTransform>
+                            <con3:replace varName="body" contents-only="true">
+                                <con2:id>_ActionId-N3f57c313.N57233d68.0.152c19dc020.N7dba</con2:id>
+                                <con3:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="SR_Commons/XQuery/SupportComponent/ErrorManager/get_handleREQ_v2"/>
+                                        <con2:param name="messageHeader">
+                                            <con2:path>$RequestHeader</con2:path>
+                                        </con2:param>
+                                        <con2:param name="sourceErrorCode">
+                                            <con2:path>''</con2:path>
+                                        </con2:param>
+                                        <con2:param name="errorPlaceHolderPlace">
+                                            <con2:path>data($fault/ctx:location)</con2:path>
+                                        </con2:param>
+                                        <con2:param name="sourceErrorDesc">
+                                            <con2:path>''</con2:path>
+                                        </con2:param>
+                                        <con2:param name="sourceFault">
+                                            <con2:path>$fault</con2:path>
+                                        </con2:param>
+                                        <con2:param name="errorIndexSubModule">
+                                            <con2:path>data($Target/@operation)</con2:path>
+                                        </con2:param>
+                                        <con2:param name="errorPlaceHolderTime">
+                                            <con2:path>current-dateTime()</con2:path>
+                                        </con2:param>
+                                        <con2:param name="errorIndexModule">
+                                            <con2:path>data($Target/@api)</con2:path>
+                                        </con2:param>
+                                        <con2:param name="errorSourceDetails">
+                                            <con2:path>concat(
+data($Target/@provider),
+'_',
+data($Target/@api),
+'_APIW'
+)</con2:path>
+                                        </con2:param>
+                                        <con2:param name="componentOperation">
+                                            <con2:path>''</con2:path>
+                                        </con2:param>
+                                        <con2:param name="errorSourceID">
+                                            <con2:path>data($Target/@provider)</con2:path>
+                                        </con2:param>
+                                        <con2:param name="componentName">
+                                            <con2:path>concat(
+data($Target/@provider),
+'_LW'
+)</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con3:expr>
+                            </con3:replace>
+                        </con3:requestTransform>
+                        <con3:responseTransform>
+                            <con3:assign varName="Result">
+                                <con2:id>_ActionId-N3f57c313.N57233d68.0.152c19dc020.N7db9</con2:id>
+                                <con3:expr>
+                                    <con2:xqueryText>$body/*[1]/*[1]</con2:xqueryText>
+                                </con3:expr>
+                            </con3:assign>
+                            <con3:replace varName="body" contents-only="true">
+                                <con2:id>_ActionId-N3f57c313.N57233d68.0.152c19dc020.N7db4</con2:id>
+                                <con3:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="SR_Commons/XQuery/DiscreteComponents/LegacyWrapper/get_LwRSP_Sync_AsElement"/>
+                                        <con2:param name="LegacyRSP">
+                                            <con2:path>()</con2:path>
+                                        </con2:param>
+                                        <con2:param name="Result">
+                                            <con2:path>$Result</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con3:expr>
+                            </con3:replace>
+                        </con3:responseTransform>
+                    </con3:wsCallout>
+                    <con2:reply isError="true">
+                        <con2:id>_ActionId-N3f57c313.N57233d68.0.152c19dc020.N7e44</con2:id>
+                    </con2:reply>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="request" name="request-N3f57c313.N57233d68.0.152c19dc020.N7371">
+            <con:stage id="_StageId-N53ee35e5.40c6ba1d.0.152fa5c6ff3.N7b58" name="Aux Vars" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/config">
+                <con:context/>
+                <con:actions>
+                    <con2:assign varName="RequestHeader" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con3:id>_ActionId-N53ee35e5.40c6ba1d.0.152fa5c6ff3.N7b57</con3:id>
+                        <con2:expr>
+                            <con3:xqueryText>$body/*[1]/*[4]</con3:xqueryText>
+                        </con2:expr>
+                    </con2:assign>
+                    <con5:assign varName="RaDetails" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con3:id>_ActionId-N53ee35e5.40c6ba1d.0.152fa5c6ff3.N7b56</con3:id>
+                        <con2:expr>
+                            <con3:xqueryText>$body/*[1]/*[2]</con3:xqueryText>
+                        </con2:expr>
+                    </con5:assign>
+                    <con5:assign varName="Target" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con3:id>_ActionId-N53ee35e5.40c6ba1d.0.152fa5c6ff3.N7b55</con3:id>
+                        <con5:expr>
+                            <con3:xqueryText>$body/*[1]/*[3]</con3:xqueryText>
+                        </con5:expr>
+                    </con5:assign>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-N3f57c313.N57233d68.0.152c19dc020.N736a"/>
+        <con:pipeline type="request" name="request-N53ee35e5.23f1573a.0.15332b68acf.N7f33"/>
+        <con:pipeline type="response" name="response-N53ee35e5.23f1573a.0.15332b68acf.N7f32"/>
+        <con:flow>
+            <con:pipeline-node name="Common Tasks">
+                <con:request>request-N3f57c313.N57233d68.0.152c19dc020.N7371</con:request>
+                <con:response>response-N3f57c313.N57233d68.0.152c19dc020.N736a</con:response>
+            </con:pipeline-node>
+            <con:pipeline-node name="Get Endpoint Configuration">
+                <con:request>request-N3f57fff2.4508908d.0.1529d9d38da.N8000</con:request>
+                <con:response>response-N3f57fff2.4508908d.0.1529d9d38da.N7fff</con:response>
+            </con:pipeline-node>
+            <con:pipeline-node name="API-Wide Preparations">
+                <con:request>request-N53ee35e5.23f1573a.0.15332b68acf.N7f33</con:request>
+                <con:response>response-N53ee35e5.23f1573a.0.15332b68acf.N7f32</con:response>
+            </con:pipeline-node>
+            <con:route-node name="Route to Transport Wrapper" error-handler="error-N53ee35ec.N6badf89f.0.152a2014e68.N7f9a">
+                <con:context>
+                    <con2:userNsDecl prefix="v1" namespace="http://www.entel.cl/CSM/LegacyWrapper/v1"/>
+                    <con1:variable name="LwREQ" path="$body" asChild="false">
+                        <con1:schema ref="SR_Commons/XSD/CSM/LegacyWrapper_v1_CSM" element="LwREQ"/>
+                    </con1:variable>
+                </con:context>
+                <con:actions>
+                    <con4:dynamic-route>
+                        <con2:id>_ActionId-N3f57fff2.4508908d.0.1529d9d38da.N7ff3</con2:id>
+                        <con4:service>
+                            <con2:xqueryTransform>
+                                <con2:resource ref="SR_Commons/XQuery/DiscreteComponents/LegacyWrapper/get_TW_DynamicRouting"/>
+                                <con2:param name="LwVersion">
+                                    <con2:path>1</con2:path>
+                                </con2:param>
+                                <con2:param name="GetEndpointRSP">
+                                    <con2:path>$GetEndpoint</con2:path>
+                                </con2:param>
+                            </con2:xqueryTransform>
+                        </con4:service>
+                        <con4:outboundTransform/>
+                        <con4:responseTransform>
+                            <con3:delete varName="GetEndpoint">
+                                <con2:id>_ActionId-N53ee3f79.N7070ebab.0.155783c1394.N7b3c</con2:id>
+                            </con3:delete>
+                        </con4:responseTransform>
+                    </con4:dynamic-route>
+                </con:actions>
+            </con:route-node>
+        </con:flow>
+    </con:router>
+</con:pipelineEntry>

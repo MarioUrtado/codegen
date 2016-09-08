@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/PhysicalResourceSpec/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/PhysicalResourceSpec/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="brandName" type="xs:string"/>									
+	<xs:element name="caseSize" type="xs:float"/>									
+	<xs:element name="comments" type="xs:string"/>									
+	<xs:element name="description" type="xs:string"/>									
+	<xs:element name="extSourceSystem" type="xs:string"/>									
+	<xs:element name="factoryName" type="xs:string"/>									
+	<xs:element name="inventoryInd" type="xs:string"/>									
+	<xs:element name="itemCube" type="xs:float"/>									
+	<xs:element name="itemHeight" type="xs:float"/>									
+	<xs:element name="itemLenght" type="xs:float"/>									
+	<xs:element name="itemNumberType" type="xs:string"/>									
+	<xs:element name="itemTypeCode" type="xs:string"/>									
+	<xs:element name="itemWeight" type="xs:float"/>									
+	<xs:element name="itemWidth" type="xs:float"/>									
+	<xs:element name="liquidVolume" type="xs:float"/>									
+	<xs:element name="liquidVolumeUom" type="xs:string"/>									
+	<xs:element name="lwhUom" type="xs:string"/>									
+	<xs:element name="modelNumber" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>This is a string that represents a manufacturer-allocated number used to identify the general type and/or category of the hardware item. This, in combination with the PartNumber and the VendorName, identify different types of hardware items. The SerialNumber can then be used to differentiate between different instances of the same type of hardware item. This is an optional attribute.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="netWeight" type="xs:float"/>									
+	<xs:element name="partNumber" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>This is a string that defines a manufacturer-allocated part number assigned by the organization that manufactures the hardware item. This, in combination with the ModelNumber and the VendorName, identify different types of hardware items. The SerialNumber can then be used to differentiate between different instances of the same type of hardware item. This is a REQUIRED attribute.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="purchaseType" type="xs:string"/>									
+	<xs:element name="recordIdentifier" type="xs:string"/>									
+	<xs:element name="shortDescription" type="xs:string"/>									
+	<xs:element name="skuNumber" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>This is a string that defines the manufacturer-allocated Stock Keeping Unit (SKU) number of the hardware item. This is an optional attribute.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="tareType" type="xs:string"/>									
+	<xs:element name="tareWeight" type="xs:float"/>									
+	<xs:element name="tecnology" type="xs:string"/>									
+	<xs:element name="vendorName" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>This is a string that defines the name of the manufacturer. This, in combination with the ModelNumber and the PartNumber, identify different types of hardware items. The SerialNumber can then be used to differentiate between different instances of the same type of hardware item. This is a REQUIRED attribute.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="weightUom" type="xs:string"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="PhysicalResourceSpec" type="tns:PhysicalResourceSpec_Type"/>
+	<xs:complexType name="PhysicalResourceSpec_Type">
+		
+			<xs:annotation>
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">This is a concrete class for describing specific attributes, behavior, relationships, constraints, and semantics for building PhysicalResource objects.</xs:documentation>
+						
+			</xs:annotation>
+		<xs:sequence> 
+		<xs:element ref="tns:brandName" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:caseSize" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:comments" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:description" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:extSourceSystem" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:factoryName" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:inventoryInd" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:itemCube" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:itemHeight" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:itemLenght" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:itemNumberType" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:itemTypeCode" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:itemWeight" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:itemWidth" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:liquidVolume" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:liquidVolumeUom" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:lwhUom" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:modelNumber" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:netWeight" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:partNumber" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:purchaseType" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:recordIdentifier" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:shortDescription" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:skuNumber" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:tareType" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:tareWeight" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:tecnology" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:vendorName" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:weightUom" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

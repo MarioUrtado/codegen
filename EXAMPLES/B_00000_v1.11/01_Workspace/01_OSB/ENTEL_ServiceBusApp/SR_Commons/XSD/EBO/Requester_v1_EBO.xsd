@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/Requester/v1"
+	xmlns:ebons_partyidentification="http://www.entel.cl/EBO/PartyIdentification/v1"
+	xmlns:ebons_individualidentification="http://www.entel.cl/EBO/IndividualIdentification/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/Requester/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/PartyIdentification/v1" schemaLocation="PartyIdentification_v1_EBO.xsd"/>
+	<xs:import namespace="http://www.entel.cl/EBO/IndividualIdentification/v1" schemaLocation="IndividualIdentification_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="individualIdentification" type="ebons_individualidentification:IndividualIdentification_Type"/>									
+	<xs:element name="partyIdentification" type="ebons_partyidentification:PartyIdentification_Type"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="Requester" type="tns:Requester_Type"/>
+	<xs:complexType name="Requester_Type">
+		<xs:sequence> 
+		<xs:element ref="tns:individualIdentification" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:partyIdentification" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

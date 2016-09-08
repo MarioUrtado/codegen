@@ -1,0 +1,31 @@
+<wsdl:definitions name="jmsReference_Upd_RA_SALESFORCE" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/jms/ES_Consumer_v1/Update_Consumer_OH_Template/jmsReference_Upd_RA_SALESFORCE" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ES_Consumer_v1/Update_Consumer_OH_Template/jmsReference_Upd_RA_SALESFORCE" xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:msg_in_out="http://www.entel.cl/CSM/RA/SALESFORCE/CRM/UPD-CLI-DATA/v1">
+   <plt:partnerLinkType name="jmsReference_Upd_RA_SALESFORCE_plt">
+      <plt:role name="Request_role">
+         <plt:portType name="tns:Request_ptt"/>
+      </plt:role>
+      <plt:role name="Reply_role">
+         <plt:portType name="tns:Reply_ptt"/>
+      </plt:role>
+   </plt:partnerLinkType>
+   <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <import namespace="http://www.entel.cl/CSM/RA/SALESFORCE/CRM/UPD-CLI-DATA/v1" schemaLocation="XMLSchema_1427065886.xsd"/>
+      </schema>
+   </wsdl:types>
+   <wsdl:message name="Request_msg_out">
+      <wsdl:part name="SALESFORCE_CRM_UPD-CLI-DATA_REQ" element="msg_in_out:SALESFORCE_CRM_UPD-CLI-DATA_REQ"/>
+   </wsdl:message>
+   <wsdl:message name="Reply_msg_in">
+      <wsdl:part name="SALESFORCE_CRM_UPD-CLI-DATA_RSP" element="msg_in_out:SALESFORCE_CRM_UPD-CLI-DATA_RSP"/>
+   </wsdl:message>
+   <wsdl:portType name="Request_ptt">
+      <wsdl:operation name="Request">
+         <wsdl:input message="tns:Request_msg_out"/>
+      </wsdl:operation>
+   </wsdl:portType>
+   <wsdl:portType name="Reply_ptt">
+      <wsdl:operation name="Reply">
+         <wsdl:input message="tns:Reply_msg_in"/>
+      </wsdl:operation>
+   </wsdl:portType>
+</wsdl:definitions>

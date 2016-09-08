@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!DOCTYPE MessageFormat SYSTEM 'mfl.dtd'>
+<!--      Enter description of the message format here.      -->
+<MessageFormat name='CHL-SALESFORCE-CRM_UPD-CLI-DATA_RA_REQAux' version='2.02'>
+    <StructFormat name='RequestData' delimOptional='y'>
+        <TagField type='String' value='*Request|'/>
+        <FieldFormat name='ConsumerID' type='String' delimRef='' delim='&apos;|' delimSeparator='\\0x0\xbf8 ' delimOptional='n' codepage='windows-1252'>
+            <TagField type='String' value=' ConsumerID-&apos;'/>
+        </FieldFormat>
+        <FieldFormat name='ConsumerName' type='String' delimRef='' delim='&apos;|' delimOptional='n' codepage='windows-1252'>
+            <TagField type='String' value=' ConsumerName-&apos;'/>
+        </FieldFormat>
+        <FieldFormat name='ConsumerSurename' type='String' delimRef='' delim='&apos;|' delimOptional='n' codepage='windows-1252'>
+            <TagField type='String' value=' ConsumerSurename-&apos;'/>
+        </FieldFormat>
+        <FieldFormat name='ConsumerAge' type='String' delimRef='' delim='&apos;|' delimOptional='n' codepage='windows-1252'>
+            <TagField type='String' value=' ConsumerAge-&apos;'/>
+        </FieldFormat>
+        <FieldFormat name='ConsumerStatus' type='String' delimRef='' delim='&apos;|' delimOptional='n' codepage='windows-1252'>
+            <TagField type='String' value=' ConsumerStatus-&apos;'/>
+        </FieldFormat>
+    </StructFormat>
+    <StructFormat name='RequestDetails' delimOptional='y'>
+        <TagField type='String' value='*Request'/>
+        <FieldFormat name='VerDigit' type='String' delimOptional='y' length='1' strlenInChars='y' codepage='windows-1252'>
+            <TagField type='String' value='%'/>
+        </FieldFormat>
+    </StructFormat>
+</MessageFormat>

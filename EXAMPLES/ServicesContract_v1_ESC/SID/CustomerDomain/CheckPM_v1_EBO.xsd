@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/CheckPM/v1"
+	xmlns:ebons_money="http://www.entel.cl/EBO/Money/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/CheckPM/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/Money/v1" schemaLocation="../CommonBusinessEntitiesDomain/Money_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="amountRef" type="xs:float"/>									
+	<xs:element name="checkAuthorized" type="xs:string"/>									
+	<xs:element name="checkCorrelative" type="xs:integer"/>									
+	<xs:element name="checkDueDate" type="xs:dateTime"/>									
+	<xs:element name="checkNumber" type="xs:long"/>									
+	<xs:element name="srCel" type="xs:string"/>									
+	<xs:element name="srCelConsult" type="xs:string"/>									
+	<xs:element name="checkAmount" type="ebons_money:Money_Type"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="CheckPM" type="tns:CheckPM_Type"/>
+	<xs:complexType name="CheckPM_Type">
+		<xs:sequence> 
+		<xs:element ref="tns:amountRef" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:checkAuthorized" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:checkCorrelative" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:checkDueDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:checkNumber" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:srCel" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:srCelConsult" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:checkAmount" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

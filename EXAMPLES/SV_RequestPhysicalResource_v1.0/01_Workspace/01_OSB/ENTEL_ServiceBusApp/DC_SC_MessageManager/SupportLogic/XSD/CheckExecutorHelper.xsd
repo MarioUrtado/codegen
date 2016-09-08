@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema elementFormDefault="qualified" targetNamespace="http://www.entel.cl/SC/MessageManager/CheckExecutorHelper/v1" version="1" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:esons_result="http://www.entel.cl/ESO/Result/v2" xmlns:tns="http://www.entel.cl/SC/MessageManager/CheckExecutorHelper/v1">
+  <import namespace="http://www.entel.cl/ESO/Result/v2" schemaLocation="../../../SR_Commons/XSD/ESO/Result_v2_ESO.xsd"/>
+  <element name="checkExecutorHelperREQ" type="tns:checkExecutorHelperREQ_Type"/>
+  <complexType name="checkExecutorHelperREQ_Type">
+    <sequence>
+      <element name="Message" type="anyType"/>
+      <element maxOccurs="1" minOccurs="0" ref="tns:TransactionInfo"/>
+    </sequence>
+    <attribute name="name" type="string" use="required"/>
+    <attribute name="type" type="int" use="required"/>
+    <attribute name="grade" type="int" use="required"/>
+    <attribute name="elapsedTime" type="string"/>
+    <attribute name="capability" type="string" use="required"/>
+    <attribute name="messageType" type="string" use="required"/>
+    <attribute name="isRetry" type="string" use="required"/>
+  </complexType>
+  <element name="checkExecutorHelperRSP" type="tns:checkExecutorHelperRSP_Type"/>
+  <complexType name="checkExecutorHelperRSP_Type">
+    <sequence>
+      <element name="Message" type="anyType"/>
+      <element ref="esons_result:Result"/>
+    </sequence>
+  </complexType>
+  <element name="TransactionInfo">
+    <complexType>
+      <attribute name="id" type="int"/>
+      <attribute name="status" type="int"/>
+      <attribute name="message_timestamp" type="dateTime"/>
+      <attribute name="capabilityTxOwner" type="string"/>    
+      <attribute name="sequence" type="int"/>
+    </complexType>
+  </element>
+</schema>

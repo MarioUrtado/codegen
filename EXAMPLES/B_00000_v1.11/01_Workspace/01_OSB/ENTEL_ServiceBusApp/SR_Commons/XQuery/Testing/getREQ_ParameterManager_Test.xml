@@ -1,0 +1,6 @@
+<ns1:GetREQ xmlns:ns1="http://www.entel.cl/SC/ParameterManager/get/v1">
+  <ns1:Params>
+    <ns1:P key="Endpoint"/>
+    <ns1:P key="KeyA"/>
+  </ns1:Params>
+</ns1:GetREQ>

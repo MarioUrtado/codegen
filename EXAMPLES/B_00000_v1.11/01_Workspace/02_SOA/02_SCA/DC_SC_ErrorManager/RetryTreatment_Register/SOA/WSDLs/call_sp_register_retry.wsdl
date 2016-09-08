@@ -1,0 +1,36 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="call_sp_register_retry"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/DC_SC_ErrorManager/RetryTreatment_Register/call_sp_register_retry"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/DC_SC_ErrorManager/RetryTreatment_Register/call_sp_register_retry"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/call_sp_register_retry"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:ns1="http://www.entel.cl/ESO/RetryTreatment/v1"
+    >
+    <plt:partnerLinkType name="call_sp_register_retry_plt">
+        <plt:role name="call_sp_register_retry_role">
+            <plt:portType name="tns:call_sp_register_retry_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:import namespace="http://www.entel.cl/ESO/RetryTreatment/v1" location="oramds:/apps/Commons/DC_SC_ErrorManager/ErrorHospital/WSDL/RetryTreatment.wsdl"/>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/call_sp_register_retry"
+                 schemaLocation="../Schemas/call_sp_register_retry_sp.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="args_in_msg">
+        <wsdl:part name="InputParameters" element="db:InputParameters"/>
+    </wsdl:message>
+    <wsdl:message name="args_out_msg">
+        <wsdl:part name="OutputParameters" element="db:OutputParameters"/>
+    </wsdl:message>
+    <wsdl:portType name="call_sp_register_retry_ptt">
+        <wsdl:operation name="call_sp_register_retry">
+            <wsdl:input message="tns:args_in_msg"/>
+            <wsdl:output message="tns:args_out_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

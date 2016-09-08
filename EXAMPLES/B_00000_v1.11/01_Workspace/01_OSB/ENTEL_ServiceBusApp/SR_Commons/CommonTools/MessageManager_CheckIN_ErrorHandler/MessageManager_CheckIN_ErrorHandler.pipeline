@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/typesystem/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/alert/config">
+    <con:coreEntry>
+        <con:binding type="Mixed" xsi:type="con:MixedBindingType">
+            <con:request type="XML"/>
+            <con:response type="XML"/>
+        </con:binding>
+        <con:xqConfiguration>
+            <con:snippetVersion>1.0</con:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:router>
+        <con:pipeline type="request" name="request-N3f57fff2.N47f6ce58.0.152a767d5e0.N7ba9">
+            <con:stage id="_StageId-N3f57fff2.N47f6ce58.0.152a767d5e0.N7a1d" name="Error Type Verification">
+                <con:context>
+                    <con3:userNsDecl prefix="v12" namespace="http://www.entel.cl/ESO/Error/v1"/>
+                    <con3:userNsDecl prefix="v11" namespace="http://www.entel.cl/ESO/Result/v1"/>
+                    <con3:userNsDecl prefix="v1" namespace="http://www.entel.cl/SC/MessageManager/checkIN/v1"/>
+                </con:context>
+                <con:actions>
+                    <con2:ifThenElse>
+                        <con3:id>_ActionId-N3f57fff2.N47f6ce58.0.152a767d5e0.N7a1c</con3:id>
+                        <con2:case id="_BranchId-N3f57fff2.N47f6ce58.0.152a767d5e0.N7a1b">
+                            <con2:condition>
+                                <con3:xqueryText>$body/*[1]/*:InvalidMessage</con3:xqueryText>
+                            </con2:condition>
+                            <con2:actions>
+                                <con2:assign varName="MMResult">
+                                    <con3:id>_ActionId-N53ee35ec.Nd7951f9.0.152d24e9f7e.N7e1d</con3:id>
+                                    <con2:expr>
+                                        <con3:xqueryText>$body/*[1]/*[1]/*[1]</con3:xqueryText>
+                                    </con2:expr>
+                                </con2:assign>
+                                <con2:assign varName="CheckIN_CanonicalErrorCode">
+                                    <con3:id>_ActionId-N3f57fff2.3b960c51.0.152a8a5a5d4.N7fb3</con3:id>
+                                    <con2:expr>
+                                        <con3:xqueryText>$MMResult/*[1]/@code</con3:xqueryText>
+                                    </con2:expr>
+                                </con2:assign>
+                                <con2:ifThenElse>
+                                    <con3:id>_ActionId-N3f57fff2.3b960c51.0.152a8a5a5d4.N7fb7</con3:id>
+                                    <con2:case id="_BranchId-N3f57fff2.3b960c51.0.152a8a5a5d4.N7fb6">
+                                        <con2:condition>
+                                            <con3:xqueryText>(:: Duplicate - Reject ::)
+$CheckIN_CanonicalErrorCode="10005"</con3:xqueryText>
+                                        </con2:condition>
+                                        <con2:actions>
+                                            <con7:replace varName="body" contents-only="true" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con6="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/alert/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/typesystem/config" xmlns:con7="http://www.bea.com/wli/sb/stages/transform/config">
+                                                <con8:id xmlns:con8="http://www.bea.com/wli/sb/stages/config">_ActionId-N53ee35ec.Nd7951f9.0.152d24e9f7e.N7d1b</con8:id>
+                                                <con1:expr>
+                                                    <con8:xqueryTransform xmlns:con8="http://www.bea.com/wli/sb/stages/config">
+                                                        <con8:resource ref="SR_Commons/XQuery/get_SOAP12Fault_Simple_v1"/>
+                                                        <con8:param name="faultCode">
+                                                            <con8:path>"Sender"</con8:path>
+                                                        </con8:param>
+                                                        <con8:param name="canonicalError">
+                                                            <con8:path>$MMResult/*[1]</con8:path>
+                                                        </con8:param>
+                                                        <con8:param name="faultDetails">
+                                                            <con8:path>$body/*[1]/*[1]/*[2]/*[1]</con8:path>
+                                                        </con8:param>
+                                                    </con8:xqueryTransform>
+                                                </con1:expr>
+                                            </con7:replace>
+                                        </con2:actions>
+                                    </con2:case>
+                                    <con2:case id="_BranchId-N3f57fff2.3b960c51.0.152a8a5a5d4.N7fb1">
+                                        <con2:condition>
+                                            <con3:xqueryText>(:: Duplicate - Result NOOK ::)
+$CheckIN_CanonicalErrorCode="10004"</con3:xqueryText>
+                                        </con2:condition>
+                                        <con2:actions>
+                                            <con7:replace varName="body" contents-only="true" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con6="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/alert/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/typesystem/config" xmlns:con7="http://www.bea.com/wli/sb/stages/transform/config">
+                                                <con8:id xmlns:con8="http://www.bea.com/wli/sb/stages/config">_ActionId-N53ee35ec.Nd7951f9.0.152d24e9f7e.N7de9</con8:id>
+                                                <con1:expr>
+                                                    <con8:xqueryTransform xmlns:con8="http://www.bea.com/wli/sb/stages/config">
+                                                        <con8:resource ref="SR_Commons/XQuery/get_SOAP12Fault_Simple_v1"/>
+                                                        <con8:param name="faultCode">
+                                                            <con8:path>"Sender"</con8:path>
+                                                        </con8:param>
+                                                        <con8:param name="canonicalError">
+                                                            <con8:path>$MMResult/*[1]</con8:path>
+                                                        </con8:param>
+                                                        <con8:param name="faultDetails">
+                                                            <con8:path>$body/*[1]/*[1]/*[2]/*[1]</con8:path>
+                                                        </con8:param>
+                                                    </con8:xqueryTransform>
+                                                </con1:expr>
+                                            </con7:replace>
+                                        </con2:actions>
+                                    </con2:case>
+                                    <con2:case id="_BranchId-N3f57fff2.3b960c51.0.152a8a5a5d4.N7faf">
+                                        <con2:condition>
+                                            <con3:xqueryText>(:: Duplicate - Result OK ::)
+$CheckIN_CanonicalErrorCode="10003"</con3:xqueryText>
+                                        </con2:condition>
+                                        <con2:actions>
+                                            <con7:replace varName="body" contents-only="true" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con6="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/alert/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/typesystem/config" xmlns:con7="http://www.bea.com/wli/sb/stages/transform/config">
+                                                <con8:id xmlns:con8="http://www.bea.com/wli/sb/stages/config">_ActionId-N53ee35ec.Nd7951f9.0.152d24e9f7e.N7db6</con8:id>
+                                                <con1:expr>
+                                                    <con8:xqueryTransform xmlns:con8="http://www.bea.com/wli/sb/stages/config">
+                                                        <con8:resource ref="SR_Commons/XQuery/get_SOAP12Fault_Simple_v1"/>
+                                                        <con8:param name="faultCode">
+                                                            <con8:path>"Sender"</con8:path>
+                                                        </con8:param>
+                                                        <con8:param name="canonicalError">
+                                                            <con8:path>$MMResult/*[1]</con8:path>
+                                                        </con8:param>
+                                                        <con8:param name="faultDetails">
+                                                            <con8:path>$body/*[1]/*[1]/*[2]/*[1]</con8:path>
+                                                        </con8:param>
+                                                    </con8:xqueryTransform>
+                                                </con1:expr>
+                                            </con7:replace>
+                                        </con2:actions>
+                                    </con2:case>
+                                    <con2:case id="_BranchId-N3f57c309.5759ba55.0.152cbda74c5.N7c9e">
+                                        <con2:condition>
+                                            <con3:xqueryText>(:: Duplicate - Idempotency::)
+$CheckIN_CanonicalErrorCode="10002"</con3:xqueryText>
+                                        </con2:condition>
+                                        <con2:actions>
+                                            <con2:replace varName="body" contents-only="true">
+                                                <con3:id>_ActionId-N3f57c309.5759ba55.0.152cbda74c5.N7bd0</con3:id>
+                                                <con2:expr>
+                                                    <con3:xqueryText>$body/*[1]/*[1]/*[2]/*[1]</con3:xqueryText>
+                                                </con2:expr>
+                                            </con2:replace>
+                                            <con2:ifThenElse>
+                                                <con3:id>_ActionId-N53ee35ec.Nd7951f9.0.152d24e9f7e.N7ebb</con3:id>
+                                                <con2:case id="_BranchId-N53ee35ec.Nd7951f9.0.152d24e9f7e.N7eba">
+                                                    <con2:condition>
+                                                        <con3:xqueryText>data($body/*[1]/*[1]/*[4]/@status)!='OK'</con3:xqueryText>
+                                                    </con2:condition>
+                                                    <con2:actions>
+                                                        <con7:replace varName="body" contents-only="true" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con6="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/alert/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/typesystem/config" xmlns:con7="http://www.bea.com/wli/sb/stages/transform/config">
+                                                            <con8:id xmlns:con8="http://www.bea.com/wli/sb/stages/config">_ActionId-N3f57c336.N47c9e540.0.152f6ed25e2.N7fca</con8:id>
+                                                            <con1:expr>
+                                                                <con8:xqueryTransform xmlns:con8="http://www.bea.com/wli/sb/stages/config">
+                                                                    <con8:resource ref="SR_Commons/XQuery/get_SOAP12Fault_Simple_v1"/>
+                                                                    <con8:param name="faultCode">
+                                                                        <con8:path>"Sender"</con8:path>
+                                                                    </con8:param>
+                                                                    <con8:param name="canonicalError">
+                                                                        <con8:path>$body/*[1]/*[1]/*[4]/*[1]</con8:path>
+                                                                    </con8:param>
+                                                                    <con8:param name="faultDetails">
+                                                                        <con8:path>$body/*[1]</con8:path>
+                                                                    </con8:param>
+                                                                </con8:xqueryTransform>
+                                                            </con1:expr>
+                                                        </con7:replace>
+                                                    </con2:actions>
+                                                </con2:case>
+                                                <con2:default>
+                                                    <con3:reply isError="false">
+                                                        <con3:id>_ActionId-N53ee35ec.Nd7951f9.0.152d24e9f7e.N7e85</con3:id>
+                                                    </con3:reply>
+                                                </con2:default>
+                                            </con2:ifThenElse>
+                                        </con2:actions>
+                                    </con2:case>
+                                    <con2:case id="_BranchId-N3f57c309.5759ba55.0.152cbda74c5.N7c9c">
+                                        <con2:condition>
+                                            <con3:xqueryText>(:: Duplicate - On-Going ::)
+$CheckIN_CanonicalErrorCode="10001"</con3:xqueryText>
+                                        </con2:condition>
+                                        <con2:actions>
+                                            <con7:replace varName="body" contents-only="true" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con6="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/alert/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/typesystem/config" xmlns:con7="http://www.bea.com/wli/sb/stages/transform/config">
+                                                <con8:id xmlns:con8="http://www.bea.com/wli/sb/stages/config">_ActionId-N53ee35ec.Nd7951f9.0.152d24e9f7e.N7d83</con8:id>
+                                                <con1:expr>
+                                                    <con8:xqueryTransform xmlns:con8="http://www.bea.com/wli/sb/stages/config">
+                                                        <con8:resource ref="SR_Commons/XQuery/get_SOAP12Fault_Simple_v1"/>
+                                                        <con8:param name="faultCode">
+                                                            <con8:path>"Sender"</con8:path>
+                                                        </con8:param>
+                                                        <con8:param name="canonicalError">
+                                                            <con8:path>$MMResult/*[1]</con8:path>
+                                                        </con8:param>
+                                                        <con8:param name="faultDetails">
+                                                            <con8:path>$body/*[1]/*[1]/*[2]/*[1]</con8:path>
+                                                        </con8:param>
+                                                    </con8:xqueryTransform>
+                                                </con1:expr>
+                                            </con7:replace>
+                                        </con2:actions>
+                                    </con2:case>
+                                    <con2:default/>
+                                </con2:ifThenElse>
+                                <con3:reply isError="false">
+                                    <con3:id>_ActionId-N3f57c309.5759ba55.0.152cbda74c5.N7b91</con3:id>
+                                </con3:reply>
+                            </con2:actions>
+                        </con2:case>
+                        <con2:case id="_BranchId-N3f57fff2.3b960c51.0.152a8a5a5d4.N7fff">
+                            <con2:condition>
+                                <con3:xqueryText>$body/*[1]/*:InvalidHeader</con3:xqueryText>
+                            </con2:condition>
+                            <con2:actions>
+                                <con2:replace varName="body" contents-only="true">
+                                    <con3:id>_ActionId-N3f57fff2.3b960c51.0.152a8a5a5d4.N7fc1</con3:id>
+                                    <con2:expr>
+                                        <con3:xqueryText>$body/*[1]/*[1]</con3:xqueryText>
+                                    </con2:expr>
+                                </con2:replace>
+                            </con2:actions>
+                        </con2:case>
+                        <con2:case id="_BranchId-N3f57fff2.3b960c51.0.152a8a5a5d4.N7ffd">
+                            <con2:condition>
+                                <con3:xqueryText>$body/*[1]/*:IncompleteValidation</con3:xqueryText>
+                            </con2:condition>
+                            <con2:actions>
+                                <con2:replace varName="body" contents-only="true">
+                                    <con3:id>_ActionId-N3f57fff2.3b960c51.0.152a8a5a5d4.N7fbe</con3:id>
+                                    <con2:expr>
+                                        <con3:xqueryText>$body/*[1]/*[1]</con3:xqueryText>
+                                    </con2:expr>
+                                </con2:replace>
+                            </con2:actions>
+                        </con2:case>
+                        <con2:default>
+                            <con4:alert>
+                                <con3:id>_ActionId-N3f57fff2.3b960c51.0.152a8a5a5d4.N7fc7</con3:id>
+                                <con4:destination ref="SR_Commons/AlertDestinations/FW_Support"/>
+                                <con4:description>Unexpected Errors were found executing the checkIN operation from the MessageManager</con4:description>
+                                <con4:severity>fatal</con4:severity>
+                                <con4:payload>
+                                    <con3:xqueryTransform>
+                                        <con3:resource ref="SR_Commons/XQuery/get_MailMessageContent_AlertFW"/>
+                                        <con3:param name="mailFooter">
+                                            <con3:path>""</con3:path>
+                                        </con3:param>
+                                        <con3:param name="componentType">
+                                            <con3:path>"Service Component - PIF"</con3:path>
+                                        </con3:param>
+                                        <con3:param name="mailBody">
+                                            <con3:path>$body</con3:path>
+                                        </con3:param>
+                                        <con3:param name="messageHeader">
+                                            <con3:path>fn-bea:serialize("")</con3:path>
+                                        </con3:param>
+                                        <con3:param name="componentOperation">
+                                            <con3:path>""</con3:path>
+                                        </con3:param>
+                                        <con3:param name="componentName">
+                                            <con3:path>$inbound/@name</con3:path>
+                                        </con3:param>
+                                        <con3:param name="mailHeader">
+                                            <con3:path>"Unexpected Errors were found executing the checkIN operation from the MessageManager"</con3:path>
+                                        </con3:param>
+                                    </con3:xqueryTransform>
+                                </con4:payload>
+                            </con4:alert>
+                            <con3:reply isError="true">
+                                <con3:id>_ActionId-N3f57fff2.3b960c51.0.152a8a5a5d4.N7fc4</con3:id>
+                            </con3:reply>
+                        </con2:default>
+                    </con2:ifThenElse>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-N3f57fff2.N47f6ce58.0.152a767d5e0.N7ba8"/>
+        <con:flow>
+            <con:pipeline-node name="MessageManager Error Handling">
+                <con:request>request-N3f57fff2.N47f6ce58.0.152a767d5e0.N7ba9</con:request>
+                <con:response>response-N3f57fff2.N47f6ce58.0.152a767d5e0.N7ba8</con:response>
+            </con:pipeline-node>
+        </con:flow>
+    </con:router>
+</con:pipelineEntry>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.entel.cl/EBO/AppliedCustomerBillingDiscount/v1" xmlns:ebons_money="http://www.entel.cl/EBO/Money/v1" targetNamespace="http://www.entel.cl/EBO/AppliedCustomerBillingDiscount/v1" elementFormDefault="qualified" version="1.0">
+	<!---=- start:Imports -=- -->
+	<import namespace="http://www.entel.cl/EBO/Money/v1" schemaLocation="Money_v1_EBO.xsd"/>
+	<!---=- end:Imports -=- -->
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+	<element name="ID" type="xs:integer"/>
+	<element name="description" type="xs:string"/>
+	<element name="exemptInd" type="xs:integer"/>
+	<element name="type" type="xs:string"/>
+	<element name="valueType" type="xs:string"/>
+	<element name="value" type="ebons_money:Money_Type"/>
+	<!---=- end:EBO root elements defs -=- -->
+	<!---=- start:EBO complexType defs -=- -->
+	<element name="AppliedCustomerBillingDiscount" type="tns:AppliedCustomerBillingDiscount_Type"/>
+	<complexType name="AppliedCustomerBillingDiscount_Type">
+		<annotation>
+			<documentation>AppliedCustomerBillingDiscount</documentation>
+			<documentation>A reduction in the price of a Product that is applied to reduce the associated charge.</documentation>
+		</annotation>
+		<sequence>
+			<element ref="tns:ID"/>
+			<element ref="tns:description" minOccurs="0"/>
+			<element ref="tns:exemptInd" minOccurs="0"/>
+			<element ref="tns:type" minOccurs="0"/>
+			<element ref="tns:valueType" minOccurs="0"/>
+			<element ref="tns:value" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+</schema>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/BusinessInteractionItem/v1"
+	xmlns:ebons_quantity="http://www.entel.cl/EBO/Quantity/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/BusinessInteractionItem/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/Quantity/v1" schemaLocation="../CommonBusinessEntitiesDomain/Quantity_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="action" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>The action to take for a BusinessInteractionItem, such as add, change, remove.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="productCode" type="xs:string"/>									
+	<xs:element name="rechargeCode" type="xs:string"/>									
+	<xs:element name="quantity" type="ebons_quantity:Quantity_Type">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>Quantity of a Specification or Entity involved in a business interaction.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="BusinessInteractionItem" type="tns:BusinessInteractionItem_Type"/>
+	<xs:complexType name="BusinessInteractionItem_Type">
+		
+			<xs:annotation>
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">The purpose for the BusinessInteraction expressed in terms of a ProductSpecification, ProductOffering, ServiceSpecification or ResourceSpecification or may refer to a Product, Service, or Resource.</xs:documentation>
+						
+			</xs:annotation>
+		<xs:sequence> 
+		<xs:element ref="tns:action" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:productCode" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:rechargeCode" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:quantity" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

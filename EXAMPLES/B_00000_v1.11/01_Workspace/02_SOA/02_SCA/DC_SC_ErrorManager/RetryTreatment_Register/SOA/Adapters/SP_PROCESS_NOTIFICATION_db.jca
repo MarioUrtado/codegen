@@ -1,0 +1,13 @@
+<adapter-config name="SP_PROCESS_NOTIFICATION_db" adapter="db" wsdlLocation="../WSDLs/SP_PROCESS_NOTIFICATION_db.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="Entel_DESA" location="eis/DB/FRW/ErrorHospital"/>
+  <endpoint-interaction portType="SP_PROCESS_NOTIFICATION_ptt" operation="SP_PROCESS_NOTIFICATION">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="PackageName" value="ESB_RETRY_MANAGER_PKG"/>
+      <property name="ProcedureName" value="PROCESS_NOTIFICATION"/>
+      <property name="QueryTimeout" value="1"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

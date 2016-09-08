@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/ResourceControl/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/ResourceControl/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="blockReason" type="xs:string"/>									
+	<xs:element name="complaintDate" type="xs:dateTime"/>									
+	<xs:element name="indicator" type="xs:string"/>									
+	<xs:element name="lostDate" type="xs:dateTime"/>									
+	<xs:element name="modality" type="xs:string"/>									
+	<xs:element name="operatorID" type="xs:string"/>									
+	<xs:element name="operatorNofiticationDate" type="xs:dateTime"/>									
+	<xs:element name="requestDate" type="xs:dateTime"/>									
+	<xs:element name="unlockReason" type="xs:string"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="ResourceControl" type="tns:ResourceControl_Type"/>
+	<xs:complexType name="ResourceControl_Type">
+		<xs:sequence> 
+		<xs:element ref="tns:blockReason" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:complaintDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:indicator" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:lostDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:modality" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:operatorID" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:operatorNofiticationDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:requestDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:unlockReason" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

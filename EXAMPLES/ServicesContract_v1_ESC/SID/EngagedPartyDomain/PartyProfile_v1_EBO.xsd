@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/PartyProfile/v1"
+	xmlns:ebons_timeperiod="http://www.entel.cl/EBO/TimePeriod/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/PartyProfile/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/TimePeriod/v1" schemaLocation="../CommonBusinessEntitiesDomain/TimePeriod_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="ID" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>A unique identifier for the PartyProfile.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="dateCreated" type="xs:dateTime">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>The date that the PartyProfile was created.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="description" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>A narrative that explains what the PartyProfile is.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="name" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>A word, term, or phrase by which the characteristic is known and distinguished from characteristics.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="validFor" type="ebons_timeperiod:TimePeriod_Type">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>The period during which the PartyProfile is applicable.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="PartyProfile" type="tns:PartyProfile_Type"/>
+	<xs:complexType name="PartyProfile_Type">
+		
+			<xs:annotation>
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">The characteristics used to group Parties that typify MarketSegments and for the formulation and targeting of MarketingCampaigns. A Party ProfileType is used to categorize one or more PartyRoleSpecifications. A PartyProflieType can be defined for one or more GeographicAreas. The profile can target one or more ProductOfferings and one or more MarketSegments. PartyProfileTypes can be based on (or defined by) DemographicCharacteristics.</xs:documentation>
+						
+			</xs:annotation>
+		<xs:sequence> 
+		<xs:element ref="tns:ID" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:dateCreated" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:description" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:name" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:validFor" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

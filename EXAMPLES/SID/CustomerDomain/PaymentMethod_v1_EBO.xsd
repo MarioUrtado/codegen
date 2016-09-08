@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/PaymentMethod/v1"
+	xmlns:ebons_money="http://www.entel.cl/EBO/Money/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/PaymentMethod/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/Money/v1" schemaLocation="../CommonBusinessEntitiesDomain/Money_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="ID" type="xs:string"/>									
+	<xs:element name="amountRef" type="xs:float"/>									
+	<xs:element name="bankChannelCode" type="xs:string"/>									
+	<xs:element name="bankTerminalNumber" type="xs:string"/>									
+	<xs:element name="checkAuthorized" type="xs:string"/>									
+	<xs:element name="checkCorrelative" type="xs:integer"/>									
+	<xs:element name="checkDueDate" type="xs:dateTime"/>									
+	<xs:element name="checkNumber" type="xs:long"/>									
+	<xs:element name="codRejection" type="xs:string"/>									
+	<xs:element name="codResponse" type="xs:string"/>									
+	<xs:element name="description" type="xs:string"/>									
+	<xs:element name="name" type="xs:string"/>									
+	<xs:element name="paymentMethodType" type="xs:string"/>									
+	<xs:element name="srCel" type="xs:string"/>									
+	<xs:element name="srCelConsult" type="xs:string"/>									
+	<xs:element name="thirdPartyID" type="xs:string"/>									
+	<xs:element name="thirdPartySiiId" type="xs:string"/>									
+	<xs:element name="thirdPartyType" type="xs:string"/>									
+	<xs:element name="checkAmount" type="ebons_money:Money_Type"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="PaymentMethod" type="tns:PaymentMethod_Type"/>
+	<xs:complexType name="PaymentMethod_Type">
+		
+			<xs:annotation>
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">PaymentMethod is the way in which customer provides payment, for example cash ,credit,transfer.</xs:documentation>
+						
+			</xs:annotation>
+		<xs:sequence> 
+		<xs:element ref="tns:ID" maxOccurs="1" minOccurs="1"/>
+		<xs:element ref="tns:amountRef" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:bankChannelCode" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:bankTerminalNumber" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:checkAuthorized" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:checkCorrelative" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:checkDueDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:checkNumber" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:codRejection" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:codResponse" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:description" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:name" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:paymentMethodType" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:srCel" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:srCelConsult" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:thirdPartyID" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:thirdPartySiiId" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:thirdPartyType" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:checkAmount" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="CacheManager" targetNamespace="http://www.entel.cl/SC/CacheManager/v1"
+                  xmlns:tns="http://www.entel.cl/SC/CacheManager/v1"
+                  xmlns:get="http://www.entel.cl/SC/CacheManager/get/v1"
+                  xmlns:put="http://www.entel.cl/SC/CacheManager/put/v1"
+                  xmlns:lazyRefresh="http://www.entel.cl/SC/CacheManager/lazyRefresh/v1"
+                  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/">
+  <wsdl:types>
+    <xs:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://www.entel.cl/SC/CacheManager/get/v1"
+                 schemaLocation="../XSD/CSM/get_CacheManager_v1_CSM.xsd"/>
+      <xs:import namespace="http://www.entel.cl/SC/CacheManager/put/v1"
+                 schemaLocation="../XSD/CSM/put_CacheManager_v1_CSM.xsd"/>
+      <xs:import namespace="http://www.entel.cl/SC/CacheManager/lazyRefresh/v1"
+                 schemaLocation="../XSD/CSM/lazyRefresh_CacheManager_v1_CSM.xsd"/>
+    </xs:schema>
+  </wsdl:types>
+  
+  <wsdl:message name="get_Message_In">
+    <wsdl:part name="In" element="get:GetREQ"/>   
+  </wsdl:message>
+  
+   <wsdl:message name="get_Message_Out"> 
+    <wsdl:part name="Out" element="get:GetRSP"/>
+  </wsdl:message>
+  
+  <wsdl:message name="put_Message_In">
+    <wsdl:part name="In" element="put:PutREQ"/>   
+  </wsdl:message>
+  
+  <wsdl:message name="put_Message_Out">
+    <wsdl:part name="Out" element="put:PutRSP"/>
+  </wsdl:message>
+  
+  <wsdl:message name="lazyRefresh_Message_In">
+    <wsdl:part name="In" element="lazyRefresh:LazyRefreshREQ"/>    
+  </wsdl:message>
+  
+  <wsdl:message name="lazyRefresh_Message_Out"> 
+    <wsdl:part name="Out" element="lazyRefresh:LazyRefreshRSP"/>
+  </wsdl:message>
+  <wsdl:portType name="CacheManager_PortType">
+    <!-- 
+          Operation Get Cache 
+          @Name get
+          @Desc Return message associated to the unique key sent as parameter.
+         -->
+    <wsdl:operation name="get">
+      <wsdl:input message="tns:get_Message_In"/>
+      <wsdl:output message="tns:get_Message_Out"/>
+    </wsdl:operation>
+    <!--
+          Operation Put Cache 
+          @Name put
+          @Desc Put a message in Cache with an associated unique key.
+         -->
+    <wsdl:operation name="put">
+      <wsdl:input message="tns:put_Message_In"/>
+      <wsdl:output message="tns:put_Message_Out"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="CacheManager_CFG_PortType">
+    <!-- 
+          Operation Lazy Refresh Cache 
+          @Name lazyRefresh
+          @Desc Deletes entries from the configured cache given it's componenent
+                operation and key.
+         -->
+    <wsdl:operation name="lazyRefresh">
+      <wsdl:input message="tns:lazyRefresh_Message_In"/>
+      <wsdl:output message="tns:lazyRefresh_Message_Out"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  
+  <wsdl:binding name="CacheManager_SOAP12Binding" type="tns:CacheManager_PortType">
+    <wsoap12:binding style="document" transport="http://www.bea.com/wli/sb/transports/sb"/>
+    <wsdl:operation name="get">
+      <wsoap12:operation style="document" soapAction=""/>
+      <wsdl:input>
+        <wsoap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsoap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="put">
+      <wsoap12:operation style="document" soapAction=""/>
+      <wsdl:input>
+        <wsoap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsoap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  
+  <wsdl:binding name="CacheManager_CFG_SOAP12Binding" type="tns:CacheManager_CFG_PortType">
+    <wsoap12:binding style="document" transport="http://www.bea.com/wli/sb/transports/sb"/>
+    <wsdl:operation name="lazyRefresh">
+      <wsoap12:operation style="document" soapAction=""/>
+      <wsdl:input>
+        <wsoap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsoap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  
+  <wsdl:service name="CacheManager_Service">
+    <wsdl:port name="CacheManager_Port" binding="tns:CacheManager_SOAP12Binding">
+      <wsoap12:address location="sb://CacheManager"/>
+    </wsdl:port>
+    <wsdl:port name="CacheManager_CFG_Port" binding="tns:CacheManager_CFG_SOAP12Binding">
+      <wsoap12:address location="sb://CacheManager_CFG"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

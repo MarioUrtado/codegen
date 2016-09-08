@@ -1,0 +1,168 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Mar 10 12:39:32 ART 2016
+  Author:  m.alexandroff
+  Type: BPEL 2.0 Process
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="Register_BPELProcess"
+               targetNamespace="http://xmlns.oracle.com/DC_SC_ErrorManager/RetryTreatment_Register/Register_BPELProcess"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/DC_SC_ErrorManager/RetryTreatment_Register/Register_BPELProcess"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/DC_SC_ErrorManager/RetryTreatment_Register/call_sp_register_retry"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/jms/DC_SC_ErrorManager/RetryTreatment_Register/JMS_Send_MessageDispatcherQueue"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/sp/call_sp_register_retry"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns4="http://www.entel.cl/ESO/ErrorTreatment/v1"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns5="http://www.entel.cl/ESO/ErrorTreatmentStatus/v1"
+         xmlns:ns6="http://www.entel.cl/ESO/RetryTreatment/v1">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <import namespace="http://www.entel.cl/ESO/RetryTreatment/v1"
+          location="oramds:/apps/Commons/DC_SC_ErrorManager/ErrorHospital/WSDL/RetryTreatment.wsdl"
+          importType="http://schemas.xmlsoap.org/wsdl/"/>
+  <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/DC_SC_ErrorManager/RetryTreatment_Register/call_sp_register_retry"
+          location="../WSDLs/call_sp_register_retry.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"
+          ui:processWSDL="true"/>
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="call_sp_register_retry" partnerLinkType="ns1:call_sp_register_retry_plt"
+                 partnerRole="call_sp_register_retry_role"/>
+    <partnerLink name="JMS_Send_MessageDispatcherQueue" partnerLinkType="ns2:Produce_Message_plt" partnerRole="Produce_Message_role"/>
+    <partnerLink name="RetryTreatment_Register_direct" partnerLinkType="ns6:RetryTreatment_Register_direct"
+                 myRole="RetryTreatment_PortType"/>
+  </partnerLinks>
+  <variables>
+    <variable name="InputVariable" messageType="ns6:retry_Treatment"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <faultHandlers>
+    <catchAll>
+      <throw name="ThrowRollBack" faultName="bpelx:rollback"/>
+    </catchAll>
+  </faultHandlers>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in Register_BPELProcess.wsdl) -->
+    <receive name="receiveInput" variable="InputVariable" createInstance="yes" partnerLink="RetryTreatment_Register_direct"
+             portType="ns6:RetryTreatment_PortType" operation="In"/>
+    <scope name="Scope1">
+      <variables>
+        <variable name="Produce_Message_InputVariable" messageType="ns2:Produce_Message_msg"/>
+        <variable name="call_sp_register_retry_InputVariable" messageType="ns1:args_in_msg"/>
+        <variable name="call_sp_register_retry_OutputVariable" messageType="ns1:args_out_msg"/>
+      </variables>
+      <sequence name="Sequence1">
+        <assign name="Assign_sp_register_retry_InputVariable">
+          <copy>
+            <from>$InputVariable.In/ns4:Error_Treatment_Id</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$call_sp_register_retry_InputVariable.InputParameters/ns3:P_ERROR_TREATMENT_ID</to>
+          </copy>
+          <copy>
+            <from>xp20:current-dateTime()</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$call_sp_register_retry_InputVariable.InputParameters/ns3:P_FECHA</to>
+          </copy>
+        </assign>
+        <invoke name="Invoke_sp_register_retry" partnerLink="call_sp_register_retry"
+                portType="ns1:call_sp_register_retry_ptt" operation="call_sp_register_retry"
+                inputVariable="call_sp_register_retry_InputVariable"
+                outputVariable="call_sp_register_retry_OutputVariable" bpelx:invokeAsDetail="no"/>
+        <if name="If">
+          <documentation>
+            <![CDATA[EvaluingRetry]]>
+          </documentation>
+          <condition>$call_sp_register_retry_OutputVariable.OutputParameters/ns3:P_SOURCE_ERROR_CODE != 0</condition>
+          <sequence name="Sequence2">
+            <if name="If1">
+              <documentation>
+                <![CDATA[FullRetry]]>
+              </documentation>
+              <condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$call_sp_register_retry_OutputVariable.OutputParameters/ns3:P_SOURCE_ERROR_CODE =1</condition>
+              <assign name="Assing_StopRetry" xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+                <copy>
+                  <from>'DONE_NOT_OK'</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Produce_Message_InputVariable.body/ns5:Status</to>
+                </copy>
+                <copy>
+                  <from>'Se ejecutaron todos los reintentos sin exito'</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Produce_Message_InputVariable.body/ns5:Description</to>
+                </copy>
+                <copy>
+                  <from>$InputVariable.In/ns4:Error_Treatment_Id</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Produce_Message_InputVariable.body/ns5:Error_Treatment_Id</to>
+                </copy>
+              </assign>
+              <else>
+                <documentation>
+                  <![CDATA[NotConfig]]>
+                </documentation>
+                <sequence>
+                  <assign name="Assign_NotConfigRetry">
+                    <copy>
+                      <from>'FATAL_FAIL'</from>
+                      <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Produce_Message_InputVariable.body/ns5:Status</to>
+                    </copy>
+                    <copy>
+                      <from>'No se pudo obtener los datos de configuracion para el registro'</from>
+                      <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Produce_Message_InputVariable.body/ns5:Description</to>
+                    </copy>
+                    <copy>
+                      <from>$InputVariable.In/ns4:Error_Treatment_Id</from>
+                      <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Produce_Message_InputVariable.body/ns5:Error_Treatment_Id</to>
+                    </copy>
+                  </assign>
+                </sequence>
+              </else>
+            </if>
+            <invoke name="Invoke_JMS_Send_MessageDispatcherQueue" partnerLink="JMS_Send_MessageDispatcherQueue" portType="ns2:Produce_Message_ptt"
+                    operation="Produce_Message" inputVariable="Produce_Message_InputVariable"
+                    bpelx:invokeAsDetail="no"/>
+          </sequence>
+          <else>
+            <documentation>
+              <![CDATA[OkRetry]]>
+            </documentation>
+            <empty name="Empty"/>
+          </else>
+        </if>
+      </sequence>
+    </scope>
+  </sequence>
+</process>

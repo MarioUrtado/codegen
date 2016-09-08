@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
+    <con:coreEntry>
+        <con:binding type="SOAP" isSoap12="true" xsi:type="con:SoapBindingType">
+            <con:wsdl ref="DC_IE_Consumer_CREDITS_v1/IE/HTTPSOAP12/WSDL/CreditsServices"/>
+            <con:binding>
+                <con:name>ConsumerBinding</con:name>
+                <con:namespace>http://www.credits.com/flat/consumer</con:namespace>
+            </con:binding>
+        </con:binding>
+        <con:xqConfiguration>
+            <con:snippetVersion>1.0</con:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:router errorHandler="error-N53ee2cec.6d416956.0.15612d49c16.N7bec">
+        <con:pipeline type="request" name="request-N53ee2cec.6d416956.0.15612d49c16.N7ffa">
+            <con:stage id="_StageId-N53ee2cec.6d416956.0.15612d49c16.N7ff8" name="Common Tasks">
+                <con:context/>
+                <con:actions>
+                    <con1:assign varName="RequestHeader">
+                        <con2:id>_ActionId-N53ee2cf4.6f0819c1.0.1562289c92f.N7e06</con2:id>
+                        <con1:expr>
+                            <con2:xqueryTransform>
+                                <con2:resource ref="SR_Commons/XQuery/DiscreteComponents/InventoryEndpoint/get_RequestHeader_v3"/>
+                                <con2:param name="sysCode">
+                                    <con2:path>'0002'
+(: Codigo numerico SYSTEM CONSUMER:)</con2:path>
+                                </con2:param>
+                                <con2:param name="enterpriseCode">
+                                    <con2:path>'ENTEL'</con2:path>
+                                </con2:param>
+                                <con2:param name="ServiceCode">
+                                    <con2:path>'100'
+(:SERVICE_CODE Consumer:)</con2:path>
+                                </con2:param>
+                                <con2:param name="ServiceName">
+                                    <con2:path>'Consumer'
+(:SERVICE_NAME Consumer:)</con2:path>
+                                </con2:param>
+                                <con2:param name="processArea">
+                                    <con2:path>'0005'
+(: representativo del Servicio a Consumir :)</con2:path>
+                                </con2:param>
+                                <con2:param name="processCode">
+                                    <con2:path>'0005'
+(: representativo del Servicio a Consumir :)</con2:path>
+                                </con2:param>
+                                <con2:param name="countryCode">
+                                    <con2:path>'CHL'</con2:path>
+                                </con2:param>
+                                <con2:param name="operationCode">
+                                    <con2:path>'101'
+(: Consumer Get:)</con2:path>
+                                </con2:param>
+                                <con2:param name="origenEventID">
+                                    <con2:path>substring(fn-bea:uuid(),1,16)</con2:path>
+                                </con2:param>
+                                <con2:param name="ServiceOperation">
+                                    <con2:path>'get'
+(: Operation Name SERVICE_NAME Consumer :)</con2:path>
+                                </con2:param>
+                                <con2:param name="clientReqTimestamp">
+                                    <con2:path>fn:current-dateTime()</con2:path>
+                                </con2:param>
+                            </con2:xqueryTransform>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="IeName" xmlns:con6="http://www.bea.com/wli/sb/typesystem/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
+                        <con2:id>_ActionId-N53ee2cec.6d416956.0.15612d49c16.N7fb5</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>'get_CREDITS_HTTPSOAP12_IE'</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="RequestBody">
+                        <con2:id>_ActionId-N53ee2cec.6d416956.0.15612d49c16.N7e3c</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$body</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-N53ee2cec.6d416956.0.15612d49c16.N7ff9"/>
+        <con:pipeline type="request" name="request-N53ee2cec.6d416956.0.15612d49c16.N7ff6">
+            <con:stage id="_StageId-N53ee2cec.6d416956.0.15612d49c16.N7ff4" name="Request Validation">
+                <con:context/>
+                <con:actions>
+                    <con1:validate>
+                        <con2:id>_ActionId-N53ee2cec.6d416956.0.15612d49c16.N7e4b</con2:id>
+                        <con1:wsdl ref="DC_IE_Consumer_CREDITS_v1/IE/HTTPSOAP12/WSDL/CreditsServices"/>
+                        <con1:schemaElement xmlns:xsd="http://www.credits.com/entidades/xsd">xsd:getConsumerREQ</con1:schemaElement>
+                        <con1:varName>body</con1:varName>
+                        <con1:location>
+                            <con2:xpathText>./*[1]</con2:xpathText>
+                        </con1:location>
+                    </con1:validate>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-N53ee2cec.6d416956.0.15612d49c16.N7ff5">
+            <con:stage id="_StageId-N53ee2cec.6d416956.0.15612d49c16.N7ff3" name="Response Validation">
+                <con:context/>
+                <con:actions>
+                    <con1:validate>
+                        <con2:id>_ActionId-N53ee2cec.6d416956.0.15612d49c16.N7e48</con2:id>
+                        <con1:wsdl ref="DC_IE_Consumer_CREDITS_v1/IE/HTTPSOAP12/WSDL/CreditsServices"/>
+                        <con1:schemaElement xmlns:xsd="http://www.credits.com/entidades/xsd">xsd:getConsumerRSP</con1:schemaElement>
+                        <con1:varName>body</con1:varName>
+                        <con1:location>
+                            <con2:xpathText>./*[1]</con2:xpathText>
+                        </con1:location>
+                    </con1:validate>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="request" name="request-N53ee2cec.6d416956.0.15612d49c16.N7e47">
+            <con:stage id="_StageId-N53ee2cec.6d416956.0.15612d49c16.N7e45" name="Request Mappings">
+                <con:context/>
+                <con:actions>
+                    <con1:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-N53ee2cec.6d416956.0.15612d49c16.N7e40</con2:id>
+                        <con1:expr>
+                            <con2:xqueryTransform>
+                                <con2:resource ref="DC_IE_Consumer_CREDITS_v1/IE/HTTPSOAP12/XQuery/get_Get_Consumer_REQ"/>
+                                <con2:param name="getConsumerREQ">
+                                    <con2:path>$body/*[1]</con2:path>
+                                </con2:param>
+                                <con2:param name="RequestHeader">
+                                    <con2:path>$RequestHeader</con2:path>
+                                </con2:param>
+                            </con2:xqueryTransform>
+                        </con1:expr>
+                    </con1:replace>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-N53ee2cec.6d416956.0.15612d49c16.N7e46">
+            <con:stage id="_StageId-N53ee2cec.6d416956.0.15612d49c16.N7e44" name="Response Mappings">
+                <con:context/>
+                <con:actions>
+                    <con1:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-N53ee2cec.6d416956.0.15612d49c16.N7e39</con2:id>
+                        <con1:expr>
+                            <con2:xqueryTransform>
+                                <con2:resource ref="DC_IE_Consumer_CREDITS_v1/IE/HTTPSOAP12/XQuery/get_getConsumerRSP"/>
+                                <con2:param name="getConsumerREQ">
+                                    <con2:path>$RequestBody/*[1]</con2:path>
+                                </con2:param>
+                                <con2:param name="Get_Consumer_RSP">
+                                    <con2:path>$body/*[1]</con2:path>
+                                </con2:param>
+                            </con2:xqueryTransform>
+                        </con1:expr>
+                    </con1:replace>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-N53ee2cec.6d416956.0.15612d49c16.N7bec">
+            <con:stage id="_StageId-N53ee2cec.6d416956.0.15612d49c16.N7b61" name="IE Error Handler" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
+                <con:context/>
+                <con:actions>
+                    <con4:log>
+                        <con2:id>_ActionId-N53ee2cec.6d416956.0.15612d49c16.N7b60</con2:id>
+                        <con4:logLevel>info</con4:logLevel>
+                        <con4:expr>
+                            <con2:xqueryTransform>
+                                <con2:resource ref="SR_Commons/XQuery/DiscreteComponents/InventoryEndpoint/get_IE_LogInfo"/>
+                                <con2:param name="IeName">
+                                    <con2:path>$IeName</con2:path>
+                                </con2:param>
+                                <con2:param name="body">
+                                    <con2:path>$body/*[1]</con2:path>
+                                </con2:param>
+                            </con2:xqueryTransform>
+                        </con4:expr>
+                        <con4:message>InvetoryEndpoint | IE Error Handler |</con4:message>
+                    </con4:log>
+                    <con1:wsCallout>
+                        <con2:id>_ActionId-N53ee2cec.6d416956.0.15612d49c16.N7b5f</con2:id>
+                        <con1:service ref="SR_Commons/CommonTools/IE_UnexpectedErrorExceptionHandler/IE_UnexpectedErrorExceptionHandler" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con1:request>
+                            <con1:payload wrapped="true">body</con1:payload>
+                        </con1:request>
+                        <con1:response>
+                            <con1:payload wrapped="true">body</con1:payload>
+                        </con1:response>
+                        <con1:requestTransform>
+                            <con1:replace varName="body" contents-only="true">
+                                <con2:id>_ActionId-N53ee2cec.6d416956.0.15612d49c16.N7b5e</con2:id>
+                                <con1:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="SR_Commons/XQuery/DiscreteComponents/InventoryEndpoint/get_IE_UnexpectedErrorExceptionHandlerREQ"/>
+                                        <con2:param name="IeName">
+                                            <con2:path>$IeName</con2:path>
+                                        </con2:param>
+                                        <con2:param name="sourceBody">
+                                            <con2:path>$body/*[1]</con2:path>
+                                        </con2:param>
+                                        <con2:param name="RequestHeader">
+                                            <con2:path>$RequestHeader</con2:path>
+                                        </con2:param>
+                                        <con2:param name="sourceFault">
+                                            <con2:path>$fault</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con1:expr>
+                            </con1:replace>
+                        </con1:requestTransform>
+                        <con1:responseTransform/>
+                    </con1:wsCallout>
+                    <con1:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-N53ee2cec.6d416956.0.15612d49c16.N7b29</con2:id>
+                        <con1:expr>
+                            <con2:xqueryTransform>
+                                <con2:resource ref="DC_IE_Consumer_CREDITS_v1/IE/HTTPSOAP12/XQuery/get_getConsumerRSP"/>
+                                <con2:param name="getConsumerREQ">
+                                    <con2:path>$RequestBody/*[1]</con2:path>
+                                </con2:param>
+                                <con2:param name="Get_Consumer_RSP">
+                                    <con2:path>()</con2:path>
+                                </con2:param>
+                            </con2:xqueryTransform>
+                        </con1:expr>
+                    </con1:replace>
+                    <con2:reply isError="true">
+                        <con2:id>_ActionId-N53ee2cec.6d416956.0.15612d49c16.N7b5d</con2:id>
+                    </con2:reply>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:flow>
+            <con:pipeline-node name="Common Tasks">
+                <con:request>request-N53ee2cec.6d416956.0.15612d49c16.N7ffa</con:request>
+                <con:response>response-N53ee2cec.6d416956.0.15612d49c16.N7ff9</con:response>
+            </con:pipeline-node>
+            <con:pipeline-node name="Schema Validation">
+                <con:request>request-N53ee2cec.6d416956.0.15612d49c16.N7ff6</con:request>
+                <con:response>response-N53ee2cec.6d416956.0.15612d49c16.N7ff5</con:response>
+            </con:pipeline-node>
+            <con:pipeline-node name="Mappings">
+                <con:request>request-N53ee2cec.6d416956.0.15612d49c16.N7e47</con:request>
+                <con:response>response-N53ee2cec.6d416956.0.15612d49c16.N7e46</con:response>
+            </con:pipeline-node>
+            <con:route-node name="Route To Consumer Service">
+                <con:context/>
+                <con:actions>
+                    <con3:route>
+                        <con2:id>_ActionId-N53ee2cec.6d416956.0.15612d49c16.N7cd4</con2:id>
+                        <con3:service ref="DC_IE_Consumer_CREDITS_v1/CommonResources/Bussiness/Consumer" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>get</con3:operation>
+                        <con3:outboundTransform/>
+                        <con3:responseTransform/>
+                    </con3:route>
+                </con:actions>
+            </con:route-node>
+        </con:flow>
+    </con:router>
+</con:pipelineEntry>

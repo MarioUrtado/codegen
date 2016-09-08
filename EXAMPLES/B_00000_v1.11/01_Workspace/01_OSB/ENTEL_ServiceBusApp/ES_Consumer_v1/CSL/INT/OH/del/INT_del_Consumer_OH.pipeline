@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/typesystem/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config">
+    <con:coreEntry>
+        <con:binding type="Mixed" xsi:type="con:MixedBindingType">
+            <con:request type="XML">
+                <con1:schema ref="ES_Consumer_v1/ESC/Primary/del_Consumer_v1_EBM" element="Del_Consumer_REQ"/>
+            </con:request>
+            <con:response type="XML">
+                <con1:schema ref="ES_Consumer_v1/ESC/Primary/del_Consumer_v1_EBM" element="Del_Consumer_RSP"/>
+            </con:response>
+        </con:binding>
+        <con:xqConfiguration>
+            <con:snippetVersion>1.0</con:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:router errorHandler="error-N53ee35ec.N445cc81e.0.152d1131f64.N7dc0">
+        <con:pipeline name="error-N53ee35ec.N445cc81e.0.152d1131f64.N7dc0" type="error">
+            <con:stage id="_StageId-N53ee35e5.N386037b7.0.1531f3e125a.N7f70" name="Service Error Handler" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/config">
+                <con:context/>
+                <con:actions>
+                    <con2:assign varName="HasResultInBody">
+                        <con3:id>_ActionId-N53ee35e5.N386037b7.0.1531f3e125a.N7f6f</con3:id>
+                        <con2:expr>
+                            <con3:xqueryTransform>
+                                <con3:resource ref="SR_Commons/XQuery/ServiceComponent/OH/get_HasResultInBody"/>
+                                <con3:param name="body">
+                                    <con3:path>$body</con3:path>
+                                </con3:param>
+                            </con3:xqueryTransform>
+                        </con2:expr>
+                    </con2:assign>
+                    <con2:ifThenElse>
+                        <con3:id>_ActionId-N53ee35e5.N386037b7.0.1531f3e125a.N7f6e</con3:id>
+                        <con2:case id="_BranchId-N53ee35e5.N386037b7.0.1531f3e125a.N7f6d">
+                            <con2:condition>
+                                <con3:xqueryText>$HasResultInBody='true'</con3:xqueryText>
+                            </con2:condition>
+                            <con2:actions>
+                                <con7:replace varName="body" contents-only="true" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con6="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/alert/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/typesystem/config" xmlns:con7="http://www.bea.com/wli/sb/stages/transform/config">
+                                    <con8:id xmlns:con8="http://www.bea.com/wli/sb/stages/config">_ActionId-N53ee35e5.N386037b7.0.1531f3e125a.N7f6c</con8:id>
+                                    <con1:expr>
+                                        <con8:xqueryTransform xmlns:con8="http://www.bea.com/wli/sb/stages/config">
+                                            <con8:resource ref="SR_Commons/XQuery/SupportComponent/ErrorManager/get_handleREQ_v2"/>
+                                            <con8:param name="messageHeader">
+                                                <con8:path>$RequestHeader</con8:path>
+                                            </con8:param>
+                                            <con8:param name="sourceErrorCode">
+                                                <con8:path>''</con8:path>
+                                            </con8:param>
+                                            <con8:param name="errorPlaceHolderPlace">
+                                                <con8:path>data($fault/ctx:location)</con8:path>
+                                            </con8:param>
+                                            <con8:param name="sourceErrorDesc">
+                                                <con8:path>''</con8:path>
+                                            </con8:param>
+                                            <con8:param name="sourceFault">
+                                                <con8:path>$body/*[1]</con8:path>
+                                            </con8:param>
+                                            <con8:param name="errorIndexSubModule">
+                                                <con8:path>data($RequestHeader/*[2]/*[1]/@operation)</con8:path>
+                                            </con8:param>
+                                            <con8:param name="errorPlaceHolderTime">
+                                                <con8:path>current-dateTime()</con8:path>
+                                            </con8:param>
+                                            <con8:param name="errorIndexModule">
+                                                <con8:path>data($RequestHeader/*[2]/*[1]/@name)</con8:path>
+                                            </con8:param>
+                                            <con8:param name="errorSourceDetails">
+                                                <con8:path>''</con8:path>
+                                            </con8:param>
+                                            <con8:param name="componentOperation">
+                                                <con8:path>$operation</con8:path>
+                                            </con8:param>
+                                            <con8:param name="errorSourceID">
+                                                <con8:path>'FRW'</con8:path>
+                                            </con8:param>
+                                            <con8:param name="componentName">
+                                                <con8:path>concat(
+data($RequestHeader/*[2]/*[1]/@operation),'_', data($RequestHeader/*[2]/*[1]/@name),'_OH'
+)</con8:path>
+                                            </con8:param>
+                                        </con8:xqueryTransform>
+                                    </con1:expr>
+                                </con7:replace>
+                            </con2:actions>
+                        </con2:case>
+                        <con2:default>
+                            <con7:replace varName="body" contents-only="true" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con6="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/alert/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/typesystem/config" xmlns:con7="http://www.bea.com/wli/sb/stages/transform/config">
+                                <con8:id xmlns:con8="http://www.bea.com/wli/sb/stages/config">_ActionId-N53ee35e5.N386037b7.0.1531f3e125a.N7f6b</con8:id>
+                                <con1:expr>
+                                    <con8:xqueryTransform xmlns:con8="http://www.bea.com/wli/sb/stages/config">
+                                        <con8:resource ref="SR_Commons/XQuery/SupportComponent/ErrorManager/get_handleREQ_v2"/>
+                                        <con8:param name="messageHeader">
+                                            <con8:path>$RequestHeader</con8:path>
+                                        </con8:param>
+                                        <con8:param name="sourceErrorCode">
+                                            <con8:path>''</con8:path>
+                                        </con8:param>
+                                        <con8:param name="errorPlaceHolderPlace">
+                                            <con8:path>data($fault/ctx:location)</con8:path>
+                                        </con8:param>
+                                        <con8:param name="sourceErrorDesc">
+                                            <con8:path>''</con8:path>
+                                        </con8:param>
+                                        <con8:param name="sourceFault">
+                                            <con8:path>$fault</con8:path>
+                                        </con8:param>
+                                        <con8:param name="errorIndexSubModule">
+                                            <con8:path>data($RequestHeader/*[2]/*[1]/@operation)</con8:path>
+                                        </con8:param>
+                                        <con8:param name="errorPlaceHolderTime">
+                                            <con8:path>current-dateTime()</con8:path>
+                                        </con8:param>
+                                        <con8:param name="errorIndexModule">
+                                            <con8:path>data($RequestHeader/*[2]/*[1]/@name)</con8:path>
+                                        </con8:param>
+                                        <con8:param name="errorSourceDetails">
+                                            <con8:path>''</con8:path>
+                                        </con8:param>
+                                        <con8:param name="componentOperation">
+                                            <con8:path>$operation</con8:path>
+                                        </con8:param>
+                                        <con8:param name="errorSourceID">
+                                            <con8:path>'FRW'</con8:path>
+                                        </con8:param>
+                                        <con8:param name="componentName">
+                                            <con8:path>concat(
+data($RequestHeader/*[2]/*[1]/@operation),'_', data($RequestHeader/*[2]/*[1]/@name),'_OH'
+)</con8:path>
+                                        </con8:param>
+                                    </con8:xqueryTransform>
+                                </con1:expr>
+                            </con7:replace>
+                        </con2:default>
+                    </con2:ifThenElse>
+                    <con7:wsCallout xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con6="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/alert/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/typesystem/config" xmlns:con7="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con8:id xmlns:con8="http://www.bea.com/wli/sb/stages/config">_ActionId-N53ee35e5.N386037b7.0.1531f3e125a.N7f6a</con8:id>
+                        <con1:service ref="DC_SC_FrameworkGateway/SupportAPI/Proxy/ErrorManager_Gateway" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con1:operation>handle</con1:operation>
+                        <con1:request>
+                            <con1:body wrapped="true">body</con1:body>
+                        </con1:request>
+                        <con1:response>
+                            <con1:body wrapped="true">body</con1:body>
+                        </con1:response>
+                        <con1:requestTransform/>
+                        <con1:responseTransform>
+                            <con7:replace contents-only="true" varName="body">
+                                <con8:id xmlns:con8="http://www.bea.com/wli/sb/stages/config">_ActionId-N53ee35e5.N386037b7.0.1531f3e125a.N7f69</con8:id>
+                                <con1:expr>
+                                    <con2:xqueryTransform xmlns:con8="http://www.bea.com/wli/sb/stages/config">
+                                        <con2:resource ref="SR_Commons/XQuery/get_ResponseHeader_v1"/>
+                                        <con2:param name="RequestHeader">
+                                            <con2:path>$RequestHeader</con2:path>
+                                        </con2:param>
+                                        <con2:param name="Result">
+                                            <con2:path>$body/*[1]/*[1]</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con1:expr>
+                            </con7:replace>
+                        </con1:responseTransform>
+                    </con7:wsCallout>
+                    <con2:replace contents-only="true" varName="body" xmlns:con6="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con3:id>_ActionId-N53ee35e5.N386037b7.0.1531f3e125a.N7f68</con3:id>
+                        <con2:expr>
+                            <con3:xqueryTransform>
+                                <con3:resource ref="ES_Consumer_v1/CSL/INT/OH/del/XQuery/get_Del_Consumer_FRSP"/>
+                                <con3:param name="ResponseHeader">
+                                    <con3:path>$body/*[1]</con3:path>
+                                </con3:param>
+                            </con3:xqueryTransform>
+                        </con2:expr>
+                    </con2:replace>
+                    <con5:route>
+                        <con3:id>_ActionId-N53ee35e5.N386037b7.0.1531f3e125a.N7f67</con3:id>
+                        <con5:service ref="DC_SC_FrameworkGateway/SupportAPI/Proxy/ConversationManager" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con5:operation>updConversationStatus</con5:operation>
+                        <con5:outboundTransform>
+                            <con2:replace varName="body" contents-only="true">
+                                <con3:id>_ActionId-N53ee35e5.N386037b7.0.1531f3e125a.N7f66</con3:id>
+                                <con2:expr>
+                                    <con3:xqueryTransform>
+                                        <con3:resource ref="SR_Commons/XQuery/SupportComponent/ConversationManager/get_UpdStatusREQ"/>
+                                        <con3:param name="ConversationID">
+                                            <con3:path>data($RequestHeader/*[2]/@conversationID)</con3:path>
+                                        </con3:param>
+                                        <con3:param name="SourceComponentOperation">
+                                            <con3:path>data($RequestHeader/*[2]/*[1]/@operation)</con3:path>
+                                        </con3:param>
+                                        <con3:param name="ConversationStatus">
+                                            <con3:path>'ERROR'</con3:path>
+                                        </con3:param>
+                                        <con3:param name="ResponseMessage">
+                                            <con3:path>$body/*[1]</con3:path>
+                                        </con3:param>
+                                        <con3:param name="SourceComponentName">
+                                            <con3:path>concat(
+data($RequestHeader/*[2]/*[1]/@operation),'_', data($RequestHeader/*[2]/*[1]/@name),'_OH'
+)</con3:path>
+                                        </con3:param>
+                                        <con3:param name="Result">
+                                            <con3:path>$body/*[1]/*[1]/*[4]</con3:path>
+                                        </con3:param>
+                                    </con3:xqueryTransform>
+                                </con2:expr>
+                            </con2:replace>
+                        </con5:outboundTransform>
+                    </con5:route>
+                    <con3:reply isError="true">
+                        <con3:id>_ActionId-N53ee35e5.N386037b7.0.1531f3e125a.N7f65</con3:id>
+                    </con3:reply>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline name="request-N3f57c309.N64aa63b6.0.152cd19734a.N7fcb" type="request">
+            <con:stage name="Request Validation">
+                <con:context xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/config"/>
+                <con:actions>
+                    <con2:assign varName="RequestHeader" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/config">
+                        <con3:id>_ActionId-N53ee35ec.N445cc81e.0.152d1131f64.N7fc6</con3:id>
+                        <con2:expr>
+                            <con3:xqueryText>$body/*[1]/*[1]</con3:xqueryText>
+                        </con2:expr>
+                    </con2:assign>
+                    <con2:validate xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/config">
+                        <con3:id>_ActionId-N3f57c309.N64aa63b6.0.152cd19734a.N7fc5</con3:id>
+                        <con2:schema ref="ES_Consumer_v1/ESC/Primary/del_Consumer_v1_EBM"/>
+                        <con2:schemaElement xmlns:v1="http://www.entel.cl/EBM/Consumer/del/v1">v1:Del_Consumer_REQ</con2:schemaElement>
+                        <con2:varName>body</con2:varName>
+                        <con2:location>
+                            <con3:xpathText>./*[1]</con3:xpathText>
+                        </con2:location>
+                    </con2:validate>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline name="response-N3f57c309.N64aa63b6.0.152cd19734a.N7fca" type="response">
+            <con:stage name="Response Validation">
+                <con:context xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/config"/>
+                <con:actions>
+                    <con2:validate xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/config">
+                        <con3:id>_ActionId-N3f57c309.N64aa63b6.0.152cd19734a.N7fc2</con3:id>
+                        <con2:schema ref="ES_Consumer_v1/ESC/Primary/del_Consumer_v1_EBM"/>
+                        <con2:schemaElement xmlns:v1="http://www.entel.cl/EBM/Consumer/del/v1">v1:Del_Consumer_RSP</con2:schemaElement>
+                        <con2:varName>body</con2:varName>
+                        <con2:location>
+                            <con3:xpathText>./*[1]</con3:xpathText>
+                        </con2:location>
+                    </con2:validate>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline name="request-N53ee35ec.N445cc81e.0.152d1131f64.N7fc5" type="request">
+            <con:stage name="Get Aux Parameters">
+                <con:context xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/config"/>
+                <con:actions>
+                    <con2:wsCallout xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/config">
+                        <con3:id>_ActionId-N53ee35ec.N445cc81e.0.152d1131f64.N7fbf</con3:id>
+                        <con2:service ref="DC_SC_FrameworkGateway/SupportAPI/Proxy/ParameterManager_Gateway" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con2:operation>get</con2:operation>
+                        <con2:request>
+                            <con2:body wrapped="false">Get</con2:body>
+                        </con2:request>
+                        <con2:response>
+                            <con2:body wrapped="false">Get</con2:body>
+                        </con2:response>
+                        <con2:requestTransform>
+                            <con2:assign varName="Get">
+                                <con3:id>_ActionId-N53ee35ec.N445cc81e.0.152d1131f64.N7fbc</con3:id>
+                                <con2:expr>
+                                    <con3:xqueryTransform>
+                                        <con3:resource ref="SR_Commons/XQuery/SupportComponent/ParameterManager/get_getREQ_v1"/>
+                                        <con3:param name="Keys">
+                                            <con3:path>&lt;Keys>
+&lt;Key>get_Consumer_OH.ConsumerType&lt;/Key>
+&lt;/Keys></con3:path>
+                                        </con3:param>
+                                        <con3:param name="RequestHeader">
+                                            <con3:path>$RequestHeader</con3:path>
+                                        </con3:param>
+                                    </con3:xqueryTransform>
+                                </con2:expr>
+                            </con2:assign>
+                        </con2:requestTransform>
+                        <con2:responseTransform/>
+                    </con2:wsCallout>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline name="response-N53ee35ec.N445cc81e.0.152d1131f64.N7fc4" type="response">
+            <con:stage name="Prepare Call">
+                <con:context xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/config"/>
+                <con:actions>
+                    <con5:route xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/config">
+                        <con3:id>_ActionId-N53ee35ec.N445cc81e.0.152d1131f64.N7f4e</con3:id>
+                        <con5:service ref="DC_SC_FrameworkGateway/SupportAPI/Proxy/ConversationManager" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con5:operation>updConversationStatus</con5:operation>
+                        <con5:outboundTransform>
+                            <con2:replace varName="body" contents-only="true">
+                                <con3:id>_ActionId-N53ee35ec.N445cc81e.0.152d1131f64.N7ee9</con3:id>
+                                <con2:expr>
+                                    <con3:xqueryTransform>
+                                        <con3:resource ref="SR_Commons/XQuery/SupportComponent/ConversationManager/get_UpdStatusREQ"/>
+                                        <con3:param name="ConversationID">
+                                            <con3:path>data($RequestHeader/*[2]/@conversationID)</con3:path>
+                                        </con3:param>
+                                        <con3:param name="SourceComponentOperation">
+                                            <con3:path>data($RequestHeader/*[2]/*[1]/@operation)</con3:path>
+                                        </con3:param>
+                                        <con3:param name="ConversationStatus">
+                                            <con3:path>'OK'</con3:path>
+                                        </con3:param>
+                                        <con3:param name="ResponseMessage">
+                                            <con3:path>$body/*[1]</con3:path>
+                                        </con3:param>
+                                        <con3:param name="SourceComponentName">
+                                            <con3:path>concat(
+data($RequestHeader/*[2]/*[1]/@operation),'_', data($RequestHeader/*[2]/*[1]/@name),'_OH'
+)</con3:path>
+                                        </con3:param>
+                                        <con3:param name="Result">
+                                            <con3:path>$body/*[1]/*[1]/*[4]</con3:path>
+                                        </con3:param>
+                                    </con3:xqueryTransform>
+                                </con2:expr>
+                            </con2:replace>
+                        </con5:outboundTransform>
+                    </con5:route>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:flow>
+            <con:pipeline-node name="Schema Validation">
+                <con:request>request-N3f57c309.N64aa63b6.0.152cd19734a.N7fcb</con:request>
+                <con:response>response-N3f57c309.N64aa63b6.0.152cd19734a.N7fca</con:response>
+            </con:pipeline-node>
+            <con:pipeline-node name="Auxiliary Logic">
+                <con:request>request-N53ee35ec.N445cc81e.0.152d1131f64.N7fc5</con:request>
+                <con:response>response-N53ee35ec.N445cc81e.0.152d1131f64.N7fc4</con:response>
+            </con:pipeline-node>
+            <con:route-node name="Call - INT-AS400-CLI_ClientDelete_RA">
+                <con:context xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/config"/>
+                <con:actions>
+                    <con4:route xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/config">
+                        <con3:id>_ActionId-N53ee35ec.N445cc81e.0.152d1131f64.N7ffd</con3:id>
+                        <con4:service ref="DC_RA_INT-AS400_v1/ResourceAdapters/INT-AS400-CLI_ClientDelete_RA_v1/INT-AS400-CLI_ClientDelete_RA" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con4:operation>ClientDelete</con4:operation>
+                        <con4:outboundTransform>
+                            <con2:replace contents-only="true" varName="body">
+                                <con3:id>_ActionId-N53ee35ec.N445cc81e.0.152d1131f64.N7fc9</con3:id>
+                                <con2:expr>
+                                    <con3:xqueryTransform>
+                                        <con3:resource ref="ES_Consumer_v1/CSL/INT/OH/del/XQuery/get_INT-AS400-CLI_ClientDelete_REQ"/>
+                                        <con3:param name="Del_Consumer_REQ">
+                                            <con3:path>$body/*[1]</con3:path>
+                                        </con3:param>
+                                        <con3:param name="ConsumerType">
+                                            <con3:path>data($Get/*[1]/*[@key='get_Consumer_OH.ConsumerType']/@value)</con3:path>
+                                        </con3:param>
+                                    </con3:xqueryTransform>
+                                </con2:expr>
+                            </con2:replace>
+                            <con2:delete varName="Get">
+                                <con3:id>_ActionId-N53ee3f79.N7070ebab.0.155783c1394.N7ffe</con3:id>
+                            </con2:delete>
+                        </con4:outboundTransform>
+                        <con4:responseTransform>
+                            <con2:replace contents-only="true" varName="body">
+                                <con3:id>_ActionId-N53ee35ec.N445cc81e.0.152d1131f64.N7fb9</con3:id>
+                                <con2:expr>
+                                    <con3:xqueryTransform>
+                                        <con3:resource ref="ES_Consumer_v1/CSL/INT/OH/del/XQuery/get_Del_Consumer_RSP"/>
+                                        <con3:param name="INT-AS400-CLI_ClientDelete_RSP">
+                                            <con3:path>$body/*[1]</con3:path>
+                                        </con3:param>
+                                        <con3:param name="RequestHeader">
+                                            <con3:path>$RequestHeader</con3:path>
+                                        </con3:param>
+                                    </con3:xqueryTransform>
+                                </con2:expr>
+                            </con2:replace>
+                        </con4:responseTransform>
+                    </con4:route>
+                </con:actions>
+            </con:route-node>
+        </con:flow>
+    </con:router>
+</con:pipelineEntry>

@@ -1,0 +1,10 @@
+<ns0:ResponseHeader xmlns:ns0="http://www.entel.cl/ESO/MessageHeader/v1">
+  <ns0:Consumer sysCode="001" enterpriseCode="260" countryCode="CHL"/>
+  <ns0:Trace reqTimestamp="2015-12-17T09:31:52.0Z" rspTimestamp="2015-12-04T16:16:43.774-03:00"
+             processID="ORDER_TO_PAYMENT" eventID="123123-AGH-221?" conversationID="CHL_17112015155030_1042"
+             correlationID="">
+    <ns0:Service code="001" name="Consumer" operation="get"/>
+  </ns0:Trace>
+  <ns0:Channel name="WEB" mode=""/>
+  <ns1:Result xmlns:ns1="http://www.entel.cl/ESO/Result/v1"/>
+</ns0:ResponseHeader>

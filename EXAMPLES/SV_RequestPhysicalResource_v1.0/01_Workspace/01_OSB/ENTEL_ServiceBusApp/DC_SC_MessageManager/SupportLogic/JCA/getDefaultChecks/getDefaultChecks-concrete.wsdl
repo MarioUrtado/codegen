@@ -1,0 +1,15 @@
+<wsdl:definitions targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/ENTEL_ServiceBusApp/DC_SC_MessageManager/getDefaultChecks" name="getDefaultChecks-concrete" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+    <wsdl:import location="getDefaultChecks.wsdl" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/ENTEL_ServiceBusApp/DC_SC_MessageManager/getDefaultChecks"/>
+    <wsdl:binding name="getDefaultChecks_ptt-binding" type="get:getDefaultChecks_ptt" xmlns:get="http://xmlns.oracle.com/pcbpel/adapter/db/ENTEL_ServiceBusApp/DC_SC_MessageManager/getDefaultChecks">
+        <soap:binding style="document" transport="http://www.bea.com/wli/sb/transports/jca"/>
+        <wsdl:operation name="getDefaultChecks">
+            <soap:operation soapAction="getDefaultChecks"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+</wsdl:definitions>

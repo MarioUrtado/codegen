@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/Dimension/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/Dimension/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="ID" type="xs:string"/>									
+	<xs:element name="description" type="xs:string"/>									
+	<xs:element name="methodDesc" type="xs:string"/>									
+	<xs:element name="presentationMethod" type="xs:string"/>									
+	<xs:element name="system" type="xs:string"/>									
+	<xs:element name="value" type="xs:string"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="Dimension" type="tns:Dimension_Type"/>
+	<xs:complexType name="Dimension_Type">
+		<xs:sequence> 
+		<xs:element ref="tns:ID" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:description" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:methodDesc" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:presentationMethod" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:system" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:value" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

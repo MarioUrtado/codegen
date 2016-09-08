@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.entel.cl/ESO/ErrorTreatment/v1" targetNamespace="http://www.entel.cl/ESO/ErrorTreatment/v1" elementFormDefault="qualified">
+	<element name="Treatment">
+		<complexType>
+			<sequence>
+				<element name="Error_Treatment_Id" type="tns:error_Treatment_Id_SType"/>
+				
+			</sequence>
+		</complexType>
+	</element>
+	<simpleType name="error_Treatment_Id_SType">
+		<annotation>
+			<documentation>
+               Identificacion of a error Treatment.
+            </documentation>
+		</annotation>
+		<restriction base="int"/>
+	</simpleType>	
+</schema>

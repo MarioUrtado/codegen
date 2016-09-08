@@ -1,0 +1,65 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/registerCorrelationMemberAdapter" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/registerCorrelationMemberAdapter" elementFormDefault="qualified">
+ <element name="InputParameters">
+      <complexType>
+         <sequence>
+            <element name="GROUP_NAME" type="string" db:index="1" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="GROUP_DESC" type="string" db:index="2" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="GROUP_HEADER" type="string" db:index="3" db:type="CLOB" minOccurs="0" nillable="true"/>
+            <element name="MEMBER_TYPES" type="db:MEMBER_T_CUR" db:index="4" db:type="Array" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <element name="OutputParameters">
+      <complexType>
+         <sequence>
+            <element name="ID_GROUP" type="decimal" db:index="5" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_SOURCE_ERROR_DESC" type="string" db:index="6" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_SOURCE_ERROR_CODE" type="string" db:index="7" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <complexType name="MEMBER_T_CUR">
+      <sequence>
+         <element name="MEMBER_TYPES_ITEM" type="db:MEMBER_T" db:type="Struct" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+      </sequence>
+   </complexType>
+   <complexType name="MEMBER_T">
+      <sequence>
+         <element name="MEMBER_NAME_" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="TYPE_MEMBER_" type="db:string30" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="CORRELATION_ID_" type="db:string255" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="MEMBER_ADDRESS_" type="db:string255" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+      </sequence>
+   </complexType>
+   <simpleType name="string50">
+      <restriction base="string">
+         <maxLength value="50"/>
+      </restriction>
+   </simpleType>
+
+   <simpleType name="string30">
+      <restriction base="string">
+
+         <maxLength value="30"/>
+      </restriction>
+   </simpleType>
+
+   <simpleType name="string255">
+      <restriction base="string">
+         <maxLength value="255"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string150">
+      <restriction base="string">
+
+         <maxLength value="150"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string100">
+      <restriction base="string">
+
+         <maxLength value="100"/>
+      </restriction>
+   </simpleType>
+</schema>
+

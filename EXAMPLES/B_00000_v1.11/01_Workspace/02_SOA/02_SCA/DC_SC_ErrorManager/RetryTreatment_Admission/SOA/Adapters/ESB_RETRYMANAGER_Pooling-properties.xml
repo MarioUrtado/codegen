@@ -1,0 +1,50 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+   <entry key="root_descriptor_alias">ESB_RETRYMANAGER</entry>
+   <entry key="ESB_RETRYMANAGER.DATE_NEXT_RETRY:db_column_scale">6</entry>
+   <entry key="ESB_RETRYMANAGER.ID:db_column_not_null">true</entry>
+   <entry key="ESB_RETRYMANAGER.CREATIONDATE:db_column_type">DATE</entry>
+   <entry key="ESB_RETRYMANAGER.ERROR_TREATMENT_ID:db_column_type">NUMBER</entry>
+   <entry key="ESB_RETRYMANAGER.ID:db_column_type">NUMBER</entry>
+   <entry key="ESB_RETRYMANAGER.RETRY_COUNT:db_column_type">NUMBER</entry>
+   <entry key="ESB_RETRYMANAGER.DATE_NEXT_RETRY:db_column_not_null">false</entry>
+   <entry key="ESB_RETRYMANAGER.ERROR_TREATMENT_ID:db_column_precision">38</entry>
+   <entry key="ESB_RETRYMANAGER.STATUS:db_column_not_null">true</entry>
+   <entry key="ESB_RETRYMANAGER.ID:db_column_scale">0</entry>
+   <entry key="ESB_RETRYMANAGER.REQUEST_BODY:db_column_type">CLOB</entry>
+   <entry key="ESB_RETRYMANAGER.ERROR_HOSPITAL_ID:db_column_type">NUMBER</entry>
+   <entry key="ESB_RETRYMANAGER.ERROR_HOSPITAL_ID:db_column_not_null">false</entry>
+   <entry key="ESB_RETRYMANAGER.ERROR_HOSPITAL_ID:db_column_scale">0</entry>
+   <entry key="ESB_RETRYMANAGER.ERROR_TREATMENT_ID:db_column_scale">0</entry>
+   <entry key="ESB_RETRYMANAGER.CONV_ORIGINAL_ID:db_column_not_null">true</entry>
+   <entry key="ESB_RETRYMANAGER.RETRYMANAGER_CONFIG_ID:db_column_type">NUMBER</entry>
+   <entry key="ESB_RETRYMANAGER:db_table_type">TABLE</entry>
+   <entry key="ESB_RETRYMANAGER.CONV_ORIGINAL_ID:db_column_type">VARCHAR2</entry>
+   <entry key="ESB_RETRYMANAGER.ERROR_HOSPITAL_ID:db_column_precision">38</entry>
+   <entry key="ESB_RETRYMANAGER.RETRY_COUNT:db_column_precision">38</entry>
+   <entry key="ESB_RETRYMANAGER.RETRY_COUNT:db_column_not_null">false</entry>
+   <entry key="ESB_RETRYMANAGER.REQUEST_BODY:db_column_not_null">false</entry>
+   <entry key="return_single_result_set">false</entry>
+   <entry key="ESB_RETRYMANAGER.CONV_ORIGINAL_ID:db_column_size">100</entry>
+   <entry key="ESB_RETRYMANAGER.STATUS:db_column_type">VARCHAR2</entry>
+   <entry key="ESB_RETRYMANAGER:db_column_9">CREATIONDATE</entry>
+   <entry key="ESB_RETRYMANAGER.RETRYMANAGER_CONFIG_ID:db_column_precision">38</entry>
+   <entry key="ESB_RETRYMANAGER:db_column_8">REQUEST_BODY</entry>
+   <entry key="ESB_RETRYMANAGER.RETRY_COUNT:db_column_scale">0</entry>
+   <entry key="ESB_RETRYMANAGER:db_column_7">ERROR_TREATMENT_ID</entry>
+   <entry key="ESB_RETRYMANAGER:db_column_6">DATE_NEXT_RETRY</entry>
+   <entry key="ESB_RETRYMANAGER:db_column_5">STATUS</entry>
+   <entry key="ESB_RETRYMANAGER.RETRYMANAGER_CONFIG_ID:db_column_not_null">true</entry>
+   <entry key="ESB_RETRYMANAGER:db_column_4">RETRY_COUNT</entry>
+   <entry key="ESB_RETRYMANAGER:db_column_3">CONV_ORIGINAL_ID</entry>
+   <entry key="ESB_RETRYMANAGER:db_column_2">ERROR_HOSPITAL_ID</entry>
+   <entry key="ESB_RETRYMANAGER.ID:db_column_precision">38</entry>
+   <entry key="ESB_RETRYMANAGER:db_column_1">RETRYMANAGER_CONFIG_ID</entry>
+   <entry key="ESB_RETRYMANAGER:db_column_0">ID</entry>
+   <entry key="ESB_RETRYMANAGER.CREATIONDATE:db_column_not_null">false</entry>
+   <entry key="ESB_RETRYMANAGER.STATUS:db_column_size">20</entry>
+   <entry key="ESB_RETRYMANAGER.DATE_NEXT_RETRY:db_column_type">TIMESTAMP</entry>
+   <entry key="ESB_RETRYMANAGER.RETRYMANAGER_CONFIG_ID:db_column_scale">0</entry>
+   <entry key="ESB_RETRYMANAGER.ERROR_TREATMENT_ID:db_column_not_null">false</entry>
+</properties>

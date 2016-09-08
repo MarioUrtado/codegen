@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/Date/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/Date/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="Date" type="tns:Date_Type"/>
+	<xs:complexType name="Date_Type">
+		
+			<xs:annotation>
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">As defined in document &lt;b&gt;Data types in IM&lt;/b&gt;. Document found in Eridoc:</xs:documentation>
+							
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">&lt;a href="https://erilink.ericsson.se/eridoc/erl/objectId/09004cff8a0074ea?docno=6/15935-FCP116428Uen&amp;amp;action=current&amp;amp;format=msw8"&gt;&lt;font color="#0000ff"&gt;&lt;u&gt;https://erilink.ericsson.se/eridoc/erl/objectId/09004cff8a0074ea?docno=6/15935-FCP116428Uen&amp;amp;action=current&amp;amp;format=msw8&lt;/u&gt;&lt;/font&gt;&lt;/a&gt;</xs:documentation>
+						
+			</xs:annotation>
+		<xs:sequence> 
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

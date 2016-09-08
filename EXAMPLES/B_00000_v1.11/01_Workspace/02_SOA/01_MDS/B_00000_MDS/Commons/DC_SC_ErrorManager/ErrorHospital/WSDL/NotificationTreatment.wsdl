@@ -1,0 +1,40 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="NotificationTreatment"
+     targetNamespace="http://www.entel.cl/ESO/NotificationTreatment/v1"
+     xmlns:tns="http://www.entel.cl/ESO/NotificationTreatment/v1"
+     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+     xmlns:msg="http://www.entel.cl/ESO/ErrorTreatment/v1"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+    >
+    <wsdl:types>
+        <xs:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.entel.cl/ESO/NotificationTreatment/v1"
+             xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msg="http://www.entel.cl/ESO/ErrorTreatment/v1"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/">
+            <xs:import namespace="http://www.entel.cl/ESO/ErrorTreatment/v1" schemaLocation="../XSD/Treatment_v1_ESO.xsd"/>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="notification_Treatment">
+        <wsdl:part name="In" element="msg:Treatment"/>
+    </wsdl:message>
+    <wsdl:portType name="NotificationTreatment_PortType">
+        <wsdl:operation name="In">
+            <wsdl:input message="tns:notification_Treatment"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="NotificationTreatment_SOAP12Binding" type="tns:NotificationTreatment_PortType">
+        <wsoap12:binding style="document" transport="http://www.bea.com/wli/sb/transports/sb"/>
+        <wsdl:operation name="In">
+            <wsoap12:operation style="document" soapAction="" soapActionRequired="false"/>
+            <wsdl:input>
+                <wsoap12:body use="literal" parts="In"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="NotificationTreatment_Service">
+        <wsdl:port name="NotificationTreatment_Port" binding="tns:NotificationTreatment_SOAP12Binding">
+            <wsoap12:address location="sb://NotificationTreatment"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

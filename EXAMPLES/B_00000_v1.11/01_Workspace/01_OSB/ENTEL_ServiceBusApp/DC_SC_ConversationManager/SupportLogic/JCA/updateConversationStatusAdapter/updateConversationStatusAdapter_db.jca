@@ -1,0 +1,12 @@
+<adapter-config name="updateConversationManagerAdapter" adapter="db" wsdlLocation="updateConversationStatusAdapter.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="Connection2" location="eis/DB/FRW/ConversationManager"/>
+  <endpoint-interaction portType="updateConversationManagerAdapter_ptt" operation="updateConversationManagerAdapter">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="PackageName" value="ESB_CONVERSATION_MANAGER_PKG"/>
+      <property name="ProcedureName" value="UPDATECONVERSATIONSTATUS"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

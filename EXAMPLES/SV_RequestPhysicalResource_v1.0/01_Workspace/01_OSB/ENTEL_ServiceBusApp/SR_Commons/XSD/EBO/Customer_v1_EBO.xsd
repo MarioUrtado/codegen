@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/Customer/v1"
+	xmlns:ebons_timeperiod="http://www.entel.cl/EBO/TimePeriod/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/Customer/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/TimePeriod/v1" schemaLocation="TimePeriod_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="ID" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>A unique identifier that enables different instances of a Customer to be distinguished from each other.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="customerName" type="xs:string"/>									
+	<xs:element name="customerRank" type="xs:integer">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>The relative importance of this Customer compared to other Customers.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="customerStatus" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>The current condition of a customer such as</xs:documentation>
+					<xs:documentation>&lt;ul&gt;</xs:documentation>
+					<xs:documentation>	&lt;li&gt;unknown&lt;/li&gt;</xs:documentation>
+					<xs:documentation>	&lt;li&gt;active&lt;/li&gt;</xs:documentation>
+					<xs:documentation>	&lt;li&gt;inactive&lt;/li&gt;</xs:documentation>
+					<xs:documentation>	&lt;li&gt;terminated&lt;/li&gt;</xs:documentation>
+					<xs:documentation>&lt;/ul&gt;</xs:documentation>
+					<xs:documentation>pending</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="dispatchCodeAuthorization" type="xs:integer"/>									
+	<xs:element name="dispatchDateAuthorization" type="xs:dateTime"/>									
+	<xs:element name="name" type="xs:string"/>									
+	<xs:element name="objectID" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>Unambiguously distinguishes different object instances.  It is the naming attribute of the object.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="partyRoleId" type="xs:string"/>									
+	<xs:element name="patent" type="xs:string"/>									
+	<xs:element name="refMarketSegment" type="xs:string"/>									
+	<xs:element name="status" type="xs:string">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>used to track the lifecycle status, e.g. existing, prospective or former customers.</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<xs:element name="transferCode" type="xs:integer"/>									
+	<xs:element name="type" type="xs:string"/>									
+	<xs:element name="version" type="xs:string"/>									
+	<xs:element name="validFor" type="ebons_timeperiod:TimePeriod_Type">
+					<xs:annotation xmlns:xs="http://www.w3.org/2001/XMLSchema">
+					<xs:documentation>the time period that the PartyRole is valid for</xs:documentation>
+				</xs:annotation>
+			</xs:element>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="Customer" type="tns:Customer_Type"/>
+	<xs:complexType name="Customer_Type">
+		
+			<xs:annotation>
+			<xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema">A person or organization that buys or has bought or otherwise obtained Products, Resources and/or Services from the enterprise or receives free offers for Products, Resources, and/or Services.  This is modeled as a Party playing the role of Customer. Customers do not have to be end-users. For example, a Customer can also be another Service Provider (i.e., one who resells the enterprise's Products, Services and/or Resources), or a Service Providers that leases the enterprise's Products, Services and/or Resources.</xs:documentation>
+						
+			</xs:annotation>
+		<xs:sequence> 
+		<xs:element ref="tns:ID" maxOccurs="1" minOccurs="1"/>
+		<xs:element ref="tns:customerName" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:customerRank" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:customerStatus" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:dispatchCodeAuthorization" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:dispatchDateAuthorization" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:name" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:objectID" maxOccurs="1" minOccurs="1"/>
+		<xs:element ref="tns:partyRoleId" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:patent" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:refMarketSegment" maxOccurs="1" minOccurs="1"/>
+		<xs:element ref="tns:status" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:transferCode" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:type" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:version" maxOccurs="1" minOccurs="1"/>
+		<xs:element ref="tns:validFor" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

@@ -1,0 +1,58 @@
+<schema targetNamespace="http://www.entel.cl/SC/ConversationManager/subscribe/v1" elementFormDefault="qualified" version="1.0" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.entel.cl/SC/ConversationManager/subscribe/v1"  xmlns:esons_messageHeader="http://www.entel.cl/ESO/MessageHeader/v1" xmlns:conversation="http://www.entel.cl/SC/ConversationManager/Aux/Conversation" xmlns:eddns_dictionary="http://www.entel.cl/EDD/Dictionary/v1" xmlns:esons_result="http://www.entel.cl/ESO/Result/v2">
+  
+  <import namespace="http://www.entel.cl/ESO/MessageHeader/v1" schemaLocation="../../../../SR_Commons/XSD/ESO/MessageHeader_v1_ESO.xsd"/>
+  <import namespace="http://www.entel.cl/SC/ConversationManager/Aux/Conversation" schemaLocation="../Conversation.xsd"/>
+  <import namespace="http://www.entel.cl/ESO/Result/v2" schemaLocation="../../../../SR_Commons/XSD/ESO/Result_v2_ESO.xsd"/>
+  <import namespace="http://www.entel.cl/EDD/Dictionary/v1" schemaLocation="../../../../SR_Commons/XSD/EDD/Dictionary_v1_EDD.xsd"/>
+  
+  <element name="SubscribeREQ" type="tns:SubscribeREQ_Type"/>
+  <element name="SubscribeRSP" type="tns:SubscribeRSP_Type"/>
+  
+  <complexType name="SubscribeREQ_Type">
+    <sequence>
+      <element ref="esons_messageHeader:RequestHeader"/>
+      <element name="Subscriber">
+        <complexType>
+          <sequence>
+            <element ref="conversation:ConversationID">
+              <annotation>
+                <documentation>--</documentation>
+              </annotation>
+            </element>
+            <choice>
+              <sequence>
+                <element name="JMSCallbackAddress" type="tns:CallbackAddress_Type"/>
+              </sequence>
+              <sequence>
+                <element name="HTTPCallbackAddress" type="tns:CallbackAddress_Type"/>
+              </sequence>
+            </choice>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="Provider">
+        <complexType>
+          <sequence>
+            <element ref="conversation:ConversationID">
+              <annotation>
+                <documentation>--</documentation>
+              </annotation>
+            </element>
+          </sequence>
+        </complexType>
+      </element>
+    </sequence>
+  </complexType>
+  
+  <complexType name="SubscribeRSP_Type">
+    <sequence>
+      <element ref="esons_result:Result"/>
+    </sequence>
+  </complexType>
+  
+  <complexType name="CallbackAddress_Type">
+      <attribute name="addr" type="eddns_dictionary:genericStringValue_SType"/>
+  </complexType>
+  
+
+</schema>

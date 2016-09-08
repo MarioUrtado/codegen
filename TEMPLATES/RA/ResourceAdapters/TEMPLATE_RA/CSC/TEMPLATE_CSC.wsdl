@@ -1,0 +1,45 @@
+<wsdl:definitions targetNamespace="http://www.entel.cl/RA/%SYSTEM_API%/%OPERATION%/v1" xmlns:tns="http://www.entel.cl/RA/%SYSTEM_API%/%OPERATION%/v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:ns="http://schemas.xmlsoap.org/soap/encoding/" xmlns:csmns="http://www.entel.cl/CSM/RA/%SYSTEM_API%/%OPERATION%/v1">
+  <wsdl:types>
+    <xs:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://www.entel.cl/CSM/RA/%SYSTEM_API%/%OPERATION%/v1"
+                 schemaLocation="%SYSTEM_API%_%OPERATION%_v1_CSM.xsd"/>
+    </xs:schema>
+  </wsdl:types>
+
+  <wsdl:message name="%OPERATION%_Message_In">
+    <wsdl:part name="In" element="csmns:%SYSTEM_API%_%OPERATION%_REQ"/>
+  </wsdl:message>
+  
+  <wsdl:message name="%OPERATION%_Message_Out">
+    <wsdl:part name="Out" element="csmns:%SYSTEM_API%_%OPERATION%_RSP"/>
+  </wsdl:message>
+  
+ 
+  <wsdl:portType name="%OPERATION%_PortType">
+    <wsdl:operation name="%OPERATION%">
+      <wsdl:input message="tns:%OPERATION%_Message_In"/>
+      <wsdl:output message="tns:%OPERATION%_Message_Out"/>
+    </wsdl:operation>
+  </wsdl:portType>
+
+  
+  <wsdl:binding name="%OPERATION%_SOAP12Binding" type="tns:%OPERATION%_PortType">
+    <wsoap12:binding style="document" transport="http://www.bea.com/wli/sb/transports/sb"/>
+    <wsdl:operation name="%OPERATION%">
+      <wsoap12:operation style="document" soapAction=""/>
+      <wsdl:input>
+        <wsoap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsoap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+
+  <wsdl:service name="%OPERATION%_Service">
+    <wsdl:port name="%OPERATION%_Port" binding="tns:%OPERATION%_SOAP12Binding">
+      <wsoap12:address location="sb://%SYSTEM_API%_%OPERATION%_RA"/>
+    </wsdl:port>
+  </wsdl:service>
+
+</wsdl:definitions>

@@ -1,0 +1,15 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="NotificationTreatment"
+     targetNamespace="http://www.entel.cl/ESO/NotificationTreatment/v1"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     xmlns:bpws="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:tns="http://www.entel.cl/ESO/NotificationTreatment/v1"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <plnk:partnerLinkType name="Call_NotificationTreatment_DirectBinding">
+        <plnk:role name="NotificationTreatment_PortType" portType="tns:NotificationTreatment_PortType"/>
+    </plnk:partnerLinkType>
+    <wsdl:import namespace="http://www.entel.cl/ESO/NotificationTreatment/v1" location="oramds:/apps/Commons/DC_SC_ErrorManager/ErrorHospital/WSDL/NotificationTreatment.wsdl"/>
+</wsdl:definitions>

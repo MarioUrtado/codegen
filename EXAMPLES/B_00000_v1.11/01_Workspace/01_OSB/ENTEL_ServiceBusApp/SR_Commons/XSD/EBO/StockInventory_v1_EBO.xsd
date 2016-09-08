@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/StockInventory/v1"
+	xmlns:ebons_quantity="http://www.entel.cl/EBO/Quantity/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/StockInventory/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/Quantity/v1" schemaLocation="Quantity_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="incomingDate" type="xs:dateTime"/>									
+	<xs:element name="inventoryCode" type="xs:string"/>									
+	<xs:element name="outgoingDate" type="xs:dateTime"/>									
+	<xs:element name="publishInd" type="xs:string"/>									
+	<xs:element name="statusCode" type="xs:string"/>									
+	<xs:element name="statusDescription" type="xs:string"/>									
+	<xs:element name="transactionType" type="xs:string"/>									
+	<xs:element name="quantity" type="ebons_quantity:Quantity_Type"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="StockInventory" type="tns:StockInventory_Type"/>
+	<xs:complexType name="StockInventory_Type">
+		<xs:sequence> 
+		<xs:element ref="tns:incomingDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:inventoryCode" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:outgoingDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:publishInd" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:statusCode" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:statusDescription" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:transactionType" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:quantity" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

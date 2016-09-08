@@ -1,0 +1,12 @@
+<adapter-config name="call_sp_register_retry" adapter="db" wsdlLocation="../WSDLs/call_sp_register_retry.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="ENTEL01" location="eis/DB/FRW/ErrorHospital"/>
+  <endpoint-interaction portType="call_sp_register_retry_ptt" operation="call_sp_register_retry">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="PackageName" value="ESB_RETRY_MANAGER_PKG"/>
+      <property name="ProcedureName" value="SP_REGISTER_RETRY"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

@@ -1,0 +1,101 @@
+<schema elementFormDefault="qualified"
+        targetNamespace="http://www.entel.cl/CSM/RA/PER-EBS-INV-EBS-INV/PR-CREATEREQPHYRES/v1" version="1.0"
+        xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ebons_consumer="http://www.entel.cl/EBO/Consumer/v1"
+        xmlns:header="http://www.entel.cl/ESO/MessageHeader/v1" xmlns:res="http://www.entel.cl/ESO/Result/v2"
+        xmlns:tns="http://www.entel.cl/CSM/RA/PER-EBS-INV-EBS-INV/PR-CREATEREQPHYRES/v1"
+        xmlns:ebons_physicalresource="http://www.entel.cl/EBO/PhysicalResource/v1"
+        xmlns:ebons_stocktransaction="http://www.entel.cl/EBO/StockTransaction/v1"
+        xmlns:ebons_issuingcompany="http://www.entel.cl/EBO/IssuingCompany/v1"
+        xmlns:ebons_freightinvoice="http://www.entel.cl/EBO/FreightInvoice/v1"
+        xmlns:ebons_physicalresourcespec="http://www.entel.cl/EBO/PhysicalResourceSpec/v1"
+        xmlns:ebons_freightinvoiceitem="http://www.entel.cl/EBO/FreightInvoiceItem/v1"
+        xmlns:ebons_partyrole="http://www.entel.cl/EBO/PartyRole/v1">
+  <import namespace="http://www.entel.cl/ESO/Result/v2"
+          schemaLocation="../../../../SR_Commons/XSD/ESO/Result_v2_ESO.xsd"/>
+  <import namespace="http://www.entel.cl/EBO/Consumer/v1"
+          schemaLocation="../../../../SR_Commons/XSD/EBO/Consumer_v1_EBO.xsd"/>
+  <import namespace="http://www.entel.cl/ESO/MessageHeader/v1"
+          schemaLocation="../../../../SR_Commons/XSD/ESO/MessageHeader_v1_ESO.xsd"/>
+  <import namespace="http://www.entel.cl/EBO/PhysicalResource/v1"
+          schemaLocation="../../../../SR_Commons/XSD/EBO/PhysicalResource_v1_EBO.xsd"/>
+  <import namespace="http://www.entel.cl/EBO/StockTransaction/v1"
+          schemaLocation="../../../../SR_Commons/XSD/EBO/StockTransaction_v1_EBO.xsd"/>
+  <import namespace="http://www.entel.cl/EBO/IssuingCompany/v1"
+          schemaLocation="../../../../SR_Commons/XSD/EBO/IssuingCompany_v1_EBO.xsd"/>
+  <import namespace="http://www.entel.cl/EBO/FreightInvoice/v1"
+          schemaLocation="../../../../SR_Commons/XSD/EBO/FreightInvoice_v1_EBO.xsd"/>
+  <import namespace="http://www.entel.cl/EBO/PhysicalResourceSpec/v1"
+          schemaLocation="../../../../SR_Commons/XSD/EBO/PhysicalResourceSpec_v1_EBO.xsd"/>
+  <import namespace="http://www.entel.cl/EBO/FreightInvoiceItem/v1"
+          schemaLocation="../../../../SR_Commons/XSD/EBO/FreightInvoiceItem_v1_EBO.xsd"/>
+  <import namespace="http://www.entel.cl/EBO/PartyRole/v1"
+          schemaLocation="../../../../SR_Commons/XSD/EBO/PartyRole_v1_EBO.xsd"/>
+  <complexType name="PER-EBS-INV-EBS-INV_PR-CREATEREQPHYRES_REQ_Type">
+    <sequence>
+      <element ref="header:RequestHeader"/>
+      <element name="Body">
+        <complexType>
+          <sequence>
+            <element maxOccurs="1" minOccurs="1" name="FreightInvoice">
+              <complexType>
+                <sequence>
+                  <element maxOccurs="unbounded" minOccurs="1" name="FreightInvoiceItem">
+                    <complexType>
+                      <sequence>
+                        <element maxOccurs="1" minOccurs="1" ref="ebons_freightinvoiceitem:needDate"/>
+                        <element maxOccurs="1" minOccurs="1" ref="ebons_freightinvoiceitem:quantity"/>
+                        <element maxOccurs="1" minOccurs="1" name="PhysicalResource">
+                          <complexType>
+                            <sequence>
+                              <element maxOccurs="1" minOccurs="0" ref="ebons_physicalresource:serialNumber"/>
+                              <element maxOccurs="1" minOccurs="1" name="PhysicalResourceSpec">
+                                <complexType>
+                                  <sequence>
+                                    <element maxOccurs="1" minOccurs="1" ref="ebons_physicalresourcespec:skuNumber"/>
+                                  </sequence>
+                                </complexType>
+                              </element>
+                            </sequence>
+                          </complexType>
+                        </element>
+                        <element maxOccurs="1" minOccurs="1" name="StockTransaction">
+                          <complexType>
+                            <sequence>
+                              <element maxOccurs="1" minOccurs="1" ref="ebons_stocktransaction:ID"/>
+                            </sequence>
+                          </complexType>
+                        </element>
+                      </sequence>
+                    </complexType>
+                  </element>
+                  <element maxOccurs="1" minOccurs="1" name="IssuingCompany">
+                    <complexType>
+                      <sequence>
+                        <element maxOccurs="1" minOccurs="1" name="partyRole">
+                          <complexType>
+                            <sequence>
+                              <element maxOccurs="1" minOccurs="1" ref="ebons_partyrole:ID"/>
+                            </sequence>
+                          </complexType>
+                        </element>
+                      </sequence>
+                    </complexType>
+                  </element>
+                </sequence>
+              </complexType>
+            </element>
+          </sequence>
+        </complexType>
+      </element>
+    </sequence>
+  </complexType>
+  <element name="PER-EBS-INV-EBS-INV_PR-CREATEREQPHYRES_REQ" type="tns:PER-EBS-INV-EBS-INV_PR-CREATEREQPHYRES_REQ_Type"/>
+  
+  <complexType name="PER-EBS-INV-EBS-INV_PR-CREATEREQPHYRES_RSP_Type">
+    <sequence>
+      <element ref="res:Result"/>
+      <element minOccurs="0" name="Body"/> <!-- No retorna Body cuando constituye una salida por Error -->
+    </sequence>
+  </complexType>
+  <element name="PER-EBS-INV-EBS-INV_PR-CREATEREQPHYRES_RSP" type="tns:PER-EBS-INV-EBS-INV_PR-CREATEREQPHYRES_RSP_Type"/>
+</schema>

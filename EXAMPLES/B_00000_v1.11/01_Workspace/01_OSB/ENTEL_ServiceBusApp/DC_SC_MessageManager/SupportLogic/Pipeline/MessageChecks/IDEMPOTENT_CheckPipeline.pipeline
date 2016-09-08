@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/typesystem/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config">
+    <con:coreEntry>
+        <con:binding type="Mixed" xsi:type="con:MixedBindingType">
+            <con:request type="XML">
+                <con1:schema ref="DC_SC_MessageManager/SupportLogic/XSD/CheckExecutorHelper" element="checkExecutorHelperREQ"/>
+            </con:request>
+            <con:response type="XML">
+                <con1:schema ref="DC_SC_MessageManager/SupportLogic/XSD/CheckExecutorHelper" element="checkExecutorHelperRSP"/>
+            </con:response>
+        </con:binding>
+        <con:xqConfiguration>
+            <con:snippetVersion>1.0</con:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:router errorHandler="error-N3f57c31a.N51c06c90.0.151c48ae847.N7ffd">
+        <con:pipeline type="error" name="error-N3f57c31a.N51c06c90.0.151c48ae847.N7ffd">
+            <con:stage id="_StageId-N3f57c31a.N51c06c90.0.151c48ae847.N7ffc" name="Error Handler">
+                <con:context/>
+                <con:actions>
+                    <con4:insert varName="fault">
+                        <con2:id>_ActionId-N3f57c309.5759ba55.0.152cbda74c5.N7f9a</con2:id>
+                        <con4:location>
+                            <con2:xpathText>/*[1]/ctx:location</con2:xpathText>
+                        </con4:location>
+                        <con4:where>before</con4:where>
+                        <con4:expr>
+                            <con2:xqueryText>&lt;ctx:details/></con2:xqueryText>
+                        </con4:expr>
+                    </con4:insert>
+                    <con4:insert varName="fault">
+                        <con2:id>_ActionId-N53ee3fe6.2b86265.0.152cafe1d03.N7eb3</con2:id>
+                        <con4:location>
+                            <con2:xpathText>/*[1]/ctx:details</con2:xpathText>
+                        </con4:location>
+                        <con4:where>first-child</con4:where>
+                        <con4:expr>
+                            <con2:xqueryText>fn-bea:inlinedXML(data($getTransactionCheckRSP/*[1]/*[1]/*:Column[@name="RSP_MSG"]))</con2:xqueryText>
+                        </con4:expr>
+                    </con4:insert>
+                    <con4:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-N3f57c309.5759ba55.0.152cbda74c5.N7f95</con2:id>
+                        <con4:expr>
+                            <con2:xqueryText>$fault</con2:xqueryText>
+                        </con4:expr>
+                    </con4:replace>
+                    <con2:reply isError="true">
+                        <con2:id>_ActionId-N3f57c31a.N51c06c90.0.151c48ae847.N7ff6</con2:id>
+                    </con2:reply>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="request" name="request-N3f57fe96.417fc5cc.0.1523285c4d1.N7901"/>
+        <con:pipeline type="response" name="response-N3f57fe96.417fc5cc.0.1523285c4d1.N7900">
+            <con:stage id="_StageId-N3f57fe96.417fc5cc.0.1523285c4d1.N78fe" name="Response Checking">
+                <con:context/>
+                <con:actions>
+                    <con4:assign varName="MaxConfiguredTimespan">
+                        <con2:id>_ActionId-N3f57c31a.N51c06c90.0.151c48ae847.N7f28</con2:id>
+                        <con4:expr>
+                            <con2:xqueryTransform>
+                                <con2:resource ref="SR_Commons/XQuery/get_DayTimeDuration"/>
+                                <con2:param name="intervalDayToSecond">
+                                    <con2:path>data($body/*[1]/@elapsedTime)</con2:path>
+                                </con2:param>
+                            </con2:xqueryTransform>
+                        </con4:expr>
+                    </con4:assign>
+                    <con4:ifThenElse>
+                        <con2:comment>Check Message Status Result.</con2:comment>
+                        <con2:id>_ActionId-N3f57c331.Ne8f037e.0.151b5079ec3.N7f91</con2:id>
+                        <con4:case id="_BranchId-N5601fa02.4aca7f53.0.155db7d0fb2.N7ee1">
+                            <con4:condition>
+                                <con2:xqueryText>(: Is Or Will Be Main Transaction Instance Or Clone Member :)
+$body/*[1]/@messageType = 'MTCM' and $body/*[1]/@messageType = 'MTIM'</con2:xqueryText>
+                            </con4:condition>
+                            <con4:actions/>
+                        </con4:case>
+                        <con4:case id="_BranchId-N5601fa02.N5f92718f.0.155ea943029.N7ed2">
+                            <con4:condition>
+                                <con2:xqueryText>(: No Previous Transaction :)
+fn:not(fn:exists($body/*[1]/*:TransactionInfo))</con2:xqueryText>
+                            </con4:condition>
+                            <con4:actions/>
+                        </con4:case>
+                        <con4:case id="_BranchId-N3f57c31a.N51c06c90.0.151c48ae847.N7ebc">
+                            <con4:condition>
+                                <con2:xqueryText>(: ELAPSED_TIME >= CURRENT TIME - MSG_TIMESTAMP :)
+xs:dayTimeDuration($MaxConfiguredTimespan) ge xs:dayTimeDuration((xs:dateTime(fn:current-dateTime()) - xs:dateTime(data($body/*[1]/*:TransactionInfo/@message_timestamp))))</con2:xqueryText>
+                            </con4:condition>
+                            <con4:actions>
+                                <con4:wsCallout>
+                                    <con2:id>_ActionId-N3f57fe97.N1a4a0d1d.0.151d0887c22.N7ffe</con2:id>
+                                    <con4:service ref="DC_SC_MessageManager/SupportLogic/Pipeline/CacheHandling/getTransactionCheck" xsi:type="con:PipelineRef"/>
+                                    <con4:request>
+                                        <con4:payload wrapped="false">getTransactionCheckREQ</con4:payload>
+                                    </con4:request>
+                                    <con4:response>
+                                        <con4:payload wrapped="false">getTransactionCheckRSP</con4:payload>
+                                    </con4:response>
+                                    <con4:requestTransform>
+                                        <con4:assign varName="getTransactionCheckREQ">
+                                            <con2:id>_ActionId-N3f57fe97.N1a4a0d1d.0.151d0887c22.N7ffb</con2:id>
+                                            <con4:expr>
+                                                <con2:xqueryTransform>
+                                                    <con2:resource ref="DC_SC_MessageManager/SupportLogic/XQuery/get_getTransactionCheckREQ"/>
+                                                    <con2:param name="capability">
+                                                        <con2:path>data($body/*[1]/@capability)</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="event_id">
+                                                        <con2:path>data($body/*[1]/*[1]/*[1]/*[1]/*[2]/@eventID)</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="client_req_timestamp">
+                                                        <con2:path>data($body/*[1]/*[1]/*[1]/*[1]/*[2]/@clientReqTimestamp)</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="proc_id">
+                                                        <con2:path>data($body/*[1]/*[1]/*[1]/*[1]/*[2]/@processID)</con2:path>
+                                                    </con2:param>
+                                                </con2:xqueryTransform>
+                                            </con4:expr>
+                                        </con4:assign>
+                                    </con4:requestTransform>
+                                    <con4:responseTransform/>
+                                </con4:wsCallout>
+                                <con4:Error>
+                                    <con2:id>_ActionId-N3f57c31a.N51c06c90.0.151c48ae847.N7e88</con2:id>
+                                    <con4:errCode>15</con4:errCode>
+                                    <con4:message>Transaction IDEMPOTENT</con4:message>
+                                </con4:Error>
+                            </con4:actions>
+                        </con4:case>
+                        <con4:default/>
+                    </con4:ifThenElse>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:flow>
+            <con:pipeline-node name="Pipeline Idempotent">
+                <con:request>request-N3f57fe96.417fc5cc.0.1523285c4d1.N7901</con:request>
+                <con:response>response-N3f57fe96.417fc5cc.0.1523285c4d1.N7900</con:response>
+            </con:pipeline-node>
+        </con:flow>
+    </con:router>
+</con:pipelineEntry>

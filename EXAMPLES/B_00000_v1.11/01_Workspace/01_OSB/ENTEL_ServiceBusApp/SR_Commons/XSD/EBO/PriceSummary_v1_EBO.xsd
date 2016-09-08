@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/PriceSummary/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/PriceSummary/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="oneTime" type="xs:float"/>									
+	<xs:element name="recurring" type="xs:float"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="PriceSummary" type="tns:PriceSummary_Type"/>
+	<xs:complexType name="PriceSummary_Type">
+		<xs:sequence> 
+		<xs:element ref="tns:oneTime" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:recurring" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

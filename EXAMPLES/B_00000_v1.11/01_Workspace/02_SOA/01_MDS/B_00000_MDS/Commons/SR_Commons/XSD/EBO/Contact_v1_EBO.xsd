@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.entel.cl/EBO/Contact/v1"
+	xmlns:ebons_emailcontact="http://www.entel.cl/EBO/EmailContact/v1"
+	xmlns:ebons_telephonenumber="http://www.entel.cl/EBO/TelephoneNumber/v1"
+	
+	targetNamespace="http://www.entel.cl/EBO/Contact/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	<xs:import namespace="http://www.entel.cl/EBO/EmailContact/v1" schemaLocation="EmailContact_v1_EBO.xsd"/>
+	<xs:import namespace="http://www.entel.cl/EBO/TelephoneNumber/v1" schemaLocation="TelephoneNumber_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	<!---=- start:EBO Content -=- -->
+	<!---=- start:EBO root elements defs -=- -->
+
+	<xs:element name="ID" type="xs:string"/>									
+	<xs:element name="activeStatusInd" type="xs:boolean"/>									
+	<xs:element name="alternativeEmailType" type="xs:string"/>									
+	<xs:element name="contactType" type="xs:string"/>
+        <xs:element name="contactValue" type="xs:string"/>
+	<xs:element name="contractCreationDate" type="xs:dateTime"/>									
+	<xs:element name="emailType" type="xs:string"/>									
+	<xs:element name="emailUpdateDate" type="xs:dateTime"/>									
+	<xs:element name="noContacSMStInd" type="xs:boolean"/>									
+	<xs:element name="noContactAPPInd" type="xs:boolean"/>									
+	<xs:element name="noContactEmailInd" type="xs:boolean"/>									
+	<xs:element name="noContactIVRInd" type="xs:boolean"/>									
+	<xs:element name="noContactInd" type="xs:boolean"/>									
+	<xs:element name="noContactMailInd" type="xs:boolean"/>									
+	<xs:element name="noContactPhoneInd" type="xs:boolean"/>									
+	<xs:element name="noContactUSSDInd" type="xs:boolean"/>									
+	<xs:element name="preferedContactMethod" type="xs:string"/>									
+	<xs:element name="privacyInd" type="xs:boolean"/>									
+	<xs:element name="prospectInd" type="xs:boolean"/>									
+	<xs:element name="alternativeEmail" type="ebons_emailcontact:EmailContact_Type"/>									
+	<xs:element name="alternativeFaxNumber" type="ebons_telephonenumber:TelephoneNumber_Type"/>									
+	<xs:element name="alternativePhoneNumber" type="ebons_telephonenumber:TelephoneNumber_Type"/>									
+	<xs:element name="cellPhone" type="ebons_telephonenumber:TelephoneNumber_Type"/>									
+	<xs:element name="email" type="ebons_emailcontact:EmailContact_Type"/>									
+	<xs:element name="mainPhoneNumber" type="ebons_telephonenumber:TelephoneNumber_Type"/>									
+	<xs:element name="workPhoneNumber" type="ebons_telephonenumber:TelephoneNumber_Type"/>									
+	<!---=- end:EBO root elements defs -=- -->
+
+<!---=- start:EBO complexType defs -=- -->
+	<xs:element name="Contact" type="tns:Contact_Type"/>
+	<xs:complexType name="Contact_Type">
+		<xs:sequence> 
+		<xs:element ref="tns:ID" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:activeStatusInd" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:alternativeEmailType" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:contactType" maxOccurs="1" minOccurs="0"/>
+                <xs:element ref="tns:contactValue" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:contractCreationDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:emailType" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:emailUpdateDate" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:noContacSMStInd" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:noContactAPPInd" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:noContactEmailInd" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:noContactIVRInd" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:noContactInd" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:noContactMailInd" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:noContactPhoneInd" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:noContactUSSDInd" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:preferedContactMethod" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:privacyInd" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:prospectInd" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:alternativeEmail" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:alternativeFaxNumber" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:alternativePhoneNumber" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:cellPhone" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:email" maxOccurs="1" minOccurs="0"/>
+		<xs:element ref="tns:mainPhoneNumber" maxOccurs="1" minOccurs="1"/>
+		<xs:element ref="tns:workPhoneNumber" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+<!---=- end:EBO complexType defs -=- -->
+	<!---=- end:EBO Content -=- -->
+	 
+</xs:schema>	

@@ -1,0 +1,76 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getEndpointParameterManagerAdapter" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getEndpointParameterManagerAdapter" elementFormDefault="qualified">
+   <element name="InputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_TARGET" type="db:TARGET_T" db:index="1" db:type="Struct" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <element name="OutputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_TARGET" type="db:TARGET_T" db:index="1" db:type="Struct" minOccurs="0" nillable="true"/>
+            <element name="P_ENDPOINT" type="db:P_ENDPOINT_RowSet" db:index="2" db:type="RowSet" minOccurs="0" nillable="true"/>
+            <element name="P_ENDPTYPE" type="string" db:index="3" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_ENDPINSTANCE" type="string" db:index="3" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_SOURCEERROR" type="db:SOURCERROR_T" db:index="4" db:type="Struct" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <complexType name="P_ENDPOINT_RowSet">
+      <sequence>
+         <element name="P_ENDPOINT_Row" minOccurs="0" maxOccurs="unbounded">
+            <complexType>
+               <sequence>
+                  <element name="KEY" type="db:string30" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="VALUE" type="db:string255" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+               </sequence>
+            </complexType>
+         </element>
+      </sequence>
+   </complexType>
+   <complexType name="SOURCERROR_T">
+      <sequence>
+         <element name="CODE_" type="db:string5" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="DESCRIPTION_" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+      </sequence>
+   </complexType>
+   <complexType name="TARGET_T">
+      <sequence>
+         <element name="OPERATION_" type="db:string50" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="PROVIDER_" type="db:string50" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="API_" type="db:string50" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         <element name="VERSION_" type="db:string10" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+      </sequence>
+   </complexType>
+   <simpleType name="string5">
+      <restriction base="string">
+         <maxLength value="5"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string10">
+      <restriction base="string">
+         <maxLength value="30"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string30">
+      <restriction base="string">
+         <maxLength value="30"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string50">
+      <restriction base="string">
+         <maxLength value="50"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string255">
+      <restriction base="string">
+         <maxLength value="255"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string100">
+      <restriction base="string">
+         <maxLength value="100"/>
+      </restriction>
+   </simpleType>
+</schema>

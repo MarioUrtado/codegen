@@ -1,0 +1,83 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed Feb 10 14:51:34 ART 2016
+  Author:  mario.urtado
+  Type: BPEL 2.0 Process
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ErrorDerivation"
+               targetNamespace="http://xmlns.oracle.com/DC_SC_ErrorManager/ErrorDerivation/ErrorDerivation"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/DC_SC_ErrorManager/ErrorDerivation/ErrorDerivation"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/DC_SC_ErrorManager/ErrorDerivation/ESB_ERROR_DERIVATION_CONFIG_Polling"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/DC_SC_ErrorManager/ErrorDerivation/CALL_SP_ERROR_DERIVATION">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/DC_SC_ErrorManager/ErrorDerivation/ESB_ERROR_DERIVATION_CONFIG_Polling"
+          location="../WSDLs/ESB_ERROR_DERIVATION_CONFIG_Polling.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"
+          ui:processWSDL="true"/>
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="ESB_ERROR_DERIVATION_CONFIG_Polling"
+                 partnerLinkType="ns1:ESB_ERROR_DERIVATION_CONFIG_Polling_plt"
+                 myRole="ESB_ERROR_DERIVATION_CONFIG_Polling_role"/>
+    <partnerLink name="CALL_SP_ERROR_DERIVATION" partnerLinkType="ns2:CALL_SP_ERROR_DERIVATION_plt"
+                 partnerRole="CALL_SP_ERROR_DERIVATION_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="ns1:EsbErrorDerivationConfCollection_msg"/>
+
+  </variables>
+  <faultHandlers>
+    <catchAll>
+      <throw name="ThrowRollBack" faultName="bpelx:rollback"/>
+    </catchAll>
+  </faultHandlers>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in ErrorDerivation.wsdl) -->
+    <receive name="receiveInput" partnerLink="ESB_ERROR_DERIVATION_CONFIG_Polling"
+             portType="ns1:ESB_ERROR_DERIVATION_CONFIG_Polling_ptt" operation="receive" variable="inputVariable" createInstance="yes"/>
+    <scope name="Scope1">
+      <variables>
+        <variable name="Request_SP_ERROR_DERIVATION" messageType="ns2:args_in_msg"/>
+        <variable name="Response_SP_ERROR_DERIVATION" messageType="ns2:args_out_msg"/>
+      </variables>
+      <invoke name="Invoke_SP_ERROR_DERIVATION" partnerLink="CALL_SP_ERROR_DERIVATION"
+              portType="ns2:CALL_SP_ERROR_DERIVATION_ptt" operation="CALL_SP_ERROR_DERIVATION"
+              inputVariable="Request_SP_ERROR_DERIVATION" bpelx:invokeAsDetail="no"
+              outputVariable="Response_SP_ERROR_DERIVATION"/>
+    </scope>
+  </sequence>
+</process>
