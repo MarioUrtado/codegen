@@ -5,6 +5,7 @@ import util
 import xml.etree.ElementTree as ET
 
 root_path=os.path.dirname(os.path.realpath(__file__)).replace('\\', '/')
+os.chdir(root_path)
 
 def generateConfig(_path):
 	_config = ConfigParser.ConfigParser()
@@ -16,7 +17,7 @@ def chdir_force(_dir):
 		os.makedirs(_dir)
 	os.chdir(_dir)
 
-def build(_initConfig):
+def build(_initConfig, workspace):
 	print '-----------------------------------------'
 	print 'Lectura de configuracion de servicio'
 	print _initConfig
@@ -24,10 +25,10 @@ def build(_initConfig):
 	config=generateConfig(_initConfig)
 
 	config_template_location = ConfigParser.ConfigParser()
-	config_template_location.readfp(open('TEMPLATE_CONFIG'))
+	config_template_location.readfp(open((root_path+'/TEMPLATE_CONFIG')))
 
 	config_2 = ConfigParser.ConfigParser()
-	config_2.readfp(open('TEMPLATES/ES/ES_ARQUITECTURE_TAG'))
+	config_2.readfp(open((root_path+'/TEMPLATES/ES/ES_ARQUITECTURE_TAG')))
 
 	serviceName=config.get( 'SERVICE', 'name')
 	serviceCode=config.get( 'SERVICE', 'code')
@@ -125,7 +126,7 @@ def build(_initConfig):
 
 	##GENERATE_ESARQUITECTURE
 	with open('get_ESArchitecture.xqy', 'w') as new_file:
-		with open('../TEMPLATES/ES/get_ESArchitecture_TEMPLATE.xqy', 'r') as template_file:
+		with open((root_path+'/TEMPLATES/ES/get_ESArchitecture_TEMPLATE.xqy'), 'r') as template_file:
 			for line in template_file:
 				if 'PLACE_CAPABILIES' in line:
 					for ctry in countries:
@@ -192,19 +193,28 @@ def build(_initConfig):
 #
 #	os.chdir('../../../')
 
-	#copy project to workspace
-	workspaacePath=paramConfig.get('WORKSPACE', 'path').replace('\\', '/')
-	fullPathProject = root_path+'/'+project
-	workspaacePathProject=workspaacePath+'/'+project
-	shutil.copytree(fullPathProject, workspaacePathProject)
-
-	print 'Borrado de proyectos temporasles'
-	shutil.rmtree(fullPathProject)
-
+	
+	newElement = ET.fromstring(('<hash><url n="URL" path="'+project+'/'+project+'.jpr"/></hash>'))
+	applicationName=os.path.basename(os.path.normpath(workspace))+'.jws'
+	applicationName = os.path.join(workspace, applicationName)
+	tree = ET.parse(applicationName)
+	root = tree.getroot()
+	for ele in root.findall(".//*[@n='listOfChildren']"):
+		ele.append(newElement)
+		break
+	tree.write(applicationName,  encoding="UTF-8")
 	print '-----------------------------------------'
 	print 'Fin de construccion de proyecto'
 	print '-----------------------------------------'
 def main():
+
+	config = generateConfig('pool.cfg')
+	workspace = config.get('WORKSPACE', 'path')
+	os.chdir(workspace)
+
+	print '-------------NEW PATH----------------------------'
+	print os.getcwd()
+	print '-------------NEW PATH----------------------------'
 	inits=[]
 	full_path_temp = os.path.join(root_path, 'tmp')
 	for file in os.listdir(full_path_temp):
@@ -213,6 +223,6 @@ def main():
 
 	for initConfig in inits:
 		fullpathInit = os.path.join(full_path_temp, initConfig)
-		build(fullpathInit)
+		build(fullpathInit,workspace)
 
 main()

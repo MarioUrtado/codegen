@@ -85,3 +85,25 @@ def replaceOHComponentName(_from, _to, _capability):
 			for line in template_file:
 				new_line = line.replace('%CAPABILITY_REQ_NAME%', _capability.reqName()).replace('%CAPABILITY_NAME%', _capability.name()).replace('%SERVICE_NAME%', _capability.service()).replace('%COUNTRY_NAME%',_capability.country())
 				new_file.write(new_line)
+
+def replaceComponentWithSystemApiAndOperation(_from, _to, _systemApi, _operation):
+	if not os.path.isfile(_to):
+		with open(_to, 'w') as new_file:
+			with open(_from, 'r') as template_file:
+				for line in template_file:
+					new_line=line.replace('%SYSTEM_API%', _systemApi).replace('%OPERATION%',_operation)
+					new_file.write(new_line)
+		return True
+	else:
+		return False
+
+def replaceComponent(_from, _to, _system, _systemApi, _operation):
+	if not os.path.isfile(_to):
+		with open(_to, 'w') as new_file:
+			with open(_from, 'r') as template_file:
+				for line in template_file:
+					new_line=line.replace('%SYSTEM_API%', _systemApi).replace('%OPERATION%',_operation).replace('%SYSTEM%',_system)
+					new_file.write(new_line)
+		return True
+	else:
+		return False

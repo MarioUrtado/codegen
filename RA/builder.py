@@ -2,9 +2,9 @@ import shutil
 import util
 import os
 import ConfigParser
+import xml.etree.ElementTree as ET
 
-config = ConfigParser.ConfigParser()
-config.readfp(open('init.cfg'))	
+root_path=os.path.dirname(os.path.realpath(__file__)).replace('\\', '/')
 
 def chdir_force(_dir):
 	force = False
@@ -36,22 +36,11 @@ def build_project(_target):
 
 	forceMkdir = chdir_force(projectName)
 
-	#servicesbus.servicesbus
-	servicesbus_file='servicesbus.servicesbus'
-	if not os.path.isfile(servicesbus_file):
-		with open(servicesbus_file, 'w') as new_file:
-			with open('../TEMPLATES/RA/TEMPLATE_servicebus.sboverview', 'r') as template_file:
-				for line in template_file:
-					new_line=line.replace('%PROJECT_NAME%', projectName)
-					new_file.write(new_line)
-	else:
-		print 'El archivo ' + servicesbus_file + ' ya existe'
-
 	#project.jpr
 	project_file=projectName+'.jpr'
 	if not os.path.isfile(project_file):
 		with open(project_file, 'w') as new_file:
-			with open('../TEMPLATES/RA/TEMPLATE.jpr', 'r') as template_file:
+			with open((root_path+'/TEMPLATES/RA/TEMPLATE.jpr'), 'r') as template_file:
 				for line in template_file:
 					new_line=line.replace('%PROJECT_NAME%', projectName).replace('%DEFUALT_PACKAGE_PROJECT_NAME%', projectName.lower().replace('-',''))
 					new_file.write(new_line)
@@ -62,35 +51,22 @@ def build_project(_target):
 	pom_file='pom.xml'
 	if not os.path.isfile(pom_file):
 		with open(pom_file, 'w') as new_file:
-			with open('../TEMPLATES/RA/POM_TEMPLATE.xml', 'r') as template_file:
+			with open((root_path+'/TEMPLATES/RA/POM_TEMPLATE.xml'), 'r') as template_file:
 				for line in template_file:
 					new_line=line.replace('%PROJECT_NAME%', projectName)
 					new_file.write(new_line)
 	else:
 		print 'El archivo ' + pom_file + ' ya existe'
+	return forceMkdir
 
-def replaceComponentSystemApiOperation(_to, _from):
-	with open(_to, 'w') as new_file:
-		with open(_from, 'r') as template_file:
-			for line in template_file:
-				new_line=line.replace('%SYSTEM_API%', country_system_api).replace('%OPERATION%',_target['operation'])
-				new_file.write(new_line)
-
-def replaceComponent(_to, _from):
-	with open(sda_pipeline, 'w') as new_file:
-		with open('../../../../TEMPLATES/RA/ResourceAdapters/TEMPLATE_RA/SDAdapter/TEMPLATE_SDA.pipeline', 'r') as template_file:
-			for line in template_file:
-				new_line=line.replace('%SYSTEM_API%', country_system_api).replace('%OPERATION%',_target['operation']).replace('%SYSTEM%', country_system )
-				new_file.write(new_line)
-
-def build(_target):
+def build(_target, workspace):
 	print '\n---------------------------------------------\n'
 	print 'Armado projecto RA: ' + get_RAName(_target)
 
 	country_system=get_System(_target)
 	project_name=getProjectName(_target)
 
-	build_project(_target)
+	isBuilder= build_project(_target)
 
 	chdir_force('CommonResources')
 	os.chdir('../')
@@ -106,76 +82,67 @@ def build(_target):
 		#Creacion de CSC, sus xsd y wsdl
 		chdir_force('CSC')
 
-		wsdl_name=country_system_api_operation+'_v1_CSC.wsdl'
-		with open(wsdl_name, 'w') as new_file:
-			with open('../../../../TEMPLATES/RA/ResourceAdapters/TEMPLATE_RA/CSC/TEMPLATE_CSC.wsdl', 'r') as template_file:
-				for line in template_file:
-					new_line=line.replace('%SYSTEM_API%', country_system_api).replace('%OPERATION%',_target['operation'])
-					new_file.write(new_line)
-		csm_name=country_system_api_operation+'_v1_CSM.xsd'
-		with open(csm_name, 'w') as new_file:
-			with open('../../../../TEMPLATES/RA/ResourceAdapters/TEMPLATE_RA/CSC/TEMPLATE_CSM.xsd', 'r') as template_file:
-				for line in template_file:
-					new_line=line.replace('%SYSTEM_API%', country_system_api).replace('%OPERATION%',_target['operation'])
-					new_file.write(new_line)
+
+
+		_to=country_system_api_operation+'_v1_CSC.wsdl'
+		_from = root_path+'/TEMPLATES/RA/ResourceAdapters/TEMPLATE_RA/CSC/TEMPLATE_CSC.wsdl'
+		util.replaceComponentWithSystemApiAndOperation(_from, _to, country_system_api, _target['operation'])
+
+
+		_to=country_system_api_operation+'_v1_CSM.xsd'
+		_from = root_path+'/TEMPLATES/RA/ResourceAdapters/TEMPLATE_RA/CSC/TEMPLATE_CSM.xsd'
+		util.replaceComponentWithSystemApiAndOperation(_from, _to, country_system_api, _target['operation'])
+
 		os.chdir('../')
 
 		#Creacion de pipeline y proxy SDAdapter
 		chdir_force('SDAdapter')
 
-		sda_pipeline=country_system_api_operation+'_RA_SDA.pipeline'
-		with open(sda_pipeline, 'w') as new_file:
-			with open('../../../../TEMPLATES/RA/ResourceAdapters/TEMPLATE_RA/SDAdapter/TEMPLATE_SDA.pipeline', 'r') as template_file:
-				for line in template_file:
-					new_line=line.replace('%SYSTEM_API%', country_system_api).replace('%OPERATION%',_target['operation']).replace('%SYSTEM%', country_system )
-					new_file.write(new_line)
-		sda_proxy=country_system_api_operation+'_RA_SDA.proxy'
-		with open(sda_proxy, 'w') as new_file:
-			with open('../../../../TEMPLATES/RA/ResourceAdapters/TEMPLATE_RA/SDAdapter/TEMPLATE_SDA.proxy', 'r') as template_file:
-				for line in template_file:
-					new_line=line.replace('%SYSTEM_API%', country_system_api).replace('%OPERATION%',_target['operation']).replace('%SYSTEM%', country_system )
-					new_file.write(new_line)
+		_to=country_system_api_operation+'_RA_SDA.pipeline'
+		_from = root_path+'/TEMPLATES/RA/ResourceAdapters/TEMPLATE_RA/SDAdapter/TEMPLATE_SDA.pipeline'
+		util.replaceComponent(_from, _to, country_system, country_system_api , _target['operation'])
+
+		_to=country_system_api_operation+'_RA_SDA.proxy'
+		_from = root_path+'/TEMPLATES/RA/ResourceAdapters/TEMPLATE_RA/SDAdapter/TEMPLATE_SDA.proxy'
+		util.replaceComponent(_from, _to, country_system, country_system_api , _target['operation'])
+
 		#return to RA
 		os.chdir('../')
 
 		chdir_force('XQuery')
 
-		xq_name_rsp_error='get_'+country_system_api_operation+'_AdapterRSP_ERROR.xqy'
-		with open(xq_name_rsp_error, 'w') as new_file:
-			with open('../../../../TEMPLATES/RA/ResourceAdapters/TEMPLATE_RA/XQuery/TEMPLATE_AdapterRSP_ERROR.xqy', 'r') as template_file:
-				for line in template_file:
-					new_line=line.replace('%SYSTEM_API%', country_system_api).replace('%OPERATION%',_target['operation'])
-					new_file.write(new_line)
+		_to='get_'+country_system_api_operation+'_AdapterRSP_ERROR.xqy'
+		_from = root_path+'/TEMPLATES/RA/ResourceAdapters/TEMPLATE_RA/XQuery/TEMPLATE_AdapterRSP_ERROR.xqy'
+		util.replaceComponentWithSystemApiAndOperation(_from, _to, country_system_api, _target['operation'])
 
-		xq_name_rsp_error='get_'+country_system_api_operation+'_REQMappings.xqy'
-		with open(xq_name_rsp_error, 'w') as new_file:
-			with open('../../../../TEMPLATES/RA/ResourceAdapters/TEMPLATE_RA/XQuery/TEMPLATE_REQMappings.xqy', 'r') as template_file:
-				for line in template_file:
-					new_line=line.replace('%SYSTEM_API%', country_system_api).replace('%OPERATION%',_target['operation'])
-					new_file.write(new_line)
+		_to='get_'+country_system_api_operation+'_REQMappings.xqy'
+		_from = root_path+'/TEMPLATES/RA/ResourceAdapters/TEMPLATE_RA/XQuery/TEMPLATE_REQMappings.xqy'
+		util.replaceComponentWithSystemApiAndOperation(_from, _to, country_system_api, _target['operation'])
 
-		xq_name_rsp_error='get_'+country_system_api_operation+'_RSPMappings.xqy'
-		with open(xq_name_rsp_error, 'w') as new_file:
-			with open('../../../../TEMPLATES/RA/ResourceAdapters/TEMPLATE_RA/XQuery/TEMPLATE_RSPMappings.xqy', 'r') as template_file:
-				for line in template_file:
-					new_line=line.replace('%SYSTEM_API%', country_system_api).replace('%OPERATION%',_target['operation'])
-					new_file.write(new_line)
+		_to='get_'+country_system_api_operation+'_RSPMappings.xqy'
+		_from = root_path+'/TEMPLATES/RA/ResourceAdapters/TEMPLATE_RA/XQuery/TEMPLATE_RSPMappings.xqy'
+		util.replaceComponentWithSystemApiAndOperation(_from, _to, country_system_api, _target['operation'])
+
+		_to='get_'+country_system_api_operation+'_LegacyREQ.xqy'
+		_from = root_path+'/TEMPLATES/RA/ResourceAdapters/TEMPLATE_RA/XQuery/TEMPLATE_LegacyREQ.xqy'
+		util.replaceComponentWithSystemApiAndOperation(_from, _to, country_system_api, _target['operation'])
+
+		_to='get_'+country_system_api_operation+'_AdapterRSP_OK.xqy'
+		_from = root_path+'/TEMPLATES/RA/ResourceAdapters/TEMPLATE_RA/XQuery/TEMPLATE_AdapterRSP_OK.xqy'
+		util.replaceComponentWithSystemApiAndOperation(_from, _to, country_system_api, _target['operation'])
 
 
 		os.chdir('../')
 		#Create proxy y pipeline de RA
-		ra_pipeline=country_system_api_operation+'_RA.pipeline'
-		with open(ra_pipeline, 'w') as new_file:
-			with open('../../../TEMPLATES/RA/ResourceAdapters/TEMPLATE_RA/TEMPLATE_RA.pipeline', 'r') as template_file:
-				for line in template_file:
-					new_line=line.replace('%SYSTEM_API%', country_system_api).replace('%OPERATION%',_target['operation']).replace('%SYSTEM%', country_system )
-					new_file.write(new_line)
-		ra_proxy=country_system_api_operation+'_RA.proxy'
-		with open(ra_proxy, 'w') as new_file:
-			with open('../../../TEMPLATES/RA/ResourceAdapters/TEMPLATE_RA/TEMPLATE_RA.proxy', 'r') as template_file:
-				for line in template_file:
-					new_line=line.replace('%SYSTEM_API%', country_system_api).replace('%OPERATION%',_target['operation']).replace('%SYSTEM%', country_system )
-					new_file.write(new_line)
+		_to=country_system_api_operation+'_RA.pipeline'
+		_from = root_path+'/TEMPLATES/RA/ResourceAdapters/TEMPLATE_RA/TEMPLATE_RA.pipeline'
+		util.replaceComponent(_from, _to, country_system, country_system_api , _target['operation'])		
+		
+
+		_to=country_system_api_operation+'_RA.proxy'
+		_from = root_path+'/TEMPLATES/RA/ResourceAdapters/TEMPLATE_RA/TEMPLATE_RA.proxy'
+		util.replaceComponent(_from, _to, country_system, country_system_api , _target['operation'])		
+		
 		#Return to ResourceAdaptes
 		os.chdir('../')
 
@@ -183,6 +150,19 @@ def build(_target):
 		print 'El RA '+ ra_name+  'Ya existe, se omite la creacion'
 	print '\n---------------------------------------------\n'
 	os.chdir('../../')
+
+	if isBuilder:
+
+		newElement = ET.fromstring(('<hash><url n="URL" path="'+project_name+'/'+project_name+'.jpr"/></hash>'))
+		applicationName=os.path.basename(os.path.normpath(workspace))+'.jws'
+		applicationName = os.path.join(workspace, applicationName)
+		tree = ET.parse(applicationName)
+		root = tree.getroot()
+		for ele in root.findall(".//*[@n='listOfChildren']"):
+			ele.append(newElement)
+			break
+		tree.write(applicationName,  encoding="UTF-8")
+
 
 def getDictionary(config, section, workspace):
 	dictionary = dict()
@@ -200,8 +180,11 @@ def main():
 	print 'Creacion de contexto'
 	workspace = config.get('WORKSPACE', 'path')
 	config.remove_section('WORKSPACE')
+
+	os.chdir(workspace)
+
 	for target in config.sections():
 		dictionary = getDictionary(config,target, workspace)
-		build(dictionary)
+		build(dictionary, workspace)
 
 main()

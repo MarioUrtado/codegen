@@ -5,14 +5,16 @@ xquery version "1.0" encoding "utf-8";
 declare namespace ns1="http://www.entel.cl/CSM/RA/%SYSTEM_API%/%OPERATION%/v1";
 (:: import schema at "../CSC/%SYSTEM_API%_%OPERATION%_v1_CSM.xsd" ::)
 
-declare namespace ns3 = "http://www.entel.cl/EBO/Consumer/v1";
 declare namespace ns4 = "http://www.entel.cl/ESO/MessageHeader/v1";
 
+declare namespace ns5 = "http://www.entel.cl/SC/ParameterManager/getMapping/v1";
+(:: import schema at "../../../../DC_SC_ParameterManager/SupportAPI/XSD/CSM/getMapping_ParameterManager_v1_CSM.xsd" ::)
+
 declare variable $RaREQ as element() (:: schema-element(ns1:%SYSTEM_API%_%OPERATION%_REQ) ::) external;
-declare variable $GetMappingRSP as element() external;
+declare variable $GetMappingRSP as element() (:: schema-element(ns5:GetMappingRSP) ::) external;
 
 declare function local:get_%SYSTEM_API%_%OPERATION%_REQMappings($RaREQ as element() (:: schema-element(ns1:%SYSTEM_API%_%OPERATION%_REQ) ::), 
-                                                                 $GetMappingRSP as element()) 
+                                                                 $GetMappingRSP as element()(:: schema-element(ns5:GetMappingRSP) ::)) 
                                                                  as element() (:: schema-element(ns1:%SYSTEM_API%_%OPERATION%_REQ) ::) {
     <ns1:%SYSTEM_API%_%OPERATION%_REQ>
     (: 
@@ -21,7 +23,9 @@ declare function local:get_%SYSTEM_API%_%OPERATION%_REQMappings($RaREQ as elemen
       As it is a good practice to use positional XPATH, the element is maintained to avoid possible mistakes when applying
       that type of XPATH over the RA Request, after it was modified by this XQ
     :)
-        <ns4:RequestHeader></ns4:RequestHeader>
+        (: Delete STUB element :)
+        <STUB>{$RaREQ}{$GetMappingRSP}</STUB>
+
         <ns1:Body>
         </ns1:Body>
     </ns1:%SYSTEM_API%_%OPERATION%_REQ>

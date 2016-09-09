@@ -59,26 +59,32 @@ def jpr(_from,_to, _serviceName ):
 				for line in template_file:
 					new_line = line.replace('%SERVICE_NAME%', _serviceName).replace('%SERVICE_NAME_LOWER%', _serviceName.lower())
 					new_file.write(new_line)
+		return True
+	else:
+		return False
 
 def serviesbus(_from,_to ,_serviceName):
 	servieNameReplace(_from,_to,_serviceName)
 
 def replaceOHComponentNameWithLegacy(_from, _to, capability, legacy):
-	
-	with open(_to, 'w') as new_file:
-		with open(_from, 'r') as template_file:
-			for line in template_file:
-				new_line = line.replace('%CAPABILITY_REQ_NAME%', capability.reqName)
-				new_line = new_line.replace('%CAPABILITY_NAME%', capability.name)
-				new_line = new_line.replace('%SERVICE_NAME%', capability.service)
-				new_line = new_line.replace('%COUNTRY_NAME%',capability.country)
-				new_line = new_line.replace('%LEGACY_COUNTRY%',legacy.country)
-				new_line = new_line.replace('%LEGACY_SYSTEM%',legacy.system)
-				new_line = new_line.replace('%LEGACY_API%',legacy.api)
-				new_line = new_line.replace('%LEGACY_OPERATION%',legacy.operation)
-				new_line = new_line.replace('%SYSTEM_API%',legacy.country_system_api)
-				new_line = new_line.replace('%OPERATION%',legacy.operation)
-				new_file.write(new_line)
+	if not os.path.isfile(_to):
+		with open(_to, 'w') as new_file:
+			with open(_from, 'r') as template_file:
+				for line in template_file:
+					new_line = line.replace('%CAPABILITY_REQ_NAME%', capability.reqName)
+					new_line = new_line.replace('%CAPABILITY_NAME%', capability.name)
+					new_line = new_line.replace('%SERVICE_NAME%', capability.service)
+					new_line = new_line.replace('%COUNTRY_NAME%',capability.country)
+					new_line = new_line.replace('%LEGACY_COUNTRY%',legacy.country)
+					new_line = new_line.replace('%LEGACY_SYSTEM%',legacy.system)
+					new_line = new_line.replace('%LEGACY_API%',legacy.api)
+					new_line = new_line.replace('%LEGACY_OPERATION%',legacy.operation)
+					new_line = new_line.replace('%SYSTEM_API%',legacy.country_system_api)
+					new_line = new_line.replace('%OPERATION%',legacy.operation)
+					new_file.write(new_line)
+		return True
+	else:
+		return False
 
 def replaceOHComponentName(_from, _to, _capability):
 	if not os.path.isfile(_to):
@@ -87,3 +93,6 @@ def replaceOHComponentName(_from, _to, _capability):
 				for line in template_file:
 					new_line = line.replace('%CAPABILITY_REQ_NAME%', _capability.reqName).replace('%CAPABILITY_NAME%', _capability.name).replace('%SERVICE_NAME%', _capability.service).replace('%COUNTRY_NAME%',_capability.country)
 					new_file.write(new_line)
+		return True
+	else:
+		return False

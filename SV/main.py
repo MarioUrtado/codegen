@@ -3,6 +3,8 @@ import builder
 import parseWSDL
 import ConfigParser
 
+root_path=os.path.dirname(os.path.realpath(__file__)).replace('\\', '/')
+os.chdir(root_path)
 def chdir_force(_dir):
 	if not(os.path.isdir(_dir)):
 		os.makedirs(_dir)
@@ -13,7 +15,7 @@ def generateConfig(_path):
 	_config.readfp(open(_path))
 	return _config
 
-config=generateConfig('pool.cfg')
+config=generateConfig((root_path+'/pool.cfg'))
 workspace = config.get('WORKSPACE', 'path')
 config.remove_section('WORKSPACE')
 
