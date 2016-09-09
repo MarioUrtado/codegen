@@ -42,13 +42,6 @@ class Capability:
 	def reqName(self):
 		return self.reqName
 
-def servieNameReplace(_from, _to, _serviceName):
-	with open(_to, 'w') as new_file:
-		with open(_from, 'r') as template_file:
-			for line in template_file:
-				new_line = line.replace('%SERVICE_NAME%', _serviceName)
-				new_file.write(new_line)
-
 def pom(_from,_to, _serviceName ):
 	servieNameReplace(_from,_to,_serviceName)
 
@@ -63,7 +56,6 @@ def serviesbus(_from,_to ,_serviceName):
 	servieNameReplace(_from,_to,_serviceName)
 
 def replaceOHComponentNameWithLegacy(_from, _to, capability, legacy):
-	print(capability)
 	with open(_to, 'w') as new_file:
 		with open(_from, 'r') as template_file:
 			for line in template_file:

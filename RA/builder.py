@@ -82,12 +82,9 @@ def build(_target, workspace):
 		#Creacion de CSC, sus xsd y wsdl
 		chdir_force('CSC')
 
-
-
 		_to=country_system_api_operation+'_v1_CSC.wsdl'
 		_from = root_path+'/TEMPLATES/RA/ResourceAdapters/TEMPLATE_RA/CSC/TEMPLATE_CSC.wsdl'
 		util.replaceComponentWithSystemApiAndOperation(_from, _to, country_system_api, _target['operation'])
-
 
 		_to=country_system_api_operation+'_v1_CSM.xsd'
 		_from = root_path+'/TEMPLATES/RA/ResourceAdapters/TEMPLATE_RA/CSC/TEMPLATE_CSM.xsd'
@@ -131,7 +128,6 @@ def build(_target, workspace):
 		_from = root_path+'/TEMPLATES/RA/ResourceAdapters/TEMPLATE_RA/XQuery/TEMPLATE_AdapterRSP_OK.xqy'
 		util.replaceComponentWithSystemApiAndOperation(_from, _to, country_system_api, _target['operation'])
 
-
 		os.chdir('../')
 		#Create proxy y pipeline de RA
 		_to=country_system_api_operation+'_RA.pipeline'
@@ -145,7 +141,6 @@ def build(_target, workspace):
 		
 		#Return to ResourceAdaptes
 		os.chdir('../')
-
 	else:
 		print 'El RA '+ ra_name+  'Ya existe, se omite la creacion'
 	print '\n---------------------------------------------\n'
@@ -162,7 +157,6 @@ def build(_target, workspace):
 			ele.append(newElement)
 			break
 		tree.write(applicationName,  encoding="UTF-8")
-
 
 def getDictionary(config, section, workspace):
 	dictionary = dict()

@@ -19,9 +19,7 @@ def chdir_force(_dir):
 
 def build(_initConfig, workspace):
 	print '-----------------------------------------'
-	print 'Lectura de configuracion de servicio'
-	print _initConfig
-	print '-----------------------------------------'
+	print 'Inicio de construccion de proyecto'
 	config=generateConfig(_initConfig)
 
 	config_template_location = ConfigParser.ConfigParser()
@@ -91,23 +89,11 @@ def build(_initConfig, workspace):
 			##Create XQuery template
 			chdir_force('XQuery')
 
-			#lg_value_list=config.get(cap, 'legacy').split(',')
-
-			#legacy = util.Legacy(lg_value_list[0], lg_value_list[1], lg_value_list[2], lg_value_list[3])
-
 			capability = util.Capability(cap, '', serviceName, ctry, cap)
-
-			#xquery_template_file=root_path+config_template_location.get('CSL','xquery_rsp')
-			#xquery_name='get_'+cap+'_'+serviceName+'_RSP.xqy'
-			#util.replaceOHComponentNameWithLegacy(xquery_template_file, xquery_name, capability, legacy)
 
 			xquery_template_file=root_path+config_template_location.get('CSL','xquery_frsp')
 			xquery_name='get_'+cap+'_'+serviceName+'_FRSP.xqy'
 			util.replaceOHComponentName(xquery_template_file, xquery_name, capability)
-
-			#xquery_template_file=root_path+config_template_location.get('CSL','xquery_ra_req')
-			#xquery_name='get_'+legacy.country+'-'+legacy.system+'-'+legacy.api+'_'+legacy.operation+'_REQ.xqy'
-			#util.replaceOHComponentNameWithLegacy(xquery_template_file, xquery_name, capability, legacy)			
 
 			os.chdir('../')
 			
@@ -166,6 +152,7 @@ def build(_initConfig, workspace):
 		ebmfile= cap + '_'+serviceName+'_v'+config.get(cap, 'version')+'_EBM.xsd'
 		ebmfilepath = os.path.join(ebmPath, ebmfile)
 		shutil.copy(ebmfilepath, ESCpath)
+
 #	for file_name in os.listdir(ebmPath):
 #	    full_file_name = os.path.join(ebmPath, file_name)
 #	    if (os.path.isfile(full_file_name)):
@@ -193,7 +180,7 @@ def build(_initConfig, workspace):
 #
 #	os.chdir('../../../')
 
-	
+	print 'Importando Proyecto a la aplicacion'
 	newElement = ET.fromstring(('<hash><url n="URL" path="'+project+'/'+project+'.jpr"/></hash>'))
 	applicationName=os.path.basename(os.path.normpath(workspace))+'.jws'
 	applicationName = os.path.join(workspace, applicationName)
@@ -203,7 +190,6 @@ def build(_initConfig, workspace):
 		ele.append(newElement)
 		break
 	tree.write(applicationName,  encoding="UTF-8")
-	print '-----------------------------------------'
 	print 'Fin de construccion de proyecto'
 	print '-----------------------------------------'
 def main():
@@ -212,9 +198,6 @@ def main():
 	workspace = config.get('WORKSPACE', 'path')
 	os.chdir(workspace)
 
-	print '-------------NEW PATH----------------------------'
-	print os.getcwd()
-	print '-------------NEW PATH----------------------------'
 	inits=[]
 	full_path_temp = os.path.join(root_path, 'tmp')
 	for file in os.listdir(full_path_temp):

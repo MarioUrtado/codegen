@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:header="http://www.entel.cl/ESO/MessageHeader/v1"
+        xmlns:tns="http://www.entel.cl/EBM/TroubleTicket/Publish/v1"
+        xmlns:ebons_troubleticket="http://www.entel.cl/EBO/TroubleTicket/v1"
+        targetNamespace="http://www.entel.cl/EBM/TroubleTicket/Publish/v1" elementFormDefault="qualified" version="1.0">
+  <!---=- start:Imports -=- -->
+  <import namespace="http://www.entel.cl/ESO/MessageHeader/v1"
+          schemaLocation="../../../SR_Commons/XSD/ESO/MessageHeader_v1_ESO.xsd"/>
+  <import namespace="http://www.entel.cl/EBO/TroubleTicket/v1"
+          schemaLocation="../../../SR_Commons/XSD/EBO/TroubleTicket_v1_EBO.xsd"/>
+  <!---=- end:Imports -=- -->
+  <!---=- start:EBM Content -=- -->
+  <element name="Publish_TroubleTicket_CRSP" type="tns:Publish_TroubleTicket_CRSP_Type"/>
+  <complexType name="Publish_TroubleTicket_CRSP_Type">
+    <sequence>
+      <element ref="header:ResponseHeader"/>
+      <element name="Body">
+        <complexType>
+          <sequence></sequence>
+        </complexType>
+      </element>
+    </sequence>
+  </complexType>
+  <element name="Publish_TroubleTicket_REQ" type="tns:Publish_TroubleTicket_REQ_Type"/>
+  <complexType name="Publish_TroubleTicket_REQ_Type">
+    <sequence>
+      <element ref="header:RequestHeader"/>
+      <element name="Body">
+        <complexType>
+          <sequence>
+            <element name="TroubleTicket" maxOccurs="1" minOccurs="1">
+              <complexType>
+                <sequence>
+                  <element ref="ebons_troubleticket:ID" maxOccurs="1" minOccurs="1"/>
+                  <element ref="ebons_troubleticket:closedDate" maxOccurs="1" minOccurs="0"/>
+                  <element ref="ebons_troubleticket:externalTroubleID" maxOccurs="1" minOccurs="1"/>
+                  <element ref="ebons_troubleticket:troubleStatus" maxOccurs="1" minOccurs="0"/>
+                  <element ref="ebons_troubleticket:troubleStatusDetail" maxOccurs="1" minOccurs="0"/>
+                  <element ref="ebons_troubleticket:troubleSubStatus" maxOccurs="1" minOccurs="0"/>
+                </sequence>
+              </complexType>
+            </element>
+          </sequence>
+        </complexType>
+      </element>
+    </sequence>
+  </complexType>
+  <element name="Publish_TroubleTicket_RSP" type="tns:Publish_TroubleTicket_RSP_Type"/>
+  <complexType name="Publish_TroubleTicket_RSP_Type">
+    <sequence>
+      <element ref="header:ResponseHeader"/>
+      <element name="Body">
+        <complexType>
+          <sequence/>
+        </complexType>
+      </element>
+    </sequence>
+  </complexType>
+  <element name="Publish_TroubleTicket_FRSP" type="tns:Publish_TroubleTicket_FRSP_Type"/>
+  <complexType name="Publish_TroubleTicket_FRSP_Type">
+    <sequence>
+      <element ref="header:ResponseHeader"/>
+      <element name="Body">
+        <complexType>
+          <sequence/>
+        </complexType>
+      </element>
+    </sequence>
+  </complexType>
+  <!---=- end:EBM Content -=- -->
+</schema>	

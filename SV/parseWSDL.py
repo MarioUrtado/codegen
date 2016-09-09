@@ -8,7 +8,6 @@ def generateConfig(_path):
 	_config.readfp(open(_path))
 	return _config
 
-
 def chdir_force(_dir):
 	if not(os.path.isdir(_dir)):
 		os.makedirs(_dir)
@@ -52,11 +51,6 @@ def main(filename):
 		config.set(oper, 'version', '1')
 		config.set(oper, 'syncORasync', 'sync')
 
-
 	file_name = serviceName + '_init.cfg'
 	with open(file_name, 'wb') as configfile:
 		config.write(configfile)
-
-
-
-

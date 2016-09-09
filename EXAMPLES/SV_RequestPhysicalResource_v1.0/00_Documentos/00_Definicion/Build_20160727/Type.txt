@@ -1,8 +1,0 @@
-TYPE TS_PROD_TYPE IS RECORD (TRANSACTION_QUANTITY NUMBER,
-                             INVENTORY_ITEM_ID VARCHAR2(50),
-                             COD_TIPO_TRX VARCHAR2(50),
-                             TRANSACTION_DATE DATE,
-                             SERIE_INVENTORY_ITEM VARCHAR2(50)
-                             );
-
-TYPE TS_PROD_TBL_TYPE IS TABLE OF TS_PROD_TYPE INDEX BY BINARY_INTEGER;

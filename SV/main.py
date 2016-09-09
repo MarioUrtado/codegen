@@ -1,5 +1,4 @@
 import os
-import builder
 import parseWSDL
 import ConfigParser
 
@@ -47,4 +46,3 @@ for section in wsdls:
 
 	parseWSDL.main(filename)
 	os.chdir('../')
-	##builder.main()

@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 
+	xmlns:header="http://www.entel.cl/ESO/MessageHeader/v1" 
+	xmlns:tns="http://www.entel.cl/EBM/TroubleTicket/Create/v1"
+	xmlns:ebons_telephonenumber="http://www.entel.cl/EBO/TelephoneNumber/v1"
+	xmlns:ebons_emailcontact="http://www.entel.cl/EBO/EmailContact/v1"
+	xmlns:ebons_physicalresourcespec="http://www.entel.cl/EBO/PhysicalResourceSpec/v1"
+	xmlns:ebons_physicalresource="http://www.entel.cl/EBO/PhysicalResource/v1"
+	xmlns:ebons_organizationidentification="http://www.entel.cl/EBO/OrganizationIdentification/v1"
+	xmlns:ebons_msisdn="http://www.entel.cl/EBO/MSISDN/v1"
+	xmlns:ebons_servicerequest="http://www.entel.cl/EBO/ServiceRequest/v1"
+	xmlns:ebons_individualidentification="http://www.entel.cl/EBO/IndividualIdentification/v1"
+	xmlns:ebons_streetname="http://www.entel.cl/EBO/StreetName/v1"
+	xmlns:ebons_marketsegment="http://www.entel.cl/EBO/MarketSegment/v1"
+	xmlns:ebons_troubleticket="http://www.entel.cl/EBO/TroubleTicket/v1"
+	xmlns:ebons_usernameresourcerole="http://www.entel.cl/EBO/UserNameResourceRole/v1"
+	xmlns:ebons_customeraccount="http://www.entel.cl/EBO/CustomerAccount/v1"
+	xmlns:ebons_contact="http://www.entel.cl/EBO/Contact/v1"
+	xmlns:ebons_geographicarea="http://www.entel.cl/EBO/GeographicArea/v1"
+	xmlns:ebons_asset="http://www.entel.cl/EBO/Asset/v1"
+	xmlns:ebons_address="http://www.entel.cl/EBO/Address/v1"
+	xmlns:ebons_geographicaddress="http://www.entel.cl/EBO/GeographicAddress/v1"
+	xmlns:ebons_absolutelocallocation="http://www.entel.cl/EBO/AbsoluteLocalLocation/v1"
+	xmlns:ebons_individualname="http://www.entel.cl/EBO/IndividualName/v1"
+	xmlns:ebons_individual="http://www.entel.cl/EBO/Individual/v1"
+	
+	targetNamespace="http://www.entel.cl/EBM/TroubleTicket/Create/v1"
+	elementFormDefault="qualified" version="1.0">	
+
+	 <!---=- start:Imports -=- -->
+	 <import namespace="http://www.entel.cl/ESO/MessageHeader/v1" schemaLocation="../../../SR_Commons/XSD/ESO/MessageHeader_v1_ESO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/TelephoneNumber/v1" schemaLocation="../../../SR_Commons/XSD/EBO/TelephoneNumber_v1_EBO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/EmailContact/v1" schemaLocation="../../../SR_Commons/XSD/EBO/EmailContact_v1_EBO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/PhysicalResourceSpec/v1" schemaLocation="../../../SR_Commons/XSD/EBO/PhysicalResourceSpec_v1_EBO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/PhysicalResource/v1" schemaLocation="../../../SR_Commons/XSD/EBO/PhysicalResource_v1_EBO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/OrganizationIdentification/v1" schemaLocation="../../../SR_Commons/XSD/EBO/OrganizationIdentification_v1_EBO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/MSISDN/v1" schemaLocation="../../../SR_Commons/XSD/EBO/MSISDN_v1_EBO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/ServiceRequest/v1" schemaLocation="../../../SR_Commons/XSD/EBO/ServiceRequest_v1_EBO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/IndividualIdentification/v1" schemaLocation="../../../SR_Commons/XSD/EBO/IndividualIdentification_v1_EBO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/StreetName/v1" schemaLocation="../../../SR_Commons/XSD/EBO/StreetName_v1_EBO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/MarketSegment/v1" schemaLocation="../../../SR_Commons/XSD/EBO/MarketSegment_v1_EBO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/TroubleTicket/v1" schemaLocation="../../../SR_Commons/XSD/EBO/TroubleTicket_v1_EBO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/UserNameResourceRole/v1" schemaLocation="../../../SR_Commons/XSD/EBO/UserNameResourceRole_v1_EBO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/CustomerAccount/v1" schemaLocation="../../../SR_Commons/XSD/EBO/CustomerAccount_v1_EBO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/Contact/v1" schemaLocation="../../../SR_Commons/XSD/EBO/Contact_v1_EBO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/GeographicArea/v1" schemaLocation="../../../SR_Commons/XSD/EBO/GeographicArea_v1_EBO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/Asset/v1" schemaLocation="../../../SR_Commons/XSD/EBO/Asset_v1_EBO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/Address/v1" schemaLocation="../../../SR_Commons/XSD/EBO/Address_v1_EBO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/GeographicAddress/v1" schemaLocation="../../../SR_Commons/XSD/EBO/GeographicAddress_v1_EBO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/AbsoluteLocalLocation/v1" schemaLocation="../../../SR_Commons/XSD/EBO/AbsoluteLocalLocation_v1_EBO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/IndividualName/v1" schemaLocation="../../../SR_Commons/XSD/EBO/IndividualName_v1_EBO.xsd"/>
+	<import namespace="http://www.entel.cl/EBO/Individual/v1" schemaLocation="../../../SR_Commons/XSD/EBO/Individual_v1_EBO.xsd"/>
+	
+	 <!---=- end:Imports -=- -->
+	 
+	 <!---=- start:EBM Content -=- -->
+	
+					
+		<element name="Create_TroubleTicket_CRSP" type="tns:Create_TroubleTicket_CRSP_Type"/>
+		<complexType name="Create_TroubleTicket_CRSP_Type">
+		<sequence>
+			<element ref="header:ResponseHeader"/>	
+			<element name="Body">		
+				<complexType>	
+					<sequence>							
+						
+                	<element name="TroubleTicket" maxOccurs="unbounded" minOccurs="0">
+                		<complexType>
+                		<sequence>
+                		<element ref="ebons_troubleticket:ID" maxOccurs="1" minOccurs="1"/>
+                			<element ref="ebons_troubleticket:createdDate" maxOccurs="1" minOccurs="0"/>
+                			<element ref="ebons_troubleticket:externalTroubleID" maxOccurs="1" minOccurs="0"/>
+                			
+                		</sequence>	
+                		</complexType>	
+                	</element>
+                		
+                	
+						</sequence>
+											
+				</complexType>								
+			</element>
+		</sequence>
+		</complexType>
+	
+					
+		<element name="Create_TroubleTicket_REQ" type="tns:Create_TroubleTicket_REQ_Type"/>
+		<complexType name="Create_TroubleTicket_REQ_Type">
+		<sequence>
+			<element ref="header:RequestHeader"/>
+			<element name="Body">		
+				<complexType>	
+					<sequence>							
+						
+                	<element name="TroubleTicket" maxOccurs="unbounded" minOccurs="0">
+                		<complexType>
+                		<sequence>
+                		<element ref="ebons_troubleticket:ID" maxOccurs="1" minOccurs="1"/>
+                			<element ref="ebons_troubleticket:agentComment" maxOccurs="1" minOccurs="0"/>
+                			<element ref="ebons_troubleticket:area" maxOccurs="1" minOccurs="0"/>
+                			<element ref="ebons_troubleticket:comment" maxOccurs="1" minOccurs="0"/>
+                			<element ref="ebons_troubleticket:commentBeforeProblem" maxOccurs="1" minOccurs="0"/>
+                			<element ref="ebons_troubleticket:createdDate" maxOccurs="1" minOccurs="1"/>
+                			<element ref="ebons_troubleticket:description" maxOccurs="1" minOccurs="1"/>
+                			<element ref="ebons_troubleticket:dueDate" maxOccurs="1" minOccurs="0"/>
+                			<element ref="ebons_troubleticket:failCondition" maxOccurs="1" minOccurs="0"/>
+                			<element ref="ebons_troubleticket:failureType" maxOccurs="1" minOccurs="0"/>
+                			<element ref="ebons_troubleticket:subArea" maxOccurs="1" minOccurs="0"/>
+                			<element ref="ebons_troubleticket:subType" maxOccurs="1" minOccurs="0"/>
+                			<element ref="ebons_troubleticket:troubleStatus" maxOccurs="1" minOccurs="0"/>
+                			<element ref="ebons_troubleticket:troubleSubStatus" maxOccurs="1" minOccurs="0"/>
+                			<element ref="ebons_troubleticket:type" maxOccurs="1" minOccurs="0"/>
+                			
+                        	<element name="Contact" maxOccurs="1" minOccurs="1">
+                        		<complexType>
+                        		<sequence>
+                        		
+                                	<element name="alternativePhoneNumber" maxOccurs="1" minOccurs="0">
+                                		<complexType>
+                                		<sequence>
+                                		<element ref="ebons_telephonenumber:number" maxOccurs="1" minOccurs="1"/>
+                                			
+                                		</sequence>	
+                                		</complexType>	
+                                	</element>
+                                		
+                                	
+                        			
+                                	<element name="email" maxOccurs="1" minOccurs="0">
+                                		<complexType>
+                                		<sequence>
+                                		<element ref="ebons_emailcontact:eMailAddress" maxOccurs="1" minOccurs="0"/>
+                                			
+                                		</sequence>	
+                                		</complexType>	
+                                	</element>
+                                		
+                                	
+                        			
+                                	<element name="mainPhoneNumber" maxOccurs="1" minOccurs="1">
+                                		<complexType>
+                                		<sequence>
+                                		<element ref="ebons_telephonenumber:number" maxOccurs="1" minOccurs="1"/>
+                                			
+                                		</sequence>	
+                                		</complexType>	
+                                	</element>
+                                		
+                                	
+                        			
+                        		</sequence>	
+                        		</complexType>	
+                        	</element>
+                        		
+                        	
+                			
+                        	<element name="CustomerAccount" maxOccurs="1" minOccurs="0">
+                        		<complexType>
+                        		<sequence>
+                        		
+                                	<element name="Asset" maxOccurs="1" minOccurs="1">
+                                		<complexType>
+                                		<sequence>
+                                		<element ref="ebons_asset:plan" maxOccurs="1" minOccurs="0"/>
+                                			
+                                        	<element name="MSISDN" maxOccurs="1" minOccurs="0">
+                                        		<complexType>
+                                        		<sequence>
+                                        		<element ref="ebons_msisdn:SN" maxOccurs="1" minOccurs="0"/>
+                                        			
+                                        		</sequence>	
+                                        		</complexType>	
+                                        	</element>
+                                        		
+                                        	
+                                			
+                                        	<element name="PhysicalResource" maxOccurs="1" minOccurs="0">
+                                        		<complexType>
+                                        		<sequence>
+                                        		
+                                                	<element name="PhysicalResourceSpec" maxOccurs="1" minOccurs="0">
+                                                		<complexType>
+                                                		<sequence>
+                                                		<element ref="ebons_physicalresourcespec:modelNumber" maxOccurs="1" minOccurs="0"/>
+                                                			<element ref="ebons_physicalresourcespec:tecnology" maxOccurs="1" minOccurs="0"/>
+                                                			
+                                                		</sequence>	
+                                                		</complexType>	
+                                                	</element>
+                                                		
+                                                	
+                                        			
+                                        		</sequence>	
+                                        		</complexType>	
+                                        	</element>
+                                        		
+                                        	
+                                			
+                                		</sequence>	
+                                		</complexType>	
+                                	</element>
+                                		
+                                	
+                        			
+                                	<element name="Individual" maxOccurs="1" minOccurs="0">
+                                		<complexType>
+                                		<sequence>
+                                		
+                                        	<element name="IndividualIdentification" maxOccurs="1" minOccurs="0">
+                                        		<complexType>
+                                        		<sequence>
+                                        		<element ref="ebons_individualidentification:number" maxOccurs="1" minOccurs="0"/>
+                                        			<element ref="ebons_individualidentification:type" maxOccurs="1" minOccurs="0"/>
+                                        			
+                                        		</sequence>	
+                                        		</complexType>	
+                                        	</element>
+                                        		
+                                        	
+                                			
+                                        	<element name="IndividualName" maxOccurs="1" minOccurs="1">
+                                        		<complexType>
+                                        		<sequence>
+                                        		<element ref="ebons_individualname:firstName" maxOccurs="1" minOccurs="1"/>
+                                        			<element ref="ebons_individualname:lastName" maxOccurs="1" minOccurs="1"/>
+                                        			<element ref="ebons_individualname:maidenName" maxOccurs="1" minOccurs="0"/>
+                                        			
+                                        		</sequence>	
+                                        		</complexType>	
+                                        	</element>
+                                        		
+                                        	
+                                			
+                                		</sequence>	
+                                		</complexType>	
+                                	</element>
+                                		
+                                	
+                        			
+                                	<element name="MarketSegment" maxOccurs="1" minOccurs="0">
+                                		<complexType>
+                                		<sequence>
+                                		<element ref="ebons_marketsegment:class" maxOccurs="1" minOccurs="0"/>
+                                			
+                                		</sequence>	
+                                		</complexType>	
+                                	</element>
+                                		
+                                	
+                        			
+                        		</sequence>	
+                        		</complexType>	
+                        	</element>
+                        		
+                        	
+                			
+                        	<element name="GeographicAddress" maxOccurs="1" minOccurs="0">
+                        		<complexType>
+                        		<sequence>
+                        		
+                                	<element name="Address" maxOccurs="1" minOccurs="0">
+                                		<complexType>
+                                		<sequence>
+                                		<element ref="ebons_address:additionalAddressInfo" maxOccurs="1" minOccurs="0"/>
+                                			<element ref="ebons_address:addressNumber" maxOccurs="1" minOccurs="0"/>
+                                			<element ref="ebons_address:addressType" maxOccurs="1" minOccurs="0"/>
+                                			
+                                        	<element name="AbsoluteLocalLocation" maxOccurs="1" minOccurs="0">
+                                        		<complexType>
+                                        		<sequence>
+                                        		<element ref="ebons_absolutelocallocation:x" maxOccurs="1" minOccurs="0"/>
+                                        			<element ref="ebons_absolutelocallocation:y" maxOccurs="1" minOccurs="0"/>
+                                        			
+                                        		</sequence>	
+                                        		</complexType>	
+                                        	</element>
+                                        		
+                                        	
+                                			
+                                        	<element name="streetNameFull" maxOccurs="1" minOccurs="0">
+                                        		<complexType>
+                                        		<sequence>
+                                        		<element ref="ebons_streetname:name" maxOccurs="1" minOccurs="0"/>
+                                        			
+                                        		</sequence>	
+                                        		</complexType>	
+                                        	</element>
+                                        		
+                                        	
+                                			
+                                		</sequence>	
+                                		</complexType>	
+                                	</element>
+                                		
+                                	
+                        			
+                                	<element name="GeographicArea" maxOccurs="1" minOccurs="0">
+                                		<complexType>
+                                		<sequence>
+                                		<element ref="ebons_geographicarea:commune" maxOccurs="1" minOccurs="0"/>
+                                			<element ref="ebons_geographicarea:region" maxOccurs="1" minOccurs="0"/>
+                                			
+                                		</sequence>	
+                                		</complexType>	
+                                	</element>
+                                		
+                                	
+                        			
+                        		</sequence>	
+                        		</complexType>	
+                        	</element>
+                        		
+                        	
+                			
+                        	<element name="Individual" maxOccurs="1" minOccurs="0">
+                        		<complexType>
+                        		<sequence>
+                        		
+                                	<element name="IndividualIdentification" maxOccurs="1" minOccurs="0">
+                                		<complexType>
+                                		<sequence>
+                                		<element ref="ebons_individualidentification:number" maxOccurs="1" minOccurs="0"/>
+                                			<element ref="ebons_individualidentification:type" maxOccurs="1" minOccurs="0"/>
+                                			
+                                		</sequence>	
+                                		</complexType>	
+                                	</element>
+                                		
+                                	
+                        			
+                                	<element name="IndividualName" maxOccurs="1" minOccurs="1">
+                                		<complexType>
+                                		<sequence>
+                                		<element ref="ebons_individualname:firstName" maxOccurs="1" minOccurs="1"/>
+                                			<element ref="ebons_individualname:lastName" maxOccurs="1" minOccurs="1"/>
+                                			<element ref="ebons_individualname:maidenName" maxOccurs="1" minOccurs="0"/>
+                                			
+                                		</sequence>	
+                                		</complexType>	
+                                	</element>
+                                		
+                                	
+                        			
+                        		</sequence>	
+                        		</complexType>	
+                        	</element>
+                        		
+                        	
+                			
+                        	<element name="OrganizationIdentification" maxOccurs="1" minOccurs="0">
+                        		<complexType>
+                        		<sequence>
+                        		<element ref="ebons_organizationidentification:number" maxOccurs="1" minOccurs="0"/>
+                        			
+                        		</sequence>	
+                        		</complexType>	
+                        	</element>
+                        		
+                        	
+                			
+                        	<element name="ServiceRequest" maxOccurs="1" minOccurs="1">
+                        		<complexType>
+                        		<sequence>
+                        		<element ref="ebons_servicerequest:area" maxOccurs="1" minOccurs="1"/>
+                        			<element ref="ebons_servicerequest:chanelIn" maxOccurs="1" minOccurs="0"/>
+                        			<element ref="ebons_servicerequest:impact" maxOccurs="1" minOccurs="1"/>
+                        			<element ref="ebons_servicerequest:subArea" maxOccurs="1" minOccurs="1"/>
+                        			<element ref="ebons_servicerequest:type" maxOccurs="1" minOccurs="0"/>
+                        			<element ref="ebons_servicerequest:urgency" maxOccurs="1" minOccurs="0"/>
+                        			
+                        		</sequence>	
+                        		</complexType>	
+                        	</element>
+                        		
+                        	
+                			
+                        	<element name="UserNameResourceRole" maxOccurs="1" minOccurs="0">
+                        		<complexType>
+                        		<sequence>
+                        		<element ref="ebons_usernameresourcerole:commonName" maxOccurs="1" minOccurs="1"/>
+                        			
+                        		</sequence>	
+                        		</complexType>	
+                        	</element>
+                        		
+                        	
+                			
+                		</sequence>	
+                		</complexType>	
+                	</element>
+                		
+                	
+						</sequence>
+											
+				</complexType>								
+			</element>
+		</sequence>
+		</complexType>
+	
+	
+	<element name="Create_TroubleTicket_RSP" type="tns:Create_TroubleTicket_RSP_Type"/>
+		<complexType name="Create_TroubleTicket_RSP_Type">
+			<sequence>
+				<element ref="header:ResponseHeader"/>
+				<element name="Body">
+					<complexType>
+						<sequence/>
+					</complexType>
+				</element>
+			</sequence>
+		</complexType>
+	
+	<element name="Create_TroubleTicket_FRSP" type="tns:Create_TroubleTicket_FRSP_Type"/>
+	<complexType name="Create_TroubleTicket_FRSP_Type">
+		<sequence>
+			<element ref="header:ResponseHeader"/>
+			<element name="Body">
+				<complexType>
+					<sequence/>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	 <!---=- end:EBM Content -=- -->
+	 
+</schema>	
