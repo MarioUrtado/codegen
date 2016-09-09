@@ -50,6 +50,7 @@ def main(filename):
 		config.set(oper, 'code', '##CAPABILITY_CODE##')
 		config.set(oper, 'version', '1')
 		config.set(oper, 'syncORasync', 'sync')
+		config.set(oper, 'countries', 'CHL,PER,INT')
 
 	file_name = serviceName + '_init.cfg'
 	with open(file_name, 'wb') as configfile:

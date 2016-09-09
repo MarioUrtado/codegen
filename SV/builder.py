@@ -1,3 +1,4 @@
+from tempfile import mkstemp
 import shutil
 import os
 import ConfigParser
@@ -84,26 +85,27 @@ def build(_initConfig, workspace):
 		chdir_force(ctry)
 		chdir_force('OH')
 		for cap in capabilities:
-			chdir_force(cap)
+			if ( ctry in config.get(cap, 'countries') ):
+				chdir_force(cap)
 
-			##Create XQuery template
-			chdir_force('XQuery')
+				##Create XQuery template
+				chdir_force('XQuery')
 
-			capability = util.Capability(cap, '', serviceName, ctry, cap)
+				capability = util.Capability(cap, '', serviceName, ctry, cap)
 
-			xquery_template_file=root_path+config_template_location.get('CSL','xquery_frsp')
-			xquery_name='get_'+cap+'_'+serviceName+'_FRSP.xqy'
-			util.replaceOHComponentName(xquery_template_file, xquery_name, capability)
+				xquery_template_file=root_path+config_template_location.get('CSL','xquery_frsp')
+				xquery_name='get_'+cap+'_'+serviceName+'_FRSP.xqy'
+				util.replaceOHComponentName(xquery_template_file, xquery_name, capability)
 
-			os.chdir('../')
-			
-			##Create Pipeline
-			pipeline_template_file=root_path+config_template_location.get('CSL','pipeline')
-			pipeline_OH_file=ctry+'_'+cap+'_'+serviceName+'_OH.pipeline'
-			util.replaceOHComponentName(pipeline_template_file, pipeline_OH_file, capability)
+				os.chdir('../')
+				
+				##Create Pipeline
+				pipeline_template_file=root_path+config_template_location.get('CSL','pipeline')
+				pipeline_OH_file=ctry+'_'+cap+'_'+serviceName+'_OH.pipeline'
+				util.replaceOHComponentName(pipeline_template_file, pipeline_OH_file, capability)
 
-			#OH
-			os.chdir('../')
+				#OH
+				os.chdir('../')
 		##Country/CSL		
 		os.chdir('../../')
 
@@ -153,32 +155,38 @@ def build(_initConfig, workspace):
 		ebmfilepath = os.path.join(ebmPath, ebmfile)
 		shutil.copy(ebmfilepath, ESCpath)
 
-#	for file_name in os.listdir(ebmPath):
-#	    full_file_name = os.path.join(ebmPath, file_name)
-#	    if (os.path.isfile(full_file_name)):
-#	        shutil.copy(full_file_name, ESCpath)
+	## COMIENZO DEL  FLASHEOOOOOOO
+	pathCommonsEBO = '../../../SR_Commons/XSD/EBO/'
 
-	#refactor path wsdl
-#	goToESC=project+'/ESC/Primary'
-#	os.chdir(goToESC)
-	#
-#	wsdlName = wsdlPath.split('/')[-1]
-#
-#	tree = ET.parse(wsdlName)
-#	root = tree.getroot()
-#	print root.attrib
-#	root = root.find('{http://schemas.xmlsoap.org/wsdl/}types').find('{http://www.w3.org/2001/XMLSchema}schema')
-#	objectify.deannotate(root, cleanup_namespaces=True)
-#	for elementImport in root.findall('{http://www.w3.org/2001/XMLSchema}import'):
-#		print 'adsasdasdadsad'
-#		pathEBMInWsdl = elementImport.get('schemaLocation')
-#		print pathEBMInWsdl
-#		pathEBMInWsdl = pathEBMInWsdl.split('/')[-1]
-#		print pathEBMInWsdl
-#		elementImport.set('schemaLocation', pathEBMInWsdl)
-#	tree.write(wsdlName, xml_declaration=True)
-#
-#	os.chdir('../../../')
+	paths_to_replace = ['../../../SID/CommonBusinessEntitiesDomain/','../../../SID/CustomerDomain/','../../../SID/EngagedPartyDomain/','../../../SID/MarketSalesDomain/','../../../SID/NetworkDomain/','../../../SID/ProductDomain/','../../../SID/ResourceDomain/','../../../SID/ServiceDomain/']
+
+	for file in os.listdir(ESCpath):
+		full_file = os.path.join(ESCpath, file)
+		if ('EBM.XSD' in full_file.upper() ):
+			fh, abs_path = mkstemp()
+			with open(abs_path,'w') as new_file:
+				with open(full_file) as old_file:
+					for line in old_file:
+						for pattern in paths_to_replace:
+							if pattern in line:
+								print 'REPLACE'
+								line = line.replace(pattern, pathCommonsEBO)
+						new_file.write(line)
+			os.close(fh)
+			os.remove(full_file)
+			shutil.move(abs_path, full_file)
+		if ('ESC.WSDL' in full_file.upper() ):
+			print 'WSDL encontrado'
+			fh, abs_path = mkstemp()
+			with open(abs_path,'w') as new_file:
+				with open(full_file) as old_file:
+					for line in old_file:
+						new_file.write(line.replace('schemaLocation="EBM/', 'schemaLocation="'))
+			os.close(fh)
+			os.remove(full_file)
+			shutil.move(abs_path, full_file)
+
+	## FIN DEL  FLASH INFORMATIVO
 
 	print 'Importando Proyecto a la aplicacion'
 	newElement = ET.fromstring(('<hash><url n="URL" path="'+project+'/'+project+'.jpr"/></hash>'))

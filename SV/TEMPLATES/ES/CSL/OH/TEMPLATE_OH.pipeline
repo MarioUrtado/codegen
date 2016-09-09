@@ -303,7 +303,7 @@ data($RequestHeader/*[2]/*[1]/@operation),'_', data($RequestHeader/*[2]/*[1]/@na
                 <con:request>request-N53ee35ec.N445cc81e.0.152d1131f64.N7fc5</con:request>
                 <con:response>response-N53ee35ec.N445cc81e.0.152d1131f64.N7fc4</con:response>
             </con:pipeline-node>
-            <con:route-node name="Call - %COUNTRY_NAME%-SALESFORCE-CRM_ClientObtain_RA">
+            <con:route-node name="Call - RA">
                 <con:context/>
                 <con:actions></con:actions>
             </con:route-node>
