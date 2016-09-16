@@ -36,6 +36,8 @@ for section in wsdls:
 	configDump.add_section('EBMs')
 	pathEBM = os.path.join(pool, 'EBM')
 	configDump.set('EBMs', 'path', pathEBM)
+	configDump.add_section('DB')
+	configDump.set('DB', 'path', workspace )
 
 	chdir_force('tmp')
 

@@ -1,0 +1,13 @@
+1- Cargar los datos del workspace donde se va a inyectar proyecto a generar. Por defecto seria la carpeta ENTEL_ServiceBussApp
+2- Colocar el path donde se encuentra el WSDL, 
+3- Colocar la carpeta donde se encuentran los EBM, si se coloca vacio, buscara por defecto en la misma carpeta donde se encuentra el WSDL, pero dentro de una carpeta llamada EBM
+
+ejecutar el script 
+main.py
+
+este generara los archivos init para los servicios
+dentro de la carpeta tmp de donde se encuentra el script. A partir del WSDL y EBM, no se consigue los codigos de operacion y de servicio. 
+Dentro de estos archivos init, se pueden cambiar estos valores, tambien indicar si la capacidad esta disponible para CHL, PER, o INT ( por defecto, esta disponible en todos)
+
+Una vez hecho esto, ejecutar el script build.py que leera estos init, y generara el proyecto en el workspace, inyectara el proyecto al jws de la aplicacion si este existe, 
+y dentor del mismo workspace la carpeta DB_SERVICENAME con los script SQL

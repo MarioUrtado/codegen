@@ -18,6 +18,7 @@ def chdir_force(_dir):
 		os.makedirs(_dir)
 	os.chdir(_dir)
 
+
 def build(_initConfig, workspace):
 	print '-----------------------------------------'
 	print 'Inicio de construccion de proyecto'
@@ -46,10 +47,6 @@ def build(_initConfig, workspace):
 	_from=root_path+config_template_location.get('PROJECT','jpr')
 	_to=project+'.jpr'
 	util.jpr(_from,_to, serviceName)
-
-	_from=root_path+config_template_location.get('PROJECT','servicebus')
-	_to='servicebus.sboverview'
-	util.serviesbus(_from,_to, serviceName)
 
 	_from=root_path+config_template_location.get('PROJECT','pom')
 	_to='pom.xml'
@@ -169,7 +166,6 @@ def build(_initConfig, workspace):
 					for line in old_file:
 						for pattern in paths_to_replace:
 							if pattern in line:
-								print 'REPLACE'
 								line = line.replace(pattern, pathCommonsEBO)
 						new_file.write(line)
 			os.close(fh)
@@ -186,20 +182,99 @@ def build(_initConfig, workspace):
 			os.remove(full_file)
 			shutil.move(abs_path, full_file)
 
-	## FIN DEL  FLASH INFORMATIVO
+	try:
+		print 'Importando Proyecto a la aplicacion'
+		newElement = ET.fromstring(('<hash><url n="URL" path="'+project+'/'+project+'.jpr"/></hash>'))
+		applicationName=os.path.basename(os.path.normpath(workspace))+'.jws'
+		applicationName = os.path.join(workspace, applicationName)
+		print applicationName
+		tree = ET.parse(applicationName)
+		root = tree.getroot()
+		for ele in root.findall(".//*[@n='listOfChildren']"):
+			ele.append(newElement)
+			break
+		tree.write(applicationName,  encoding="UTF-8")
+	except IOError as e:
+		print 'No se pudo el archivo de aplicacion .jws: ' + applicationName
+	except Exception as e:
+		print 'Error inesperado la inyectar el proyecto en la aplicacion'
+		print type(e)
+		print e.args
 
-	print 'Importando Proyecto a la aplicacion'
-	newElement = ET.fromstring(('<hash><url n="URL" path="'+project+'/'+project+'.jpr"/></hash>'))
-	applicationName=os.path.basename(os.path.normpath(workspace))+'.jws'
-	applicationName = os.path.join(workspace, applicationName)
-	tree = ET.parse(applicationName)
-	root = tree.getroot()
-	for ele in root.findall(".//*[@n='listOfChildren']"):
-		ele.append(newElement)
-		break
-	tree.write(applicationName,  encoding="UTF-8")
 	print 'Fin de construccion de proyecto'
 	print '-----------------------------------------'
+	print 'Creacion de script SQL'
+
+	os.chdir(root_path)
+
+	
+	os.chdir(workspace)
+	chdir_force(('DB_'+serviceName))
+	chdir_force('01_SQL_CHANGE')
+
+	_from = root_path+'/TEMPLATES/DB/01_SQL_CHANGE/SQL_CHANGE_SV.sql' 
+	_to = 'SQL_CHANGE_SV_' +  serviceName + '.sql'
+	with open(_to, 'w') as new_file:
+		with open(_from, 'r') as template_file:
+			for line in template_file:
+				if '%SERVICE_NAME%' in line:
+					line = line.replace('%SERVICE_NAME%',serviceName )
+				new_file.write(line)
+
+	chdir_force('01_Scripts')
+	chdir_force('04_ENTERPRISE_SERVICE')				
+
+	_from = root_path+'/TEMPLATES/DB/01_SQL_CHANGE/01_Scripts/04_ENTERPRISE_SERVICE/INSERT_SV.sql'
+	_to = 'INSERT_SV_' + serviceName + '.sql'
+	with open(_to, 'w') as new_file:
+		with open(_from, 'r') as template_file:
+			for line in template_file:
+				if '%CAPABILITY_QUERY%' in line:
+					dbtagconfig= generateConfig(root_path+'/TEMPLATES/DB/DB_TAG')
+					for cap in capabilities:
+						code = capability_code = config.get(cap, 'code')
+						tag = dbtagconfig.get('CAPABILITY', 'query')
+						tag = ('\t' + (tag.replace('%CAPABILITY_CODE%',code ).replace('%CAPABILITY_NAME%',cap ).replace(';', ';\n')))
+						new_file.write(tag)
+				else:
+					line = line.replace('%SERVICE_CODE%',serviceCode ).replace('%SERVICE_NAME%',serviceName )
+					new_file.write(line)
+	os.chdir('../../../')
+
+	chdir_force('02_SQL_ROLLBACK')
+
+	_from = root_path+'/TEMPLATES/DB/02_SQL_ROLLBACK/SQL_ROLLBACK_SV.sql' 
+	_to = 'SQL_ROLLBACK_SV_' +  serviceName + '.sql'
+	with open(_to, 'w') as new_file:
+		with open(_from, 'r') as template_file:
+			for line in template_file:
+				if '%SERVICE_NAME%' in line:
+					line = line.replace('%SERVICE_NAME%',serviceName )
+				new_file.write(line)
+
+	chdir_force('01_Scripts')
+	chdir_force('04_ENTERPRISE_SERVICE')				
+
+	_from = root_path+'/TEMPLATES/DB/02_SQL_ROLLBACK/01_Scripts/04_ENTERPRISE_SERVICE/DELETE_SV.sql'
+	_to = 'DELETE_SV_' + serviceName + '.sql'
+	with open(_to, 'w') as new_file:
+		with open(_from, 'r') as template_file:
+			for line in template_file:
+				if '%CAPABILITY_QUERY%' in line:
+					dbtagconfig= generateConfig(root_path+'/TEMPLATES/DB/DB_TAG')
+					for cap in capabilities:
+						code = capability_code = config.get(cap, 'code')
+						tag = dbtagconfig.get('CAPABILITY', 'delete')
+						tag = ('\t' + (tag.replace('%CAPABILITY_CODE%',code ).replace('%CAPABILITY_NAME%',cap ).replace(';', ';\n')))
+						new_file.write(tag)
+				else:
+					line = line.replace('%SERVICE_CODE%',serviceCode ).replace('%SERVICE_NAME%',serviceName )
+					new_file.write(line)
+
+	os.chdir('../../../../')
+
+	print 'Fin Creacion de script SQL'
+
 def main():
 
 	config = generateConfig('pool.cfg')
