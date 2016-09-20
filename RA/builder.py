@@ -36,27 +36,28 @@ def build_project(_target):
 
 	forceMkdir = chdir_force(projectName)
 
-	#project.jpr
-	project_file=projectName+'.jpr'
-	if not os.path.isfile(project_file):
-		with open(project_file, 'w') as new_file:
-			with open((root_path+'/TEMPLATES/RA/TEMPLATE.jpr'), 'r') as template_file:
-				for line in template_file:
-					new_line=line.replace('%PROJECT_NAME%', projectName).replace('%DEFUALT_PACKAGE_PROJECT_NAME%', projectName.lower().replace('-',''))
-					new_file.write(new_line)
-	else:
-		print 'El archivo ' + project_file + ' ya existe'
+	if not forceMkdir:
+		#project.jpr
+		project_file=projectName+'.jpr'
+		if not os.path.isfile(project_file):
+			with open(project_file, 'w') as new_file:
+				with open((root_path+'/TEMPLATES/RA/TEMPLATE.jpr'), 'r') as template_file:
+					for line in template_file:
+						new_line=line.replace('%PROJECT_NAME%', projectName).replace('%DEFUALT_PACKAGE_PROJECT_NAME%', projectName.lower().replace('-',''))
+						new_file.write(new_line)
+		else:
+			print 'El archivo ' + project_file + ' ya existe'
 
-	#pom.xml
-	pom_file='pom.xml'
-	if not os.path.isfile(pom_file):
-		with open(pom_file, 'w') as new_file:
-			with open((root_path+'/TEMPLATES/RA/POM_TEMPLATE.xml'), 'r') as template_file:
-				for line in template_file:
-					new_line=line.replace('%PROJECT_NAME%', projectName)
-					new_file.write(new_line)
-	else:
-		print 'El archivo ' + pom_file + ' ya existe'
+		#pom.xml
+		pom_file='pom.xml'
+		if not os.path.isfile(pom_file):
+			with open(pom_file, 'w') as new_file:
+				with open((root_path+'/TEMPLATES/RA/POM_TEMPLATE.xml'), 'r') as template_file:
+					for line in template_file:
+						new_line=line.replace('%PROJECT_NAME%', projectName)
+						new_file.write(new_line)
+		else:
+			print 'El archivo ' + pom_file + ' ya existe'
 	return forceMkdir
 
 def build(_target, workspace):
@@ -143,6 +144,8 @@ def build(_target, workspace):
 		os.chdir('../')
 	else:
 		print 'El RA '+ ra_name+  'Ya existe, se omite la creacion'
+		#Return to ResourceAdapter
+		os.chdir('../')
 	print '\n---------------------------------------------\n'
 	os.chdir('../../')
 
